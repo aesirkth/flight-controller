@@ -15,10 +15,11 @@ The main functions of the Flight Controller are:
 # Table of content <!-- omit in toc -->
 
 - [Description](#description)
+- [Folder structure](#folder-structure)
 
 # Description
 
-Two separate power rails are available on the Flight Controller
+Two separate battery inputs are available on the Flight Controller
 
 | Name | Voltage | Role                                                                              | Connector | Connector type |
 |------|---------|-----------------------------------------------------------------------------------|-----------|----------------|
@@ -32,3 +33,18 @@ The Flight Controller has two microcontrollers
 | Main controller   | Teensy 3.6   | Handle the flight data acquisition, parachute ejection, Engine Computer and radio links | BAT1  |
 | Backup controller | Arduino Nano | Eject the parachutes in case the main controller fails                                  | BAT2  |
 
+A more detailed description of the hardware is given in [doc/hardware_description.md](doc/hardware_description.md)
+
+# Folder structure
+
+```
+.
+├── doc/
+│   ├── img/
+│   ├── diagrams/
+│   ├── sources
+│   |   └── flight_controller_v1.0.pdf
+│   └── hardware_description.md
+├── LICENSE
+└── README.md                               // This file
+```
