@@ -2,8 +2,10 @@
 
 *This page describes the version 1.0 of the Flight Controller*
 
-<img src="img/flight_controller_pcb_1.jpg" width="400">
-<img src="img/flight_controller_pcb_2.jpg" width="400">
+<p align="middle">
+    <img src="img/flight_controller_pcb_1.jpg" width="450">
+    <img src="img/flight_controller_pcb_2.jpg" width="450">
+</p>
 
 >Top side and bottom side of the Flight Controller PCB
 
