@@ -2,13 +2,27 @@
 
 This is the embedded software on the Flight Controller for the project Mjollnir. The Flight Controller is on-board the rocket. The Flight Controller communicates with the ground through a radio link during all phases of the flight
 
-The main functions of the Flight Controller are:
+The mission objectives for the Mjollnir project relevant to the electronics are the following:
 
-- Measure the flight parameters during the whole flight of the rocket
-- Eject the parachutes at the right moment to ensure a smooth descent path of the rocket and a soft touchdown
-- Receive telecommands from the ground station
-- Forward commands and receive telemetry from the Engine Computer
-- Send Telemetry (flight telemetry and engine telemetry) to the ground station
+**Primary objectives**
+
+- **E.PO.1** Monitor the rocket while it is on the launchpad and give a “Go”/”No go” signal
+- **E.PO.2** Control the rocket while it is on the launchpad
+- **E.PO.3** Trigger the drogue parachute’s ejection after apogee
+- **E.PO.4** Trigger the main parachute’s ejection before touchdown
+- **E.PO.5** Support rocket recovery operations
+- **E.PO.6** Record video footage from the rocket
+
+**Secondary objectives**
+
+- **E.SO.1** Send real-time telemetry from the rocket
+- **E.SO.2** Receive & display real-time telemetry from the rocket at the Ground Station as long as the rocket is at a reasonable distance
+- **E.SO.3** Send real-time video from the rocket
+- **E.SO.4** Receive & display real-time video from the rocket at the Ground Station as long as the rocket is at a reasonable distance
+- **E.SO.5** Acquire flight data with more sensors than those deemed “mission-critical”
+- **E.SO.6** Store all flight data on-board the rocket for further analysis
+
+All of them apply to some extent to the Flight Controller
 
 ![flight_controller_test](doc/img/flight_controller_test.jpg)
 
