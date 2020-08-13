@@ -77,9 +77,9 @@ Base frame format (11 identifier bits)
 
 ## TC
 
-### Communication sequence
-
 The TC link is a low data rate radio link over LoRa at 433 MHz.
+
+### Communication sequence
 
 ![commands-sequence-no-ec](diagrams/command-sequence-no-ec.png)
 >Command sequence to the Rocket. Command addressed to the Flight Controller<br>
@@ -95,9 +95,17 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
 
 ## Telemetry
 
+The Telemetry link is a high data rate radio link over FHSS at 868 MHz. It is technicaly bi-directional but only the downlink capability is used.
+
 ### Communication sequence
 
-*This part is stil undone...*
+![telemetry-sequence-no-ec](diagrams/telemetry-sequence-no-ec.png)
+>Telemetry sequence to the Rocket. Telemetry from the Flight Controller<br>
+The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/telemetry-sequence.xml)
+
+![telemetry-sequence-no-ec](diagrams/telemetry-sequence-ec.png)
+>Telemetry sequence to the Rocket. Telemetry from the Engine Controller<br>
+The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/telemetry-sequence.xml)
 
 ### Data description
 
