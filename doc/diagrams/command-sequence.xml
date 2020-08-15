@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2020-08-13T15:41:03.170Z" agent="5.0 (X11)" etag="nYZvyWpvJixBBRh2AWMy" version="13.6.2" type="google" pages="2">
+<mxfile host="app.diagrams.net" modified="2020-08-15T12:51:50.729Z" agent="5.0 (X11)" etag="plw0vv_ciAAfj89EegD-" version="13.6.2" type="google" pages="2">
   <diagram name="no-ec" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
     <mxGraphModel dx="2062" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
@@ -268,7 +268,7 @@
             <mxPoint x="334.34000000000003" y="360.20000000000005" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1gBDZ8r0zzv1KEK97WtK-18" value="4b: Frame ID + Data [command]" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=-0.081;entryY=0.166;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.914;exitY=0.009;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1gBDZ8r0zzv1KEK97WtK-1" source="1gBDZ8r0zzv1KEK97WtK-7" target="1gBDZ8r0zzv1KEK97WtK-20" edge="1">
+        <mxCell id="1gBDZ8r0zzv1KEK97WtK-18" value="4b: identifier + Data [command]" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=-0.081;entryY=0.166;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.914;exitY=0.009;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1gBDZ8r0zzv1KEK97WtK-1" source="1gBDZ8r0zzv1KEK97WtK-7" target="1gBDZ8r0zzv1KEK97WtK-20" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="590.0000000000001" y="249.51999999999998" as="sourcePoint" />
             <mxPoint x="819.0300000000001" y="249.66000000000008" as="targetPoint" />
@@ -284,7 +284,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="1gBDZ8r0zzv1KEK97WtK-19" value="5a: Frame ID + Data [return]" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=1.05;entryY=0.793;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1gBDZ8r0zzv1KEK97WtK-1" target="1gBDZ8r0zzv1KEK97WtK-7" edge="1">
+        <mxCell id="1gBDZ8r0zzv1KEK97WtK-19" value="5a: identifier + Data [return]" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=1.05;entryY=0.793;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1gBDZ8r0zzv1KEK97WtK-1" target="1gBDZ8r0zzv1KEK97WtK-7" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="591" y="290" as="targetPoint" />
             <Array as="points">
