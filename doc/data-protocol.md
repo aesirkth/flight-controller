@@ -86,8 +86,8 @@ Each message on the Telecommand link and the Telemetry link has a unique ID
 | ID              | Frame type | From              | To                |
 |-----------------|------------|-------------------|-------------------|
 | `0x00` - `0x0F` | TC         | Ground            | Engine Computer   |
-| `0x10` - `0x1F` | TC         | Ground            | Flight Controller |
-| `0x20` - `0x8F` | TM         | Engine Computer   | Ground            |
+| `0x1F` - `0x7F` | TM         | Engine Computer   | Ground            |
+| `0x80` - `0x8F` | TC         | Ground            | Flight Controller |
 | `0x90` - `0xFF` | TM         | Flight Controller | Ground            |
 
 ## Telecommand
@@ -116,20 +116,20 @@ Commands from the Ground Station to the Flight Controller
 
 | ID     | Description             | Data size | Data                                                             | Comment                                                                                                            |
 |--------|-------------------------|-----------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| `0x11` | Set sleeping mode       | 1 Byte    | bit0: `is_fc_sleeping`                                           | Default state is 0                                                                                                 |
-| `0x12` | Enable radios emitters  | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`           | Default state is 0                                                                                                 |
-| `0x13` | Enable parachute output | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en` | Default state is 0 <br> Used for testing only <br> Must set `is_armed` to 1 before a <br> parachute can be enabled |
+| `0x81` | Set sleeping mode       | 1 Byte    | bit0: `is_fc_sleeping`                                           | Default state is 0                                                                                                 |
+| `0x82` | Enable radios emitters  | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`           | Default state is 0                                                                                                 |
+| `0x83` | Enable parachute output | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en` | Default state is 0 <br> Used for testing only <br> Must set `is_armed` to 1 before a <br> parachute can be enabled |
 
 Returned data
 
 | ID     | Description              | Data size | Data                                                                                   | Comment                                        |
 |--------|--------------------------|-----------|----------------------------------------------------------------------------------------|------------------------------------------------|
-| `0x17` | Sleep mode               | 1 Byte    | bit0: `is_fc_sleeping`                                                                 | Returned after `0x11`                          |
-| `0x18` | Radio emitters state     | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`                                 | Returned after `0x12`                          |
-| `0x19` | Parachute outputs state  | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en`                       | Returned after `0x13`                          |
-| `0x1A` | On-board battery voltage | 4 Bytes   | byte0: `bat1_msb` <br> byte1: `bat1_lsb` <br> byte2: `bat2_msb` <br> byte3: `bat2_lsb` | Sent every `x` seconds <br> Unsigned, in 0.01V |
-| `0x1B` | GNSS data                | -         | -                                                                                      | -                                              |
-| `0x1C` | Software state           | -         | -                                                                                      | -                                              |
+| `0x87` | Sleep mode               | 1 Byte    | bit0: `is_fc_sleeping`                                                                 | Returned after `0x81`                          |
+| `0x88` | Radio emitters state     | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`                                 | Returned after `0x82`                          |
+| `0x89` | Parachute outputs state  | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en`                       | Returned after `0x83`                          |
+| `0x8A` | On-board battery voltage | 4 Bytes   | byte0: `bat1_msb` <br> byte1: `bat1_lsb` <br> byte2: `bat2_msb` <br> byte3: `bat2_lsb` | Sent every `x` seconds <br> Unsigned, in 0.01V |
+| `0x8B` | GNSS data                | -         | -                                                                                      | -                                              |
+| `0x8C` | Software state           | -         | -                                                                                      | -                                              |
 
 ## Telemetry
 
