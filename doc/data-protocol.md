@@ -11,9 +11,11 @@ Here is a description of the data protocol between the Rocket and the Ground Sta
 - [Serial links](#serial-links)
 - [CAN Bus](#can-bus)
 - [Data protocol](#data-protocol)
-  - [TC](#tc)
+  - [Telecommand](#telecommand)
     - [Communication sequence](#communication-sequence)
     - [Commands description](#commands-description)
+      - [Engine Controller](#engine-controller)
+      - [Flight Controller](#flight-controller)
   - [Telemetry](#telemetry)
     - [Communication sequence](#communication-sequence-1)
     - [Data description](#data-description)
@@ -75,9 +77,22 @@ Base frame format (11 identifier bits)
 
 # Data protocol
 
-## TC
+The term `ID` is used below to denote `identifier field` of the CAN Bus and byte 2 (`Frame ID`) of a frame over the serial links
 
-The TC link is a low data rate radio link over LoRa at 433 MHz.
+The `identifier field` is an 11 bits field but only the 8 lower bits are used to make the data on the CAN Bus as similar as possible to the data on the serial buses.
+
+Each message on the Telecommand link and the Telemetry link has a unique ID
+
+| ID              | Frame type | From              | To                |
+|-----------------|------------|-------------------|-------------------|
+| `0x00` - `0x0F` | TC         | Ground            | Engine Computer   |
+| `0x10` - `0x1F` | TC         | Ground            | Flight Controller |
+| `0x20` - `0x8F` | TM         | Engine Computer   | Ground            |
+| `0x90` - `0xFF` | TM         | Flight Controller | Ground            |
+
+## Telecommand
+
+The Telecommand link is a low data rate radio link over LoRa at 433 MHz.
 
 ### Communication sequence
 
@@ -91,7 +106,30 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
 
 ### Commands description
 
+#### Engine Controller
+
 *This part is stil undone...*
+
+#### Flight Controller
+
+Commands from the Ground Station to the Flight Controller
+
+| ID     | Description             | Data size | Data                                                             | Comment                                                                                                            |
+|--------|-------------------------|-----------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| `0x11` | Set sleeping mode       | 1 Byte    | bit0: `is_fc_sleeping`                                           | Default state is 0                                                                                                 |
+| `0x12` | Enable radios emitters  | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`           | Default state is 0                                                                                                 |
+| `0x13` | Enable parachute output | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en` | Default state is 0 <br> Used for testing only <br> Must set `is_armed` to 1 before a <br> parachute can be enabled |
+
+Returned data
+
+| ID     | Description              | Data size | Data                                                                                   | Comment                                        |
+|--------|--------------------------|-----------|----------------------------------------------------------------------------------------|------------------------------------------------|
+| `0x17` | Sleep mode               | 1 Byte    | bit0: `is_fc_sleeping`                                                                 | Returned after `0x11`                          |
+| `0x18` | Radio emitters state     | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`                                 | Returned after `0x12`                          |
+| `0x19` | Parachute outputs state  | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en`                       | Returned after `0x13`                          |
+| `0x1A` | On-board battery voltage | 4 Bytes   | byte0: `bat1_msb` <br> byte1: `bat1_lsb` <br> byte2: `bat2_msb` <br> byte3: `bat2_lsb` | Sent every `x` seconds <br> Unsigned, in 0.01V |
+| `0x1B` | GNSS data                | -         | -                                                                                      | -                                              |
+| `0x1C` | Software state           | -         | -                                                                                      | -                                              |
 
 ## Telemetry
 
