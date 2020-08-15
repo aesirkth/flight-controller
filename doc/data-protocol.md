@@ -88,7 +88,10 @@ Each message on the Telecommand link and the Telemetry link has a unique ID
 | `0x00` - `0x0F` | TC         | Ground            | Engine Computer   |
 | `0x1F` - `0x7F` | TM         | Engine Computer   | Ground            |
 | `0x80` - `0x8F` | TC         | Ground            | Flight Controller |
-| `0x90` - `0xFF` | TM         | Flight Controller | Ground            |
+| `0x90` - `0xEF` | TM         | Flight Controller | Ground            |
+| `0xF0` - `0xFF` | N/A        | N/A               | N/A               |
+
+The `ID` values `0xF0` - `0xFF` are left unused and will be used if new devices are added to the on-board CAN Bus
 
 ## Telecommand
 
