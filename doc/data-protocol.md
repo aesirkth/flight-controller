@@ -176,7 +176,7 @@ Commands from the Ground Station to the Flight Controller
     <td>0x82</td>
     <td>Enable radios emitters</td>
     <td>1 Byte</td>
-    <td>bit0: is_fpv_en<br>bit1: N/C<br>bit2: is_tm_en</td>
+    <td>bit0: is_fpv_en<br>bit1: is_tm_en</td>
     <td>Default state is 0</td>
   </tr>
   <tr>
@@ -213,7 +213,7 @@ Returned data
     <td>0x88</td>
     <td>Radio emitters state<br>Returned after 0x82</td>
     <td>1 Byte</td>
-    <td>bit0: is_fpv_en<br>bit1: N/C<br>bit2: is_tm_en</td>
+    <td>bit0: is_fpv_en<br>bit1: is_tm_en</td>
     <td></td>
   </tr>
   <tr>
@@ -224,21 +224,15 @@ Returned data
     <td></td>
   </tr>
   <tr>
-    <td rowspan="4">0x8A</td>
-    <td rowspan="4">On-board battery voltage<br>Sent every X seconds</td>
-    <td rowspan="4">4 Bytes</td>
-    <td>byte0: bat1_msb</td>
-    <td rowspan="2">uint16_t, in 0.01V</td>
+    <td rowspan="2">0x8A</td>
+    <td rowspan="2">On-board battery voltage<br>Sent every X seconds</td>
+    <td rowspan="2">4 Bytes</td>
+    <td>voltage_battery_1</td>
+    <td>uint16_t, little-endian, in 0.01V</td>
   </tr>
   <tr>
-    <td>byte1: bat1_lsb</td>
-  </tr>
-  <tr>
-    <td>byte2: bat2_msb</td>
-    <td rowspan="2">uint16_t, in 0.01V</td>
-  </tr>
-  <tr>
-    <td>byte3: bat2_lsb</td>
+    <td>voltage_battery_2</td>
+    <td>uint16_t, little-endian, in 0.01V</td>
   </tr>
   <tr>
     <td>0x8B</td>
@@ -412,12 +406,12 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td rowspan="2"></td>
     <td rowspan="2">On-board battery voltage</td>
     <td rowspan="2">4 Bytes</td>
-    <td>battery_1</td>
+    <td>voltage_battery_1</td>
     <td>uint16_t, little-endian, in 0.01V</td>
     <td rowspan="2">1 Hz</td>
   </tr>
   <tr>
-    <td>battery_2</td>
+    <td>voltage_battery_2</td>
     <td>uint16_t, little-endian, in 0.01V</td>
   </tr>
   <tr>
