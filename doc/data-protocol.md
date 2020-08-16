@@ -22,6 +22,7 @@ Here is a description of the data protocol between the Rocket and the Ground Sta
       - [Engine Controller](#engine-controller-1)
       - [Flight Controller](#flight-controller-1)
       - [About time stamps](#about-time-stamps)
+      - [About lost frames](#about-lost-frames)
 
 # Overview
 
@@ -51,6 +52,7 @@ Drivers:
 Drivers:
 
 - Maximize the amount of data downlinked from the Rocket, by optimizing how the data packets are processed by the Flight Controller and maybe also the Ground Station
+- Be more resilient to loss of frames
 
 # Serial links
 
@@ -269,11 +271,177 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 
 #### Engine Controller
 
-*This part is stil undone...*
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Data size</th>
+    <th>Data</th>
+    <th>Comment</th>
+    <th>Rate</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>0x80</td>
+    <td>Time since boot - millis</td>
+    <td>4 Bytes</td>
+    <td>ms_since_boot</td>
+    <td>uint32_t, little-endian, in ms</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x81</td>
+    <td>Time since boot - micros</td>
+    <td>8 Bytes</td>
+    <td>us_since_boot</td>
+    <td>uint64_t, little-endian, in us</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
 
 #### Flight Controller
 
-*This part is stil undone...*
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Data size</th>
+    <th>Data</th>
+    <th>Comment</th>
+    <th>Rate</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>0x80</td>
+    <td>Time since boot - millis</td>
+    <td>4 Bytes</td>
+    <td>ms_since_boot</td>
+    <td>uint32_t, little-endian, in ms</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x81</td>
+    <td>Time since boot - micros</td>
+    <td>8 Bytes</td>
+    <td>us_since_boot</td>
+    <td>uint64_t, little-endian, in us</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x82</td>
+    <td>GNSS time</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Software state</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Hardware state</td>
+    <td>1 Byte<br></td>
+    <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en<br>bit3: is_fpv_en<br>bit4: is_telemetry_en</td>
+    <td>uint8_t</td>
+    <td>1 Hz</td>
+  </tr>
+  <tr>
+    <td rowspan="4"></td>
+    <td rowspan="4">Static pressure</td>
+    <td rowspan="4">16 Bytes</td>
+    <td>pressure_1</td>
+    <td>int32_t, little-endian, in 0.01 mbar</td>
+    <td rowspan="4">1 Hz</td>
+  </tr>
+  <tr>
+    <td>temperature_1</td>
+    <td>int32_t, little-endian, in 0.01°C</td>
+  </tr>
+  <tr>
+    <td>pressure_2</td>
+    <td>int32_t, little-endian, in 0.01 mbar</td>
+  </tr>
+  <tr>
+    <td>temperature_2</td>
+    <td>int32_t, little-endian, in 0.01°C</td>
+  </tr>
+  <tr>
+    <td rowspan="2"></td>
+    <td rowspan="2">Static pressure - no temp</td>
+    <td rowspan="2">8 bytes</td>
+    <td>pressure_1</td>
+    <td>int32_t, little-endian, in 0.01 mbar</td>
+    <td rowspan="2">10 Hz</td>
+  </tr>
+  <tr>
+    <td>pressure_2</td>
+    <td>int32_t, little-endian, in 0.01 mbar</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>IMU</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>50 Hz</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Magnetometer</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td rowspan="2"></td>
+    <td rowspan="2">On-board battery voltage</td>
+    <td rowspan="2">4 Bytes</td>
+    <td>battery_1</td>
+    <td>uint16_t, little-endian, in 0.01V</td>
+    <td rowspan="2">1 Hz</td>
+  </tr>
+  <tr>
+    <td>battery_2</td>
+    <td>uint16_t, little-endian, in 0.01V</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>GNSS data</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Air speed</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Air temperature</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+</tbody>
+</table>
 
 #### About time stamps
 
@@ -290,3 +458,15 @@ The error in acquisition time is acceptable as the sampling loop is assumed to b
 All the sensors may not be sampled in every loop or may be sampled without sending the samples to the ground. The sensors that require low sampling rates can simply be sampled and sent every **X** loop
 
 >**Note:** the exact time of acquisition for each sample can still be recorded and stored on the on-board memory
+
+#### About lost frames
+
+Some cases might exist where the time frame is not received on the Ground Station.
+
+On Sigmundr launch (2019), the telemetry frames were ~100 bytes long. It was noticed that when a failure occured, the whole frame was lost instead of just small bits at the beginning or so. This has to do with how the RFD900+ modems handle the data transmission and should be further investigated.
+
+Possible mitigations for early uses of this protocol can be:
+
+- Time stamp all packets at reception time and compare this time with the time frame
+- Assume no packet loss (realistic at close range, < 1km with line of sight)
+- Group the frames in a big packet (wait and send all at once) like was done on Sigmundr and hope for a pass / fail for one hole sampling loop
