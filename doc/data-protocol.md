@@ -114,7 +114,28 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
 
 #### Engine Controller
 
-*This part is stil undone...*
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Data size</th>
+    <th>Data</th>
+    <th>Comment</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>0x00</td>
+    <td>Time sync<br>Can be sent by FC</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+>**Note:** The LoRa link adds a sizeable delay in the transmission of the commands. This delay makes the "Time sync" frame (`0x00`) inaccurate. This frame is intended to be sent from the Ground Station for testing purposes and in the absence of GNSS receiver connected to the Flight Controller. When a GNSS receiver is connected to the Flight Controller, the Flight Controller sends a "Time sync" frame based on GNSS time to the Engine Computer over the CAN Bus
 
 #### Flight Controller
 
@@ -131,6 +152,13 @@ Commands from the Ground Station to the Flight Controller
   </tr>
 </thead>
 <tbody>
+  <tr>
+    <td>0x80</td>
+    <td>Time sync</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
+  </tr>
   <tr>
     <td>0x81</td>
     <td>Set sleeping mode</td>
