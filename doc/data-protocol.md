@@ -19,6 +19,9 @@ Here is a description of the data protocol between the Rocket and the Ground Sta
   - [Telemetry](#telemetry)
     - [Communication sequence](#communication-sequence-1)
     - [Data description](#data-description)
+      - [Engine Controller](#engine-controller-1)
+      - [Flight Controller](#flight-controller-1)
+      - [About time stamps](#about-time-stamps)
 
 # Overview
 
@@ -236,5 +239,26 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 
 ### Data description
 
+#### Engine Controller
 
 *This part is stil undone...*
+
+#### Flight Controller
+
+*This part is stil undone...*
+
+#### About time stamps
+
+The data acquisition process is the following:
+
+1. Record the current time
+1. Take a sample from each sensor
+1. Send the acquisition time
+1. Send all the samples in their corresponding frame
+1. The time of acquisition is reconstructed on the Ground Station from the acquisition time
+
+This allows to reduce the overhead on the Telemetry link by only sending one time stamp for all the data acquired in one loop.
+The error in acquisition time is acceptable as the sampling loop is assumed to be short with respect to the measured phenomena.
+All the sensors may not be sampled in every loop or may be sampled without sending the samples to the ground. The sensors that require low sampling rates can simply be sampled and sent every **X** loop
+
+>**Note:** the exact time of acquisition for each sample can still be recorded and stored on the on-board memory
