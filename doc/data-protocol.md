@@ -117,22 +117,108 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
 
 Commands from the Ground Station to the Flight Controller
 
-| ID     | Description             | Data size | Data                                                             | Comment                                                                                                            |
-|--------|-------------------------|-----------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| `0x81` | Set sleeping mode       | 1 Byte    | bit0: `is_fc_sleeping`                                           | Default state is 0                                                                                                 |
-| `0x82` | Enable radios emitters  | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`           | Default state is 0                                                                                                 |
-| `0x83` | Enable parachute output | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en` | Default state is 0 <br> Used for testing only <br> Must set `is_armed` to 1 before a <br> parachute can be enabled |
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Data size</th>
+    <th>Data</th>
+    <th>Comment</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>0x81</td>
+    <td>Set sleeping mode</td>
+    <td>1 Byte</td>
+    <td>bit0: is_fc_sleeping</td>
+    <td>Default state is 0</td>
+  </tr>
+  <tr>
+    <td>0x82</td>
+    <td>Enable radios emitters</td>
+    <td>1 Byte</td>
+    <td>bit0: is_fpv_en<br>bit1: N/C<br>bit2: is_tm_en</td>
+    <td>Default state is 0</td>
+  </tr>
+  <tr>
+    <td>0x83</td>
+    <td>Enable parachute output<br>Used for testing only</td>
+    <td>1 Byte</td>
+    <td>bit0: is_armed<br>bit1: is_par1_en <br>bit2: is_par2_en</td>
+    <td>Default state is 0 <br>Must set is_armed to 1 before<br>a parachute can be enabled</td>
+  </tr>
+</tbody>
+</table>
 
 Returned data
 
-| ID     | Description              | Data size | Data                                                                                   | Comment                                        |
-|--------|--------------------------|-----------|----------------------------------------------------------------------------------------|------------------------------------------------|
-| `0x87` | Sleep mode               | 1 Byte    | bit0: `is_fc_sleeping`                                                                 | Returned after `0x81`                          |
-| `0x88` | Radio emitters state     | 1 Byte    | bit0: `is_fpv_en` <br> bit1: N/C <br> bit2: `is_tm_en`                                 | Returned after `0x82`                          |
-| `0x89` | Parachute outputs state  | 1 Byte    | bit0: `is_armed` <br> bit1: `is_par1_en` <br> bit2: `is_par2_en`                       | Returned after `0x83`                          |
-| `0x8A` | On-board battery voltage | 4 Bytes   | byte0: `bat1_msb` <br> byte1: `bat1_lsb` <br> byte2: `bat2_msb` <br> byte3: `bat2_lsb` | Sent every `x` seconds <br> Unsigned, in 0.01V |
-| `0x8B` | GNSS data                | -         | -                                                                                      | -                                              |
-| `0x8C` | Software state           | -         | -                                                                                      | -                                              |
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Data size</th>
+    <th>Data</th>
+    <th>Comment</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>0x87</td>
+    <td>Sleep mode<br>Returned after 0x81</td>
+    <td>1 Byte</td>
+    <td>bit0: is_fc_sleeping</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x88</td>
+    <td>Radio emitters state<br>Returned after 0x82</td>
+    <td>1 Byte</td>
+    <td>bit0: is_fpv_en<br>bit1: N/C<br>bit2: is_tm_en</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x89</td>
+    <td>Parachute outputs state<br>Returned after 0x83</td>
+    <td>1 Byte</td>
+    <td>bit0: is_armed<br>bit1: is_par1_en<br>bit2: is_par2_en</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x8A</td>
+    <td rowspan="4">On-board battery voltage<br>Sent every X seconds</td>
+    <td rowspan="4">4 Bytes</td>
+    <td>byte0: bat1_msb</td>
+    <td rowspan="2">uint16_t, in 0.01V</td>
+  </tr>
+  <tr>
+    <td>byte1: bat1_lsb</td>
+  </tr>
+  <tr>
+    <td>byte2: bat2_msb</td>
+    <td rowspan="2">uint16_t, in 0.01V</td>
+  </tr>
+  <tr>
+    <td>byte3: bat2_lsb</td>
+  </tr>
+  <tr>
+    <td>0x8B</td>
+    <td>GNSS data</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>0x8C</td>
+    <td>Software state</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+</tbody>
+</table>
 
 ## Telemetry
 
