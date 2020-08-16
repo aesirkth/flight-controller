@@ -2,9 +2,17 @@
 
 Here is a description of the data protocol between the Rocket and the Ground Station for the Mjollnir project
 
+This protocol defines how Telecommands and Telemetry are transmitted between the Ground Station, the Engine Computer, and the Flight Controller
+
+The following repositories follow this data protocol:
+
+- [aesirkth/flight-controller](https://github.com/aesirkth/flight-controller)
+- [aesirkth/ground-control](https://github.com/aesirkth/ground-control)
+- *engine computer repository*
+
 The diagrams in this document can be edited using the online tool [diagrams.net](https://www.diagrams.net/). Just import the `.xml` files. Export the diagrams to `.png` and to `.xml` (compressed) and save them back here after modification
 
-The HTML tables in this document can be edited using the online tool [tablesgenerator.com](https://www.tablesgenerator.com/html_tables#). Simply click "File / Paste table data" and paste the table. Make sure to check "Do not generate CSS" and uncheck "Compact mode"
+The HTML tables in this document can be edited using the online tool [tablesgenerator.com](https://www.tablesgenerator.com/html_tables). Simply click "File / Paste table data" and paste the table. Make sure to check "Do not generate CSS" and uncheck "Compact mode"
 
 # Table of contents <!-- omit in toc -->
 
@@ -60,7 +68,7 @@ Drivers:
 
 # Serial links
 
-All serial links share the same configuration. The baud rate is `57600`.
+All serial links share the same configuration. The baud rate is `57600`. The airspeed between the RFD900+ modems is 64kbps
 
 A frame on the serial links looks like this:
 
@@ -183,7 +191,7 @@ Commands from the Ground Station to the Flight Controller
     <td>0x83</td>
     <td>Enable parachute output<br>Used for testing only</td>
     <td>1 Byte</td>
-    <td>bit0: is_armed<br>bit1: is_par1_en <br>bit2: is_par2_en</td>
+    <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
     <td>Default state is 0 <br>Must set is_armed to 1 before<br>a parachute can be enabled</td>
   </tr>
 </tbody>
@@ -220,7 +228,7 @@ Returned data
     <td>0x89</td>
     <td>Parachute outputs state<br>Returned after 0x83</td>
     <td>1 Byte</td>
-    <td>bit0: is_armed<br>bit1: is_par1_en<br>bit2: is_par2_en</td>
+    <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
     <td></td>
   </tr>
   <tr>
@@ -282,7 +290,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 </thead>
 <tbody>
   <tr>
-    <td>0x80</td>
+    <td>0x10</td>
     <td>Time since boot - millis</td>
     <td>4 Bytes</td>
     <td>ms_since_boot</td>
@@ -290,7 +298,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td></td>
   </tr>
   <tr>
-    <td>0x81</td>
+    <td>0x11</td>
     <td>Time since boot - micros</td>
     <td>8 Bytes</td>
     <td>us_since_boot</td>
@@ -315,7 +323,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 </thead>
 <tbody>
   <tr>
-    <td>0x80</td>
+    <td>0x90</td>
     <td>Time since boot - millis</td>
     <td>4 Bytes</td>
     <td>ms_since_boot</td>
@@ -323,7 +331,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td></td>
   </tr>
   <tr>
-    <td>0x81</td>
+    <td>0x91</td>
     <td>Time since boot - micros</td>
     <td>8 Bytes</td>
     <td>us_since_boot</td>
@@ -331,7 +339,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td></td>
   </tr>
   <tr>
-    <td>0x82</td>
+    <td>0x92</td>
     <td>GNSS time</td>
     <td>-</td>
     <td>-</td>
