@@ -2,6 +2,10 @@
 
 Here is a description of the data protocol between the Rocket and the Ground Station for the Mjollnir project
 
+The diagrams in this document can be edited using the online tool [diagrams.net](https://www.diagrams.net/). Just import the `.xml` files. Export the diagrams to `.png` and to `.xml` (compressed) and save them back here after modification
+
+The HTML tables in this document can be edited using the online tool [tablesgenerator.com](https://www.tablesgenerator.com/html_tables#). Simply click "File / Paste table data" and paste the table. Make sure to check "Do not generate CSS" and uncheck "Compact mode"
+
 # Table of contents <!-- omit in toc -->
 
 - [Overview](#overview)
