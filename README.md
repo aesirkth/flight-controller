@@ -65,6 +65,14 @@ The protocol to communicate between the Ground Station and the Rocket is detaile
 │   |   └── flight_controller_v1.0.pdf
 │   ├── data-protocol.md
 │   └── hardware_description.md
+├── include/
+│   └── hardware_definition_teensy.h
+├── src/                                    // Code folder
+│   └── test_companion_teensy.cpp
+├── test/                                   // Unit tests
+│   └── hardware_test_teensy.cpp
+├── env_teensy.ini                          // Extra platformIO config
 ├── LICENSE
+├── platformio.ini                          // PlatformIO config
 └── README.md                               // This file
 ```
