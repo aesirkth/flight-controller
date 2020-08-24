@@ -29,26 +29,29 @@ All of them apply to some extent to the Flight Controller
 # Table of content <!-- omit in toc -->
 
 - [Description](#description)
+  - [Hardware](#hardware)
+  - [Software](#software)
+    - [Installation](#installation)
 - [Data protocol](#data-protocol)
 - [Folder structure](#folder-structure)
 
 # Description
 
-Two separate battery inputs are available on the Flight Controller
+## Hardware
 
-| Name | Voltage | Role                                                                              | Connector | Connector type |
-|------|---------|-----------------------------------------------------------------------------------|-----------|----------------|
-| BAT1 | 7.2V    | Power the sensors and low power chips                                             | CON1      | XT30, male     |
-| BAT2 | 11.1V   | Power the EEDs for the parachutes, the Engine actuators, and the high power chips | CON2      | XT60, male     |
-
-The Flight Controller has two microcontrollers
-
-| Name              | Device       | Role                                                                                    | Power |
-|-------------------|--------------|-----------------------------------------------------------------------------------------|-------|
-| Main controller   | Teensy 3.6   | Handle the flight data acquisition, parachute ejection, Engine Computer and radio links | BAT1  |
-| Backup controller | Arduino Nano | Eject the parachutes in case the main controller fails                                  | BAT2  |
+The Flight Controller is a single PCB with power management, sensors, radio communciation, and driver for the actuators used udring the flight.
 
 A more detailed description of the hardware is given in [doc/hardware_description.md](doc/hardware_description.md)
+
+## Software
+
+This repository uses [PlatformIO](https://platformio.org/) as the development tool for the two microcontrollers on the Flight Controller.
+
+### Installation
+
+1. Install [PlatformIO Core](https://docs.platformio.org/en/latest/core/index.html) or [PlatformIO IDE](https://platformio.org/install/ide) on your computer
+2. Clone this repository
+3. [Linux] install [udev](https://docs.platformio.org/en/latest/faq.html?highlight=99#platformio-udev-rules) rules
 
 # Data protocol
 
