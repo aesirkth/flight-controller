@@ -96,7 +96,7 @@ Base frame format (11 identifier bits)
 
 The term `ID` is used below to denote `identifier field` of the CAN Bus and byte 2 (`Frame ID`) of a frame over the serial links
 
-The `identifier field` is an 11 bits field but only the 8 lower bits are used to make the data on the CAN Bus as similar as possible to the data on the serial buses.
+The `identifier field` is an 11 bits field but only the 8 lower bits are used to make the data on the CAN Bus as similar as possible to the data on the serial buses. The remaining `ID` values `100` - `7FF` are available for data transfer between on-board systems over the CAN Bus only and cannot be sent to the ground.
 
 Each message on the Telecommand link and the Telemetry link has a unique ID
 
