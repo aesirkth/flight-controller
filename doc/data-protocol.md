@@ -128,6 +128,8 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
 
 #### Engine Controller
 
+Commands from the Ground Station to the Engine Computer
+
 <table>
 <thead>
   <tr>
@@ -146,10 +148,75 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
     <td>-</td>
     <td></td>
   </tr>
+  <tr>
+    <td>0x01</td>
+    <td>Set sleeping mode</td>
+    <td>1 Byte</td>
+    <td>bit0: is_ec_sleeping</td>
+    <td>Default state is 0</td>
+  </tr>
+  <tr>
+    <td>0x02</td>
+    <td>Engine state</td>
+    <td>1 Byte</td>
+    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en</td>
+    <td>Default state is 0<br>bit0 has absolute priority<br>Must set is_engine_armed to 1 <br>before engine can be enabled</td>
+  </tr>
+  <tr>
+    <td>0x03</td>
+    <td>Liftoff status</td>
+    <td>1 Byte</td>
+    <td>bit0: is_liftoff_confirmed</td>
+    <td>Confirmed by FC sensors</td>
+  </tr>
 </tbody>
 </table>
 
 >**Note:** The LoRa link adds a sizeable delay in the transmission of the commands. This delay makes the "Time sync" frame (`0x00`) inaccurate. This frame is intended to be sent from the Ground Station for testing purposes and in the absence of GNSS receiver connected to the Flight Controller. When a GNSS receiver is connected to the Flight Controller, the Flight Controller sends a "Time sync" frame based on GNSS time to the Engine Computer over the CAN Bus
+
+Returned data
+
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Data size</th>
+    <th>Data</th>
+    <th>Comment</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>0x07</td>
+    <td>Sleep mode<br>Returned after 0x01<br></td>
+    <td>1 Byte</td>
+    <td>bit0: is_ec_sleeping</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x08</td>
+    <td>Engine state<br>Returned after 0x02<br></td>
+    <td>1 Byte</td>
+    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x09</td>
+    <td>Software state</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>0x0A</td>
+    <td>Hardware state</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
 
 #### Flight Controller
 
