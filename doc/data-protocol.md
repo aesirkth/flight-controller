@@ -40,7 +40,7 @@ The HTML tables in this document can be edited using the online tool [tablesgene
 
 ![buses](diagrams/data-buses.png)
 >Overview of the data buses between the Ground Station and the Rocket<br>
-The source file can be found in [doc/diagrams/data-buses.xml](diagrams/data-buses.xml)
+The source file can be found in [doc/diagrams/data-buses.xml](diagrams/data-buses.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 The Gateway is connected to the Control computer through the USB connector of the Flight Controller<br>
 The RFD900+ on the Ground Station side is connected to the Dashboard computer through an FTDI USB cable
@@ -118,11 +118,11 @@ The Telecommand link is a low data rate radio link over LoRa at 433 MHz.
 
 ![commands-sequence-no-ec](diagrams/command-sequence-no-ec.png)
 >Command sequence to the Rocket. Command addressed to the Flight Controller<br>
-The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/command-sequence.xml)
+The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/command-sequence.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 ![commands-sequence-no-ec](diagrams/command-sequence-ec.png)
 >Command sequence to the Rocket. Command addressed to the Engine Controller<br>
-The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/command-sequence.xml)
+The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/command-sequence.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 ### Commands description
 
@@ -334,11 +334,11 @@ The Telemetry link is a high data rate radio link over FHSS at 868 MHz. It is te
 
 ![telemetry-sequence-no-ec](diagrams/telemetry-sequence-no-ec.png)
 >Telemetry sequence to the Rocket. Telemetry from the Flight Controller<br>
-The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/telemetry-sequence.xml)
+The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/telemetry-sequence.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 ![telemetry-sequence-no-ec](diagrams/telemetry-sequence-ec.png)
 >Telemetry sequence to the Rocket. Telemetry from the Engine Controller<br>
-The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/telemetry-sequence.xml)
+The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/telemetry-sequence.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 ### Data description
 
