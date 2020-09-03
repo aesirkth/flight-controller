@@ -520,11 +520,11 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 
 The data acquisition process is the following:
 
-1. Record the current time
+1. Record the current time (e.g. time since boot)
 1. Take a sample from each sensor
-1. Send the acquisition time
+1. Send the recorded time
 1. Send all the samples in their corresponding frame
-1. The time of acquisition is reconstructed on the Ground Station from the acquisition time
+1. The time of acquisition for each frame is reconstructed on the Ground Station from the recorded time
 
 This allows to reduce the overhead on the Telemetry link by only sending one time stamp for all the data acquired in one loop.
 The error in acquisition time is acceptable as the sampling loop is assumed to be short with respect to the measured phenomena.
