@@ -333,11 +333,11 @@ The Telemetry link is a high data rate radio link over FHSS at 868 MHz. It is te
 ### Communication sequence
 
 ![telemetry-sequence-no-ec](diagrams/telemetry-sequence-no-ec.png)
->Telemetry sequence to the Rocket. Telemetry from the Flight Controller<br>
+>Telemetry sequence from the Rocket. Telemetry from the Flight Controller<br>
 The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/telemetry-sequence.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 ![telemetry-sequence-no-ec](diagrams/telemetry-sequence-ec.png)
->Telemetry sequence to the Rocket. Telemetry from the Engine Controller<br>
+>Telemetry sequence from the Rocket. Telemetry from the Engine Controller<br>
 The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/telemetry-sequence.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 ### Data description
