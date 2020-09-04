@@ -102,8 +102,8 @@ Each message on the Telecommand link and the Telemetry link has a unique ID
 
 | ID              | Frame type | From              | To                |
 |-----------------|------------|-------------------|-------------------|
-| `0x00` - `0x0F` | TC         | Ground            | Engine Computer   |
-| `0x10` - `0x7F` | TM         | Engine Computer   | Ground            |
+| `0x00` - `0x0F` | TC         | Ground or Flight Controller           | Engine Computer   |
+| `0x10` - `0x7F` | TM         | Engine Computer   | Ground or Flight Controller  |
 | `0x80` - `0x8F` | TC         | Ground            | Flight Controller |
 | `0x90` - `0xEF` | TM         | Flight Controller | Ground            |
 | `0xF0` - `0xFF` | N/A        | N/A               | N/A               |
@@ -157,14 +157,14 @@ Commands from the Ground Station to the Engine Computer
   </tr>
   <tr>
     <td>0x02</td>
-    <td>Engine state</td>
+    <td>Set engine state</td>
     <td>1 Byte</td>
     <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en</td>
     <td>Default state is 0<br>bit0 has absolute priority<br>Must set is_engine_armed to 1 <br>before engine can be enabled</td>
   </tr>
   <tr>
     <td>0x03</td>
-    <td>Liftoff status</td>
+    <td>Set liftoff status</td>
     <td>1 Byte</td>
     <td>bit0: is_liftoff_confirmed</td>
     <td>Confirmed by FC sensors</td>
@@ -172,7 +172,7 @@ Commands from the Ground Station to the Engine Computer
 </tbody>
 </table>
 
->**Note:** The LoRa link adds a sizeable delay in the transmission of the commands. This delay makes the "Time sync" frame (`0x00`) inaccurate. This frame is intended to be sent from the Ground Station for testing purposes and in the absence of GNSS receiver connected to the Flight Controller. When a GNSS receiver is connected to the Flight Controller, the Flight Controller sends a "Time sync" frame based on GNSS time to the Engine Computer over the CAN Bus
+>**Note:** The LoRa link adds a sizeable delay in the transmission of the commands. This delay makes the "Time sync" frame (`0x00`) inaccurate if sent from the ground. This frame is intended to be sent from the Ground Station for testing purposes and in the absence of GNSS receiver connected to the Flight Controller. When a GNSS receiver is connected to the Flight Controller, the Flight Controller sends a "Time sync" frame based on GNSS time to the Engine Computer over the CAN Bus
 
 Returned data
 
