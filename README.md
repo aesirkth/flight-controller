@@ -73,7 +73,8 @@ The protocol to communicate between the Ground Station and the Rocket is detaile
 ├── src/                                    // Code folder
 │   └── test_companion_teensy.cpp           // Use with hardware_test_teensy
 ├── test/                                   // Unit tests
-│   ├── hardware_test_teensy.cpp
+│   ├── hardware_test_nano/
+│   ├── hardware_test_teensy/
 │   └── README.md                           // Documentation for the tests
 ├── env_teensy.ini                          // Extra platformIO config
 ├── LICENSE
