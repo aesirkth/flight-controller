@@ -88,7 +88,7 @@ The length of the data field is variable
 
 > **Note:** the CAN bus between the Engine Computer and the Flight Controller can be extended to additional boards in future developments
 
-CAN bus: CAN2.0 (FlexCAN) @1Mbit/s with termination 120$\Omega$ resistors on the Flight Controller side and on the Engine Computer side
+CAN bus: CAN2.0 (FlexCAN) @1Mbit/s with termination 120Ω resistors on the Flight Controller side and on the Engine Computer side
 
 Base frame format (11 identifier bits)
 
@@ -100,13 +100,13 @@ The `identifier field` is an 11 bits field but only the 8 lower bits are used to
 
 Each message on the Telecommand link and the Telemetry link has a unique ID
 
-| ID              | Frame type | From              | To                |
-|-----------------|------------|-------------------|-------------------|
-| `0x00` - `0x0F` | TC         | Ground or Flight Controller           | Engine Computer   |
-| `0x10` - `0x7F` | TM         | Engine Computer   | Ground or Flight Controller  |
-| `0x80` - `0x8F` | TC         | Ground            | Flight Controller |
-| `0x90` - `0xEF` | TM         | Flight Controller | Ground            |
-| `0xF0` - `0xFF` | N/A        | N/A               | N/A               |
+| ID              | Frame type | From                        | To                          |
+| --------------- | ---------- | --------------------------- | --------------------------- |
+| `0x00` - `0x0F` | TC         | Ground or Flight Controller | Engine Computer             |
+| `0x10` - `0x7F` | TM         | Engine Computer             | Ground or Flight Controller |
+| `0x80` - `0x8F` | TC         | Ground                      | Flight Controller           |
+| `0x90` - `0xEF` | TM         | Flight Controller           | Ground                      |
+| `0xF0` - `0xFF` | N/A        | N/A                         | N/A                         |
 
 The `ID` values `0xF0` - `0xFF` are left unused and will be used if new devices are added to the on-board CAN Bus
 
