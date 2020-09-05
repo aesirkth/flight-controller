@@ -34,8 +34,8 @@
 #define PIN_TX4 32
 #define PIN_CS_TEMP1 33
 #define PIN_CS_TEMP2 34
-#define PIN_RFD_EN 35
-#define PIN_FPV_EN 36
+#define PIN_J2_DIS 35
+#define PIN_J4_DIS 36
 #define PIN_PARA1 37
 #define PIN_PARA2 38
 #define PIN_RFM_INT 39

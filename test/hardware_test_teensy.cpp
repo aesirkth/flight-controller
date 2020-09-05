@@ -95,10 +95,10 @@ void setup() {
   digitalWrite(PIN_PARA1, LOW);  // LOW means inactive parachute
   digitalWrite(PIN_PARA2, LOW);  // LOW means inactive parachute
 
-  pinMode(PIN_RFD_EN, OUTPUT);
-  pinMode(PIN_FPV_EN, OUTPUT);
-  digitalWrite(PIN_RFD_EN, LOW);  // LOW means active Telemetry output
-  digitalWrite(PIN_FPV_EN, LOW);
+  pinMode(PIN_J2_DIS, OUTPUT);
+  pinMode(PIN_J4_DIS, OUTPUT);
+  digitalWrite(PIN_J2_DIS, LOW);  // LOW means active Telemetry output
+  digitalWrite(PIN_J4_DIS, LOW);
 
   UNITY_BEGIN();
 
@@ -342,9 +342,9 @@ void test_J2_output() {
   TEST_MESSAGE("It should turn off for 1s, do you see it ?");
   TEST_MESSAGE("(Measure the voltage on the test pad, 5V expected)");
   delay(1000);
-  digitalWrite(PIN_RFD_EN, HIGH);
+  digitalWrite(PIN_J2_DIS, HIGH);
   delay(1000);
-  digitalWrite(PIN_RFD_EN, LOW);
+  digitalWrite(PIN_J2_DIS, LOW);
 
   TEST_PASS_MESSAGE("Test passed if saw it");
 }
@@ -363,9 +363,9 @@ void test_J4_output() {
   TEST_MESSAGE("It should turn off for 1s, do you see it ?");
   TEST_MESSAGE("(Measure the voltage on the test pad, 12V expected)");
   delay(1000);
-  digitalWrite(PIN_FPV_EN, HIGH);
+  digitalWrite(PIN_J4_DIS, HIGH);
   delay(1000);
-  digitalWrite(PIN_FPV_EN, LOW);
+  digitalWrite(PIN_J4_DIS, LOW);
 
   TEST_PASS_MESSAGE("Test passed if saw it");
 }
