@@ -21,6 +21,19 @@ The schematic of the Flight Controller is here [doc/sources/flight_controller_v1
   - [Output](#output)
   - [Turn on the board](#turn-on-the-board)
   - [Power from USB](#power-from-usb)
+- [Sensors](#sensors)
+  - [On the board](#on-the-board)
+    - [Air pressure](#air-pressure)
+    - [Acceleration & angular velocity](#acceleration--angular-velocity)
+  - [Off the board](#off-the-board)
+    - [Differential air pressure sensor](#differential-air-pressure-sensor)
+    - [Temperature sensors](#temperature-sensors)
+- [Radio communication](#radio-communication)
+- [GNSS receiver](#gnss-receiver)
+- [Flash memory](#flash-memory)
+- [Visual and audible signals](#visual-and-audible-signals)
+  - [RGB leds](#rgb-leds)
+  - [Buzzer](#buzzer)
 - [Connectors](#connectors)
   - [Signal](#signal)
     - [Pin numbering](#pin-numbering)
@@ -108,7 +121,83 @@ Make sure to isolate `VIN` from `VUSB` on any Teensy used on the Flight Controll
 
 **Arduino Nano**
 
-The nano boards handles the power supply in a way that allows to use external power and USB power simultaneously. No modification is required.
+The Nano board handles the power supply in a way that allows to use external power and USB power simultaneously. No modification is required.
+
+
+# Sensors
+
+## On the board
+
+### Air pressure
+
+The static air pressure inside the rocket is measured with 2x **MS5611** sensors. The pressure inside the rocket must be equilibrated with the pressure outside the rocket.
+
+A measure of the altitude is derivated from the static pressure
+
+The **MS5611** chips are connected to the SPI bus 0 (`SPI`) of the Teensy.
+
+### Acceleration & angular velocity
+
+The acceleration and angular velocity of the rocket is measured with 2x **MPU9250** sensors. A 3-axis magnetometer is also available on the **MPU9250**.
+
+The measurements from the **MPU9250** are meant to help derive an altitude value and to get the rocket attitude. The performance of the engine can also be recontructed from the acceleration curve during the propulsive phase.
+
+The **MPU9250** are connected to the SPI bus 0 (`SPI`) of the Teensy
+
+## Off the board
+
+### Differential air pressure sensor
+
+Located in the nosecone. ABPDRRT005PG2A5. Used to derive the Mach number
+
+Connected to the I²C bus 0 (`SDA0` & `SCL0`). 5V logic, with level shifter
+
+### Temperature sensors
+
+The board features 2x **MAX31855K** thermocouple-to-digital converters to read the temperature from type_K thermocouples.
+
+The thermocouples will be placed outside the rocket to measure the total air temperature.
+
+The value of the external temperature will be used to derive the air speed during the flight, along with the Mach number
+
+The **MAX31855K** are connected to the SPI bus 0 (`SPI`) of the Teensy
+
+
+# Radio communication
+
+An **RFM96W** LoRa transceiver at 433 MHz is mounted on the PCB and must always be connected to a 50Ω antenna. It is used as a low power device to receive TC and send the rocket position at low datarates during the flight and after landing.
+
+The **RFM96W** is connected to the SPI bus 1 (`SPI1`) of the Teensy
+
+An **RFD900+** (868MHz) modem can be connected on the **TM/GNSS** connectors of the board
+
+The **RFD900+** is connected on the serial bus corresponding to the number of the connector it is connected to (`Serial1` for J1, `Serial2` for J2, `Serial3` for J3)
+
+
+# GNSS receiver
+
+A **NEO-M9N** GNSS receiver is used to acquire the rocket position during flight and after landing
+
+The **NEO-M9N** can be used with one of the Serial buses available or over I²C
+
+
+# Flash memory
+
+A **W25N01GV** flash memory chip (1 Gbit) is available on the Flight Controller to log the flight data
+
+It is connected to the SPI bus 1 (`SPI1`) of the Teensy
+
+
+# Visual and audible signals
+
+## RGB leds
+
+Two **SK6812** RGB leds are used to display the status of the GNSS signal and the state of the Teensy. The leds are wired in series and are controlled via pin `6` of the Teensy
+
+## Buzzer
+
+The Flight Controller features two CEM-1206S buzzers. One is drived by pin `2` of the Teensy, the other is drived by pin `10` of the Arduino Nano. They work at 2400 Hz.
+
 
 # Connectors
 
