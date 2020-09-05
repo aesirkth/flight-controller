@@ -18,6 +18,14 @@ void setup() {
   Serial1.setTX(PIN_TX1);
   Serial1.begin(SERIAL1_BAUD);
 
+  Serial2.setRX(PIN_RX2);
+  Serial2.setTX(PIN_TX2);
+  Serial2.begin(SERIAL2_BAUD);
+
+  Serial3.setRX(PIN_RX3);
+  Serial3.setTX(PIN_TX3);
+  Serial3.begin(SERIAL3_BAUD);
+
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
