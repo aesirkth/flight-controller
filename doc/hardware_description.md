@@ -278,4 +278,4 @@ Rated 12V/3A, can deliver 5A for short periods
 
 ### [ANT] LoRa antenna
 
-50$\Omega$ SMA connector
+50Ω SMA connector
