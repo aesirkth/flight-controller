@@ -1,6 +1,4 @@
-#include <FlexCAN.h>
-#include <RHHardwareSPI1.h>  // From Paul's version of RadioHead
-#include <RH_RF95.h>         // From RadioHead
+#include <FlexCAN.h>  // https://github.com/pawelsky/FlexCAN_Library
 #include <SPI.h>
 
 #include "hardware_definition_teensy.h"
@@ -38,6 +36,18 @@ void loop() {
 
   if (Serial1.available()) {
     Serial1.write(Serial1.read() + 1);
+    led_state = !led_state;
+    digitalWrite(LED_BUILTIN, led_state);
+  }
+
+  if (Serial2.available()) {
+    Serial2.write(Serial2.read() + 1);
+    led_state = !led_state;
+    digitalWrite(LED_BUILTIN, led_state);
+  }
+
+  if (Serial3.available()) {
+    Serial3.write(Serial3.read() + 1);
     led_state = !led_state;
     digitalWrite(LED_BUILTIN, led_state);
   }
