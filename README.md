@@ -74,6 +74,7 @@ The protocol to communicate between the Ground Station and the Rocket is detaile
 │   ├── data-protocol.md
 │   └── hardware_description.md
 ├── include/
+│   ├── hardware_definition_nano.h
 │   └── hardware_definition_teensy.h
 ├── src/                                    // Code folder
 │   └── test_companion_teensy.cpp           // Use with hardware_test_teensy
@@ -81,6 +82,7 @@ The protocol to communicate between the Ground Station and the Rocket is detaile
 │   ├── hardware_test_nano/
 │   ├── hardware_test_teensy/
 │   └── README.md                           // Documentation for the tests
+├── env_nano.ini                            // Extra platformIO config
 ├── env_teensy.ini                          // Extra platformIO config
 ├── LICENSE
 ├── platformio.ini                          // PlatformIO config
