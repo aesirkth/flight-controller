@@ -32,6 +32,7 @@ All of them apply to some extent to the Flight Controller
   - [Hardware](#hardware)
   - [Software](#software)
     - [Installation](#installation)
+  - [Tests](#tests)
 - [Data protocol](#data-protocol)
 - [Folder structure](#folder-structure)
 
@@ -39,7 +40,7 @@ All of them apply to some extent to the Flight Controller
 
 ## Hardware
 
-The Flight Controller is a single PCB with power management, sensors, radio communciation, and driver for the actuators used udring the flight.
+The Flight Controller is a single PCB with power management, sensors, radio communciation, and driver for the actuators used during the flight.
 
 A more detailed description of the hardware is given in [doc/hardware_description.md](doc/hardware_description.md)
 
@@ -52,6 +53,10 @@ This repository uses [PlatformIO](https://platformio.org/) as the development to
 1. Install [PlatformIO Core](https://docs.platformio.org/en/latest/core/index.html) or [PlatformIO IDE](https://platformio.org/install/ide) on your computer
 2. Clone this repository
 3. [Linux] install [udev](https://docs.platformio.org/en/latest/faq.html?highlight=99#platformio-udev-rules) rules
+
+## Tests
+
+See [test/](test/)
 
 # Data protocol
 
