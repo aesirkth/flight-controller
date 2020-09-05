@@ -11,8 +11,10 @@
 
 The schematic of the Flight Controller is here [doc/sources/flight_controller_v1.0.pdf](sources/flight_controller_v1.0.pdf)
 
+
 # Table of contents <!-- omit in toc -->
 
+- [Purpose](#purpose)
 - [Microcontrollers](#microcontrollers)
 - [Power](#power)
   - [Input](#input)
@@ -39,6 +41,15 @@ The schematic of the Flight Controller is here [doc/sources/flight_controller_v1
     - [[CON4] Parachute drivers](#con4-parachute-drivers)
   - [Antenna](#antenna)
     - [[ANT] LoRa antenna](#ant-lora-antenna)
+
+
+# Purpose
+
+- Validate the overall design of the Flight Controller
+- Support the first static fire at the end of the summer 2020
+- Support the first tests of the parachute system
+- Support the beginning of the code development for the future flight hardware
+
 
 # Microcontrollers
 
