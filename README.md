@@ -29,6 +29,7 @@ All of them apply to some extent to the Flight Controller
 # Table of content <!-- omit in toc -->
 
 - [Description](#description)
+- [Data protocol](#data-protocol)
 - [Folder structure](#folder-structure)
 
 # Description
@@ -49,6 +50,10 @@ The Flight Controller has two microcontrollers
 
 A more detailed description of the hardware is given in [doc/hardware_description.md](doc/hardware_description.md)
 
+# Data protocol
+
+The protocol to communicate between the Ground Station and the Rocket is detailed in [doc/data-protocol](doc/data-protocol.md)
+
 # Folder structure
 
 ```
@@ -58,6 +63,7 @@ A more detailed description of the hardware is given in [doc/hardware_descriptio
 │   ├── diagrams/
 │   ├── sources
 │   |   └── flight_controller_v1.0.pdf
+│   ├── data-protocol.md
 │   └── hardware_description.md
 ├── LICENSE
 └── README.md                               // This file
