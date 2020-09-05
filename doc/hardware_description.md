@@ -9,7 +9,8 @@
 
 >Top side and bottom side of the Flight Controller PCB
 
-The schematic of the Flight Controller is here [doc/sources/flight_controller_v1.0.pdf](sources/flight_controller_v1.0.pdf)
+The schematic of the Flight Controller is here [doc/sources/flight_controller_v1.0.pdf](sources/flight_controller_v1.0.pdf)<br>
+The Eagle source files are also available as [doc/sources/flight_controller_v1.0.sch](doc/../sources/flight_controller_v1.0.sch) and [doc/sources/flight_controller_v1.0.brd](doc/../sources/flight_controller_v1.0.brd)
 
 
 # Table of contents <!-- omit in toc -->
