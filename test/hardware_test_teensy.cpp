@@ -1,3 +1,43 @@
+/* hardware_test_teensy.cpp
+
+Author: Erwan Caffier
+
+Version:
+
+Description:
+  Unit tests to check the Flight Controller board. Works with the Flight Controller
+  v1.0. The tests require a fully assembled board with both batteries connected.
+  ALWAYS connect the antenna for the LoRa chip before powering the board.
+
+  A secondary board is required to test the communication buses. Connect a second
+  Flight Controller with test_companion_teensy.cpp loaded on it through J6 to test 
+  the CAN Bus. Power for the secondary board is provided through J6. Connect a 
+  second Flight Controller with test_companion_teensy.cpp loaded on it through J1, 
+  J2, or J3 to test the Serial buses. The RX and TX wires must be inverted. Power 
+  for the secondary board is provided through J1, J2, or J3.
+
+License:
+  MIT License
+  Copyright (c) 2020 Association of Engineering Students in Rocketry
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
+
 #include "hardware_test_teensy.h"
 
 #define UNIT_TESTING  // define this to get access to the private objects of MS5611
