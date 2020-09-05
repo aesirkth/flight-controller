@@ -21,6 +21,7 @@ The schematic of the Flight Controller is here [doc/sources/flight_controller_v1
   - [Output](#output)
   - [Turn on the board](#turn-on-the-board)
   - [Power from USB](#power-from-usb)
+- [Parachute drivers](#parachute-drivers)
 - [Sensors](#sensors)
   - [On the board](#on-the-board)
     - [Air pressure](#air-pressure)
@@ -123,6 +124,16 @@ Make sure to isolate `VIN` from `VUSB` on any Teensy used on the Flight Controll
 
 The Nano board handles the power supply in a way that allows to use external power and USB power simultaneously. No modification is required.
 
+
+# Parachute drivers
+
+The Flight Controller can drive two independent parachutes at 12V/5A<br>
+The parachutes are ejected from the rocket by Electro Explosive Devices
+
+For safety reasons, both pins of the EEDs must be shorted and grounded when the parachutes are not energized.
+This is done with an half H-bridge. The drivers' outputs are either shorted together and with the ground, or one of them is the ground and the other is connected to BAT2. Both the Teensy and the Arduino Nano can trigger the parachutes ejection. A signal from one of them is enough to energize the EED.
+
+A led indicator next to the drivers connector `CON4` shows the state of the two outputs. The code on the Arduino and on the Teensy must activate their respective buzzers before any EED can be energized as a warning signal in case someone were to be close to the EED.
 
 # Sensors
 
