@@ -150,10 +150,10 @@ Commands from the Ground Station to the Engine Computer
   </tr>
   <tr>
     <td>0x01</td>
-    <td>Set sleeping mode</td>
+    <td>Set power mode</td>
     <td>1 Byte</td>
-    <td>bit0: is_ec_sleeping</td>
-    <td>Default state is 0</td>
+    <td>TBD enum</td>
+    <td>Default state is TBD</td>
   </tr>
   <tr>
     <td>0x02</td>
@@ -189,9 +189,9 @@ Returned data
 <tbody>
   <tr>
     <td>0x07</td>
-    <td>Sleep mode<br>Returned after 0x01<br></td>
+    <td>Power mode<br>Returned after 0x01<br></td>
     <td>1 Byte</td>
-    <td>bit0: is_ec_sleeping</td>
+    <td>TBD enum</td>
     <td></td>
   </tr>
   <tr>
@@ -242,9 +242,9 @@ Commands from the Ground Station to the Flight Controller
   </tr>
   <tr>
     <td>0x81</td>
-    <td>Set sleeping mode</td>
+    <td>Set power mode</td>
     <td>1 Byte</td>
-    <td>bit0: is_fc_sleeping</td>
+    <td>TBD enum</td>
     <td>Default state is 0</td>
   </tr>
   <tr>
@@ -279,9 +279,9 @@ Returned data
 <tbody>
   <tr>
     <td>0x87</td>
-    <td>Sleep mode<br>Returned after 0x81</td>
+    <td>Power mode<br>Returned after 0x81</td>
     <td>1 Byte</td>
-    <td>bit0: is_fc_sleeping</td>
+    <td>TBD enum</td>
     <td></td>
   </tr>
   <tr>
