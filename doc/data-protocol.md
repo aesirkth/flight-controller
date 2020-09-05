@@ -249,14 +249,14 @@ Commands from the Ground Station to the Flight Controller
   </tr>
   <tr>
     <td>0x82</td>
-    <td>Enable radios emitters</td>
+    <td>Set radios emitters</td>
     <td>1 Byte</td>
     <td>bit0: is_fpv_en<br>bit1: is_tm_en</td>
     <td>Default state is 0</td>
   </tr>
   <tr>
     <td>0x83</td>
-    <td>Enable parachute output<br>Used for testing only</td>
+    <td>Set parachute output<br>Used for testing only</td>
     <td>1 Byte</td>
     <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
     <td>Default state is 0 <br>Must set is_armed to 1 before<br>a parachute can be enabled</td>
