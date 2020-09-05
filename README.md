@@ -40,7 +40,21 @@ All of them apply to some extent to the Flight Controller
 
 ## Hardware
 
-The Flight Controller is a single PCB with power management, sensors, radio communciation, and driver for the actuators used during the flight.
+The Flight Controller is a single PCB with power management, sensors, radio communication, and driver for the actuators used during the flight.
+
+It has the following features:
+
+- Dual microcontroller (main + backup)
+- Low power long range LoRa transceiver
+- Telemetry output via serial link (x3)
+- GNSS support via serial link (x3)
+- Compatible with 10 dof breakout board with MS5611 pressure sensors and MPU9250 IMU (2x)
+- Compatible with K type thermocouples (2x)
+- Flash memory
+- EEDs driver for parachute ejection, with ESD protection + visual and audible warning (2x)
+- RGB leds to display the board status
+- Serial link to FPV transmitter
+- CAN Bus
 
 A more detailed description of the hardware is given in [doc/hardware_description.md](doc/hardware_description.md)
 
