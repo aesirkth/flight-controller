@@ -85,7 +85,7 @@ The protocol to communicate between the Ground Station and the Rocket is detaile
 │   ├── diagrams/
 │   ├── sources
 │   |   └── flight_controller_v1.0.pdf
-│   ├── data-protocol.md
+│   ├── data_protocol.md
 │   └── hardware_description.md
 ├── include/
 │   ├── hardware_definition_nano.h
