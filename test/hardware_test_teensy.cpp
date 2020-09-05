@@ -27,7 +27,7 @@ static CAN_message_t msg;
 RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), RFM_SPI);
 
 void setup() {
-  delay(2000); // Required to make the unit tests work
+  delay(2000);  // Required to make the unit tests work
 
   SPI.setMOSI(PIN_MOSI0);
   SPI.setMISO(PIN_MISO0);
@@ -47,6 +47,10 @@ void setup() {
   RUN_TEST(test_ms2);
 
   RUN_TEST(test_RFM);
+
+  RUN_TEST(test_serial1);
+  RUN_TEST(test_serial2);
+  RUN_TEST(test_serial3);
 
   RUN_TEST(test_CAN_bus);
 
@@ -148,12 +152,12 @@ void test_J2_output() {
   delay(1000);
   buzzerShortSound();
   TEST_MESSAGE("Testing J2 output");
-  TEST_MESSAGE("It should turn on for 1s, do you see it ?");
+  TEST_MESSAGE("It should turn off for 1s, do you see it ?");
   TEST_MESSAGE("(Measure the voltage on the test pad, 5V expected)");
   delay(1000);
-  digitalWrite(PIN_RFD_EN, LOW);
-  delay(1000);
   digitalWrite(PIN_RFD_EN, HIGH);
+  delay(1000);
+  digitalWrite(PIN_RFD_EN, LOW);
 
   TEST_PASS_MESSAGE("Test passed if saw it");
 }
@@ -162,12 +166,12 @@ void test_J4_output() {
   delay(1000);
   buzzerShortSound();
   TEST_MESSAGE("Testing J4 output");
-  TEST_MESSAGE("It should turn on for 1s, do you see it ?");
+  TEST_MESSAGE("It should turn off for 1s, do you see it ?");
   TEST_MESSAGE("(Measure the voltage on the test pad, 12V expected)");
   delay(1000);
-  digitalWrite(PIN_FPV_EN, LOW);
-  delay(1000);
   digitalWrite(PIN_FPV_EN, HIGH);
+  delay(1000);
+  digitalWrite(PIN_FPV_EN, LOW);
 
   TEST_PASS_MESSAGE("Test passed if saw it");
 }
@@ -192,6 +196,57 @@ void test_CAN_bus() {
   delay(10);
   CANbus.read(msg);
   TEST_ASSERT_EQUAL(0x43, msg.buf[0]);
+}
+
+/*
+  Test the Serial1 bus on J1
+
+  Send one byte on TX pin
+  Expect the same byte + 1 on RX pin
+*/
+void test_serial1() {
+  // Custom pins for the board
+  Serial1.setRX(PIN_RX1);
+  Serial1.setTX(PIN_TX1);
+  Serial1.begin(SERIAL1_BAUD);
+
+  Serial1.write(0x42);
+  delay(10);
+  TEST_ASSERT_EQUAL(0x43, Serial1.read());
+}
+
+/*
+  Test the Serial2 bus on J2
+
+  Send one byte on TX pin
+  Expect the same byte + 1 on RX pin
+*/
+void test_serial2() {
+  // Custom pins for the board
+  Serial2.setRX(PIN_RX2);
+  Serial2.setTX(PIN_TX2);
+  Serial2.begin(SERIAL2_BAUD);
+
+  Serial2.write(0x42);
+  delay(10);
+  TEST_ASSERT_EQUAL(0x43, Serial2.read());
+}
+
+/*
+  Test the Serial3 bus on J3
+
+  Send one byte on TX pin
+  Expect the same byte + 1 on RX pin
+*/
+void test_serial3() {
+  // Custom pins for the board
+  Serial3.setRX(PIN_RX3);
+  Serial3.setTX(PIN_TX3);
+  Serial3.begin(SERIAL3_BAUD);
+
+  Serial3.write(0x42);
+  delay(10);
+  TEST_ASSERT_EQUAL(0x43, Serial3.read());
 }
 
 /* Utils */
@@ -219,6 +274,6 @@ void initOutputs() {
 
   pinMode(PIN_RFD_EN, OUTPUT);
   pinMode(PIN_FPV_EN, OUTPUT);
-  digitalWrite(PIN_RFD_EN, HIGH);  // HIGH means inactive Telemetry output
-  digitalWrite(PIN_FPV_EN, HIGH);
+  digitalWrite(PIN_RFD_EN, LOW);  // LOW means active Telemetry output
+  digitalWrite(PIN_FPV_EN, LOW);
 }
