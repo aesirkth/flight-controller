@@ -40,14 +40,16 @@ License:
 
 #include "hardware_test_teensy.h"
 
-#define UNIT_TESTING  // define this to get access to the private objects of MS5611
+// If using https://github.com/wanysteus/MS5611
+// define this to get access to the private objects of MS5611
+#define UNIT_TESTING
 
 #include <Adafruit_NeoPixel.h>  // https://github.com/adafruit/Adafruit_NeoPixel
 #include <Arduino.h>
-#include <FlexCAN.h>
+#include <FlexCAN.h>         // https://github.com/pawelsky/FlexCAN_Library
 #include <MS5611.h>          // https://github.com/wanysteus/MS5611
-#include <RHHardwareSPI1.h>  // From Paul's version of RadioHead
-#include <RH_RF95.h>
+#include <RHHardwareSPI1.h>  // From Paul's version of RadioHead https://github.com/PaulStoffregen/RadioHead
+#include <RH_RF95.h>         // From Paul's version of RadioHead https://github.com/PaulStoffregen/RadioHead
 #include <SPI.h>
 #include <unity.h>
 
@@ -69,6 +71,16 @@ RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), RFM_SPI);
 void setup() {
   delay(2000);  // Required to make the unit tests work
 
+  // Set custom pins for the buses
+  Serial1.setRX(PIN_RX1);
+  Serial1.setTX(PIN_TX1);
+
+  Serial2.setRX(PIN_RX2);
+  Serial2.setTX(PIN_TX2);
+
+  Serial3.setRX(PIN_RX3);
+  Serial3.setTX(PIN_TX3);
+
   SPI.setMOSI(PIN_MOSI0);
   SPI.setMISO(PIN_MISO0);
   SPI.setSCK(PIN_SCK0);
@@ -77,12 +89,20 @@ void setup() {
   SPI1.setMISO(PIN_MISO1);
   SPI1.setSCK(PIN_SCK1);
 
-  CANbus.begin();
+  // Set I/O
+  pinMode(PIN_PARA1, OUTPUT);
+  pinMode(PIN_PARA2, OUTPUT);
+  digitalWrite(PIN_PARA1, LOW);  // LOW means inactive parachute
+  digitalWrite(PIN_PARA2, LOW);  // LOW means inactive parachute
 
-  initOutputs();
+  pinMode(PIN_RFD_EN, OUTPUT);
+  pinMode(PIN_FPV_EN, OUTPUT);
+  digitalWrite(PIN_RFD_EN, LOW);  // LOW means active Telemetry output
+  digitalWrite(PIN_FPV_EN, LOW);
 
   UNITY_BEGIN();
 
+  // Automatic tests
   RUN_TEST(test_ms1);
   RUN_TEST(test_ms2);
 
@@ -94,9 +114,9 @@ void setup() {
 
   RUN_TEST(test_CAN_bus);
 
+  // Manual tests, check the tests description below
   RUN_TEST(test_buzzer);
 
-  initRGB();
   RUN_TEST(test_rgb);
 
   RUN_TEST(test_parachutes);
@@ -110,8 +130,124 @@ void setup() {
 void loop() {
 }
 
-/* Tests */
+/* Automatic tests */
 
+/*
+  Test the MS5611 pressure sensors on IC1
+
+  Try to read the PROM. 0x0000 or 0xFFFF indicate
+  a failure to read. Not bullet proof, should check 
+  CRC4 instead in the future
+*/
+void test_ms1() {
+  ms1.begin();
+  uint16_t C1 = ms1._c[1];
+  TEST_ASSERT_NOT_EQUAL(0x0000, C1);
+  TEST_ASSERT_NOT_EQUAL(0xffff, C1);
+}
+
+/*
+  Test the MS5611 pressure sensors on IC2
+
+  Try to read the PROM. 0x0000 or 0xFFFF indicate
+  a failure to read. Not bullet proof, should check 
+  CRC4 instead in the future
+*/
+void test_ms2() {
+  ms2.begin();
+  uint16_t C1 = ms2._c[1];
+  TEST_ASSERT_NOT_EQUAL(0x0000, C1);
+  TEST_ASSERT_NOT_EQUAL(0xffff, C1);
+}
+
+/*
+  Test the RFM96W LoRa chip
+
+  Try to initialize the chip
+*/
+void test_RFM() {
+  // Hard-reset the chip
+  pinMode(PIN_RFM_RST, OUTPUT);
+  digitalWrite(PIN_RFM_RST, HIGH);
+  delay(100);
+  digitalWrite(PIN_RFM_RST, LOW);
+  delay(10);
+  digitalWrite(PIN_RFM_RST, HIGH);
+  delay(100);
+
+  TEST_ASSERT_TRUE(rfm.init());
+}
+
+/*
+  Test the CAN Bus (CAN0)
+
+  Send one byte
+  Expect a message with the same ID but with byte+1
+  as a payload
+*/
+void test_CAN_bus() {
+  CANbus.begin();
+
+  msg.len = 8;
+  msg.id = 0x222;
+  msg.buf[0] = 0x42;
+  CANbus.write(msg);
+  delay(10);
+  CANbus.read(msg);
+  TEST_ASSERT_EQUAL(0x43, msg.buf[0]);
+}
+
+/*
+  Test the Serial1 bus on J1
+
+  Send one byte on TX pin
+  Expect the same byte + 1 on RX pin
+*/
+void test_serial1() {
+  Serial1.begin(SERIAL1_BAUD);
+
+  Serial1.write(0x42);
+  delay(10);
+  TEST_ASSERT_EQUAL(0x43, Serial1.read());
+}
+
+/*
+  Test the Serial2 bus on J2
+
+  Send one byte on TX pin
+  Expect the same byte + 1 on RX pin
+*/
+void test_serial2() {
+  Serial2.begin(SERIAL2_BAUD);
+
+  Serial2.write(0x42);
+  delay(10);
+  TEST_ASSERT_EQUAL(0x43, Serial2.read());
+}
+
+/*
+  Test the Serial3 bus on J3
+
+  Send one byte on TX pin
+  Expect the same byte + 1 on RX pin
+*/
+void test_serial3() {
+  Serial3.begin(SERIAL3_BAUD);
+
+  Serial3.write(0x42);
+  delay(10);
+  TEST_ASSERT_EQUAL(0x43, Serial3.read());
+}
+
+/* Manual tests */
+
+/*
+  Test the buzzer (LS1)
+
+  Play short sounds
+  The user must pay attention to the test outputs in 
+  the serial console and confirm the sounds
+*/
 void test_buzzer() {
 #ifdef SILENT_MODE
   TEST_IGNORE_MESSAGE("Silent mode: skipping buzzer test");
@@ -128,7 +264,15 @@ void test_buzzer() {
 #endif
 }
 
+/*
+  Test the RGB leds
+
+  Display various colors
+  The user must pay attention to the test outputs in 
+  the serial console and confirm correct led output
+*/
 void test_rgb() {
+  initRGB();
   delay(1000);
   buzzerShortSound();
   TEST_MESSAGE("Testing the RGB leds");
@@ -156,6 +300,16 @@ void test_rgb() {
   TEST_PASS_MESSAGE("Test passed if saw it");
 }
 
+/*
+  Test the parachute outputs
+
+  /!\ DO NOT CONNECT EEDs for this test /!\
+
+  Activate each parachute for 1 second
+  The user must pay attention to the test outputs in 
+  the serial console and confirm correct parachute 
+  outputs
+*/
 void test_parachutes() {
   delay(1000);
   buzzerShortSound();
@@ -174,20 +328,13 @@ void test_parachutes() {
   TEST_PASS_MESSAGE("Test passed if saw it");
 }
 
-void test_ms1() {
-  ms1.begin();
-  uint16_t C1 = ms1._c[1];
-  TEST_ASSERT_NOT_EQUAL(0x0000, C1);
-  TEST_ASSERT_NOT_EQUAL(0xffff, C1);
-}
+/*
+  Test the power output to J2
 
-void test_ms2() {
-  ms2.begin();
-  uint16_t C1 = ms2._c[1];
-  TEST_ASSERT_NOT_EQUAL(0x0000, C1);
-  TEST_ASSERT_NOT_EQUAL(0xffff, C1);
-}
-
+  Cut power to J2 for 1 second
+  The user must pay attention to the test outputs in 
+  the serial console and confirm voltage at J2
+*/
 void test_J2_output() {
   delay(1000);
   buzzerShortSound();
@@ -202,6 +349,13 @@ void test_J2_output() {
   TEST_PASS_MESSAGE("Test passed if saw it");
 }
 
+/*
+  Test the power output to J4
+
+  Cut power to J4 for 1 second
+  The user must pay attention to the test outputs in 
+  the serial console and confirm voltage at J4
+*/
 void test_J4_output() {
   delay(1000);
   buzzerShortSound();
@@ -214,79 +368,6 @@ void test_J4_output() {
   digitalWrite(PIN_FPV_EN, LOW);
 
   TEST_PASS_MESSAGE("Test passed if saw it");
-}
-
-void test_RFM() {
-  pinMode(PIN_RFM_RST, OUTPUT);
-  digitalWrite(PIN_RFM_RST, HIGH);
-  delay(100);
-  digitalWrite(PIN_RFM_RST, LOW);
-  delay(10);
-  digitalWrite(PIN_RFM_RST, HIGH);
-  delay(100);
-
-  TEST_ASSERT_TRUE(rfm.init());
-}
-
-void test_CAN_bus() {
-  msg.len = 8;
-  msg.id = 0x222;
-  msg.buf[0] = 0x42;
-  CANbus.write(msg);
-  delay(10);
-  CANbus.read(msg);
-  TEST_ASSERT_EQUAL(0x43, msg.buf[0]);
-}
-
-/*
-  Test the Serial1 bus on J1
-
-  Send one byte on TX pin
-  Expect the same byte + 1 on RX pin
-*/
-void test_serial1() {
-  // Custom pins for the board
-  Serial1.setRX(PIN_RX1);
-  Serial1.setTX(PIN_TX1);
-  Serial1.begin(SERIAL1_BAUD);
-
-  Serial1.write(0x42);
-  delay(10);
-  TEST_ASSERT_EQUAL(0x43, Serial1.read());
-}
-
-/*
-  Test the Serial2 bus on J2
-
-  Send one byte on TX pin
-  Expect the same byte + 1 on RX pin
-*/
-void test_serial2() {
-  // Custom pins for the board
-  Serial2.setRX(PIN_RX2);
-  Serial2.setTX(PIN_TX2);
-  Serial2.begin(SERIAL2_BAUD);
-
-  Serial2.write(0x42);
-  delay(10);
-  TEST_ASSERT_EQUAL(0x43, Serial2.read());
-}
-
-/*
-  Test the Serial3 bus on J3
-
-  Send one byte on TX pin
-  Expect the same byte + 1 on RX pin
-*/
-void test_serial3() {
-  // Custom pins for the board
-  Serial3.setRX(PIN_RX3);
-  Serial3.setTX(PIN_TX3);
-  Serial3.begin(SERIAL3_BAUD);
-
-  Serial3.write(0x42);
-  delay(10);
-  TEST_ASSERT_EQUAL(0x43, Serial3.read());
 }
 
 /* Utils */
@@ -304,16 +385,4 @@ void initRGB() {
   strip.setBrightness(20);
   delay(10);
   strip.show();
-}
-
-void initOutputs() {
-  pinMode(PIN_PARA1, OUTPUT);
-  pinMode(PIN_PARA2, OUTPUT);
-  digitalWrite(PIN_PARA1, LOW);  // LOW means inactive parachute
-  digitalWrite(PIN_PARA2, LOW);  // LOW means inactive parachute
-
-  pinMode(PIN_RFD_EN, OUTPUT);
-  pinMode(PIN_FPV_EN, OUTPUT);
-  digitalWrite(PIN_RFD_EN, LOW);  // LOW means active Telemetry output
-  digitalWrite(PIN_FPV_EN, LOW);
 }
