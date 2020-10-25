@@ -342,6 +342,8 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 
 ### Data description
 
+All data should have little-endianess
+
 #### Engine Controller
 
 <table>
@@ -408,13 +410,57 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
   <tr>
     <td>0x92</td>
     <td>GNSS time</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>2 Bytes</td>
+    <td>gps_time</td>
+    <td>uint16_t, UTC time as hhmmss</td>
+    <td>1 Hz</td>
   </tr>
   <tr>
-    <td></td>
+    <td rowspan="10">0x93</td>
+    <td rowspan="10">GNSS data</td>
+    <td rowspan="10">54 Bytes</td>
+    <td>latitude</td>
+    <td>int32_t, ddmm.mmm</td>
+    <td rowspan="10">1 Hz</td>
+  </tr>
+  <tr>
+    <td>longitude</td>
+    <td>int32_t, dddmm.mmm</td>
+  </tr>
+  <tr>
+    <td>altitude</td>
+    <td>int16_t, in 0.1 meters</td>
+  </tr>
+  <tr>
+    <td>heading</td>
+    <td>int16_t, in degrees</td>
+  </tr>
+  <tr>
+    <td>speed</td>
+    <td>int16_t, in 0.1 km/h</td>
+  </tr>
+  <tr>
+    <td>fix_status</td>
+    <td>uint8_t, {0,1,2} {No Fix,2D,3D}</td>
+  </tr>
+  <tr>
+    <td>n_satellites</td>
+    <td>uint8_t</td>
+  </tr>
+  <tr>
+    <td>dop</td>
+    <td>uint8_t, in 0.1</td>
+  </tr>
+  <tr>
+    <td>h_dop</td>
+    <td>uint8_t, in 0.1</td>
+  </tr>
+  <tr>
+    <td>v_dop</td>
+    <td>uint8_t, in 0.1</td>
+  </tr>
+  <tr>
+    <td>0x94</td>
     <td>Software state</td>
     <td>-</td>
     <td>-</td>
@@ -422,7 +468,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td>-</td>
   </tr>
   <tr>
-    <td></td>
+    <td>0x95</td>
     <td>Hardware state</td>
     <td>1 Byte<br></td>
     <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en<br>bit3: is_fpv_en<br>bit4: is_telemetry_en</td>
@@ -430,7 +476,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td>1 Hz</td>
   </tr>
   <tr>
-    <td rowspan="4"></td>
+    <td rowspan="4">0x96</td>
     <td rowspan="4">Static pressure</td>
     <td rowspan="4">16 Bytes</td>
     <td>pressure_1</td>
@@ -439,7 +485,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
   </tr>
   <tr>
     <td>temperature_1</td>
-    <td>int32_t, little-endian, in 0.01°C</td>
+    <td>int32_t, little-endian, in 0.01 °C</td>
   </tr>
   <tr>
     <td>pressure_2</td>
@@ -447,10 +493,10 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
   </tr>
   <tr>
     <td>temperature_2</td>
-    <td>int32_t, little-endian, in 0.01°C</td>
+    <td>int32_t, little-endian, in 0.01 °C</td>
   </tr>
   <tr>
-    <td rowspan="2"></td>
+    <td rowspan="2">0x97</td>
     <td rowspan="2">Static pressure - no temp</td>
     <td rowspan="2">8 bytes</td>
     <td>pressure_1</td>
@@ -462,7 +508,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td>int32_t, little-endian, in 0.01 mbar</td>
   </tr>
   <tr>
-    <td></td>
+    <td>0x97</td>
     <td>IMU</td>
     <td>-</td>
     <td>-</td>
@@ -470,7 +516,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td>50 Hz</td>
   </tr>
   <tr>
-    <td></td>
+    <td>0x98</td>
     <td>Magnetometer</td>
     <td>-</td>
     <td>-</td>
@@ -478,7 +524,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td>-</td>
   </tr>
   <tr>
-    <td rowspan="2"></td>
+    <td rowspan="2">0x99</td>
     <td rowspan="2">On-board battery voltage</td>
     <td rowspan="2">4 Bytes</td>
     <td>voltage_battery_1</td>
@@ -490,15 +536,7 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td>uint16_t, little-endian, in 0.01V</td>
   </tr>
   <tr>
-    <td></td>
-    <td>GNSS data</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td></td>
+    <td>0x99</td>
     <td>Air speed</td>
     <td>-</td>
     <td>-</td>
@@ -506,12 +544,15 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <td>-</td>
   </tr>
   <tr>
-    <td></td>
-    <td>Air temperature</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td rowspan="2">0x9A</td>
+    <td rowspan="2">Air temperature</td>
+    <td rowspan="2">4 Bytes</td>
+    <td>ext_temp_1</td>
+    <td>int16_t, in 0.01 °C</td>
+    <td rowspan="2">1 Hz</td>
+  <tr>
+    <td>ext_temp_2</td>
+    <td>int16_t, in 0.01 °C</td>
   </tr>
 </tbody>
 </table>
