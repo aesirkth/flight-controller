@@ -396,7 +396,7 @@ All data should have little-endianess
     <td>Time since boot - millis</td>
     <td>4 Bytes</td>
     <td>ms_since_boot</td>
-    <td>uint32_t, little-endian, in ms</td>
+    <td>uint32_t, in ms</td>
     <td></td>
   </tr>
   <tr>
@@ -404,32 +404,32 @@ All data should have little-endianess
     <td>Time since boot - micros</td>
     <td>8 Bytes</td>
     <td>us_since_boot</td>
-    <td>uint64_t, little-endian, in us</td>
+    <td>uint64_t, in us</td>
     <td></td>
   </tr>
   <tr>
     <td>0x92</td>
     <td>GNSS time</td>
-    <td>2 Bytes</td>
+    <td>4 Bytes</td>
     <td>gps_time</td>
-    <td>uint16_t, UTC time as hhmmss</td>
+    <td>uint32_t, UTC time as hhmmss.sss</td>
     <td>1 Hz</td>
   </tr>
   <tr>
     <td rowspan="10">0x93</td>
     <td rowspan="10">GNSS data</td>
-    <td rowspan="10">54 Bytes</td>
+    <td rowspan="10">24 Bytes</td>
     <td>latitude</td>
-    <td>int32_t, ddmm.mmm</td>
+    <td>int32_t, ddmm.mmmm</td>
     <td rowspan="10">1 Hz</td>
   </tr>
   <tr>
     <td>longitude</td>
-    <td>int32_t, dddmm.mmm</td>
+    <td>int32_t, dddmm.mmmm</td>
   </tr>
   <tr>
     <td>altitude</td>
-    <td>int16_t, in 0.1 meters</td>
+    <td>int32_t, in 0.1 meters</td>
   </tr>
   <tr>
     <td>heading</td>
@@ -449,15 +449,15 @@ All data should have little-endianess
   </tr>
   <tr>
     <td>dop</td>
-    <td>uint8_t, in 0.1</td>
+    <td>uint16_t, in 0.1</td>
   </tr>
   <tr>
     <td>h_dop</td>
-    <td>uint8_t, in 0.1</td>
+    <td>uint16_t, in 0.1</td>
   </tr>
   <tr>
     <td>v_dop</td>
-    <td>uint8_t, in 0.1</td>
+    <td>uint16_t, in 0.1</td>
   </tr>
   <tr>
     <td>0x94</td>
