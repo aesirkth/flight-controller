@@ -393,10 +393,37 @@ void DataProtocol::setReceived_GnssTime(uint8_t pay[SIZE_TELE_GNSS_TIME])
 void DataProtocol::setReceived_GnssData(uint8_t pay[SIZE_TELE_GNSS_DATA])
 {
 	uint8_t i = 0;
+    double temp_lat;
+    double temp_lon;
+    uint8_t * p_temp_lat = (uint8_t*)(&temp_lat);
+    uint8_t * p_temp_lon = (uint8_t*)(&temp_lon);
+
+    *(p_temp_lat) = pay[i++];
+    *(p_temp_lat+1) = pay[i++];
+    *(p_temp_lat+2) = pay[i++];
+    *(p_temp_lat+3) = pay[i++];
+    *(p_temp_lat+4) = pay[i++];
+    *(p_temp_lat+5) = pay[i++];
+    *(p_temp_lat+6) = pay[i++];
+    *(p_temp_lat+7) = pay[i++];
+
+    *(p_temp_lon) = pay[i++];
+    *(p_temp_lon+1) = pay[i++];
+    *(p_temp_lon+2) = pay[i++];
+    *(p_temp_lon+3) = pay[i++];
+    *(p_temp_lon+4) = pay[i++];
+    *(p_temp_lon+5) = pay[i++];
+    *(p_temp_lon+6) = pay[i++];
+    *(p_temp_lon+7) = pay[i++];
+
+    gnss_data.latitude = temp_lat;
+    gnss_data.longitude = temp_lon;
+    /*
 	gnss_data.latitude = ((int32_t)pay[i++] << 24) | ((int32_t)pay[i++] << 16) |
                     	 ((int32_t)pay[i++] << 8) | (int32_t)pay[i++];
 	gnss_data.longitude = ((int32_t)pay[i++] << 24) | ((int32_t)pay[i++] << 16) |
                     	  ((int32_t)pay[i++] << 8) | (int32_t)pay[i++];
+    */
 	gnss_data.altitude = ((int32_t)pay[i++] << 24) | ((int32_t)pay[i++] << 16) |
                     	 ((int32_t)pay[i++] << 8) | (int32_t)pay[i++];
 	gnss_data.heading = ((int16_t)pay[i++] << 8) | (int16_t)pay[i++];
@@ -500,9 +527,9 @@ uint32_t DataProtocol::get_Millis()
 void DataProtocol::get_GnssTime(uint8_t * hour, uint8_t * min, uint8_t * sec)
 {
 	new_gnss_time = FALSE;
-	*hour = (uint8_t)(gnss_time/10000);
-	*min = (uint8_t)((gnss_time%10000)/100);
-	*sec = (uint8_t)(gnss_time%100);
+	*hour = (uint8_t)(gnss_time/1000000);
+	*min = (uint8_t)((gnss_time%1000000)/10000);
+	*sec = (uint8_t)((gnss_time%10000)/100);
 }
 //
 
@@ -529,7 +556,7 @@ uint8_t DataProtocol::get_HwState()
 //
 
 //
-void DataProtocol::get_PressTemp(int32_t * press1, int32_t * press2, int32_t * temp1, int32_t * temp2)
+void DataProtocol::get_PressTemp(int32_t * press1, int32_t * temp1, int32_t * press2, int32_t * temp2)
 {
 	new_press_temp = FALSE;
 	*press1 = pressure_1;
@@ -603,18 +630,28 @@ void DataProtocol::build_GnssTime(uint8_t * data, uint8_t * size_data, uint32_t 
 void DataProtocol::build_GnssData(uint8_t * data, uint8_t * size_data, gnss_data_t g_data)
 {
     uint8_t i = 0;
+    uint8_t * p_temp_lat = (uint8_t*)(&g_data.latitude);
+    uint8_t * p_temp_lon = (uint8_t*)(&g_data.longitude);
   
     data[i++] = INIT_FRAME_1;
     data[i++] = INIT_FRAME_2;
     data[i++] = ID_TELE_GNSS_DATA;
-    data[i++] = (uint8_t)(g_data.latitude >> 24);
-    data[i++] = (uint8_t)(g_data.latitude >> 16);
-    data[i++] = (uint8_t)(g_data.latitude >> 8);
-    data[i++] = (uint8_t)g_data.latitude;
-    data[i++] = (uint8_t)(g_data.longitude >> 24);
-    data[i++] = (uint8_t)(g_data.longitude >> 16);
-    data[i++] = (uint8_t)(g_data.longitude >> 8);
-    data[i++] = (uint8_t)g_data.longitude;
+    data[i++] = *(p_temp_lat);
+    data[i++] = *(p_temp_lat+1);
+    data[i++] = *(p_temp_lat+2);
+    data[i++] = *(p_temp_lat+3);
+    data[i++] = *(p_temp_lat)+4;
+    data[i++] = *(p_temp_lat+5);
+    data[i++] = *(p_temp_lat+6);
+    data[i++] = *(p_temp_lat+7);
+    data[i++] = *(p_temp_lon);
+    data[i++] = *(p_temp_lon+1);
+    data[i++] = *(p_temp_lon+2);
+    data[i++] = *(p_temp_lon+3);
+    data[i++] = *(p_temp_lon)+4;
+    data[i++] = *(p_temp_lon+5);
+    data[i++] = *(p_temp_lon+6);
+    data[i++] = *(p_temp_lon+7);
     data[i++] = (uint8_t)(g_data.altitude >> 24);
     data[i++] = (uint8_t)(g_data.altitude >> 16);
     data[i++] = (uint8_t)(g_data.altitude >> 8);

@@ -28,7 +28,7 @@
 #define SIZE_TELE_MILLIS		4
 #define SIZE_TELE_MICROS		8
 #define SIZE_TELE_GNSS_TIME		4
-#define SIZE_TELE_GNSS_DATA		24
+#define SIZE_TELE_GNSS_DATA		32
 #define SIZE_TELE_SW_STATE		1	//TODO
 #define SIZE_TELE_HW_STATE		1
 #define SIZE_TELE_PRESS_TEMP	16
@@ -41,8 +41,8 @@
 
 typedef struct 
 {
-	int32_t latitude;
-	int32_t longitude;
+	double latitude;
+	double longitude;
 	int32_t altitude;
 	int16_t heading;
 	int16_t speed;
@@ -104,7 +104,7 @@ public:
 	gnss_data_t get_GnssData();
 	//uint8_t get_SwState();
 	uint8_t get_HwState();
-	void get_PressTemp(int32_t * press1, int32_t * press2, int32_t * temp1, int32_t * temp2);
+	void get_PressTemp(int32_t * press1, int32_t * temp1, int32_t * press2, int32_t * temp2);
 	//get_PressOnly
 	//get_Imu
 	//get_Magnet

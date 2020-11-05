@@ -6,7 +6,7 @@
 #include <RH_RF95.h>
 #include "hardware_definition_teensy.h"
 #include "MAX31855.hpp"
-#include <lora_protocol.h>
+//#include <lora_protocol.h>
 #include <data_protocol.h>
 #include <TinyGPS++.h>
 
@@ -24,19 +24,20 @@
 SPISettings spi_settings(SPI_FREQ, MSBFIRST, SPI_MODE0);
 
 Adafruit_NeoPixel led_strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400);
-Thermocouple k_type(PIN_CS_TEMP2, SPI, spi_settings);
+Thermocouple kt1(PIN_CS_TEMP1, SPI, spi_settings);
+Thermocouple kt2(PIN_CS_TEMP2, SPI, spi_settings);
 MS5611 ms1(PIN_CS_MS1, SPI, SPI_FREQ); // Pressure sensor
+MS5611 ms2(PIN_CS_MS2, SPI, SPI_FREQ); // Pressure sensor
 TinyGPSPlus gps;
 RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), RFM_SPI);
 //LoraFC lora_radio;
 
-
+uint32_t gps_time = 0;
+gnss_data_t gps_data;
 uint32_t prev_time = 0;
 bool is_lora_init = false;
 bool initLoRa();
 
-uint32_t gps_time = 0;
-gnss_data_t gps_data;
 
 // platformio run -t upload -e teensy_balloon
 void setup()
@@ -61,7 +62,7 @@ void setup()
         digitalWrite(PIN_J2_DIS, LOW);  // LOW means active Telemetry output
         digitalWrite(PIN_J4_DIS, LOW);
 
-        //delay(3000);
+        delay(3000);
         // Initialize status LEDs
         led_strip.begin();
         delay(10);
@@ -72,9 +73,11 @@ void setup()
 
         Serial.begin(57600);
         Serial.println("INIT");
+        
         Serial2.begin(57600);   //Telemetry link
         Serial3.begin(38400);   //GNSS link
         ms1.begin();
+        ms2.begin();
         is_lora_init = initLoRa();
         //while(!Serial);
         prev_time = millis();
@@ -92,98 +95,99 @@ void loop()
     // Each SEND_INTERVAL milliseconds take a sample of each sensor and transmit it
     if (SEND_INTERVAL < (millis() - prev_time))
     {
-        int32_t temperature, pressure;
+        int32_t int_temp_1, int_temp_2;
+        int32_t int_pres_1, int_pres_2;
+        int16_t ext_temp_1, ext_temp_2;
         uint32_t ms_since_boot;
-        uint8_t buffer[50];
+
+        uint8_t buffer[100];
         uint8_t buf_size = 0;
         
         prev_time = millis();
         led_strip.setPixelColor(LED_STATUS, COLOR_BLUE);
         led_strip.show();
+
         // Get measurements from the batteries
-        uint32_t bat1_raw_mv = analogRead(PIN_BAT1);
-        uint32_t bat2_raw_mv = analogRead(PIN_BAT2);
-        //uint32_t bat1_raw_mv = (3223 * analogRead(PIN_BAT1)) / 1000;
-        //uint32_t bat2_raw_mv = (3223 * analogRead(PIN_BAT2)) / 1000;
-        uint32_t bat1_voltage = (5263 * bat1_raw_mv) / 10000; // 0.01V
-        uint32_t bat2_voltage = (3125 * bat2_raw_mv) / 10000; // 0.01V
+        uint32_t adc1_raw = analogRead(PIN_BAT1);
+        uint32_t adc2_raw = analogRead(PIN_BAT2);
+        /*
+        Serial.print("Raw_1: ");
+        Serial.print(adc1_raw);
+        Serial.print(" / Raw_2: ");
+        Serial.println(adc2_raw);
+        */
+        uint32_t bat1_raw_mv = (764 * adc1_raw) / 1000;
+        uint32_t bat2_raw_mv = (764 * adc2_raw) / 1000;
+        /*
+        Serial.print("ADC_mv_1: ");
+        Serial.print(bat1_raw_mv);
+        Serial.print(" / ADC_mv_2: ");
+        Serial.println(bat2_raw_mv);
+        */
+        uint32_t bat1_voltage = (16129 * bat1_raw_mv) / 10000; // 0.01V
+        uint32_t bat2_voltage = (25000 * bat2_raw_mv) / 10000; // 0.01V
+        /*
+        Serial.print("Volt_1: ");
+        Serial.print(bat1_voltage);
+        Serial.print(" / Volt_2: ");
+        Serial.println(bat2_voltage);
+        */
         // Get a measurement from the chip
         ms1.update();
-        k_type.update();
+        ms2.update();
+        kt1.update();
+        kt2.update();
         ms_since_boot = millis();
 
-        // The update() method updates the 'pressure' and 'temperature' attributes
+        // The update() method updates the 'pressure' and 'temperature' attributes of MS5611
         // Read them after calling update()
-        temperature = ms1.temperature;  // In 0.01°C
-        pressure = ms1.pressure;        // In 0.01 mbar
+        int_temp_1 = ms1.temperature;  // In 0.01°C
+        int_temp_2 = ms2.temperature;  // In 0.01°C
+        int_pres_1 = ms1.pressure;     // In 0.01 mbar
+        int_pres_2 = ms2.pressure;     // In 0.01 mbar
+        /*
+        Serial.print("t1: ");
+        Serial.print(int_temp_1);
+        Serial.print(" / p1: ");
+        Serial.println(int_pres_1);
+        Serial.print("t2: ");
+        Serial.print(int_temp_2);
+        Serial.print(" / p2: ");
+        Serial.println(int_pres_1);
+        */
+        // The same goes for the thermocouples
+        ext_temp_1 = kt1.getTemperature();
+        ext_temp_2 = kt2.getTemperature();
 
-      
         // Send time since boot in milliseconds
         DataProtocol::build_Millis(buffer, &buf_size, ms_since_boot);
-        /*
-        buffer[0] = 0x0A;
-        buffer[1] = 0x0D;
-        buffer[2] = 0x90;
-        buffer[3] = (uint8_t)(ms_since_boot >> 24);
-        buffer[4] = (uint8_t)(ms_since_boot >> 16);
-        buffer[5] = (uint8_t)(ms_since_boot >> 8);
-        buffer[6] = (uint8_t)ms_since_boot;
-        buf_size = 7;
-        */
         Serial2.write(buffer, buf_size);
 
         // Send pressure and temperature data
-        DataProtocol::build_PressTemp(buffer, &buf_size, pressure, temperature, pressure, temperature);
-        /*
-        buffer[0] = 0x0A;
-        buffer[1] = 0x0D;
-        buffer[2] = 0x96;
-        buffer[3] = (uint8_t)(temperature >> 24);
-        buffer[4] = (uint8_t)(temperature >> 16);
-        buffer[5] = (uint8_t)(temperature >> 8);
-        buffer[6] = (uint8_t)temperature;
-        buffer[7] = (uint8_t)(pressure >> 24);
-        buffer[8] = (uint8_t)(pressure >> 16);
-        buffer[9] = (uint8_t)(pressure >> 8);
-        buffer[10] = (uint8_t)pressure;
-        buffer[11] = (uint8_t)(temperature >> 24);
-        buffer[12] = (uint8_t)(temperature >> 16);
-        buffer[13] = (uint8_t)(temperature >> 8);
-        buffer[14] = (uint8_t)temperature;
-        buffer[15] = (uint8_t)(pressure >> 24);
-        buffer[16] = (uint8_t)(pressure >> 16);
-        buffer[17] = (uint8_t)(pressure >> 8);
-        buffer[18] = (uint8_t)pressure;
-        buf_size = 19;
-        */
+        DataProtocol::build_PressTemp(buffer, &buf_size, int_pres_1, int_temp_1, int_pres_2, int_temp_2);
+        Serial2.write(buffer, buf_size);
+
+        // Send external temperature data
+        DataProtocol::build_AirTemp(buffer, &buf_size, ext_temp_1, ext_temp_2);
         Serial2.write(buffer, buf_size);
 
         // Send batteries data
-        DataProtocol::build_Battery(buffer, &buf_size, bat1_raw_mv, bat2_raw_mv);
-        /*
-        buffer[0] = 0x0A;
-        buffer[1] = 0x0D;
-        buffer[2] = 0x9A;
-        buffer[3] = (uint8_t)(bat1_raw_mv >> 8);
-        buffer[4] = (uint8_t)bat1_raw_mv;
-        buffer[5] = (uint8_t)(bat2_raw_mv >> 8);
-        buffer[6] = (uint8_t)bat2_raw_mv;
-        buf_size = 7;
-        */
+        DataProtocol::build_Battery(buffer, &buf_size, bat1_voltage, bat2_voltage);
         Serial2.write(buffer, buf_size);
 
-        /*
-        // Read the temperature in Celsius
-        float temp_couple = 0;
-        //if (!isnan(temp_couple)) {
-            temp_couple = k_type.getColdJunctionT()/16.0;
-            Serial.print("CJ[C] = ");
-            Serial.print(temp_couple);
-            temp_couple = k_type.getTemperature()/4.0;
-            Serial.print("  //  Temp[C] = ");
-            Serial.println(temp_couple);
-        //}
-        */
+        // Send GNSS acquired time
+        DataProtocol::build_GnssTime(buffer, &buf_size, gps_time);
+        Serial2.write(buffer, buf_size);
+
+        // Send GNSS acquired navigation data
+        DataProtocol::build_GnssData(buffer, &buf_size, gps_data);
+        Serial2.write(buffer, buf_size);
+
+        
+        
+        //    temp_couple = kt1.getColdJunctionT()/16.0;
+        //    temp_couple = k_type.getTemperature()/4.0;
+        
 
         if (gps.time.isValid())
         {
@@ -193,28 +197,23 @@ void loop()
         {
             gps_time = 0;
         }
-        Serial.print("Time: ");
+        Serial.print("\nNAVIGATION\nTime: ");
         Serial.println(gps_time);
 
-        RawDegrees lat, lon;
         if (gps.location.isValid())
         {
-            lat = gps.location.rawLat();
-            lon = gps.location.rawLng();
+            gps_data.latitude = gps.location.lat();
+            gps_data.longitude = gps.location.lng();
         }
         else
         {
-            //gps_data.latitude = 0;
-            //gps_data.longitude = 0;
+            gps_data.latitude = 0;
+            gps_data.longitude = 0;
         }
         Serial.print("Latitude: ");
-        Serial.print(lat.deg);
-        Serial.print(".");
-        Serial.println(lat.billionths);
-        Serial.print("Longitude: ");
-        Serial.print(lon.deg);
-        Serial.print(".");
-        Serial.println(lon.billionths);
+        Serial.print(gps_data.latitude);
+        Serial.print(" / Longitude: ");
+        Serial.println(gps_data.longitude);
         
         if (gps.speed.isValid())
         {
