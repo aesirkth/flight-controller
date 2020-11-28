@@ -74,7 +74,7 @@ See [test/](test/)
 
 # Data protocol
 
-The protocol to communicate between the Ground Station and the Rocket is detailed in [doc/data-protocol](doc/data-protocol.md)
+The protocol to communicate between the Ground Station and the Rocket is detailed in [doc/data_protocol](doc/data_protocol.md)
 
 # Folder structure
 
