@@ -32,9 +32,13 @@ License:
 */
 
 #include <FlexCAN.h>  // https://github.com/pawelsky/FlexCAN_Library
+#include <Adafruit_NeoPixel.h>
 #include <SPI.h>
+#include <RH_RF95.h>  // RadioHead library  to control the LoRa transceiver
 
 #include "hardware_definition_teensy.h"
+#include "utils.h"
+#include "test_companion_teensy.h"
 
 static CAN_message_t msg;
 
@@ -42,25 +46,41 @@ FlexCAN CANbus(1000000, 0, 1, 1);  // 1Mbs, CAN0, pins 29&30 for TX&RX
 
 uint8_t led_state = 0;
 
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400);
+
+// For LoRa Communication
+RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT));
+
+char data[CMD_DATA_LEN];
+uint8_t rfm_init_success = 0;
+
 void setup() {
   CANbus.begin();
 
-  Serial1.setRX(PIN_RX1);
-  Serial1.setTX(PIN_TX1);
-  Serial1.begin(SERIAL1_BAUD);
-
-  Serial2.setRX(PIN_RX2);
-  Serial2.setTX(PIN_TX2);
-  Serial2.begin(SERIAL2_BAUD);
-
-  Serial3.setRX(PIN_RX3);
-  Serial3.setTX(PIN_TX3);
-  Serial3.begin(SERIAL3_BAUD);
+  initRGB();
+  initCommunications();
 
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
+  
+  if (millis() % 5000 == 0) {
+    sendMessage();
+    strip.setPixelColor(1, 0x0000ff);
+    strip.show();
+    delay(20); 
+    strip.setPixelColor(1, 0x000000);
+    strip.show();
+    Serial.println("msg was sent...");
+    Serial.println(digitalPinToInterrupt(PIN_RFM_INT));
+  }
+
+  if (getCommand(data)) {
+    Serial.println("msg was received...");
+    Serial.println(data);
+  } 
+
   if (CANbus.available()) {
     CANbus.read(msg);
     msg.buf[0]++;
@@ -85,3 +105,121 @@ void loop() {
     digitalWrite(LED_BUILTIN, led_state);
   }
 }
+
+void initCommunications() {
+  /*  */
+  initSerial();
+  
+  resetRFM();
+  initRFM();
+  Serial.println("Success?");
+  Serial.println(rfm_init_success);
+}
+
+void resetRFM() {
+  /*  */
+  Serial.println("rstRFM:Success!");
+  pinMode(PIN_RFM_RST, OUTPUT);
+  digitalWrite(PIN_RFM_RST, HIGH);
+  delay(100);
+  digitalWrite(PIN_RFM_RST, LOW);
+  delay(10);
+  digitalWrite(PIN_RFM_RST, HIGH);
+  delay(100);
+}
+
+void initRFM() {
+  /* Calls init method from RadioHead library and sets frequency and power to values defined in platformio.ini */
+  Serial.println("initRFM:Success!");
+  rfm_init_success = rfm.init();
+  if (rfm_init_success) {
+    rfm.setFrequency(RFM_FREQ);
+    rfm.setTxPower(RFM_TX_POWER, false);
+  }
+  showStatus();
+}
+
+void showStatus() {
+  if (not rfm_init_success) {
+    strip.setPixelColor(0, 0xff0000);
+  } else {
+    strip.setPixelColor(0, 0x00ff00);
+  }
+  strip.show();
+}
+
+void initSerial() {
+  /*  */
+  Serial.println("initSERIAL:Success!");
+  Serial.begin(9600); 
+
+  Serial1.setRX(PIN_RX1);
+  Serial1.setTX(PIN_TX1);
+  Serial1.begin(SERIAL1_BAUD);
+
+  Serial2.setRX(PIN_RX2);
+  Serial2.setTX(PIN_TX2);
+  Serial2.begin(SERIAL2_BAUD);
+
+  Serial3.setRX(PIN_RX3);
+  Serial3.setTX(PIN_TX3);
+  Serial3.begin(SERIAL3_BAUD);
+}
+
+void initRGB() {
+  strip.begin();
+  delay(10);
+  strip.clear();
+  strip.setBrightness(20);
+  strip.show();
+  delay(100);
+  strip.setPixelColor(0, STARTUP_COLOR);
+  strip.show();
+}
+
+uint8_t getCommand(char* DATA) {
+  if (rfm_init_success) {
+    if (rfm.waitAvailableTimeout(100)) { 
+      uint8_t data_buffer[RH_RF95_MAX_MESSAGE_LEN];
+      uint8_t buffer_len = sizeof(data_buffer);
+
+      if (rfm.recv(data_buffer, &buffer_len)) {
+        for (uint8_t i=0; i< CMD_DATA_LEN; i++) {
+          DATA[i] = data_buffer[i];
+          strip.setPixelColor(0, 0xff0000); 
+          strip.show();
+          delay(30);
+          showStatus();
+        }
+      return 1; 
+      }
+    }
+  } else {
+    return 0; 
+  }
+}
+
+void sendMessage() {
+  uint8_t m_size = 2;
+  uint8_t message[m_size];
+
+  message[0] = 6; 
+  message[1] = 23; 
+
+  if (rfm_init_success) {
+    strip.setPixelColor(0, 0x0000ff);
+    strip.show();
+    delay(20);
+    rfm.send(message, m_size);
+    rfm.waitPacketSent();
+    showStatus();
+  }
+  
+  Serial.write(message, m_size);
+  Serial.write(0x00);
+  // Include a carriage return and a line feed so the receiver can split out frames
+  Serial.write(0x0D);
+  Serial.write(0x0A);
+  
+}
+

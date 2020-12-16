@@ -1,0 +1,1 @@
+#define CMD_DATA_LEN  2
