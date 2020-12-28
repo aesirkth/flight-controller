@@ -72,6 +72,7 @@ void loop()
     Serial.println(reg_val, BIN);
 
     memory.checkFactoryBadBlocks();
+    memory.readBadBlockLUT();
 
 /*
     uint8_t register_val = 0;

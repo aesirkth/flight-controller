@@ -253,3 +253,50 @@ void Flash::checkFactoryBadBlocks()
         Serial.println();
     }
 }
+
+/* 
+    Read and display the memory's internal LUT that store the links used to
+    handle bad memory blocks.
+*/
+void Flash::readBadBlockLUT()
+{
+    uint16_t logic_blocks[20];
+    uint16_t physical_blocks[20];
+
+    _spi->beginTransaction(_spi_settings);
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+
+    digitalWrite(_ss, LOW);
+    _spi->transfer(OPCODE_BBM_READ);
+    _spi->transfer(DUMMY_BYTE);
+    for (int i = 0; i < 20; i++)
+    {
+        uint8_t temp = 0;
+        temp = _spi->transfer(DUMMY_BYTE);
+        logic_blocks[i] = (uint16_t)temp << 8;
+        temp = _spi->transfer(DUMMY_BYTE);
+        logic_blocks[i] |= (uint16_t)temp;
+        temp = _spi->transfer(DUMMY_BYTE);
+        physical_blocks[i] = (uint16_t)temp << 8;
+        temp = _spi->transfer(DUMMY_BYTE);
+        physical_blocks[i] |= (uint16_t)temp;
+    } 
+    digitalWrite(_ss, HIGH);
+    _spi->endTransaction();
+
+    Serial.println("** Bad Block Management LUT **");
+    for (int i = 0; i < 20; i++)
+    {
+        Serial.print("LBA ");
+        Serial.print(i);
+        Serial.print(": ");
+        Serial.print(logic_blocks[i], BIN);
+        Serial.print(" <=> PBA ");
+        Serial.print(i);
+        Serial.print(": ");
+        Serial.println(physical_blocks[i], BIN);
+    } 
+}
