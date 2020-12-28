@@ -3,6 +3,9 @@
 #include <SPI.h>
 #include "hardware_definition_teensy.h"
 
+#define WT_PAGE_MSB 0x00
+#define WT_PAGE_LSB 0x01
+
 #define SPI1 SPI1 // SPI bus which is connected to the Flash IC
 SPISettings settingsFlash(10000000, MSBFIRST, SPI_MODE0); // SPI bus settings to communicate with the Flash IC
 
@@ -42,6 +45,7 @@ void setup()
         read_buffer[i] = 0;
         write_buffer[i] = count;
         count++;
+        //count--;
     }
     
 
@@ -49,7 +53,12 @@ void setup()
 
     SPI1.begin(); // Initialize the SPI bus for the Flash IC
     Serial.begin(57600); // Open Serial port with the PC
-    Serial.println("INIT");
+    for (int i = 0; i < 200; i++)
+    {
+    Serial.print(write_buffer[i]);
+    Serial.print(",");
+    }
+    Serial.println("\nINIT");
 }
 
 void loop()
@@ -60,7 +69,7 @@ void loop()
     // Read Status Register SR-1
     digitalWrite(PIN_CS_FLASH, LOW);
     SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0x0A); //Register address
+    SPI1.transfer(0xA0); //Register address
     register_val = SPI1.transfer(0xFF);
     digitalWrite(PIN_CS_FLASH, HIGH);
     // Print register values
@@ -70,7 +79,7 @@ void loop()
     // Read Status Register SR-2
     digitalWrite(PIN_CS_FLASH, LOW);
     SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0x0B); //Register address
+    SPI1.transfer(0xB0); //Register address
     register_val = SPI1.transfer(0xFF);
     digitalWrite(PIN_CS_FLASH, HIGH);
     // Print register values
@@ -80,11 +89,28 @@ void loop()
     // Read Status Register SR-3
     digitalWrite(PIN_CS_FLASH, LOW);
     SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0x0C); //Register address
+    SPI1.transfer(0xC0); //Register address
     register_val = SPI1.transfer(0xFF);
     digitalWrite(PIN_CS_FLASH, HIGH);
     // Print register values
     Serial.print("SR-3: ");
+    Serial.println(register_val, BIN);
+
+    // Write Status Register SR-1 (Disable Block Protect Bits)
+    digitalWrite(PIN_CS_FLASH, LOW);
+    SPI1.transfer(0x1F); // Read Status Register
+    SPI1.transfer(0xA0); //Register address
+    SPI1.transfer(0x00); // Reset all bits on the register
+    digitalWrite(PIN_CS_FLASH, HIGH);
+
+    // Read Status Register SR-1
+    digitalWrite(PIN_CS_FLASH, LOW);
+    SPI1.transfer(0x0F); // Read Status Register
+    SPI1.transfer(0xA0); //Register address
+    register_val = SPI1.transfer(0xFF);
+    digitalWrite(PIN_CS_FLASH, HIGH);
+    // Print register values
+    Serial.print("SR-1: ");
     Serial.println(register_val, BIN);
 
     // Check Busy flag == 0
@@ -125,8 +151,8 @@ uint32_t time_dif = 0;
     SPI1.transfer(0x13); // Page Data Read
     SPI1.transfer(0xFF); // 8 dummy clock cycles
     // Page Address (16 bits)
-    SPI1.transfer(0x00);
-    SPI1.transfer(0x00);
+    SPI1.transfer(WT_PAGE_MSB);
+    SPI1.transfer(WT_PAGE_LSB);
     digitalWrite(PIN_CS_FLASH, HIGH);
 
     // Check Busy flag == 0
@@ -158,18 +184,28 @@ uint32_t time_dif = 0;
 
 // Read data from the memory
 Serial.println("READ DATA");
-for (int i = 0; i < 2048; i++)
+for (int i = 0; i < 200; i++)
 {
     Serial.print(read_buffer[i]);
-    //Serial.print(",");
+    Serial.print(",");
 }
 Serial.println("\nREAD DATA \n");
-/*
+
 // Write data to the memory
     // Write enable
     digitalWrite(PIN_CS_FLASH, LOW);
     SPI1.transfer(0x06);
     digitalWrite(PIN_CS_FLASH, HIGH);
+
+    // Read Status Register SR-3
+    digitalWrite(PIN_CS_FLASH, LOW);
+    SPI1.transfer(0x0F); // Read Status Register
+    SPI1.transfer(0xC0); //Register address
+    register_val = SPI1.transfer(0xFF);
+    digitalWrite(PIN_CS_FLASH, HIGH);
+    // Print register values
+    Serial.print("SR-3: ");
+    Serial.println(register_val, BIN);
 
     // Check Busy flag == 0
     while (checkBusyFlash()) {delayMicroseconds (1);}
@@ -188,7 +224,7 @@ Serial.println("\nREAD DATA \n");
 
     // Check Busy flag == 0
     while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = time_dif - micros();
+    time_dif = micros() - time_dif;
     Serial.print("Load Program Data (2048 Bytes) => ");
     Serial.print(time_dif);
     Serial.println(" us");
@@ -199,13 +235,13 @@ Serial.println("\nREAD DATA \n");
     SPI1.transfer(0x10); // Program Execute
     SPI1.transfer(0xFF); // 8 dummy clock cycles
     // Page Address (16 bits)
-    SPI1.transfer(0x00);
-    SPI1.transfer(0x0A);
+    SPI1.transfer(WT_PAGE_MSB);
+    SPI1.transfer(WT_PAGE_LSB);
     digitalWrite(PIN_CS_FLASH, HIGH);
 
     // Check Busy flag == 0
     while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = time_dif - micros();
+    time_dif = micros() - time_dif;
     Serial.print("Program Execute => ");
     Serial.print(time_dif);
     Serial.println(" us");
@@ -218,13 +254,13 @@ Serial.println("\nREAD DATA \n");
     SPI1.transfer(0x13); // Page Data Read
     SPI1.transfer(0xFF); // 8 dummy clock cycles
     // Page Address (16 bits)
-    SPI1.transfer(0x00);
-    SPI1.transfer(0x0A);
+    SPI1.transfer(WT_PAGE_MSB);
+    SPI1.transfer(WT_PAGE_LSB);
     digitalWrite(PIN_CS_FLASH, HIGH);
 
     // Check Busy flag == 0
     while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = time_dif - micros();
+    time_dif = micros() - time_dif;
     Serial.print("Page Data Read => ");
     Serial.print(time_dif);
     Serial.println(" us");
@@ -244,20 +280,20 @@ Serial.println("\nREAD DATA \n");
 
     // Check Busy flag == 0
     while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = time_dif - micros();
+    time_dif = micros() - time_dif;
     Serial.print("Read Data (2048 Bytes) => ");
     Serial.print(time_dif);
     Serial.println(" us");
 
 // Read data from the memory
 Serial.println("READ DATA");
-for (int i = 0; i < 2048; i++)
+for (int i = 0; i < 200; i++)
 {
     Serial.print(read_buffer[i]);
-    //Serial.print(",");
+    Serial.print(",");
 }
 Serial.println("\nREAD DATA \n");
-*/
+
     while(1)
     {
         delay(1000);
@@ -272,7 +308,7 @@ uint8_t checkBusyFlash()
     // Read Status Register SR-3
     digitalWrite(PIN_CS_FLASH, LOW);
     SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0x0C); // SR-3 Address
+    SPI1.transfer(0xC0); // SR-3 Address
     ret_val = SPI1.transfer(0xFF) & 0x01; // Read busy it value. If '1' the Flash is busy with some task.
     digitalWrite(PIN_CS_FLASH, HIGH);
 
