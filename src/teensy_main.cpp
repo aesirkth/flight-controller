@@ -2,13 +2,13 @@
 #include <Arduino.h>
 #include <SPI.h>
 #include "hardware_definition_teensy.h"
+#include "FlashMemory.hpp"
 
 #define WT_PAGE_MSB 0x00
 #define WT_PAGE_LSB 0x01
 
-#define SPI1 SPI1 // SPI bus which is connected to the Flash IC
 SPISettings settingsFlash(10000000, MSBFIRST, SPI_MODE0); // SPI bus settings to communicate with the Flash IC
-
+Flash memory(&SPI1, settingsFlash, PIN_CS_FLASH, PIN_WP, PIN_HOLD);
 uint8_t write_buffer[2048];
 uint8_t read_buffer[2048];
 
@@ -22,12 +22,6 @@ void setup()
     pinMode(PIN_RFM_NSS, OUTPUT);
     digitalWrite(PIN_RFM_NSS, HIGH);
     // Set Flash IC CS, WP, HOLD line to high (this should be done through pullup resistors)
-    pinMode(PIN_CS_FLASH, OUTPUT);
-    pinMode(PIN_WP, OUTPUT);
-    pinMode(PIN_HOLD, OUTPUT);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-    digitalWrite(PIN_WP, HIGH);
-    digitalWrite(PIN_HOLD, HIGH);
 
     // Set I/O we don't care about at the moment
     pinMode(PIN_PARA1, OUTPUT);
@@ -53,16 +47,33 @@ void setup()
 
     SPI1.begin(); // Initialize the SPI bus for the Flash IC
     Serial.begin(57600); // Open Serial port with the PC
-    for (int i = 0; i < 200; i++)
+/*    for (int i = 0; i < 200; i++)
     {
     Serial.print(write_buffer[i]);
     Serial.print(",");
-    }
+    }*/
     Serial.println("\nINIT");
 }
 
 void loop()
 {
+    if (memory.test() == RET_SUCCESS)
+    {
+        Serial.println("JEDEC ID match");
+    }
+    else
+    {
+        Serial.println("JEDEC don't match ERROR");
+    }
+
+    uint8_t reg_val = 0;
+    memory.readStatusRegister(SR_1_ADDR, &reg_val);
+    Serial.print("SR-1: ");
+    Serial.println(reg_val, BIN);
+
+    memory.checkFactoryBadBlocks();
+
+/*
     uint8_t register_val = 0;
     SPI1.beginTransaction(settingsFlash);
 
@@ -293,7 +304,7 @@ for (int i = 0; i < 200; i++)
     Serial.print(",");
 }
 Serial.println("\nREAD DATA \n");
-
+*/
     while(1)
     {
         delay(1000);

@@ -3,7 +3,7 @@
 /* 
     Class constructor
 */
-Flash::Flash(SPIClass * spi_bus, SPISettings * spi_settings, uint8_t pin_ss, uint8_t pin_wp, uint8_t pin_hold)
+Flash::Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_t pin_wp, uint8_t pin_hold)
 {
     _spi = spi_bus;
     _spi_settings = spi_settings;
@@ -11,8 +11,10 @@ Flash::Flash(SPIClass * spi_bus, SPISettings * spi_settings, uint8_t pin_ss, uin
     _wp = pin_wp;
     _hold = pin_hold;
 
+    pinMode(_ss, OUTPUT);
     pinMode(_wp, OUTPUT);
     pinMode(_hold, OUTPUT);
+    digitalWrite(_ss, HIGH);
     digitalWrite(_wp, HIGH);
     digitalWrite(_hold, HIGH);
 }
@@ -22,7 +24,7 @@ Flash::Flash(SPIClass * spi_bus, SPISettings * spi_settings, uint8_t pin_ss, uin
 */
 void Flash::reset()
 {
-    _spi->beginTransaction(*_spi_settings);
+    _spi->beginTransaction(_spi_settings);
     while (isBusy())
     {
         delayMicroseconds(1);
@@ -49,15 +51,15 @@ int Flash::test()
     uint8_t manu_id = 0;
     uint16_t ic_id = 0;
 
-    _spi->beginTransaction(*_spi_settings);
+    _spi->beginTransaction(_spi_settings);
     digitalWrite(_ss, LOW);
-    SPI1.transfer(OPCODE_JEDEC_ID); // Read chip ID
-    SPI1.transfer(DUMMY_BYTE); // Dummy
-    temp = SPI1.transfer(DUMMY_BYTE); // Get Manufacturer ID
+    _spi->transfer(OPCODE_JEDEC_ID); // Read chip ID
+    _spi->transfer(DUMMY_BYTE); // Dummy
+    temp = _spi->transfer(DUMMY_BYTE); // Get Manufacturer ID
     manu_id = temp;
-    temp = SPI1.transfer(DUMMY_BYTE); // Get Device ID 1/2
+    temp = _spi->transfer(DUMMY_BYTE); // Get Device ID 1/2
     ic_id = (uint16_t)temp << 8;
-    temp = SPI1.transfer(DUMMY_BYTE); // Get Device ID 2/2
+    temp = _spi->transfer(DUMMY_BYTE); // Get Device ID 2/2
     ic_id |= (uint16_t)temp;
     digitalWrite(_ss, HIGH);
     _spi->endTransaction();
@@ -77,7 +79,7 @@ int Flash::readStatusRegister(uint8_t reg_address, uint8_t * reg_value)
 
     if ((reg_address == SR_1_ADDR) || (reg_address == SR_2_ADDR) || (reg_address == SR_3_ADDR)) // Check valid Status Register address
     {
-        _spi->beginTransaction(*_spi_settings);
+        _spi->beginTransaction(_spi_settings);
         digitalWrite(_ss, LOW);
         _spi->transfer(OPCODE_READ_STATUS_REG); // Read Status Register
         _spi->transfer(reg_address); //Register address
@@ -101,7 +103,7 @@ int Flash::writeStatusRegister(uint8_t reg_address, uint8_t reg_value)
 
     if ((reg_address == SR_1_ADDR) || (reg_address == SR_2_ADDR) || (reg_address == SR_3_ADDR)) // Check valid Status Register address
     {
-        _spi->beginTransaction(*_spi_settings);
+        _spi->beginTransaction(_spi_settings);
         while (isBusy())
         {
             delayMicroseconds(1);
@@ -129,7 +131,7 @@ int Flash::writeEnable()
 {
     int ret_val = RET_ERROR;
 
-    _spi->beginTransaction(*_spi_settings);
+    _spi->beginTransaction(_spi_settings);
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_WRITE_ENABLE);
     digitalWrite(_ss, HIGH);
@@ -158,7 +160,7 @@ int Flash::pageDataRead(uint16_t page_addr)
 {
     int ret_val = RET_ERROR;
 
-    _spi->beginTransaction(*_spi_settings);
+    _spi->beginTransaction(_spi_settings);
     while (isBusy())
     {
         delayMicroseconds(1);
@@ -187,7 +189,7 @@ int Flash::readData(uint8_t * data_buffer, uint16_t column_addr)
 {
     int ret_val = RET_ERROR;
 
-    _spi->beginTransaction(*_spi_settings);
+    _spi->beginTransaction(_spi_settings);
     while (isBusy())
     {
         delayMicroseconds(1);
@@ -227,4 +229,27 @@ uint8_t Flash::isBusy()
     digitalWrite(_ss, HIGH);
 
     return ret_val;
+}
+
+/* 
+    Use always this function first before using the memory on the
+    main application. It will check for Bad Blocks marked at the 
+    factory that will need to be deal with prior to end use.
+*/
+void Flash::checkFactoryBadBlocks()
+{
+    uint8_t read_buffer[2048];
+
+    for (uint16_t block_num = 0; block_num < 1024; block_num++)
+    {
+        this->pageDataRead(block_num*64);
+        this->readData(read_buffer, 0);
+
+        Serial.print("Block ");
+        Serial.print(block_num);
+        Serial.print(" => ");
+        Serial.print(read_buffer[0], HEX);
+        if (read_buffer[0] != 0xFF) Serial.print(" BAD");
+        Serial.println();
+    }
 }

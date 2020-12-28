@@ -64,7 +64,7 @@ class Flash
 {
     // SPI bus and specific pins configuration
     SPIClass * _spi;
-    SPISettings * _spi_settings;
+    SPISettings _spi_settings;
     uint8_t _ss;
     uint8_t _wp;
     uint8_t _hold;
@@ -72,7 +72,7 @@ class Flash
 
 
 public:
-    Flash(SPIClass * spi_bus, SPISettings * spi_settings, uint8_t pin_ss, uint8_t pin_wp, uint8_t pin_hold);
+    Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_t pin_wp, uint8_t pin_hold);
     void reset();
     int test();
     //int init();
@@ -84,6 +84,7 @@ public:
     int readData(uint8_t * data_buffer, uint16_t column_addr);
 
     uint8_t isBusy();
+    void checkFactoryBadBlocks(); // Use always before using the memory for its intended application
 };
 
 #endif
