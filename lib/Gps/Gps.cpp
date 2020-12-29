@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include "Gps.h"
+#include "Gps.hpp"
 
 template <class T>
 bool GPS::parse_field_to_uint(T* result, char message[], uint8_t* msg_index) {

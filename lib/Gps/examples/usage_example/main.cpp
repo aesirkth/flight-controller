@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include "Gps.h"
+#include "Gps.hpp"
 
 #define BUF_LEN 100
 
