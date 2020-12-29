@@ -1,13 +1,13 @@
 #include <Arduino.h>
 
-#include "gps.h"
+#include "Gps.h"
 
 #define BUF_LEN 100
 
 Gps gps;
 
 void init() {
-    Serial.open(115200) //open gps serial
+    Serial.open(115200); //open gps serial
 }
 
 void loop() {

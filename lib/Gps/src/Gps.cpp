@@ -1,5 +1,6 @@
-#include <cstring>
+#include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include "Gps.h"
 
