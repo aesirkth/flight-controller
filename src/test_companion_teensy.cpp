@@ -34,11 +34,14 @@ License:
 #include <FlexCAN.h>  // https://github.com/pawelsky/FlexCAN_Library
 #include <Adafruit_NeoPixel.h>
 #include <SPI.h>
+#include <RHHardwareSPI1.h>
 #include <RH_RF95.h>  // RadioHead library  to control the LoRa transceiver
 
 #include "hardware_definition_teensy.h"
 #include "utils.h"
 #include "test_companion_teensy.h"
+
+#define RFM_SPI hardware_spi1
 
 static CAN_message_t msg;
 
@@ -49,7 +52,7 @@ uint8_t led_state = 0;
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400);
 
 // For LoRa Communication
-RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT));
+RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), RFM_SPI);
 
 char data[CMD_DATA_LEN];
 uint8_t rfm_init_success = 0;
@@ -150,8 +153,10 @@ void showStatus() {
 
 void initSerial() {
   /*  */
-  Serial.println("initSERIAL:Success!");
   Serial.begin(9600); 
+  while(!Serial);
+
+  Serial.println("initSERIAL:Success!");
 
   Serial1.setRX(PIN_RX1);
   Serial1.setTX(PIN_TX1);
