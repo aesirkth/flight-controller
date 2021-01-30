@@ -66,13 +66,22 @@ void loop()
         Serial.println("JEDEC don't match ERROR");
     }
 
+    //memory.checkFactoryBadBlocks();
+    //memory.readBadBlockLUT();
+
+
     uint8_t reg_val = 0;
     memory.readStatusRegister(SR_1_ADDR, &reg_val);
     Serial.print("SR-1: ");
     Serial.println(reg_val, BIN);
 
-    memory.checkFactoryBadBlocks();
-    memory.readBadBlockLUT();
+    memory.writeStatusRegister(SR_1_ADDR, 0x00);
+
+    memory.readStatusRegister(SR_1_ADDR, &reg_val);
+    Serial.print("SR-1: ");
+    Serial.println(reg_val, BIN);
+
+    testFlashMemory(&memory);
 
 /*
     uint8_t register_val = 0;
@@ -312,17 +321,4 @@ Serial.println("\nREAD DATA \n");
         Serial.print(".");
     }
 
-}
-
-uint8_t checkBusyFlash()
-{
-    uint8_t ret_val = 0;
-    // Read Status Register SR-3
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0xC0); // SR-3 Address
-    ret_val = SPI1.transfer(0xFF) & 0x01; // Read busy it value. If '1' the Flash is busy with some task.
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    return ret_val;
 }

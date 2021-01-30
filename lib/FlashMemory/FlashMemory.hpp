@@ -82,14 +82,16 @@ public:
     //int writeDisable();
     int pageDataRead(uint16_t page_addr);
     int readData(uint8_t * data_buffer, uint16_t column_addr);
-    int programDataLoad();
-    int programExecute();
-    int blockErase();
+    int programDataLoad(uint8_t * data_buffer, uint16_t column_addr);
+    int programExecute(uint16_t page_addr);
+    int blockErase(uint16_t page_addr);
 
 
     uint8_t isBusy();
     void checkFactoryBadBlocks(); // Use always before using the memory for its intended application
     void readBadBlockLUT();
 };
+
+void testFlashMemory(Flash * obj);
 
 #endif

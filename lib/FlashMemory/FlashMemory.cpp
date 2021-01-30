@@ -132,6 +132,10 @@ int Flash::writeEnable()
     int ret_val = RET_ERROR;
 
     _spi->beginTransaction(_spi_settings);
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_WRITE_ENABLE);
     digitalWrite(_ss, HIGH);
@@ -209,13 +213,148 @@ int Flash::readData(uint8_t * data_buffer, uint16_t column_addr)
     digitalWrite(_ss, HIGH);
     _spi->endTransaction();
 
+    //Check SR-3 for ECC related errors
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+    uint8_t reg_val = 0;
+    if (readStatusRegister(SR_3_ADDR, &reg_val) == RET_SUCCESS)
+    {
+        reg_val = (reg_val & (SR_3_ECC1 | SR_3_ECC0)) >> 4;
+        Serial.print("Page readed. ECC status -> ");
+        Serial.println(reg_val, BIN);
+    }
+
     ret_val = RET_SUCCESS;
 
     return ret_val;
 }
 
+/*
+    Load up to 2048 bytes (1 Page) into the memory buffer starting at the specified Column Address.
+    If loaded data is less than 2048 bytes, the remaining bytes will be set to 0xFF.
+    'data_buffer' size has to be at least 2048 bytes as that will be the maximum amount of
+    data that can be written.
+    ret_val -> int -> 'RET_SUCCESS' Data has been loaded in the memory buffer
+*/
+int Flash::programDataLoad(uint8_t * data_buffer, uint16_t column_addr)
+{
+    int ret_val = RET_ERROR;
+
+    _spi->beginTransaction(_spi_settings);
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+
+    digitalWrite(_ss, LOW);
+    _spi->transfer(OPCODE_PROGRAM_LOAD); // Load Program Data
+    _spi->transfer((uint8_t)(column_addr >> 8)); // Column Address (16-bit)
+    _spi->transfer((uint8_t)column_addr);
+    for (int i = column_addr; i < 2048; i++)
+    {
+        _spi->transfer(data_buffer[i]); // Transfer 1 byte of data
+    }
+    digitalWrite(_ss, HIGH);
+    _spi->endTransaction();
+
+    ret_val = RET_SUCCESS;
+
+    return ret_val;
+}
+
+/*
+    Program the contents of the buffer into the specified Page Address
+    ret_val -> int -> 
+        'RET_SUCCESS' Data has beed programed to memory
+        'RET_ERROR' There was an error during data programming
+
+    **NOTE**    Separate the error checking logic as to not block execution
+                until the program operation has finished.
+*/
+int Flash::programExecute(uint16_t page_addr)
+{
+    int ret_val = RET_ERROR;
+
+    _spi->beginTransaction(_spi_settings);
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+
+    digitalWrite(_ss, LOW);
+    _spi->transfer(OPCODE_PROGRAM_EXECUTE);
+    _spi->transfer(DUMMY_BYTE);
+    _spi->transfer((uint8_t)(page_addr >> 8));
+    _spi->transfer((uint8_t)page_addr);
+    digitalWrite(_ss, HIGH);
+    _spi->endTransaction();
+
+    //Check SR-3 for errors during program operation
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+    uint8_t reg_val = 0;
+    if (readStatusRegister(SR_3_ADDR, &reg_val) == RET_SUCCESS)
+    {
+        Serial.print("SR_3 -> ");
+        Serial.println(reg_val, BIN);
+        // If SR_3_PFAIL bit is asserted there was an error during program execute operation
+        ret_val = (reg_val & SR_3_PFAIL) ? RET_ERROR : RET_SUCCESS;
+    }
+
+    return ret_val;
+}
+
+/*
+    Erase (sets each byte to 0xFF) the content of the memory block 
+    (64 Pages = 128 KB) corresponding to the specified Page Address.
+    ret_val -> int -> 
+        'RET_SUCCESS' Memory block has been erased
+        'RET_ERROR' There was an error during memory erasing
+
+    **NOTE**    Separate the error checking logic as to not block execution
+                until the erase operation has finished.
+*/
+int Flash::blockErase(uint16_t page_addr)
+{
+    int ret_val = RET_ERROR;
+
+    _spi->beginTransaction(_spi_settings);
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+
+    digitalWrite(_ss, LOW);
+    _spi->transfer(OPCODE_BLOCK_ERASE);
+    _spi->transfer(DUMMY_BYTE);
+    _spi->transfer((uint8_t)(page_addr >> 8));
+    _spi->transfer((uint8_t)page_addr);
+    digitalWrite(_ss, HIGH);
+    _spi->endTransaction();
+
+    //Check SR-3 for errors during erase operation
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+    uint8_t reg_val = 0;
+    if (readStatusRegister(SR_3_ADDR, &reg_val) == RET_SUCCESS)
+    {
+        Serial.print("SR_3 -> ");
+        Serial.println(reg_val, BIN);
+        // If SR_3_EFAIL bit is asserted there was an error during block erase operation
+        ret_val = (reg_val & SR_3_EFAIL) ? RET_ERROR : RET_SUCCESS;
+    }
+    
+    return ret_val;
+}
+
 /* 
-    Check if the memory controller is ready to accept new commands
+    Check if the memory controller is ready to accept new commands.
     ret_val -> uint8_t -> '1' Controller is busy / '0' Controller is ready
 */
 uint8_t Flash::isBusy()
@@ -299,4 +438,154 @@ void Flash::readBadBlockLUT()
         Serial.print(": ");
         Serial.println(physical_blocks[i], BIN);
     } 
+}
+
+void testFlashMemory(Flash * obj)
+{
+    uint8_t write_buff[2048];
+    uint8_t read_buff[2048];
+    uint8_t page_count;
+    uint8_t ret_val = 0;
+    
+    Serial.println("** ERASE block 0**");
+    obj->writeEnable();
+    ret_val = obj->blockErase(2);
+    if (ret_val == RET_ERROR)
+    {
+        Serial.println("ERROR Block Erase");
+    }
+    Serial.println("** ERASE block 1**");
+    obj->writeEnable();
+    ret_val = obj->blockErase(70);
+    if (ret_val == RET_ERROR)
+    {
+        Serial.println("ERROR Block Erase");
+    }
+
+    Serial.println("** WRITE 1 **");
+    page_count = 0;
+    while (page_count < 128)
+    {
+        for (int i = 0; i < 2048; i++)
+        {
+            write_buff[i] = page_count;
+        }
+        obj->writeEnable();
+        obj->programDataLoad(write_buff, 0);
+        ret_val = obj->programExecute(page_count);
+        if (ret_val == RET_ERROR)
+        {
+            Serial.println("ERROR Program Execute");
+        }
+        page_count++;
+        //Display values
+        Serial.print("Page ");
+        Serial.print(page_count);
+        Serial.print(": ");
+        Serial.print(write_buff[0], HEX);
+        Serial.print(", ");
+        Serial.print(write_buff[1], HEX);
+        Serial.print(", ");
+        Serial.print(write_buff[2], HEX);
+        Serial.print(", ");
+        Serial.println(write_buff[3], HEX);
+    }
+
+    Serial.println("** READ 1 **");
+    page_count = 0;
+    while (page_count < 128)
+    {
+        obj->pageDataRead(page_count);
+        obj->readData(read_buff, 0);
+        page_count++;
+        //Display values
+        Serial.print("Page ");
+        Serial.print(page_count);
+        Serial.print(": ");
+        Serial.print(read_buff[0], HEX);
+        Serial.print(", ");
+        Serial.print(read_buff[1], HEX);
+        Serial.print(", ");
+        Serial.print(read_buff[2], HEX);
+        Serial.print(", ");
+        Serial.println(read_buff[3], HEX);
+    }
+
+    Serial.println("** ERASE **");
+    obj->writeEnable();
+    ret_val = obj->blockErase(2);
+    if (ret_val == RET_ERROR)
+    {
+        Serial.println("ERROR Block Erase");
+    }
+
+    Serial.println("** READ 2 **");
+    page_count = 0;
+    while (page_count < 128)
+    {
+        obj->pageDataRead(page_count);
+        obj->readData(read_buff, 0);
+        page_count++;
+        //Display values
+        Serial.print("Page ");
+        Serial.print(page_count);
+        Serial.print(": ");
+        Serial.print(read_buff[0], HEX);
+        Serial.print(", ");
+        Serial.print(read_buff[1], HEX);
+        Serial.print(", ");
+        Serial.print(read_buff[2], HEX);
+        Serial.print(", ");
+        Serial.println(read_buff[3], HEX);
+    }
+
+    Serial.println("** WRITE 2 **");
+    //obj->writeEnable();
+    page_count = 10;
+    while (page_count < 40)
+    {
+        for (int i = 0; i < 2048; i++)
+        {
+            write_buff[i] = page_count-100;
+        }
+        obj->writeEnable();
+        obj->programDataLoad(write_buff, 0);
+        ret_val = obj->programExecute(page_count);
+        if (ret_val == RET_ERROR)
+        {
+            Serial.println("ERROR Program Execute");
+        }
+        page_count++;
+        //Display values
+        Serial.print("Page ");
+        Serial.print(page_count);
+        Serial.print(": ");
+        Serial.print(write_buff[0], HEX);
+        Serial.print(", ");
+        Serial.print(write_buff[1], HEX);
+        Serial.print(", ");
+        Serial.print(write_buff[2], HEX);
+        Serial.print(", ");
+        Serial.println(write_buff[3], HEX);
+    }
+
+    Serial.println("** READ 3 **");
+    page_count = 0;
+    while (page_count < 128)
+    {
+        obj->pageDataRead(page_count);
+        obj->readData(read_buff, 0);
+        page_count++;
+        //Display values
+        Serial.print("Page ");
+        Serial.print(page_count);
+        Serial.print(": ");
+        Serial.print(read_buff[0], HEX);
+        Serial.print(", ");
+        Serial.print(read_buff[1], HEX);
+        Serial.print(", ");
+        Serial.print(read_buff[2], HEX);
+        Serial.print(", ");
+        Serial.println(read_buff[3], HEX);
+    }
 }
