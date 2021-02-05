@@ -1,8 +1,8 @@
 # Data Protocol <!-- omit in toc -->
 
-Here is a description of the data protocol between the Rocket and the Ground Station for the Mjollnir project
+Here is a description of the data protocol between the Rocket and the Ground Station for the Mjollnir project.
 
-This protocol defines how Telecommands and Telemetry are transmitted between the Ground Station, the Engine Computer, and the Flight Controller
+This protocol defines how Telecommands and Telemetry are transmitted between the Ground Station, the Engine Computer, and the Flight Controller.
 
 The following repositories follow this data protocol:
 
@@ -10,9 +10,9 @@ The following repositories follow this data protocol:
 - [aesirkth/ground-control](https://github.com/aesirkth/ground-control)
 - *engine computer repository*
 
-The diagrams in this document can be edited using the online tool [diagrams.net](https://www.diagrams.net/). Just import the `.xml` files. Export the diagrams to `.png` and to `.xml` (compressed) and save them back here after modification
+The diagrams in this document can be edited using the online tool [diagrams.net](https://www.diagrams.net/). Just import the `.xml` files. Export the diagrams to `.png` and to `.xml` (compressed) and save them back here after modification.
 
-The HTML tables in this document can be edited using the online tool [tablesgenerator.com](https://www.tablesgenerator.com/html_tables). Simply click "File / Paste table data" and paste the table. Make sure to check "Do not generate CSS" and uncheck "Compact mode"
+The HTML tables in this document can be edited using the online tool [tablesgenerator.com](https://www.tablesgenerator.com/html_tables). Simply click "File / Paste table data" and paste the table. Make sure to check "Do not generate CSS" and uncheck "Compact mode".
 
 # Table of contents <!-- omit in toc -->
 
@@ -43,13 +43,13 @@ The HTML tables in this document can be edited using the online tool [tablesgene
 The source file can be found in [doc/diagrams/data-buses.xml](diagrams/data-buses.xml) and edited using [diagrams.net](https://www.diagrams.net/) \[[desktop](https://github.com/jgraph/drawio-desktop/releases)]
 
 The Gateway is connected to the Control computer through the USB connector of the Flight Controller<br>
-The RFD900+ on the Ground Station side is connected to the Dashboard computer through an FTDI USB cable
+The RFD900+ on the Ground Station side is connected to the Dashboard computer through an FTDI USB cable.
 
-The Flight Controller on the Ground Station 'Gateway' is a preliminary solution to have the Control computer talk to the Rocket's Flight Controller during the first static fire
+The Flight Controller on the Ground Station 'Gateway' is a preliminary solution to have the Control computer talk to the Rocket's Flight Controller during the first static fire.
 
 # Development plan
 
-The work on this data protocol is still preliminary. The development will be iterative and the first milestone is the static fire planned for the end of the summer 2020. The protocol will be refined later on to better allocate the telemetry sent back to the Ground Station.
+The work on this data protocol is still preliminary. The development will be iterative and the first milestone is the static fire planned for the end of the beginning of 2021. The protocol will be refined later on to better allocate the telemetry sent back to the Ground Station.
 
 ## Static Fire
 
@@ -57,18 +57,18 @@ Drivers:
 
 - Send commands to the Rocket and have the relevant ones forwarded to the Engine Computer
 - Send back Telemetry to the Ground Station, mainly comprised of measurement samples from the Engine Computer
-- No logic on the Flight Controller for the Telemetry packets, the packets are simply forwarded to the Ground Station
+- No logic on the Flight Controller for the Telemetry packets, the packets are simply forwarded to the Ground Station. We will try to store the telemetry on th FC memory as well, so we can have data with higher sampling rates even if it is offline, as well as a backup.
 
 ## Launch
 
 Drivers:
 
-- Maximize the amount of data downlinked from the Rocket, by optimizing how the data packets are processed by the Flight Controller and maybe also the Ground Station
-- Be more resilient to loss of frames
+- Maximize the amount of data downlinked from the Rocket, by optimizing how the data packets are processed by the Flight Controller and maybe also the Ground Station.
+- Be more resilient to loss of frames.
 
 # Serial links
 
-All serial links share the same configuration. The baud rate is `57600`. The airspeed between the RFD900+ modems is 64kbps
+All serial links share the same configuration. The baud rate is `57600` (might need to be changed to 115200). The airspeed between the RFD900+ modems is 64kbps.
 
 A frame on the serial links looks like this:
 
@@ -86,33 +86,90 @@ The length of the data field is variable
 
 # CAN Bus
 
-> **Note:** the CAN bus between the Engine Computer and the Flight Controller can be extended to additional boards in future developments
+> **Note:** the CAN bus between the Engine Computer and the Flight Controller can be extended to additional boards in future developments.
 
-CAN bus: CAN2.0 (FlexCAN) @1Mbit/s with termination 120Ω resistors on the Flight Controller side and on the Engine Computer side
+CAN bus: CAN2.0 (FlexCAN) @1Mbit/s with termination 120Ω resistors on the Flight Controller side and on the Engine Computer side.
 
 Base frame format (11 identifier bits)
 
+>**Note:** The Time Sync of the Engine Computer will be handled by the Flight Controller. The EC will send a request package and the FC will answer it using its currently configured system time (this can be the time set by the Ground Station or the time received through GNSS). 
+
 # Data protocol
 
-The term `ID` is used below to denote `identifier field` of the CAN Bus and byte 2 (`Frame ID`) of a frame over the serial links
+The term `ID` is used below to denote `identifier field` of the CAN Bus and byte 2 (`Frame ID`) of a frame over the serial links.
 
-The `identifier field` is an 11 bits field but only the 8 lower bits are used to make the data on the CAN Bus as similar as possible to the data on the serial buses. The remaining `ID` values `100` - `7FF` are available for data transfer between on-board systems over the CAN Bus only and cannot be sent to the ground.
+The `identifier field` is an 11 bits field but only the 8 lower bits are used to make the data on the CAN Bus as similar as possible to the data on the serial buses. The remaining `ID` values `100` - `7FF` are available for data transfer between on-board systems over the CAN Bus only, and cannot be sent to ground.
 
-Each message on the Telecommand link and the Telemetry link has a unique ID
+Each message on the Telecommand TC link and the Telemetry TM link has a unique ID.
 
-| ID              | Frame type | From                        | To                          |
-| --------------- | ---------- | --------------------------- | --------------------------- |
-| `0x00` - `0x0F` | TC         | Ground or Flight Controller | Engine Computer             |
-| `0x10` - `0x7F` | TM         | Engine Computer             | Ground or Flight Controller |
-| `0x80` - `0x8F` | TC         | Ground                      | Flight Controller           |
-| `0x90` - `0xEF` | TM         | Flight Controller           | Ground                      |
-| `0xF0` - `0xFF` | N/A        | N/A                         | N/A                         |
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Frame Type</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Unique IDs</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>0x00 - 0x0F</td>
+    <td>TC</td>
+    <td>Ground Station</td>
+    <td>Flight Controller</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>0x10 - 0x1F</td>
+    <td>TC</td>
+    <td>Flight Controller</td>
+    <td>Ground Station</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>0x20 - 0x2F</td>
+    <td>TC</td>
+    <td>Ground Station</td>
+    <td>Engine Computer</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>0x30 - 0x3F</td>
+    <td>TC</td>
+    <td>Engine Computer</td>
+    <td>Ground Station</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>0x40 - 0x7F</td>
+    <td>TM</td>
+    <td>Flight Controller</td>
+    <td>Ground Station</td>
+    <td>64</td>
+  </tr>
+  <tr>
+    <td>0x80 - 0xBF</td>
+    <td>TM</td>
+    <td>Engine Computer</td>
+    <td>Ground Station</td>
+    <td>64</td>
+  </tr>
+  <tr>
+    <td>0xC0 - 0xFF</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>64</td>
+  </tr>
+</tbody>
+</table>
 
-The `ID` values `0xF0` - `0xFF` are left unused and will be used if new devices are added to the on-board CAN Bus
+The `ID` values `0xC0` - `0xFF` are left unused and will be used if new devices are added to the on-board CAN Bus.
 
 ## Telecommand
 
-The Telecommand link is a low data rate radio link over LoRa at 433 MHz.
+The Telecommand link is a low data rate radio link over LoRa at 433 MHz. The communication will work on a request-response basis where the Ground Station sends a command and the Flight Controller or Engine Computer replies back, but at the same time some data will be stremed from the FC at a low rate.
 
 ### Communication sequence
 
@@ -126,9 +183,11 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
 
 ### Commands description
 
+ALL DATA MUST BE LITTLE-ENDIAN
+
 #### Engine Controller
 
-Commands from the Ground Station to the Engine Computer
+Commands sent from the Ground Station to the Engine Computer
 
 <table>
 <thead>
@@ -138,43 +197,54 @@ Commands from the Ground Station to the Engine Computer
     <th>Data size</th>
     <th>Data</th>
     <th>Comment</th>
+    <th>Tx Rate</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>0x00</td>
-    <td>Time sync<br>Can be sent by FC</td>
-    <td>-</td>
-    <td>-</td>
+    <td>0x20</td>
+    <td>N/A</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x21</td>
+    <td>N/A</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x22</td>
+    <td>Set Power Mode</td>
+    <td>1</td>
+    <td>TBD</td>
     <td></td>
-  </tr>
-  <tr>
-    <td>0x01</td>
-    <td>Set power mode</td>
-    <td>1 Byte</td>
-    <td>TBD enum</td>
-    <td>Default state is TBD</td>
-  </tr>
-  <tr>
-    <td>0x02</td>
-    <td>Set engine state</td>
-    <td>1 Byte</td>
-    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en</td>
-    <td>Default state is 0<br>bit0 has absolute priority<br>Must set is_engine_armed to 1 <br>before engine can be enabled</td>
+    <td> </td>
   </tr>
   <tr>
     <td>0x03</td>
-    <td>Set liftoff status</td>
-    <td>1 Byte</td>
-    <td>bit0: is_liftoff_confirmed</td>
-    <td>Confirmed by FC sensors</td>
+    <td>Set Engine State</td>
+    <td>1</td>
+    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en </td>
+    <td>Default state is 0, bit 0 has<br>absolute priority. Must set<br>is_engine_armed to 1 before<br>engine can be enabled </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x2F</td>
+    <td>Fire Rocket</td>
+    <td>1</td>
+    <td>TBD</td>
+    <td>Will send the signal to launch<br>the rocket</td>
+    <td></td>
   </tr>
 </tbody>
 </table>
 
->**Note:** The LoRa link adds a sizeable delay in the transmission of the commands. This delay makes the "Time sync" frame (`0x00`) inaccurate if sent from the ground. This frame is intended to be sent from the Ground Station for testing purposes and in the absence of GNSS receiver connected to the Flight Controller. When a GNSS receiver is connected to the Flight Controller, the Flight Controller sends a "Time sync" frame based on GNSS time to the Engine Computer over the CAN Bus
-
-Returned data
+Replies sent from the Engine Computer to the Ground Station
 
 <table>
 <thead>
@@ -184,44 +254,56 @@ Returned data
     <th>Data size</th>
     <th>Data</th>
     <th>Comment</th>
+    <th>Tx Rate</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>0x07</td>
-    <td>Power mode<br>Returned after 0x01<br></td>
-    <td>1 Byte</td>
-    <td>TBD enum</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>0x08</td>
-    <td>Engine state<br>Returned after 0x02<br></td>
-    <td>1 Byte</td>
-    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>0x09</td>
+    <td>0x30</td>
     <td>Software state</td>
-    <td>-</td>
-    <td>-</td>
-    <td></td>
+    <td> </td>
+    <td>TBD</td>
+    <td> </td>
+    <td> </td>
   </tr>
   <tr>
-    <td>0x0A</td>
+    <td>0x31</td>
     <td>Hardware state</td>
-    <td>-</td>
-    <td>-</td>
+    <td> </td>
+    <td>TBD</td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x32</td>
+    <td>Return Power Mode</td>
+    <td>1</td>
+    <td>TBD</td>
     <td></td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x33</td>
+    <td>Return Engine State</td>
+    <td>1</td>
+    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en</td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x3F</td>
+    <td>Fire Rocket Confirmation</td>
+    <td>1</td>
+    <td>TBD</td>
+    <td> </td>
+    <td> </td>
   </tr>
 </tbody>
 </table>
 
 #### Flight Controller
 
-Commands from the Ground Station to the Flight Controller
-
+Commands sent from the Ground Station to the Flight Controller
 <table>
 <thead>
   <tr>
@@ -230,42 +312,46 @@ Commands from the Ground Station to the Flight Controller
     <th>Data size</th>
     <th>Data</th>
     <th>Comment</th>
+    <th>Rate</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>0x80</td>
-    <td>Time sync</td>
-    <td>-</td>
-    <td>-</td>
-    <td></td>
+    <td>0x00</td>
+    <td>Time Sync</td>
+    <td>4</td>
+    <td>system_time</td>
+    <td>uint32_t, hhmmss.sss</td>
+    <td> </td>
   </tr>
   <tr>
-    <td>0x81</td>
-    <td>Set power mode</td>
-    <td>1 Byte</td>
-    <td>TBD enum</td>
-    <td>Default state is 0</td>
+    <td>0x01</td>
+    <td>Set Power Mode</td>
+    <td>1</td>
+    <td>TBD</td>
+    <td> </td>
+    <td> </td>
   </tr>
   <tr>
-    <td>0x82</td>
-    <td>Set radios emitters</td>
-    <td>1 Byte</td>
+    <td>0x02</td>
+    <td>Set Radio Equipment</td>
+    <td>1</td>
     <td>bit0: is_fpv_en<br>bit1: is_tm_en</td>
     <td>Default state is 0</td>
+    <td> </td>
   </tr>
   <tr>
-    <td>0x83</td>
-    <td>Set parachute output<br>Used for testing only</td>
-    <td>1 Byte</td>
+    <td>0x03</td>
+    <td>Set Parachute Output</td>
+    <td>1</td>
     <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
     <td>Default state is 0 <br>Must set is_armed to 1 before<br>a parachute can be enabled</td>
+    <td> </td>
   </tr>
 </tbody>
 </table>
 
-Returned data
-
+Replies sent from the Flight Controller to the Ground Station and stremed data
 <table>
 <thead>
   <tr>
@@ -274,54 +360,89 @@ Returned data
     <th>Data size</th>
     <th>Data</th>
     <th>Comment</th>
+    <th>Rate</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>0x87</td>
-    <td>Power mode<br>Returned after 0x81</td>
-    <td>1 Byte</td>
-    <td>TBD enum</td>
-    <td></td>
+    <td>0x10</td>
+    <td>Return Time Sync</td>
+    <td>N/A</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
   </tr>
   <tr>
-    <td>0x88</td>
-    <td>Radio emitters state<br>Returned after 0x82</td>
-    <td>1 Byte</td>
+    <td>0x11</td>
+    <td>Return Power Mode</td>
+    <td>1</td>
+    <td>TBD</td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x12</td>
+    <td>Return Radio Equipment</td>
+    <td>1</td>
     <td>bit0: is_fpv_en<br>bit1: is_tm_en</td>
-    <td></td>
+    <td> </td>
+    <td> </td>
   </tr>
   <tr>
-    <td>0x89</td>
-    <td>Parachute outputs state<br>Returned after 0x83</td>
-    <td>1 Byte</td>
+    <td>0x13</td>
+    <td>Return Parachute Output</td>
+    <td>1</td>
     <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
-    <td></td>
+    <td> </td>
+    <td> </td>
   </tr>
   <tr>
-    <td rowspan="2">0x8A</td>
-    <td rowspan="2">On-board battery voltage<br>Sent every X seconds</td>
-    <td rowspan="2">4 Bytes</td>
-    <td>voltage_battery_1</td>
-    <td>uint16_t, little-endian, in 0.01V</td>
+    <td rowspan="2">0x14</td>
+    <td rowspan="2">Onboard Battery Voltage</td>
+    <td rowspan="2">4</td>
+    <td>battery_1</td>
+    <td>uint16_t, in 0.01V</td>
+    <td rowspan="2">0.2</td>
   </tr>
   <tr>
-    <td>voltage_battery_2</td>
-    <td>uint16_t, little-endian, in 0.01V</td>
+    <td>battery_2</td>
+    <td>uint16_t, in 0.01V</td>
   </tr>
   <tr>
-    <td>0x8B</td>
-    <td>GNSS data</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td rowspan="4">0x15</td>
+    <td rowspan="4">GNSS data</td>
+    <td rowspan="4">14</td>
+    <td>gnss_time</td>
+    <td>uint32_t, in hhmmss.sss</td>
+    <td rowspan="4">0.2</td>
   </tr>
   <tr>
-    <td>0x8C</td>
-    <td>Software state</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>latitude</td>
+    <td>int32_t, in ddmm.mmmm</td>
+  </tr>
+  <tr>
+    <td>longitude</td>
+    <td>int32_t, in dddmm.mmmm</td>
+  </tr>
+  <tr>
+    <td>h_dop</td>
+    <td>uint16_t, in 0.01</td>
+  </tr>
+  <tr>
+    <td rowspan="3">0x16</td>
+    <td rowspan="3">Flight Controller Status</td>
+    <td rowspan="3">3</td>
+    <td>HW_state</td>
+    <td>uint8_t</td>
+    <td rowspan="3">0.2</td>
+  </tr>
+  <tr>
+    <td>SW_state</td>
+    <td>uint8_t</td>
+  </tr>
+  <tr>
+    <td>mision_state</td>
+    <td>uint8_t, enum</td>
   </tr>
 </tbody>
 </table>
@@ -342,6 +463,8 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 
 ### Data description
 
+ALL DATA MUST BE LITTLE-ENDIAN
+
 #### Engine Controller
 
 <table>
@@ -352,25 +475,387 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <th>Data size</th>
     <th>Data</th>
     <th>Comment</th>
-    <th>Rate</th>
+    <th>Tx Rate</th>
+    <th>CAN Rate</th>
+    <th>Sampling Rate</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>0x10</td>
-    <td>Time since boot - millis</td>
-    <td>4 Bytes</td>
+    <td rowspan="2">0x80</td>
+    <td rowspan="2">Time since boot - millis</td>
+    <td rowspan="2">8</td>
     <td>ms_since_boot</td>
-    <td>uint32_t, little-endian, in ms</td>
+    <td>uint32_t</td>
+    <td rowspan="2"> </td>
+    <td rowspan="2"></td>
+    <td rowspan="2"></td>
+  </tr>
+  <tr>
+    <td>[empty]</td>
+    <td>32 bits</td>
+  </tr>
+  <tr>
+    <td>0x81</td>
+    <td>Time since boot - micros</td>
+    <td>8</td>
+    <td>us_since_boot</td>
+    <td>uint64_t</td>
+    <td> </td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>0x11</td>
-    <td>Time since boot - micros</td>
-    <td>8 Bytes</td>
-    <td>us_since_boot</td>
-    <td>uint64_t, little-endian, in us</td>
-    <td></td>
+    <td rowspan="4">0x82</td>
+    <td rowspan="4">TC Temperatures 1</td>
+    <td rowspan="4">8</td>
+    <td>sensor_1 (tank top)</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>sensor_2 (tank 1)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_3 (tank 2)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_4 (tank 3)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x83</td>
+    <td rowspan="4">TC Temperatures 2</td>
+    <td rowspan="4">8</td>
+    <td>sensor_5 (tank 4)</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>sensor_6 (tank 5)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_7 (tank bottom)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_8 (pipework 1)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x84</td>
+    <td rowspan="4">TC Temperatures 3</td>
+    <td rowspan="4">8</td>
+    <td>sensor_9 (pipework 2)</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>sensor_10 (injector cavity)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_11 (pipework plate)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_12</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x85</td>
+    <td rowspan="4">TC Temperatures 4</td>
+    <td rowspan="4">8</td>
+    <td>sensor_13 (comb. Chamber 1)</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>sensor_14 (comb. Chamber 2)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_15 (comb. Chamber 3)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>sensor_16 (nozzle)</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="2">0x86</td>
+    <td rowspan="2">PT Pressures 1</td>
+    <td rowspan="2">8</td>
+    <td>sensor_1 (tank top)</td>
+    <td>uint32_t</td>
+    <td rowspan="2">20</td>
+    <td rowspan="2">TBD</td>
+    <td rowspan="2">1000</td>
+  </tr>
+  <tr>
+    <td>sensor-2</td>
+    <td>uint32_t</td>
+  </tr>
+  <tr>
+    <td rowspan="2">0x87</td>
+    <td rowspan="2">PT Pressures 2</td>
+    <td rowspan="2">8</td>
+    <td>sensor_3</td>
+    <td>uint32_t</td>
+    <td rowspan="2">20</td>
+    <td rowspan="2">TBD</td>
+    <td rowspan="2">1000</td>
+  </tr>
+  <tr>
+    <td>sensor_4</td>
+    <td>uint32_t</td>
+  </tr>
+  <tr>
+    <td rowspan="2">0x88</td>
+    <td rowspan="2">PT Pressures 3</td>
+    <td rowspan="2">8</td>
+    <td>sensor_5 (tank bottom)</td>
+    <td>uint32_t</td>
+    <td rowspan="2">20</td>
+    <td rowspan="2">TBD</td>
+    <td rowspan="2">1000</td>
+  </tr>
+  <tr>
+    <td>sensor_6</td>
+    <td>uint32_t</td>
+  </tr>
+  <tr>
+    <td rowspan="2">0x89</td>
+    <td rowspan="2">PT Pressures 4</td>
+    <td rowspan="2">8</td>
+    <td>sensor_7 (injector cavity)</td>
+    <td>uint32_t</td>
+    <td rowspan="2">20</td>
+    <td rowspan="2">TBD</td>
+    <td rowspan="2">1000</td>
+  </tr>
+  <tr>
+    <td>sensor_8 (comb. chamber)</td>
+    <td>uint32_t</td>
+  </tr>
+  <tr>
+    <td rowspan="3">0x8A</td>
+    <td rowspan="3">Ambient Pres Temp 1</td>
+    <td rowspan="3">8</td>
+    <td>pres_1</td>
+    <td>uint32_t</td>
+    <td rowspan="3">20</td>
+    <td rowspan="3">TBD</td>
+    <td rowspan="3">100</td>
+  </tr>
+  <tr>
+    <td>temp 1</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>[empty]</td>
+    <td>16 bits</td>
+  </tr>
+  <tr>
+    <td rowspan="3">0x8B</td>
+    <td rowspan="3">Ambient Pres Temp 2</td>
+    <td rowspan="3">8</td>
+    <td>pres_2</td>
+    <td>uint32_t</td>
+    <td rowspan="3">20</td>
+    <td rowspan="3">TBD</td>
+    <td rowspan="3">100</td>
+  </tr>
+  <tr>
+    <td>temp 2</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>[empty]</td>
+    <td>16 bits</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x8C</td>
+    <td rowspan="4">High Power Stats 1</td>
+    <td rowspan="4">8</td>
+    <td>volts_1</td>
+    <td>uint16_t</td>
+    <td rowspan="4">20</td>
+    <td rowspan="4">TBD</td>
+    <td rowspan="4">100</td>
+  </tr>
+  <tr>
+    <td>amps_1</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>ohms_1</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>[empty]</td>
+    <td>16 bits</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x8D</td>
+    <td rowspan="4">High Power Stats 2</td>
+    <td rowspan="4">8</td>
+    <td>volts_2</td>
+    <td>uint16_t</td>
+    <td rowspan="4">20</td>
+    <td rowspan="4">TBD</td>
+    <td rowspan="4">100</td>
+  </tr>
+  <tr>
+    <td>amps_2</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>ohms_2</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>[empty]</td>
+    <td>16 bits</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x8E</td>
+    <td rowspan="4">High Power Stats 3</td>
+    <td rowspan="4">8</td>
+    <td>volts_3</td>
+    <td>uint16_t</td>
+    <td rowspan="4">20</td>
+    <td rowspan="4">TBD</td>
+    <td rowspan="4">100</td>
+  </tr>
+  <tr>
+    <td>amps_3</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>ohms_3</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>[empty]</td>
+    <td>16 bits</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x8F</td>
+    <td rowspan="4">Board Diagnosis 1</td>
+    <td rowspan="4">8</td>
+    <td>in_volt_1</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>uc_temp_1</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>n_errors_1</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>loop_time_1</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x90</td>
+    <td rowspan="4">Board Diagnosis 2</td>
+    <td rowspan="4">8</td>
+    <td>in_volt_2</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>uc_temp_2</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>n_errors_2</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>loop_time_2</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x91</td>
+    <td rowspan="4">Board Diagnosis 3</td>
+    <td rowspan="4">8</td>
+    <td>in_volt_3</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>uc_temp_3</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>n_errors_3</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>loop_time_3</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="4">0x92</td>
+    <td rowspan="4">Board Diagnosis 4</td>
+    <td rowspan="4">8</td>
+    <td>in_volt_4</td>
+    <td>uint16_t</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+    <td rowspan="4">10</td>
+  </tr>
+  <tr>
+    <td>uc_temp_4</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>n_errors_4</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td>loop_time_4</td>
+    <td>uint16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="3">0x93</td>
+    <td rowspan="3">Status signals</td>
+    <td rowspan="3">8</td>
+    <td>valve_triggers</td>
+    <td>uint8_t</td>
+    <td rowspan="3">10</td>
+    <td rowspan="3">10</td>
+    <td rowspan="3">10</td>
+  </tr>
+  <tr>
+    <td>main_valve_actuation</td>
+    <td>uint8_t</td>
+  </tr>
+  <tr>
+    <td>[empty]</td>
+    <td>24 bits</td>
   </tr>
 </tbody>
 </table>
@@ -385,133 +870,247 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
     <th>Data size</th>
     <th>Data</th>
     <th>Comment</th>
-    <th>Rate</th>
+    <th>Tx Rate</th>
+    <th>Sampling Rate</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>0x90</td>
+    <td>0x40</td>
     <td>Time since boot - millis</td>
-    <td>4 Bytes</td>
+    <td>4</td>
     <td>ms_since_boot</td>
-    <td>uint32_t, little-endian, in ms</td>
+    <td>uint32_t</td>
+    <td> </td>
     <td></td>
   </tr>
   <tr>
-    <td>0x91</td>
+    <td>0x41</td>
     <td>Time since boot - micros</td>
-    <td>8 Bytes</td>
+    <td>8</td>
     <td>us_since_boot</td>
-    <td>uint64_t, little-endian, in us</td>
+    <td>uint64_t</td>
+    <td> </td>
     <td></td>
   </tr>
   <tr>
-    <td>0x92</td>
-    <td>GNSS time</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>0x42</td>
+    <td>N/A</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td></td>
   </tr>
   <tr>
-    <td></td>
-    <td>Software state</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td rowspan="3">0x43</td>
+    <td rowspan="3">GNSS Data 1</td>
+    <td rowspan="3">12</td>
+    <td>gnss_time</td>
+    <td>uint32_t, in hhmmss.sss</td>
+    <td rowspan="3">2</td>
+    <td rowspan="3">2</td>
   </tr>
   <tr>
-    <td></td>
-    <td>Hardware state</td>
-    <td>1 Byte<br></td>
-    <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en<br>bit3: is_fpv_en<br>bit4: is_telemetry_en</td>
+    <td>latitude</td>
+    <td>int32_t, in ddmm.mmmm</td>
+  </tr>
+  <tr>
+    <td>longitude</td>
+    <td>int32_t, in dddmm.mmmm</td>
+  </tr>
+  <tr>
+    <td rowspan="6">0x44</td>
+    <td rowspan="6">GNSS Data 2</td>
+    <td rowspan="6">12</td>
+    <td>altitude</td>
+    <td>int32_t, in 0.1 meters</td>
+    <td rowspan="6">2</td>
+    <td rowspan="6">2</td>
+  </tr>
+  <tr>
+    <td>heading</td>
+    <td>int16_t, in degrees</td>
+  </tr>
+  <tr>
+    <td>horiz_speed</td>
+    <td>int16_t, in 0.1 km/h</td>
+  </tr>
+  <tr>
+    <td>fix_status</td>
+    <td>uint8_t, {0 = No Fix, 1 = 2D, 2 = 3D}</td>
+  </tr>
+  <tr>
+    <td>n_satellites</td>
     <td>uint8_t</td>
-    <td>1 Hz</td>
   </tr>
   <tr>
-    <td rowspan="4"></td>
-    <td rowspan="4">Static pressure</td>
-    <td rowspan="4">16 Bytes</td>
-    <td>pressure_1</td>
-    <td>int32_t, little-endian, in 0.01 mbar</td>
-    <td rowspan="4">1 Hz</td>
+    <td>h_dop</td>
+    <td>uint16_t, in 0.1</td>
   </tr>
   <tr>
+    <td rowspan="2">0x45</td>
+    <td rowspan="2">Inside Static Temperature</td>
+    <td rowspan="2">8</td>
     <td>temperature_1</td>
-    <td>int32_t, little-endian, in 0.01°C</td>
-  </tr>
-  <tr>
-    <td>pressure_2</td>
-    <td>int32_t, little-endian, in 0.01 mbar</td>
+    <td>int32_t, in 0.01 ºC</td>
+    <td rowspan="2">2</td>
+    <td rowspan="2">TBD</td>
   </tr>
   <tr>
     <td>temperature_2</td>
-    <td>int32_t, little-endian, in 0.01°C</td>
+    <td>int32_t, in 0.01 ºC</td>
   </tr>
   <tr>
-    <td rowspan="2"></td>
-    <td rowspan="2">Static pressure - no temp</td>
-    <td rowspan="2">8 bytes</td>
+    <td rowspan="2">0x46</td>
+    <td rowspan="2">Inside Static Pressure</td>
+    <td rowspan="2">8</td>
     <td>pressure_1</td>
-    <td>int32_t, little-endian, in 0.01 mbar</td>
-    <td rowspan="2">10 Hz</td>
+    <td>int32_t, in 0.01 mbar</td>
+    <td rowspan="2">20</td>
+    <td rowspan="2">TBD</td>
   </tr>
   <tr>
     <td>pressure_2</td>
-    <td>int32_t, little-endian, in 0.01 mbar</td>
+    <td>int32_t, in 0.01 mbar</td>
   </tr>
   <tr>
-    <td></td>
-    <td>IMU</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>50 Hz</td>
+    <td rowspan="9">0x47</td>
+    <td rowspan="9">IMU 1</td>
+    <td rowspan="9">18</td>
+    <td>accel_x</td>
+    <td>int16_t</td>
+    <td rowspan="9">20</td>
+    <td rowspan="9">TBD</td>
   </tr>
   <tr>
-    <td></td>
-    <td>Magnetometer</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>accel_y</td>
+    <td>int16_t</td>
   </tr>
   <tr>
-    <td rowspan="2"></td>
-    <td rowspan="2">On-board battery voltage</td>
-    <td rowspan="2">4 Bytes</td>
-    <td>voltage_battery_1</td>
-    <td>uint16_t, little-endian, in 0.01V</td>
-    <td rowspan="2">1 Hz</td>
+    <td>accel_z</td>
+    <td>int16_t</td>
   </tr>
   <tr>
-    <td>voltage_battery_2</td>
-    <td>uint16_t, little-endian, in 0.01V</td>
+    <td>gyro_x</td>
+    <td>int16_t</td>
   </tr>
   <tr>
-    <td></td>
-    <td>GNSS data</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>gyro_y</td>
+    <td>int16_t</td>
   </tr>
   <tr>
-    <td></td>
-    <td>Air speed</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>gyro_z</td>
+    <td>int16_t</td>
   </tr>
   <tr>
-    <td></td>
-    <td>Air temperature</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
+    <td>magnet_x</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>magnet_y</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>magnet_z</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="9">0x48</td>
+    <td rowspan="9">IMU 2</td>
+    <td rowspan="9">18</td>
+    <td>accel_x</td>
+    <td>int16_t</td>
+    <td rowspan="9">20</td>
+    <td rowspan="9">TBD</td>
+  </tr>
+  <tr>
+    <td>accel_y</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>accel_z</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>gyro_x</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>gyro_y</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>gyro_z</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>magnet_x</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>magnet_y</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td>magnet_z</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="2">0x49</td>
+    <td rowspan="2">External Temperature</td>
+    <td rowspan="2">4</td>
+    <td>temp_1</td>
+    <td>int16_t</td>
+    <td rowspan="2">10</td>
+    <td rowspan="2">TBD</td>
+  </tr>
+  <tr>
+    <td>temp_2</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="2">0x4A</td>
+    <td rowspan="2">Air Speed</td>
+    <td rowspan="2">4</td>
+    <td>pitot</td>
+    <td>int16_t</td>
+    <td rowspan="2">20</td>
+    <td rowspan="2">TBD</td>
+  </tr>
+  <tr>
+    <td>calculated</td>
+    <td>int16_t</td>
+  </tr>
+  <tr>
+    <td rowspan="2">0x4B</td>
+    <td rowspan="2">Onboard Battery Voltage</td>
+    <td rowspan="2">4</td>
+    <td>battery_1</td>
+    <td>uint16_t, in 0.01V</td>
+    <td rowspan="2">2</td>
+    <td rowspan="2">10</td>
+  </tr>
+  <tr>
+    <td>battery_2</td>
+    <td>uint16_t, in 0.01V</td>
+  </tr>
+  <tr>
+    <td rowspan="3">0x4C</td>
+    <td rowspan="3">Flight Controller Status</td>
+    <td rowspan="3">3</td>
+    <td>HW_state</td>
+    <td>uint8_t<br>bit0: is_parachute_armed<br>bit1: is_parachute_1_en<br>bit2: is_parachute_2_en<br>bit3: is_fpv_en<br>bit4: is_telemetry_en</td>
+    <td rowspan="3">10</td>
+    <td rowspan="3">10</td>
+  </tr>
+  <tr>
+    <td>SW_state</td>
+    <td>uint8_t</td>
+  </tr>
+  <tr>
+    <td>mision_state</td>
+    <td>uint8_t, enum</td>
   </tr>
 </tbody>
 </table>
@@ -521,25 +1120,25 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 The data acquisition process is the following:
 
 1. Record the current time (e.g. time since boot)
-1. Take a sample from each sensor
+1. Take a sample from each sensor (depending on their sampling rate)
 1. Send the recorded time
-1. Send all the samples in their corresponding frame
+1. Send all the data that has been sampled in their corresponding frame
 1. The time of acquisition for each frame is reconstructed on the Ground Station from the recorded time
 
 This allows to reduce the overhead on the Telemetry link by only sending one time stamp for all the data acquired in one loop.
 The error in acquisition time is acceptable as the sampling loop is assumed to be short with respect to the measured phenomena.
 All the sensors may not be sampled in every loop or may be sampled without sending the samples to the ground. The sensors that require low sampling rates can simply be sampled and sent every **X** loop
 
->**Note:** the exact time of acquisition for each sample can still be recorded and stored on the on-board memory
+>**Note:** the exact time of acquisition for each sample could still be recorded and stored on the on-board memory
 
 #### About lost frames
 
 Some cases might exist where the time frame is not received on the Ground Station.
 
-On Sigmundr launch (2019), the telemetry frames were ~100 bytes long. It was noticed that when a failure occured, the whole frame was lost instead of just small bits at the beginning or so. This has to do with how the RFD900+ modems handle the data transmission and should be further investigated.
+On Sigmundr launch (2019), the telemetry frames were ~100 bytes long. It was noticed that when a failure occured, the whole frame was lost instead of just small bits at the beginning or so. **This has to do with how the RFD900+ modems handle the data transmission and should be further investigated.**
 
 Possible mitigations for early uses of this protocol can be:
 
-- Time stamp all packets at reception time and compare this time with the time frame
-- Assume no packet loss (realistic at close range, < 1km with line of sight)
-- Group the frames in a big packet (wait and send all at once) like was done on Sigmundr and hope for a pass / fail for one hole sampling loop
+- Time stamp all packets at reception time and compare this time with the time frame.
+- Assume no packet loss. (realistic at close range, < 1km with line of sight)
+- Group the frames in a big packet (wait and send all at once) like was done on Sigmundr and hope for a pass / fail for one hole sampling loop.
