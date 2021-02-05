@@ -4,6 +4,9 @@
 
 #include "Gps.hpp"
 
+
+// parses a field to an unsigned integer
+// the index will be pointing on the character after ','
 template <class T>
 bool GPS::parse_field_to_uint(T* result, char message[], uint8_t* msg_index) {
   char buf[FIELD_BUF_LEN];
@@ -26,6 +29,8 @@ bool GPS::parse_field_to_uint(T* result, char message[], uint8_t* msg_index) {
   return true;
 }
 
+// parses X amount of bytes to an unsigned integer
+// the index will be pointing after the last parsed byte
 template <class T>
 bool GPS::parse_len_to_uint(T* result, char message[], uint8_t* index, uint8_t len) {
   *result = 0;
@@ -37,6 +42,8 @@ bool GPS::parse_len_to_uint(T* result, char message[], uint8_t* index, uint8_t l
   return true;
 }
 
+// parses a field to a double
+// the index will be pointing on the character after ','
 bool GPS::parse_field_to_double(double* result, char message[], uint8_t* msg_index) {
   char buf[FIELD_BUF_LEN];
   uint8_t buf_index = 0;
@@ -59,7 +66,7 @@ bool GPS::parse_field_to_double(double* result, char message[], uint8_t* msg_ind
   return true; 
 }
 
-
+//generates a checksum for a message to a 2 long buffer
 void GPS::generate_checksum(char message[], char buf[]) {
   uint8_t index = 1; //1 to skip $
   uint8_t checksum = 0;
@@ -74,6 +81,7 @@ void GPS::generate_checksum(char message[], char buf[]) {
 }
 
 
+// verify if a gps message is valid,
 bool GPS::verify_message(char message[], uint8_t msg_len) {
   char checksum[2];
   uint8_t index = 0;
@@ -94,7 +102,7 @@ bool GPS::verify_message(char message[], uint8_t msg_len) {
   return memcmp(checksum, &message[++index], 2) == 0;
 }
 
-
+// generate the hex value of a num in ascii
 void GPS::to_hex(uint8_t num, char buf[]) {
   const char* chars = "0123456789ABCDEF";
   buf[1] = chars[num & 0x0F];
@@ -102,6 +110,7 @@ void GPS::to_hex(uint8_t num, char buf[]) {
 }
 
 
+// parse generic message
 bool GPS::parse_message(char message[], uint8_t buf_len) {
   if (!verify_message(message, buf_len)) {
     SET(flags, FLAG_ERROR_MESSAGE);
@@ -132,6 +141,7 @@ bool GPS::parse_message(char message[], uint8_t buf_len) {
   return true;
 }
 
+// parse the GNS message
 void GPS::parse_gns(char message[]) {
   uint32_t whole;
   double number;
@@ -221,6 +231,7 @@ void GPS::parse_gns(char message[]) {
   }
 }
 
+// parse the RMC message
 void GPS::parse_rmc(char* message) {
   uint32_t whole;
   double number;
@@ -320,7 +331,7 @@ void GPS::parse_rmc(char* message) {
   }
 }
 
-//This is a todo, i don't know if we will need all that satellite info.
+//Parses relevant parts of the GSA message
 void GPS::parse_gsa(char* message) {
   uint8_t index = 0;
   double waste;
