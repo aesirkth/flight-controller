@@ -42,6 +42,9 @@ License:
 #include "test_companion_teensy.h"
 
 #define RFM_SPI hardware_spi1
+#define RFM_FREQ 433.0f
+#define RFM_TX_POWER 5
+#define STARTUP_COLOR 0xFFFFFFFF
 
 static CAN_message_t msg;
 
@@ -54,11 +57,18 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB 
 // For LoRa Communication
 RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), RFM_SPI);
 
+#define SPI_FREQ 1000000  // 1MHz
+
+SPISettings spi_settings(SPI_FREQ, MSBFIRST, SPI_MODE0);
+
 char data[CMD_DATA_LEN];
-uint8_t rfm_init_success = 0;
+bool rfm_init_success = 0;
 
 void setup() {
   CANbus.begin();
+
+  pinMode(PIN_CS_FLASH, OUTPUT); // 
+  digitalWrite(PIN_CS_FLASH, HIGH);
 
   initRGB();
   initCommunications();
@@ -114,6 +124,7 @@ void initCommunications() {
   initSerial();
   
   resetRFM();
+
   initRFM();
   Serial.println("Success?");
   Serial.println(rfm_init_success);
@@ -134,10 +145,15 @@ void resetRFM() {
 void initRFM() {
   /* Calls init method from RadioHead library and sets frequency and power to values defined in platformio.ini */
   Serial.println("initRFM:Success!");
+  SPI1.setMOSI(PIN_MOSI1);
+  SPI1.setMISO(PIN_MISO1);
+  SPI1.setSCK(PIN_SCK1);
+
   rfm_init_success = rfm.init();
+  Serial.println(rfm_init_success);
   if (rfm_init_success) {
     rfm.setFrequency(RFM_FREQ);
-    rfm.setTxPower(RFM_TX_POWER, false);
+    rfm.setTxPower(RFM_TX_POWER);
   }
   showStatus();
 }
@@ -183,6 +199,8 @@ void initRGB() {
 }
 
 uint8_t getCommand(char* DATA) {
+  uint8_t return_val = 0; 
+
   if (rfm_init_success) {
     if (rfm.waitAvailableTimeout(100)) { 
       uint8_t data_buffer[RH_RF95_MAX_MESSAGE_LEN];
@@ -196,12 +214,13 @@ uint8_t getCommand(char* DATA) {
           delay(30);
           showStatus();
         }
-      return 1; 
+      return_val = 1; 
       }
     }
   } else {
-    return 0; 
+    return_val = 0; 
   }
+  return return_val; 
 }
 
 void sendMessage() {
