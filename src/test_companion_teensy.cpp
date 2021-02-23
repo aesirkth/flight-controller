@@ -76,9 +76,8 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
-void loop() {
-  
-  if (millis() % 5000 == 0) {
+void loop() { 
+  if ((millis() % 5000 > 0) && (millis() % 5000 < 100)) {
     sendMessage();
     strip.setPixelColor(1, 0x0000ff);
     strip.show();
@@ -86,12 +85,12 @@ void loop() {
     strip.setPixelColor(1, 0x000000);
     strip.show();
     Serial.println("msg was sent...");
-    Serial.println(digitalPinToInterrupt(PIN_RFM_INT));
   }
-
+  
   if (getCommand(data)) {
     Serial.println("msg was received...");
-    Serial.println(data);
+    Serial.println(data[0]);
+    Serial.println(data[1]);
   } 
 
   if (CANbus.available()) {
@@ -122,17 +121,12 @@ void loop() {
 void initCommunications() {
   /*  */
   initSerial();
-  
   resetRFM();
-
   initRFM();
-  Serial.println("Success?");
-  Serial.println(rfm_init_success);
 }
 
 void resetRFM() {
   /*  */
-  Serial.println("rstRFM:Success!");
   pinMode(PIN_RFM_RST, OUTPUT);
   digitalWrite(PIN_RFM_RST, HIGH);
   delay(100);
@@ -144,7 +138,6 @@ void resetRFM() {
 
 void initRFM() {
   /* Calls init method from RadioHead library and sets frequency and power to values defined in platformio.ini */
-  Serial.println("initRFM:Success!");
   SPI1.setMOSI(PIN_MOSI1);
   SPI1.setMISO(PIN_MISO1);
   SPI1.setSCK(PIN_SCK1);
@@ -162,6 +155,7 @@ void showStatus() {
   if (not rfm_init_success) {
     strip.setPixelColor(0, 0xff0000);
   } else {
+    
     strip.setPixelColor(0, 0x00ff00);
   }
   strip.show();
@@ -238,12 +232,14 @@ void sendMessage() {
     rfm.waitPacketSent();
     showStatus();
   }
-  
-  Serial.write(message, m_size);
-  Serial.write(0x00);
+  // Serial.println(message[0]);
+  // Serial.println(message[1]);
+  // Serial.println(m_size);
+  // Serial.write(message, m_size);
+  // Serial.write(0x00);
   // Include a carriage return and a line feed so the receiver can split out frames
-  Serial.write(0x0D);
-  Serial.write(0x0A);
+  // Serial.write(0x0D);
+  // Serial.write(0x0A);
   
 }
 
