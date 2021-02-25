@@ -149,18 +149,12 @@ Each message on the Telecommand TC link and the Telemetry TM link has a unique I
     <td>64</td>
   </tr>
   <tr>
-    <td>0x80 - 0xBF</td>
+    <td>0x80 - 0xFF</td>
     <td>TM</td>
     <td>Engine Computer</td>
     <td>Ground Station</td>
-    <td>64</td>
+    <td>128</td>
   </tr>
-  <tr>
-    <td>0xC0 - 0xFF</td>
-    <td>N/A</td>
-    <td>N/A</td>
-    <td>N/A</td>
-    <td>64</td>
   </tr>
 </tbody>
 </table>
@@ -184,122 +178,6 @@ The source file can be found in [doc/diagrams/command-sequence.xml](diagrams/com
 ### Commands description
 
 ALL DATA MUST BE LITTLE-ENDIAN
-
-#### Engine Controller
-
-Commands sent from the Ground Station to the Engine Computer
-
-<table>
-<thead>
-  <tr>
-    <th>ID</th>
-    <th>Description</th>
-    <th>Data size</th>
-    <th>Data</th>
-    <th>Comment</th>
-    <th>Tx Rate</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>0x20</td>
-    <td>N/A</td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x21</td>
-    <td>N/A</td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x22</td>
-    <td>Set Power Mode</td>
-    <td>1</td>
-    <td>TBD</td>
-    <td></td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x03</td>
-    <td>Set Engine State</td>
-    <td>1</td>
-    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en </td>
-    <td>Default state is 0, bit 0 has<br>absolute priority. Must set<br>is_engine_armed to 1 before<br>engine can be enabled </td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x2F</td>
-    <td>Fire Rocket</td>
-    <td>1</td>
-    <td>TBD</td>
-    <td>Will send the signal to launch<br>the rocket</td>
-    <td></td>
-  </tr>
-</tbody>
-</table>
-
-Replies sent from the Engine Computer to the Ground Station
-
-<table>
-<thead>
-  <tr>
-    <th>ID</th>
-    <th>Description</th>
-    <th>Data size</th>
-    <th>Data</th>
-    <th>Comment</th>
-    <th>Tx Rate</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>0x30</td>
-    <td>Software state</td>
-    <td> </td>
-    <td>TBD</td>
-    <td> </td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x31</td>
-    <td>Hardware state</td>
-    <td> </td>
-    <td>TBD</td>
-    <td> </td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x32</td>
-    <td>Return Power Mode</td>
-    <td>1</td>
-    <td>TBD</td>
-    <td></td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x33</td>
-    <td>Return Engine State</td>
-    <td>1</td>
-    <td>bit0: is_launch_aborted<br>bit1: is_engine_armed<br>bit2: is_engine_en</td>
-    <td> </td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>0x3F</td>
-    <td>Fire Rocket Confirmation</td>
-    <td>1</td>
-    <td>TBD</td>
-    <td> </td>
-    <td> </td>
-  </tr>
-</tbody>
-</table>
 
 #### Flight Controller
 
@@ -346,6 +224,22 @@ Commands sent from the Ground Station to the Flight Controller
     <td>1</td>
     <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
     <td>Default state is 0 <br>Must set is_armed to 1 before<br>a parachute can be enabled</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x04</td>
+    <td>Set Data Logging</td>
+    <td>1</td>
+    <td>bit0: is_logging_en</td>
+    <td>enables data logging to SD-card and/or flash-chip</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x05</td>
+    <td>Dump flash chip</td>
+    <td>1</td>
+    <td>bit0: dump_sd <br>bit1: dump_usb</td>
+    <td></td>
     <td> </td>
   </tr>
 </tbody>
@@ -444,12 +338,36 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td>mision_state</td>
     <td>uint8_t, enum</td>
   </tr>
+  <tr>
+    <td>0x17</td>
+    <td>Return Data Logging</td>
+    <td>1</td>
+    <td>bit0: is_logging_en</td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x18</td>
+    <td>Return dump flash</td>
+    <td>1</td>
+    <td>bit0: dump_sd <br>bit1: dump_usb</td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <td>0x19</td>
+    <td>Return Handshake</td>
+    <td>0</td>
+    <td></td>
+    <td> </td>
+    <td> </td>
+  </tr>
 </tbody>
 </table>
 
 ## Telemetry
 
-The Telemetry link is a high data rate radio link over FHSS at 868 MHz. It is technicaly bi-directional but only the downlink capability is used.
+The Telemetry link is a high data rate radio link over FHSS at 868 MHz. It is technically bi-directional but only the downlink capability is used.
 
 ### Communication sequence
 
@@ -464,401 +382,6 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 ### Data description
 
 ALL DATA MUST BE LITTLE-ENDIAN
-
-#### Engine Controller
-
-<table>
-<thead>
-  <tr>
-    <th>ID</th>
-    <th>Description</th>
-    <th>Data size</th>
-    <th>Data</th>
-    <th>Comment</th>
-    <th>Tx Rate</th>
-    <th>CAN Rate</th>
-    <th>Sampling Rate</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td rowspan="2">0x80</td>
-    <td rowspan="2">Time since boot - millis</td>
-    <td rowspan="2">8</td>
-    <td>ms_since_boot</td>
-    <td>uint32_t</td>
-    <td rowspan="2"> </td>
-    <td rowspan="2"></td>
-    <td rowspan="2"></td>
-  </tr>
-  <tr>
-    <td>[empty]</td>
-    <td>32 bits</td>
-  </tr>
-  <tr>
-    <td>0x81</td>
-    <td>Time since boot - micros</td>
-    <td>8</td>
-    <td>us_since_boot</td>
-    <td>uint64_t</td>
-    <td> </td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x82</td>
-    <td rowspan="4">TC Temperatures 1</td>
-    <td rowspan="4">8</td>
-    <td>sensor_1 (tank top)</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>sensor_2 (tank 1)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_3 (tank 2)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_4 (tank 3)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x83</td>
-    <td rowspan="4">TC Temperatures 2</td>
-    <td rowspan="4">8</td>
-    <td>sensor_5 (tank 4)</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>sensor_6 (tank 5)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_7 (tank bottom)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_8 (pipework 1)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x84</td>
-    <td rowspan="4">TC Temperatures 3</td>
-    <td rowspan="4">8</td>
-    <td>sensor_9 (pipework 2)</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>sensor_10 (injector cavity)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_11 (pipework plate)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_12</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x85</td>
-    <td rowspan="4">TC Temperatures 4</td>
-    <td rowspan="4">8</td>
-    <td>sensor_13 (comb. Chamber 1)</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>sensor_14 (comb. Chamber 2)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_15 (comb. Chamber 3)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>sensor_16 (nozzle)</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="2">0x86</td>
-    <td rowspan="2">PT Pressures 1</td>
-    <td rowspan="2">8</td>
-    <td>sensor_1 (tank top)</td>
-    <td>uint32_t</td>
-    <td rowspan="2">20</td>
-    <td rowspan="2">TBD</td>
-    <td rowspan="2">1000</td>
-  </tr>
-  <tr>
-    <td>sensor-2</td>
-    <td>uint32_t</td>
-  </tr>
-  <tr>
-    <td rowspan="2">0x87</td>
-    <td rowspan="2">PT Pressures 2</td>
-    <td rowspan="2">8</td>
-    <td>sensor_3</td>
-    <td>uint32_t</td>
-    <td rowspan="2">20</td>
-    <td rowspan="2">TBD</td>
-    <td rowspan="2">1000</td>
-  </tr>
-  <tr>
-    <td>sensor_4</td>
-    <td>uint32_t</td>
-  </tr>
-  <tr>
-    <td rowspan="2">0x88</td>
-    <td rowspan="2">PT Pressures 3</td>
-    <td rowspan="2">8</td>
-    <td>sensor_5 (tank bottom)</td>
-    <td>uint32_t</td>
-    <td rowspan="2">20</td>
-    <td rowspan="2">TBD</td>
-    <td rowspan="2">1000</td>
-  </tr>
-  <tr>
-    <td>sensor_6</td>
-    <td>uint32_t</td>
-  </tr>
-  <tr>
-    <td rowspan="2">0x89</td>
-    <td rowspan="2">PT Pressures 4</td>
-    <td rowspan="2">8</td>
-    <td>sensor_7 (injector cavity)</td>
-    <td>uint32_t</td>
-    <td rowspan="2">20</td>
-    <td rowspan="2">TBD</td>
-    <td rowspan="2">1000</td>
-  </tr>
-  <tr>
-    <td>sensor_8 (comb. chamber)</td>
-    <td>uint32_t</td>
-  </tr>
-  <tr>
-    <td rowspan="3">0x8A</td>
-    <td rowspan="3">Ambient Pres Temp 1</td>
-    <td rowspan="3">8</td>
-    <td>pres_1</td>
-    <td>uint32_t</td>
-    <td rowspan="3">20</td>
-    <td rowspan="3">TBD</td>
-    <td rowspan="3">100</td>
-  </tr>
-  <tr>
-    <td>temp 1</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>[empty]</td>
-    <td>16 bits</td>
-  </tr>
-  <tr>
-    <td rowspan="3">0x8B</td>
-    <td rowspan="3">Ambient Pres Temp 2</td>
-    <td rowspan="3">8</td>
-    <td>pres_2</td>
-    <td>uint32_t</td>
-    <td rowspan="3">20</td>
-    <td rowspan="3">TBD</td>
-    <td rowspan="3">100</td>
-  </tr>
-  <tr>
-    <td>temp 2</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>[empty]</td>
-    <td>16 bits</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x8C</td>
-    <td rowspan="4">High Power Stats 1</td>
-    <td rowspan="4">8</td>
-    <td>volts_1</td>
-    <td>uint16_t</td>
-    <td rowspan="4">20</td>
-    <td rowspan="4">TBD</td>
-    <td rowspan="4">100</td>
-  </tr>
-  <tr>
-    <td>amps_1</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>ohms_1</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>[empty]</td>
-    <td>16 bits</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x8D</td>
-    <td rowspan="4">High Power Stats 2</td>
-    <td rowspan="4">8</td>
-    <td>volts_2</td>
-    <td>uint16_t</td>
-    <td rowspan="4">20</td>
-    <td rowspan="4">TBD</td>
-    <td rowspan="4">100</td>
-  </tr>
-  <tr>
-    <td>amps_2</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>ohms_2</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>[empty]</td>
-    <td>16 bits</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x8E</td>
-    <td rowspan="4">High Power Stats 3</td>
-    <td rowspan="4">8</td>
-    <td>volts_3</td>
-    <td>uint16_t</td>
-    <td rowspan="4">20</td>
-    <td rowspan="4">TBD</td>
-    <td rowspan="4">100</td>
-  </tr>
-  <tr>
-    <td>amps_3</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>ohms_3</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>[empty]</td>
-    <td>16 bits</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x8F</td>
-    <td rowspan="4">Board Diagnosis 1</td>
-    <td rowspan="4">8</td>
-    <td>in_volt_1</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>uc_temp_1</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>n_errors_1</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>loop_time_1</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x90</td>
-    <td rowspan="4">Board Diagnosis 2</td>
-    <td rowspan="4">8</td>
-    <td>in_volt_2</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>uc_temp_2</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>n_errors_2</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>loop_time_2</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x91</td>
-    <td rowspan="4">Board Diagnosis 3</td>
-    <td rowspan="4">8</td>
-    <td>in_volt_3</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>uc_temp_3</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>n_errors_3</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>loop_time_3</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="4">0x92</td>
-    <td rowspan="4">Board Diagnosis 4</td>
-    <td rowspan="4">8</td>
-    <td>in_volt_4</td>
-    <td>uint16_t</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-    <td rowspan="4">10</td>
-  </tr>
-  <tr>
-    <td>uc_temp_4</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>n_errors_4</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td>loop_time_4</td>
-    <td>uint16_t</td>
-  </tr>
-  <tr>
-    <td rowspan="3">0x93</td>
-    <td rowspan="3">Status signals</td>
-    <td rowspan="3">8</td>
-    <td>valve_triggers</td>
-    <td>uint8_t</td>
-    <td rowspan="3">10</td>
-    <td rowspan="3">10</td>
-    <td rowspan="3">10</td>
-  </tr>
-  <tr>
-    <td>main_valve_actuation</td>
-    <td>uint8_t</td>
-  </tr>
-  <tr>
-    <td>[empty]</td>
-    <td>24 bits</td>
-  </tr>
-</tbody>
-</table>
 
 #### Flight Controller
 
@@ -895,11 +418,11 @@ ALL DATA MUST BE LITTLE-ENDIAN
   </tr>
   <tr>
     <td>0x42</td>
-    <td>N/A</td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
+    <td>Current time</td>
+    <td>4 </td>
+    <td>current_time</td>
+    <td>uint32_t, in hhmmss.sss<br>interpolated from gps time</td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
@@ -1119,17 +642,15 @@ ALL DATA MUST BE LITTLE-ENDIAN
 
 The data acquisition process is the following:
 
-1. Record the current time (e.g. time since boot)
-1. Take a sample from each sensor (depending on their sampling rate)
-1. Send the recorded time
-1. Send all the data that has been sampled in their corresponding frame
-1. The time of acquisition for each frame is reconstructed on the Ground Station from the recorded time
+1. Save all acquired data to a buffer
+1. Sync the internal clock to GPS time and interpolate it
+1. At a regular interval send the current time and the stored buffer
+1. Every few seconds record the delays in the CAN-system
+1. If needed use the delays to reconstruct the actual time on the ground station
 
 This allows to reduce the overhead on the Telemetry link by only sending one time stamp for all the data acquired in one loop.
 The error in acquisition time is acceptable as the sampling loop is assumed to be short with respect to the measured phenomena.
 All the sensors may not be sampled in every loop or may be sampled without sending the samples to the ground. The sensors that require low sampling rates can simply be sampled and sent every **X** loop
-
->**Note:** the exact time of acquisition for each sample could still be recorded and stored on the on-board memory
 
 #### About lost frames
 
