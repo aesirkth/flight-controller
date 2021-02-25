@@ -57,7 +57,7 @@ Drivers:
 
 - Send commands to the Rocket and have the relevant ones forwarded to the Engine Computer
 - Send back Telemetry to the Ground Station, mainly comprised of measurement samples from the Engine Computer
-- No logic on the Flight Controller for the Telemetry packets, the packets are simply forwarded to the Ground Station. We will try to store the telemetry on th FC memory as well, so we can have data with higher sampling rates even if it is offline, as well as a backup.
+- No logic on the Flight Controller for the Telemetry packets, the packets are simply forwarded to the Ground Station. We will try to store the telemetry on the FC memory as well, so we can have data with higher sampling rates even if it is offline, as well as a backup.
 
 ## Launch
 
