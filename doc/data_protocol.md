@@ -159,11 +159,10 @@ Each message on the Telecommand TC link and the Telemetry TM link has a unique I
 </tbody>
 </table>
 
-The `ID` values `0xC0` - `0xFF` are left unused and will be used if new devices are added to the on-board CAN Bus.
 
 ## Telecommand
 
-The Telecommand link is a low data rate radio link over LoRa at 433 MHz. The communication will work on a request-response basis where the Ground Station sends a command and the Flight Controller or Engine Computer replies back, but at the same time some data will be stremed from the FC at a low rate.
+The Telecommand link is a low data rate radio link over LoRa at 433 MHz. The communication will work on a request-response basis where the Ground Station sends a command and the Flight Controller or Engine Computer replies back, but at the same time some data will be streamed from the FC at a low rate.
 
 ### Communication sequence
 
