@@ -318,12 +318,12 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td>uint16_t, in 0.01V</td>
   </tr>
   <tr>
-    <td rowspan="4">0x25</td>
-    <td rowspan="4">GNSS data</td>
-    <td rowspan="4">14</td>
+    <td rowspan="5">0x25</td>
+    <td rowspan="5">GNSS data</td>
+    <td rowspan="5">15</td>
     <td>gnss_time</td>
     <td>uint32_t, in hhmmss.sss</td>
-    <td rowspan="4">0.2</td>
+    <td rowspan="5">0.2</td>
   </tr>
   <tr>
     <td>latitude</td>
@@ -336,6 +336,10 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
   <tr>
     <td>h_dop</td>
     <td>uint16_t, in 0.01</td>
+  </tr>
+  <tr>
+    <td>n_satellites</td>
+    <td>uint8_t</td>
   </tr>
   <tr>
     <td rowspan="3">0x26</td>
