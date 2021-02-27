@@ -113,47 +113,63 @@ Each message on the Telecommand TC link and the Telemetry TM link has a unique I
   </tr>
 </thead>
 <tbody>
-  <tr>
-    <td>0x00 - 0x0F</td>
-    <td>TC</td>
-    <td>Ground Station</td>
+<tr>
+    <td>0x00 - 0x3</td>
+    <td>CAN</td>
     <td>Flight Controller</td>
-    <td>16</td>
+    <td>Engine Controller</td>
+    <td>4</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>0x04 - 0x0F</td>
+    <td>CAN</td>
+    <td>Engine Controller</td>
+    <td>Flight Controller</td>
+    <td>12</td>
   </tr>
   <tr>
     <td>0x10 - 0x1F</td>
     <td>TC</td>
-    <td>Flight Controller</td>
     <td>Ground Station</td>
+    <td>Flight Controller</td>
     <td>16</td>
   </tr>
   <tr>
+  <tr>
     <td>0x20 - 0x2F</td>
     <td>TC</td>
+    <td>Flight Controller</td>
     <td>Ground Station</td>
-    <td>Engine Computer</td>
     <td>16</td>
   </tr>
   <tr>
     <td>0x30 - 0x3F</td>
     <td>TC</td>
+    <td>Ground Station</td>
+    <td>Engine Computer</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>0x40 - 0x4F</td>
+    <td>TC</td>
     <td>Engine Computer</td>
     <td>Ground Station</td>
     <td>16</td>
   </tr>
   <tr>
-    <td>0x40 - 0x7F</td>
+    <td>0x50 - 0x8F</td>
     <td>TM</td>
     <td>Flight Controller</td>
     <td>Ground Station</td>
     <td>64</td>
   </tr>
   <tr>
-    <td>0x80 - 0xFF</td>
+    <td>0x90 - 0xFF</td>
     <td>TM</td>
     <td>Engine Computer</td>
     <td>Ground Station</td>
-    <td>128</td>
+    <td>112</td>
   </tr>
   </tr>
 </tbody>
@@ -194,7 +210,7 @@ Commands sent from the Ground Station to the Flight Controller
 </thead>
 <tbody>
   <tr>
-    <td>0x00</td>
+    <td>0x10</td>
     <td>Time Sync</td>
     <td>4</td>
     <td>system_time</td>
@@ -202,7 +218,7 @@ Commands sent from the Ground Station to the Flight Controller
     <td> </td>
   </tr>
   <tr>
-    <td>0x01</td>
+    <td>0x11</td>
     <td>Set Power Mode</td>
     <td>1</td>
     <td>TBD</td>
@@ -210,7 +226,7 @@ Commands sent from the Ground Station to the Flight Controller
     <td> </td>
   </tr>
   <tr>
-    <td>0x02</td>
+    <td>0x12</td>
     <td>Set Radio Equipment</td>
     <td>1</td>
     <td>bit0: is_fpv_en<br>bit1: is_tm_en</td>
@@ -218,7 +234,7 @@ Commands sent from the Ground Station to the Flight Controller
     <td> </td>
   </tr>
   <tr>
-    <td>0x03</td>
+    <td>0x13</td>
     <td>Set Parachute Output</td>
     <td>1</td>
     <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
@@ -226,7 +242,7 @@ Commands sent from the Ground Station to the Flight Controller
     <td> </td>
   </tr>
   <tr>
-    <td>0x04</td>
+    <td>0x14</td>
     <td>Set Data Logging</td>
     <td>1</td>
     <td>bit0: is_logging_en</td>
@@ -234,7 +250,7 @@ Commands sent from the Ground Station to the Flight Controller
     <td> </td>
   </tr>
   <tr>
-    <td>0x05</td>
+    <td>0x15</td>
     <td>Dump flash chip</td>
     <td>1</td>
     <td>bit0: dump_sd <br>bit1: dump_usb</td>
@@ -258,7 +274,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
 </thead>
 <tbody>
   <tr>
-    <td>0x10</td>
+    <td>0x20</td>
     <td>Return Time Sync</td>
     <td>N/A</td>
     <td> </td>
@@ -266,7 +282,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td> </td>
   </tr>
   <tr>
-    <td>0x11</td>
+    <td>0x21</td>
     <td>Return Power Mode</td>
     <td>1</td>
     <td>TBD</td>
@@ -274,7 +290,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td> </td>
   </tr>
   <tr>
-    <td>0x12</td>
+    <td>0x22</td>
     <td>Return Radio Equipment</td>
     <td>1</td>
     <td>bit0: is_fpv_en<br>bit1: is_tm_en</td>
@@ -282,7 +298,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td> </td>
   </tr>
   <tr>
-    <td>0x13</td>
+    <td>0x23</td>
     <td>Return Parachute Output</td>
     <td>1</td>
     <td>bit0: is_parachute_armed<br>bit1: is_parachute1_en<br>bit2: is_parachute2_en</td>
@@ -290,7 +306,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td> </td>
   </tr>
   <tr>
-    <td rowspan="2">0x14</td>
+    <td rowspan="2">0x24</td>
     <td rowspan="2">Onboard Battery Voltage</td>
     <td rowspan="2">4</td>
     <td>battery_1</td>
@@ -302,7 +318,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td>uint16_t, in 0.01V</td>
   </tr>
   <tr>
-    <td rowspan="4">0x15</td>
+    <td rowspan="4">0x25</td>
     <td rowspan="4">GNSS data</td>
     <td rowspan="4">14</td>
     <td>gnss_time</td>
@@ -322,7 +338,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td>uint16_t, in 0.01</td>
   </tr>
   <tr>
-    <td rowspan="3">0x16</td>
+    <td rowspan="3">0x26</td>
     <td rowspan="3">Flight Controller Status</td>
     <td rowspan="3">3</td>
     <td>HW_state</td>
@@ -338,7 +354,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td>uint8_t, enum</td>
   </tr>
   <tr>
-    <td>0x17</td>
+    <td>0x27</td>
     <td>Return Data Logging</td>
     <td>1</td>
     <td>bit0: is_logging_en</td>
@@ -346,7 +362,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td> </td>
   </tr>
   <tr>
-    <td>0x18</td>
+    <td>0x28</td>
     <td>Return dump flash</td>
     <td>1</td>
     <td>bit0: dump_sd <br>bit1: dump_usb</td>
@@ -354,7 +370,7 @@ Replies sent from the Flight Controller to the Ground Station and stremed data
     <td> </td>
   </tr>
   <tr>
-    <td>0x19</td>
+    <td>0x29</td>
     <td>Return Handshake</td>
     <td>0</td>
     <td></td>
@@ -381,7 +397,6 @@ The source file can be found in [doc/diagrams/telemetry-sequence.xml](diagrams/t
 ### Data description
 
 ALL DATA MUST BE LITTLE-ENDIAN
-
 #### Flight Controller
 
 <table>
@@ -398,7 +413,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
 </thead>
 <tbody>
   <tr>
-    <td>0x40</td>
+    <td>0x50</td>
     <td>Time since boot - millis</td>
     <td>4</td>
     <td>ms_since_boot</td>
@@ -407,7 +422,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td></td>
   </tr>
   <tr>
-    <td>0x41</td>
+    <td>0x51</td>
     <td>Time since boot - micros</td>
     <td>8</td>
     <td>us_since_boot</td>
@@ -416,7 +431,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td></td>
   </tr>
   <tr>
-    <td>0x42</td>
+    <td>0x52</td>
     <td>Current time</td>
     <td>4 </td>
     <td>current_time</td>
@@ -425,7 +440,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td></td>
   </tr>
   <tr>
-    <td rowspan="3">0x43</td>
+    <td rowspan="3">0x53</td>
     <td rowspan="3">GNSS Data 1</td>
     <td rowspan="3">12</td>
     <td>gnss_time</td>
@@ -442,7 +457,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>int32_t, in dddmm.mmmm</td>
   </tr>
   <tr>
-    <td rowspan="6">0x44</td>
+    <td rowspan="6">0x54</td>
     <td rowspan="6">GNSS Data 2</td>
     <td rowspan="6">12</td>
     <td>altitude</td>
@@ -471,7 +486,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>uint16_t, in 0.1</td>
   </tr>
   <tr>
-    <td rowspan="2">0x45</td>
+    <td rowspan="2">0x55</td>
     <td rowspan="2">Inside Static Temperature</td>
     <td rowspan="2">8</td>
     <td>temperature_1</td>
@@ -484,7 +499,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>int32_t, in 0.01 ºC</td>
   </tr>
   <tr>
-    <td rowspan="2">0x46</td>
+    <td rowspan="2">0x56</td>
     <td rowspan="2">Inside Static Pressure</td>
     <td rowspan="2">8</td>
     <td>pressure_1</td>
@@ -497,7 +512,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>int32_t, in 0.01 mbar</td>
   </tr>
   <tr>
-    <td rowspan="9">0x47</td>
+    <td rowspan="9">0x57</td>
     <td rowspan="9">IMU 1</td>
     <td rowspan="9">18</td>
     <td>accel_x</td>
@@ -538,7 +553,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>int16_t</td>
   </tr>
   <tr>
-    <td rowspan="9">0x48</td>
+    <td rowspan="9">0x58</td>
     <td rowspan="9">IMU 2</td>
     <td rowspan="9">18</td>
     <td>accel_x</td>
@@ -579,7 +594,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>int16_t</td>
   </tr>
   <tr>
-    <td rowspan="2">0x49</td>
+    <td rowspan="2">0x59</td>
     <td rowspan="2">External Temperature</td>
     <td rowspan="2">4</td>
     <td>temp_1</td>
@@ -592,7 +607,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>int16_t</td>
   </tr>
   <tr>
-    <td rowspan="2">0x4A</td>
+    <td rowspan="2">0x5A</td>
     <td rowspan="2">Air Speed</td>
     <td rowspan="2">4</td>
     <td>pitot</td>
@@ -605,7 +620,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>int16_t</td>
   </tr>
   <tr>
-    <td rowspan="2">0x4B</td>
+    <td rowspan="2">0x5B</td>
     <td rowspan="2">Onboard Battery Voltage</td>
     <td rowspan="2">4</td>
     <td>battery_1</td>
@@ -618,7 +633,7 @@ ALL DATA MUST BE LITTLE-ENDIAN
     <td>uint16_t, in 0.01V</td>
   </tr>
   <tr>
-    <td rowspan="3">0x4C</td>
+    <td rowspan="3">0x5C</td>
     <td rowspan="3">Flight Controller Status</td>
     <td rowspan="3">3</td>
     <td>HW_state</td>
