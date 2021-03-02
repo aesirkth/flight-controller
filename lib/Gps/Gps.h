@@ -40,25 +40,13 @@
 #define POS_MODE_AUTONOMOUS 'A'
 #define POS_MODE_DIFFERENTIAL 'D'
 
-#define IS_SET(bytes, flag) (bytes & flag)
-#define SET(bytes, flag) (bytes |= flag)
-#define CLEAR(bytes, flag) (bytes &= !flag)
-
-
 class GPS {
 public:
-  void read();
-  void init();
-  void clear() {flags = 0;}
+  void clear_flags() {flags = 0;}
+  bool is_set(uint32_t flag) {return flags & flag;}
 
-  uint32_t get_flags() {return flags;};
-
-  void disable_message(char message_id[]);
-  void set_refresh_rate(uint8_t);
-
-  bool parse_message(char message[], uint8_t buf_len);
-
-  uint32_t flags;
+  bool parse_message(uint8_t message[], uint8_t buf_len);
+  bool parse_byte(uint8_t byte);
 
   int32_t latitude_degrees; //north positive
   double latitude_minutes;
@@ -71,6 +59,7 @@ public:
   double speed_ms;
   double course_over_ground;
 
+  uint32_t raw_time;
   uint8_t hours;
   uint8_t minutes;
   uint8_t seconds;
@@ -81,13 +70,13 @@ public:
 
   uint8_t fix_status; // multi gnss
 
-  char op_mode; // multi gnss
+  uint8_t op_mode; // multi gnss
 
-  char gps_pos_mode;
-  char glonass_pos_mode;
-  char galileo_pos_mode;
-  char beidou_pos_mode;
-  char pos_mode; //pos_mode from the last message. can be gps, galileo, beidou anything!
+  uint8_t gps_pos_mode;
+  uint8_t glonass_pos_mode;
+  uint8_t galileo_pos_mode;
+  uint8_t beidou_pos_mode;
+  uint8_t pos_mode; //pos_mode from the last message. can be gps, galileo, beidou anything!
 
   double hdop;
   double pdop;
@@ -99,20 +88,27 @@ public:
   double magnetic_variation;
 
 private:
-  template <class T>
-  bool parse_len_to_uint(T* whole, char message[], uint8_t* index, uint8_t len);
-  template <class T>
-  bool parse_field_to_uint(T* whole, char message[], uint8_t* index);
-  bool parse_field_to_double(double* num, char message[], uint8_t* index);
+  uint32_t flags = 0;
+  void set(uint32_t flag) {flags |= flag;}
+  void clear(uint32_t flag) {flags &= !flag;}
 
-  void parse_gns(char message[]);
-  void parse_rmc(char message[]);
-  void parse_gsa(char message[]);
+  template <class T>
+  bool parse_len_to_uint(T* whole, uint8_t message[], uint8_t* index, uint8_t len);
+  template <class T>
+  bool parse_field_to_uint(T* whole, uint8_t message[], uint8_t* index);
+  bool parse_field_to_double(double* num, uint8_t message[], uint8_t* index);
 
-  void to_hex(uint8_t num, char buf[]);
-  void generate_checksum(char message[], char buf[]);
-  bool verify_message(char message[], uint8_t buf_len);
-  void send_to_GPS(char message[]);
+  void parse_gns(uint8_t message[]);
+  void parse_rmc(uint8_t message[]);
+  void parse_gsa(uint8_t message[]);
+
+  void to_hex(uint8_t num, uint8_t buf[]);
+  void generate_checksum(uint8_t message[], uint8_t buf[]);
+  bool verify_message(uint8_t message[], uint8_t buf_len);
+  void send_to_GPS(uint8_t message[]);
+
+  uint8_t message_buf[100];
+  uint8_t message_buf_index = 0;
 
   uint8_t constellation;
 };

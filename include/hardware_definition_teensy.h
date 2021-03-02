@@ -1,4 +1,7 @@
 /* Pin definition for the Teensy */
+#define PIN_FPV_DIS PIN_J4_DIS
+#define PIN_RFD_DIS PIN_J2_DIS
+
 #define PIN_MOSI1 0
 #define PIN_MISO1 1
 #define PIN_BUZZER 2
@@ -52,3 +55,4 @@
 /* Other definitions */
 #define NUM_RGB_LEDS 2
 #define BUZZER_FREQ 2400  // Hz
+#define RFM_FREQ 434.0f

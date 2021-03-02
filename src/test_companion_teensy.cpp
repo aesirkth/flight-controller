@@ -25,7 +25,7 @@ License:
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  
+
   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -36,7 +36,7 @@ License:
 #include <SPI.h>
 
 #include "hardware_definition_teensy.h"
-#include "Gps.hpp"
+#include "Gps.h"
 
 #define GPS_MAX_LEN 100
 #define GPS_BAUD 38400
@@ -69,14 +69,14 @@ void update_gps() {
   if (Serial1.available() > 0) {
     char buf[GPS_MAX_LEN];
     uint8_t len = Serial1.readBytesUntil('\n', buf, GPS_MAX_LEN);
-    gps1.parse_message(buf, len);
+    gps1.parse_message((uint8_t*) buf, len);
   }
 
   //gps 2
   if (Serial3.available() > 0) {
     char buf[GPS_MAX_LEN];
     uint8_t len = Serial3.readBytesUntil('\n', buf, GPS_MAX_LEN);
-    gps2.parse_message(buf, len);
+    gps2.parse_message((uint8_t*) buf, len);
   }
 }
 
@@ -110,15 +110,15 @@ void loop() {
   }
 
   update_gps();
-  if (IS_SET(gps1.flags, FLAG_N_SATELLITES)) {
+  if (gps1.is_set(FLAG_N_SATELLITES)) {
     Serial.print("gps1 satellites: ");
     Serial.println(gps1.n_satellites);
-    gps1.clear();
+    gps1.clear_flags();
   }
 
-  if (IS_SET(gps2.flags, FLAG_N_SATELLITES)) {
+  if (gps2.is_set(FLAG_N_SATELLITES)) {
     Serial.print("gps2 satellites: ");
     Serial.println(gps2.n_satellites);
-    gps2.clear();
+    gps2.clear_flags();
   }
 }

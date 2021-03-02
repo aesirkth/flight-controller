@@ -1,15 +1,16 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <Arduino.h>
 
-#include "Gps.hpp"
+#include "Gps.h"
 
 
 // parses a field to an unsigned integer
 // the index will be pointing on the character after ','
 template <class T>
-bool GPS::parse_field_to_uint(T* result, char message[], uint8_t* msg_index) {
-  char buf[FIELD_BUF_LEN];
+bool GPS::parse_field_to_uint(T* result, uint8_t message[], uint8_t* msg_index) {
+  uint8_t buf[FIELD_BUF_LEN];
   uint8_t buf_index = 0;
   while (buf_index < FIELD_BUF_LEN) {
     if (message[*msg_index] < '0' || message[*msg_index] > '9') {
@@ -32,7 +33,7 @@ bool GPS::parse_field_to_uint(T* result, char message[], uint8_t* msg_index) {
 // parses X amount of bytes to an unsigned integer
 // the index will be pointing after the last parsed byte
 template <class T>
-bool GPS::parse_len_to_uint(T* result, char message[], uint8_t* index, uint8_t len) {
+bool GPS::parse_len_to_uint(T* result, uint8_t message[], uint8_t* index, uint8_t len) {
   *result = 0;
   
   for (uint8_t i = 0; i < len; i++) {
@@ -44,8 +45,8 @@ bool GPS::parse_len_to_uint(T* result, char message[], uint8_t* index, uint8_t l
 
 // parses a field to a double
 // the index will be pointing on the character after ','
-bool GPS::parse_field_to_double(double* result, char message[], uint8_t* msg_index) {
-  char buf[FIELD_BUF_LEN];
+bool GPS::parse_field_to_double(double* result, uint8_t message[], uint8_t* msg_index) {
+  uint8_t buf[FIELD_BUF_LEN];
   uint8_t buf_index = 0;
   
   while (buf_index < FIELD_BUF_LEN) {
@@ -62,12 +63,12 @@ bool GPS::parse_field_to_double(double* result, char message[], uint8_t* msg_ind
     return false;
   }
   buf[buf_index] = '\0'; //terminate string
-  *result = atof(buf);
+  *result = atof((char*) buf);
   return true; 
 }
 
 //generates a checksum for a message to a 2 long buffer
-void GPS::generate_checksum(char message[], char buf[]) {
+void GPS::generate_checksum(uint8_t message[], uint8_t buf[]) {
   uint8_t index = 1; //1 to skip $
   uint8_t checksum = 0;
   while (true) {
@@ -82,8 +83,8 @@ void GPS::generate_checksum(char message[], char buf[]) {
 
 
 // verify if a gps message is valid,
-bool GPS::verify_message(char message[], uint8_t msg_len) {
-  char checksum[2];
+bool GPS::verify_message(uint8_t message[], uint8_t msg_len) {
+  uint8_t checksum[2];
   uint8_t index = 0;
   while (true) {
     index++;
@@ -103,7 +104,7 @@ bool GPS::verify_message(char message[], uint8_t msg_len) {
 }
 
 // generate the hex value of a num in ascii
-void GPS::to_hex(uint8_t num, char buf[]) {
+void GPS::to_hex(uint8_t num, uint8_t buf[]) {
   const char* chars = "0123456789ABCDEF";
   buf[1] = chars[num & 0x0F];
   buf[0] = chars[(num & 0xF0) >> 4];
@@ -111,9 +112,9 @@ void GPS::to_hex(uint8_t num, char buf[]) {
 
 
 // parse generic message
-bool GPS::parse_message(char message[], uint8_t buf_len) {
+bool GPS::parse_message(uint8_t message[], uint8_t buf_len) {
   if (!verify_message(message, buf_len)) {
-    SET(flags, FLAG_ERROR_MESSAGE);
+    set(FLAG_ERROR_MESSAGE);
     return false;
   }
 
@@ -126,7 +127,7 @@ bool GPS::parse_message(char message[], uint8_t buf_len) {
   }
   
   //switch on message type
-  char* type_pos = &message[3];
+  uint8_t* type_pos = &message[3];
   
   //GNS is basically GGA 2.0
   if (memcmp(type_pos, "GNS", 3) == 0) {
@@ -141,15 +142,24 @@ bool GPS::parse_message(char message[], uint8_t buf_len) {
   return true;
 }
 
-// parse the GNS message
-void GPS::parse_gns(char message[]) {
-  uint32_t whole;
-  double number;
-  uint8_t index = 0;
+bool GPS::parse_byte(uint8_t byte) {
+  message_buf[message_buf_index] = byte;
+  message_buf_index++;
+  if (byte == '\n') {
+    bool result =  parse_message(message_buf, message_buf_index);
+    //Serial.write(message_buf, message_buf_index);
+    message_buf_index = 0;
+    return result;
+  }
+  return false;
+}
 
+// parse the GNS message
+void GPS::parse_gns(uint8_t message[]) {
+  uint8_t index = 0;
   //decode time
   if (message[index] != ',') {
-    SET(flags, FLAG_TIME);
+    set(FLAG_TIME);
     parse_len_to_uint(&hours, message, &index, 2);
     parse_len_to_uint(&minutes, message, &index, 2);
     parse_len_to_uint(&seconds, message, &index, 2);
@@ -157,11 +167,14 @@ void GPS::parse_gns(char message[]) {
     uint8_t start = index;
     parse_field_to_uint(&milliseconds, message, &index);
     milliseconds *= pow(10, 4 - index + start);
+    raw_time = milliseconds + seconds * 1000 + minutes * 1000 * 100 + hours * 1000 * 100 * 100;
+  } else {
+    index++;
   } //end time
 
   //decode latitude
   if (message[index] != ',') {
-    SET(flags, FLAG_LATITUDE);
+    set(FLAG_LATITUDE);
     parse_len_to_uint(&latitude_degrees, message, &index, 2);
     parse_field_to_double(&latitude_minutes, message, &index);
   } else {
@@ -179,7 +192,7 @@ void GPS::parse_gns(char message[]) {
 
   //longitude
   if (message[index] != ',') {
-    SET(flags, FLAG_LONGITUDE);
+    set(FLAG_LONGITUDE);
     parse_len_to_uint(&longitude_degrees, message, &index, 3);
     parse_field_to_double(&longitude_minutes, message, &index);
   } else {
@@ -197,7 +210,7 @@ void GPS::parse_gns(char message[]) {
 
   //constellation information
   if (message[index] != ',') {
-    SET(flags, FLAG_POS_MODE);
+    set(FLAG_POS_MODE);
     gps_pos_mode = message[index++];
     glonass_pos_mode = message[index++];
     galileo_pos_mode = message[index++];
@@ -207,39 +220,37 @@ void GPS::parse_gns(char message[]) {
 
   //n_satellites
   if (parse_field_to_uint(&n_satellites, message, &index)) {
-    SET(flags, FLAG_N_SATELLITES);
+    set(FLAG_N_SATELLITES);
   }
   //hdop
   if (parse_field_to_double(&hdop, message, &index)) {
-    SET(flags, FLAG_HDOP);
+    set(FLAG_HDOP);
   }
   //altitude
   if (parse_field_to_double(&altitude, message, &index)) {
-    SET(flags, FLAG_ALTITUDE);
+    set(FLAG_ALTITUDE);
   }
   //geoid_separation
   if (parse_field_to_double(&geoid_separation, message, &index)) {
-    SET(flags, FLAG_GEOID_SEPARATION);
+    set(FLAG_GEOID_SEPARATION);
   }
   //diff_age
   if (parse_field_to_uint(&diff_age, message, &index)) {
-    SET(flags, FLAG_DIFF_AGE);
+    set(FLAG_DIFF_AGE);
   } 
   //diff_station
   if (parse_field_to_uint(&diff_station, message, &index)) {
-    SET(flags, FLAG_DIFF_STATION);
+    set(FLAG_DIFF_STATION);
   }
 }
 
 // parse the RMC message
-void GPS::parse_rmc(char* message) {
-  uint32_t whole;
-  double number;
+void GPS::parse_rmc(uint8_t* message) {
   uint8_t index = 0;
 
   //decode time
   if (message[index] != ',') {
-    SET(flags, FLAG_TIME);
+    set(FLAG_TIME);
     parse_len_to_uint(&hours, message, &index, 2);
     parse_len_to_uint(&minutes, message, &index, 2);
     parse_len_to_uint(&seconds, message, &index, 2);
@@ -247,6 +258,8 @@ void GPS::parse_rmc(char* message) {
     uint8_t start = index;
     parse_field_to_uint(&milliseconds, message, &index);
     milliseconds *= pow(10, 4 - index + start);
+  } else {
+    index++;
   } //end time
 
   //status is just posmode light
@@ -258,7 +271,7 @@ void GPS::parse_rmc(char* message) {
 
   //decode latitude
   if (message[index] != ',') {
-    SET(flags, FLAG_LATITUDE);
+    set(FLAG_LATITUDE);
     parse_len_to_uint(&latitude_degrees, message, &index, 2);
     parse_field_to_double(&latitude_minutes, message, &index);
   } else {
@@ -276,7 +289,7 @@ void GPS::parse_rmc(char* message) {
 
   //longitude
   if (message[index] != ',') {
-    SET(flags, FLAG_LONGITUDE);
+    set(FLAG_LONGITUDE);
     parse_len_to_uint(&longitude_degrees, message, &index, 3);
     parse_field_to_double(&longitude_minutes, message, &index);
   } else {
@@ -294,18 +307,18 @@ void GPS::parse_rmc(char* message) {
 
   //speed
   if (parse_field_to_double(&speed_knot, message, &index)) {
-    SET(flags, FLAG_SPEED);
+    set(FLAG_SPEED);
     speed_ms = speed_knot * KNOT_TO_MS;
   }
 
   //course over ground
   if (parse_field_to_double(&course_over_ground, message, &index)) {
-    SET(flags, FLAG_COURSE_OVER_GROUND);
+    set(FLAG_COURSE_OVER_GROUND);
   }
 
   //date
   if (message[index] != ',') {
-    SET(flags, FLAG_DATE);
+    set(FLAG_DATE);
     parse_len_to_uint(&day, message, &index, 2);
     parse_len_to_uint(&month, message, &index, 2);
     parse_len_to_uint(&year, message, &index, 2);
@@ -314,7 +327,7 @@ void GPS::parse_rmc(char* message) {
 
   //magnetic variation
   if (parse_field_to_double(&magnetic_variation, message, &index)) {
-    SET(flags, FLAG_MAGNETIC_VARIATION);
+    set(FLAG_MAGNETIC_VARIATION);
   } 
   if (message[index] != ',') {
     if (message[index] == 'W') {
@@ -326,25 +339,25 @@ void GPS::parse_rmc(char* message) {
   
   //posmode, the one from gns is better 
   if (message[index] != ',') {
-    SET(flags, FLAG_POS_MODE_SINGLE);
+    set(FLAG_POS_MODE_SINGLE);
     pos_mode = message[index];
   }
 }
 
 //Parses relevant parts of the GSA message
-void GPS::parse_gsa(char* message) {
+void GPS::parse_gsa(uint8_t* message) {
   uint8_t index = 0;
   double waste;
 
   if(message[index] != ',') {
-    SET(flags, FLAG_OP_MODE);
+    set(FLAG_OP_MODE);
     op_mode = message[index];
     index++;
   }
   index++;
 
   if(parse_field_to_uint(&fix_status, message, &index)) {
-    SET(flags, FLAG_FIX_STATUS);
+    set(FLAG_FIX_STATUS);
   }
 
   //12 fields of satellite IDs, this is pretty useless informaiton so i throw it away
@@ -353,12 +366,12 @@ void GPS::parse_gsa(char* message) {
   }
 
   if(parse_field_to_double(&pdop, message, &index)) {
-    SET(flags, FLAG_PDOP);
+    set(FLAG_PDOP);
   }
   if(parse_field_to_double(&hdop, message, &index)) {
-    SET(flags, FLAG_HDOP);
+    set(FLAG_HDOP);
   }
   if(parse_field_to_double(&vdop, message, &index)) {
-    SET(flags, FLAG_VDOP);
+    set(FLAG_VDOP);
   }
 }
