@@ -257,6 +257,14 @@ Commands sent from the Ground Station to the Flight Controller
     <td></td>
     <td> </td>
   </tr>
+  <tr>
+    <td>0x16</td>
+    <td>handshake</td>
+    <td>0</td>
+    <td></td>
+    <td></td>
+    <td> </td>
+  </tr>
 </tbody>
 </table>
 
