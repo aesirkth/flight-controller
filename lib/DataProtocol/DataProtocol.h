@@ -133,7 +133,8 @@ public:
   uint8_t build_return_dump_flash(uint8_t* buf, bool sd, bool usb);
   uint8_t build_return_handshake(uint8_t* buf);
   uint8_t build_current_time(uint8_t* buf, uint32_t raw_time);
-
+  uint8_t build_ms_since_boot(uint8_t* buf, uint32_t ms);
+  
   uint8_t hours, minutes, seconds;
   uint16_t milliseconds;
   uint32_t raw_time;
@@ -145,7 +146,6 @@ public:
 
 template<typename T>
 void DataProtocol::write_int_to_array(uint8_t* array, uint8_t* index, T num) {
-  Serial.println(sizeof(T));
   for(uint8_t i = 0; i < sizeof(T); i++) {
     array[*index] = num & 0xFF;
     num >>= 8;

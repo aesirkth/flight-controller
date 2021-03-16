@@ -30,6 +30,8 @@ bool DataProtocol::decode_payload(uint8_t* payload, uint8_t len, uint8_t id) {
     case ID_HANDSHAKE:
       return decode_handshake(payload, len);
       break;
+    default:
+      return false;
   }
 }
 
@@ -189,6 +191,7 @@ bool DataProtocol::decode_handshake(uint8_t* payload, uint8_t len) {
     return false;
   }
   set(FLAG_HANDSHAKE);
+  return true;
 }
 
 uint8_t DataProtocol::build_return_time_sync(uint8_t* buf) {
@@ -199,7 +202,7 @@ uint8_t DataProtocol::build_return_time_sync(uint8_t* buf) {
 }
 
 uint8_t DataProtocol::build_return_power_mode(uint8_t* buf, bool TBD) {
-
+  return 0;
 }
 
 uint8_t DataProtocol::build_return_radio_equipment(uint8_t* buf, bool is_fpv_en, bool is_tm_en) {
@@ -272,5 +275,14 @@ uint8_t DataProtocol::build_current_time(uint8_t* buf, uint32_t current_time) {
   buf[index++] = INIT_FRAME_2;
   buf[index++] = ID_CURRENT_TIME;
   write_int_to_array(buf, &index, current_time);
+  return index;
+}
+
+uint8_t DataProtocol::build_ms_since_boot(uint8_t* buf, uint32_t ms) {
+  uint8_t index = 0;
+  buf[index++] = INIT_FRAME_1;
+  buf[index++] = INIT_FRAME_2;
+  buf[index++] = ID_CURRENT_TIME;
+  write_int_to_array(buf, &index, ms);
   return index;
 }

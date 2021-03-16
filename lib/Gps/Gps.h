@@ -64,6 +64,7 @@ public:
   uint8_t minutes;
   uint8_t seconds;
   uint16_t milliseconds;
+  uint8_t ms_precision;
   uint8_t day;
   uint8_t month;
   uint8_t year;

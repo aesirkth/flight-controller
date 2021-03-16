@@ -4,6 +4,12 @@
 #define MS_IN_MINUTE (1000 * 60)
 #define MS_IN_HOUR (1000 * 60 * 60)
 
+enum clock_state {
+  NOT_SYNCED,
+  SYNCED_GROUND,
+  SYNCED_GNSS
+};
+
 class Clock {
   private:
   uint32_t when_updated;
@@ -13,6 +19,7 @@ class Clock {
   public:
   void update(uint32_t formatted_time);
   void update(uint8_t hours, uint8_t minutes, uint8_t seconds, uint16_t milliseconds);
+  enum clock_state state = NOT_SYNCED;
   uint32_t get_current_time();
   uint8_t get_hours();
   uint8_t get_minutes();
