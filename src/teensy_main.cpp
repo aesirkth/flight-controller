@@ -13,6 +13,7 @@
 #include "Gps.h"
 #include "Clock.h"
 #include "DataProtocol.h"
+#include "fc.h"
 
 #define LIVE_FILE_NAME "/LIVEDATA.BIN"
 #define DUMPED_FILE_NAME "/DUMPEDDATA.BIN"
@@ -26,7 +27,6 @@
 #define BLUE 0x0000FF //blue
 #define GREEN 0x00FF00 //green
 #define RED 0xFF0000 //red
-#define RFM_TX_POWER 13 //legal max
 #define BACKUP_BUF_LEN 100
 #define TELEMETRY_BUF_LEN 100
 #define TELECOMMAND_BUF_LEN 100
@@ -36,7 +36,7 @@
 #define LORA_SEND_CYCLE 3000
 #define BLINK_LED_CYCLE 3000
 #define PING_EDDA_CYCLE 5000
-#define TC_GNSS_CYCLE 5000
+#define TC_GNSS_CYCLE 6000
 
 struct default_uint8 {
   uint8_t val = 1;
@@ -48,7 +48,7 @@ std::map<uint8_t, uint8_t> can_message_count;
 IntervalTimer para1_timer;
 IntervalTimer para2_timer;
 DataProtocol protocol;
-static CAN_message_t msg;
+static CAN_message_t can_msg;
 FlexCAN CANbus(1000000, 0, 1, 1);  // 1Mbs, CAN0, pins 29&30 for TX&RX
 GPS gps1;
 GPS gps2;
@@ -232,29 +232,6 @@ void initSD() {
   }
 }
 
-void handleCAN() {
-  if (!CANbus.available()) {
-    return;
-  }
-  CANbus.read(msg);
-  //telemetry
-  if (EC_TO_GS_TM_RANGE_START <= msg.id && msg.id <= EC_TO_GS_TM_RANGE_END) {
-    add_to_backup_buf(msg.buf, msg.len);
-    //only relay a specific amount
-    can_message_count[msg.id] = can_message_count[msg.id]++ % can_relay_frequency[msg.id].val;
-    if (can_message_count[msg.id] == 0) {
-      add_to_telemetry_buf(msg.buf, msg.len);
-    }
-  }else
-  //telecommand
-  if (EC_TO_GS_RANGE_START <= msg.id && msg.id <= EC_TO_GS_RANGE_END) {
-    add_to_backup_buf(msg.buf, msg.len);
-    add_to_telecommand_buf(msg.buf, msg.len);
-  } else {
-    add_to_backup_buf(msg.buf, msg.len);
-  }
-}
-
 void enableParachute1() {
   digitalWriteFast(PIN_PARA1, LOW);
   analogWrite(PIN_BUZZER, 0);
@@ -265,69 +242,68 @@ void enableParachute2() {
   analogWrite(PIN_BUZZER, 0);
 }
 
-void handleTelecommand(Clock clock) {
+void handleDataStreams() {
   uint8_t buf[TELECOMMAND_MAX_MSG_LEN];
   uint8_t len = TELECOMMAND_MAX_MSG_LEN;
-  bool updated = false;
   while (Serial.available() > 0) {
     uint8_t byte = Serial.read();
-    updated |= protocol.parse_byte((uint8_t) byte);
+    protocol.parse_byte(byte);
   }
   if (rfm.recv(buf, &len)) {
-    updated |= protocol.parse_frame(buf, len);
-    add_to_backup_buf(buf, len);
+    protocol.parse_frame(buf, len);
   }
-  if (not updated) {
-    return;
+  if(CANbus.available()) {
+    CANbus.read(can_msg);
+    protocol.parse_CAN_message(can_msg);
   }
-  if (protocol.is_set(FLAG_ENGINE_MESSAGE_AVAILABLE)) {
-    CANbus.write(protocol.engine_msg);
-  }
-  if (protocol.is_set(FLAG_SET_PARACHUTE_OUTPUT)) {
-    bool para1 = parachute_armed && protocol.is_parachute1_en;
-    bool para2 = parachute_armed && protocol.is_parachute2_en;
-    parachute_armed = protocol.is_parachute_armed;
-    if (para1) {
-      analogWrite(PIN_BUZZER, 122);
-      para1_timer.begin(enableParachute1, PARACHUTE_DELAY_US);
-    }
-    if (para2) {
-      analogWrite(PIN_BUZZER, 122);
-      para2_timer.begin(enableParachute1, PARACHUTE_DELAY_US); 
-    }
-    len = protocol.build_return_parachute_output(buf, parachute_armed, para1, para2);
-    add_to_telecommand_buf(buf, len);
-    add_to_backup_buf(buf, len);
-  }
-  if (protocol.is_set(FLAG_SET_DATA_LOGGING)) {
-    data_logging_enabled = protocol.data_logging_en;
-    len = protocol.build_return_data_logging(buf, data_logging_enabled);
-    add_to_telecommand_buf(buf, len);
-    add_to_backup_buf(buf, len);
-  }
-  if (protocol.is_set(FLAG_SET_RADIO_TRANSMITTERS)) {
-    telemetry_enabled = protocol.is_tm_en;
-    FPV_enabled = protocol.is_fpv_en;
-    digitalWriteFast(PIN_RFD_DIS, telemetry_enabled);
-    digitalWriteFast(PIN_FPV_DIS, FPV_enabled);
-    len = protocol.build_return_radio_equipment(buf, FPV_enabled, telemetry_enabled);
-    add_to_telecommand_buf(buf, len);
-    add_to_backup_buf(buf, len);
-  }
-  if (protocol.is_set(FLAG_TIME_SYNC)) {
-    clock.update(protocol.raw_time);
-    clock.state = SYNCED_GROUND;
-    len = protocol.build_return_time_sync(buf);
-    add_to_telecommand_buf(buf, len);
-    add_to_backup_buf(buf, len);
-  }
-  if (protocol.is_set(FLAG_HANDSHAKE)) {
-    len = protocol.build_return_handshake(buf);
-    add_to_telecommand_buf(buf, len);
-    add_to_backup_buf(buf, len); 
-  }
-  protocol.clear_flags();
 }
+
+void fc_rx(fc::set_parachute_output msg) {
+  bool para1 = parachute_armed && msg.get_is_parachute1_en();
+  bool para2 = parachute_armed && msg.get_is_parachute2_en();
+  parachute_armed = msg.get_is_parachute_armed();
+
+  if (para1) {
+    analogWrite(PIN_BUZZER, 122);
+    para1_timer.begin(enableParachute1, PARACHUTE_DELAY_US);
+  }
+  if (para2) {
+    analogWrite(PIN_BUZZER, 122);
+    para2_timer.begin(enableParachute1, PARACHUTE_DELAY_US); 
+  }
+  fc::return_parachute_output_from_flight_controller_to_ground_station_tc response;
+  uint8_t len = response.get_size() + HEADER_SIZE;
+  uint8_t buf[len];
+  response.set_is_parachute1_en(para1);
+  response.set_is_parachute2_en(para2);
+  response.set_is_parachute_armed(parachute_armed);
+  protocol.build_buf(response, buf, &len);
+  add_to_telecommand_buf(buf, len);
+  add_to_backup_buf(buf, len);
+}
+
+void fc_rx(fc::set_data_logging msg) {
+  data_logging_enabled = msg.get_is_logging_en();
+  fc::return_data_logging_from_flight_controller_to_ground_station_tc response;
+  uint8_t len = response.get_size() + HEADER_SIZE;
+  uint8_t buf[len];
+  protocol.build_buf(response, buf, &len);
+  add_to_telecommand_buf(buf, len);
+  add_to_backup_buf(buf, len);
+}
+
+void fc_rx(fc::handshake msg) {
+  fc::return_handshake_from_flight_controller_to_ground_station_tc response;
+  uint8_t len = response.get_size() + HEADER_SIZE;
+  uint8_t buf[len];
+  protocol.build_buf(response, buf, &len);
+  add_to_telecommand_buf(buf, len);
+  add_to_backup_buf(buf, len);
+}
+
+//catch messages we don't care about
+template <class T>
+void fc_rx(T msg) {}
 
 void setup() {
   CANbus.begin();
@@ -344,12 +320,18 @@ void setup() {
   showOk();
 }
 
+void DataProtocol_callback(uint64_t id, uint8_t* buf, uint8_t len) {
+  uint8_t msg_buf[len + HEADER_SIZE];
+  uint8_t index = 0;
+  protocol.build_header(id, msg_buf, &index);
+  add_to_backup_buf(msg_buf, index);
+  FC_PARSE_MESSAGE(id, buf);
+}
+
 void loop() {
-  static Clock clock; //sdfat.h includes a global variable and class called Clock...
-                      //shadow the included version with a local variable
   updateGps();
-  handleCAN();
-  handleTelecommand(clock);
+  handleDataStreams();
+
   uint32_t current_time = millis();
   if (current_time - last_cycle_time >= CYCLE_DELAY_MS) {
     if (current_time - last_cycle_time > CYCLE_DELAY_MS) {
@@ -357,7 +339,6 @@ void loop() {
     }
     last_cycle_time = current_time;
     cycle_count++;
-
     if (cycle_count % BLINK_LED_CYCLE == 0) {
       showOk();
     }
@@ -369,12 +350,13 @@ void loop() {
       //PONG!
     }
     if (cycle_count % TC_GNSS_CYCLE == 0) {
-      uint8_t buf[20], len;
+      fc::gnss_data_from_flight_controller_to_ground_station_tc msg;
+      uint8_t len = msg.get_size() + HEADER_SIZE;
+      uint8_t buf[len];
       uint32_t gnss_time = 0;
       int32_t latitude = 0, longitude = 0; 
       uint16_t h_dop = 0;
       uint8_t n_satellites = 0;
-
       if (gps1.is_set(FLAG_HDOP))
       if (best_gps->is_set(FLAG_TIME)) {
         gnss_time = best_gps->raw_time;
@@ -393,20 +375,32 @@ void loop() {
       }
       gps1.clear_flags();
       gps2.clear_flags();
-      len = protocol.build_GNSS_data(buf, gnss_time, latitude, longitude, h_dop, n_satellites);
+      msg.set_gnss_time(gnss_time);
+      msg.set_latitude(latitude);
+      msg.set_longitude(longitude);
+      msg.set_h_dop(h_dop);
+      msg.set_n_satellites(n_satellites);
+      protocol.build_buf(msg, buf, &len);
       add_to_telecommand_buf(buf, len);
+      add_to_backup_buf(buf, len);
     }
 
     //empty all buffers
     if (telemetry_index > LEN_MS_SINCE_BOOT_MSG) {
-      protocol.build_ms_since_boot(telemetry_buf, millis());
+      uint8_t index = 0;
+      fc::ms_since_boot_from_flight_controller_to_ground_station_tm msg;
+      msg.set_ms_since_boot(current_time);
+      protocol.build_buf(msg, telemetry_buf, &index);
       if (telemetry_enabled) {
         Serial2.write(telemetry_buf, telemetry_index);
       }
       telemetry_index = LEN_MS_SINCE_BOOT_MSG;
     }
     if (backup_index > LEN_MS_SINCE_BOOT_MSG) {
-      protocol.build_current_time(backup_buf, millis());
+      uint8_t index = 0;
+      fc::ms_since_boot_from_flight_controller_to_ground_station_tm msg;
+      msg.set_ms_since_boot(current_time);
+      protocol.build_buf(msg, backup_buf, &index);
       if (data_logging_enabled) {
         live_file.write(backup_buf, backup_index);
       }

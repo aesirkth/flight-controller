@@ -56,3 +56,4 @@
 #define NUM_RGB_LEDS 2
 #define BUZZER_FREQ 2400  // Hz
 #define RFM_FREQ 434.0f
+#define RFM_TX_POWER 13 //legal max
