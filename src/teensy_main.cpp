@@ -215,10 +215,17 @@ void resetRadio() {
 }
 
 void initRadio() {
+  /* Init radio communication and set frequency and power parameters */
   resetRadio();
-  if (not rfm.init()) {
+
+  rfm_init_success = rfm.init();
+  Serial.println(rfm_init_success);
+  if (rfm_init_success) {
+    rfm.setFrequency(RFM_FREQ);
+    rfm.setTxPower(RFM_TX_POWER);
+  } else {
     showError();
-  }
+  } 
 }
 
 void initSD() {
