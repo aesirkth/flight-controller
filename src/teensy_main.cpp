@@ -73,6 +73,7 @@ bool data_logging_enabled = false;
 bool telemetry_enabled = true;
 bool FPV_enabled = false;
 bool gps_led_on = false;
+bool rfm_init_success = 0;
 
 void showError() {
   strip.setPixelColor(STATE_LED, RED);
