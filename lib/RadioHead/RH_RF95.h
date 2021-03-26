@@ -14,6 +14,9 @@
 
 #include <RHSPIDriver.h>
 
+//how long to wait before each message
+#define MESSAGE_DELAY 3000
+
 // This is the maximum number of interrupts the driver can support
 // Most Arduinos can handle 2, Megas can handle more
 #define RH_RF95_NUM_INTERRUPTS 3
@@ -870,6 +873,7 @@ protected:
     bool                _useRFO;
     
 private:
+    uint32_t _last_message_sent_at = 0;
     /// Low level interrupt service routine for device connected to interrupt 0
     static void         isr0();
 
