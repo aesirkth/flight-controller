@@ -14,6 +14,29 @@ enum struct units : uint8_t {
   ground_station_tc = 3,
   ground_station_tm = 4,
 };
+enum struct datatypes : uint8_t {
+  time_sync = 0,
+  set_power_mode = 1,
+  set_radio_equipment = 2,
+  set_parachute_output = 3,
+  set_data_logging = 4,
+  dump_flash_chip = 5,
+  handshake = 6,
+  return_time_sync = 7,
+  return_power_mode = 8,
+  return_radio_equipment = 9,
+  return_parachute_output = 10,
+  onboard_battery_voltage = 11,
+  gnss_data = 12,
+  flight_controller_status = 13,
+  return_data_logging = 14,
+  return_dump_flash = 15,
+  return_handshake = 16,
+  ms_since_boot = 17,
+  us_since_boot = 18,
+  current_time = 19,
+  GNSS_data_1 = 20,
+};
 template <typename T>
 void scaledFloat_to_uint(double value, double scale, T *out) {
   *out = value * scale;
@@ -46,8 +69,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -64,8 +90,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {}
@@ -81,8 +110,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -103,8 +135,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -123,8 +158,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -144,8 +182,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -161,8 +202,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {}
@@ -174,8 +218,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {}
@@ -187,8 +234,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {}
@@ -204,8 +254,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -226,8 +279,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -247,8 +303,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -286,8 +345,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -326,8 +388,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -353,8 +418,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -374,8 +442,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -391,8 +462,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {}
@@ -406,8 +480,11 @@ public:
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
+  uint8_t id;
   enum units get_source() { return source; }
   enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
   void set_source(enum units value) { source = value; }
   void set_target(enum units value) { target = value; }
   void parse_buf(uint8_t *buf) {
@@ -418,6 +495,85 @@ public:
   uint32_t get_ms_since_boot() { return ms_since_boot; }
 };
 
+class us_since_boot {
+public:
+  uint32_t us_since_boot;
+  static_assert((sizeof(us_since_boot) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&us_since_boot, buf + index, sizeof(us_since_boot));
+    index += sizeof(us_since_boot);
+  }
+  uint32_t get_us_since_boot() { return us_since_boot; }
+};
+
+class current_time {
+public:
+  uint32_t ms_since_boot;
+  static_assert((sizeof(ms_since_boot) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&ms_since_boot, buf + index, sizeof(ms_since_boot));
+    index += sizeof(ms_since_boot);
+  }
+  uint32_t get_ms_since_boot() { return ms_since_boot; }
+};
+
+class GNSS_data_1 {
+public:
+  uint32_t gnss_time;
+  static_assert((sizeof(gnss_time) == 4), "invalid size");
+  int32_t latitude;
+  static_assert((sizeof(latitude) == 4), "invalid size");
+  int32_t longitude;
+  static_assert((sizeof(longitude) == 4), "invalid size");
+  uint8_t size = 12;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&gnss_time, buf + index, sizeof(gnss_time));
+    index += sizeof(gnss_time);
+    memcpy(&latitude, buf + index, sizeof(latitude));
+    index += sizeof(latitude);
+    memcpy(&longitude, buf + index, sizeof(longitude));
+    index += sizeof(longitude);
+  }
+  uint32_t get_gnss_time() { return gnss_time; }
+  int32_t get_latitude() { return latitude; }
+  int32_t get_longitude() { return longitude; }
+};
+
 class time_sync_from_ground_station_to_flight_controller_tc {
 public:
   uint32_t system_time;
@@ -426,12 +582,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 16;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &system_time, sizeof(system_time));
     *index += sizeof(system_time);
@@ -445,12 +595,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 17;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
@@ -470,12 +614,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 18;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -502,12 +640,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 19;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -526,12 +658,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 20;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -554,12 +680,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 21;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -572,12 +692,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 22;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
@@ -587,12 +701,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 32;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
@@ -602,12 +710,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 33;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
@@ -627,12 +729,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 34;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -659,12 +755,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 35;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -681,12 +771,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 36;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &battery_1, sizeof(battery_1));
     *index += sizeof(battery_1);
@@ -717,12 +801,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 37;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &gnss_time, sizeof(gnss_time));
     *index += sizeof(gnss_time);
@@ -754,12 +832,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 38;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &HW_state, sizeof(HW_state));
     *index += sizeof(HW_state);
@@ -785,12 +857,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 39;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -813,12 +879,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 40;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &bit_field, sizeof(bit_field));
     *index += sizeof(bit_field);
@@ -831,12 +891,6 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 41;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
@@ -848,17 +902,66 @@ public:
   uint8_t get_size() { return size; }
   uint8_t id = 80;
   uint8_t get_id() { return id; }
-  enum units source;
-  enum units target;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
   void build_buf(uint8_t *buf, uint8_t *index) {
     memcpy(buf + *index, &ms_since_boot, sizeof(ms_since_boot));
     *index += sizeof(ms_since_boot);
   }
   void set_ms_since_boot(uint32_t value) { ms_since_boot = value; }
+};
+
+class us_since_boot_from_flight_controller_to_ground_station_tm {
+public:
+  uint32_t us_since_boot;
+  static_assert((sizeof(us_since_boot) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  uint8_t id = 81;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &us_since_boot, sizeof(us_since_boot));
+    *index += sizeof(us_since_boot);
+  }
+  void set_us_since_boot(uint32_t value) { us_since_boot = value; }
+};
+
+class current_time_from_flight_controller_to_ground_station_tm {
+public:
+  uint32_t ms_since_boot;
+  static_assert((sizeof(ms_since_boot) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  uint8_t id = 82;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &ms_since_boot, sizeof(ms_since_boot));
+    *index += sizeof(ms_since_boot);
+  }
+  void set_ms_since_boot(uint32_t value) { ms_since_boot = value; }
+};
+
+class GNSS_data_1_from_flight_controller_to_ground_station_tm {
+public:
+  uint32_t gnss_time;
+  static_assert((sizeof(gnss_time) == 4), "invalid size");
+  int32_t latitude;
+  static_assert((sizeof(latitude) == 4), "invalid size");
+  int32_t longitude;
+  static_assert((sizeof(longitude) == 4), "invalid size");
+  uint8_t size = 12;
+  uint8_t get_size() { return size; }
+  uint8_t id = 83;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &gnss_time, sizeof(gnss_time));
+    *index += sizeof(gnss_time);
+    memcpy(buf + *index, &latitude, sizeof(latitude));
+    *index += sizeof(latitude);
+    memcpy(buf + *index, &longitude, sizeof(longitude));
+    *index += sizeof(longitude);
+  }
+  void set_gnss_time(uint32_t value) { gnss_time = value; }
+  void set_latitude(int32_t value) { latitude = value; }
+  void set_longitude(int32_t value) { longitude = value; }
 };
 
 #define FC_PARSE_MESSAGE(id, buf)                                              \
@@ -868,6 +971,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_id(16);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -876,6 +980,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_id(17);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -884,6 +989,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_id(18);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -892,6 +998,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_id(19);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -900,6 +1007,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_id(20);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -908,6 +1016,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_id(21);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -916,6 +1025,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_id(22);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -924,6 +1034,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(32);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -932,6 +1043,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(33);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -940,6 +1052,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(34);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -948,6 +1061,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(35);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -956,6 +1070,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(36);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -964,6 +1079,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(37);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -972,6 +1088,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(38);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -980,6 +1097,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(39);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -988,6 +1106,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(40);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -996,6 +1115,7 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_id(41);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
@@ -1004,12 +1124,41 @@ public:
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
     __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_id(80);                                                      \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
+  case 81: {                                                                   \
+    fc::us_since_boot __message;                                               \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::flight_controller);                        \
+    __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_id(81);                                                      \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
+  case 82: {                                                                   \
+    fc::current_time __message;                                                \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::flight_controller);                        \
+    __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_id(82);                                                      \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
+  case 83: {                                                                   \
+    fc::GNSS_data_1 __message;                                                 \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::flight_controller);                        \
+    __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_id(83);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
   }
 
-uint8_t id_to_len(size_t id);
-enum units id_to_source(size_t id);
-enum units id_to_target(size_t id);
+uint8_t id_to_len(uint8_t id);
+enum units id_to_source(uint8_t id);
+enum units id_to_target(uint8_t id);
+enum datatypes id_to_datatype(uint8_t id);
 } // namespace fc

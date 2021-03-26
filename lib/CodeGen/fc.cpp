@@ -5,7 +5,7 @@ GENERATED FILE DO NOT EDIT
 #include "fc.h"
 #include <stdint.h>
 
-uint8_t fc::id_to_len(size_t id) {
+uint8_t fc::id_to_len(uint8_t id) {
   switch (id) {
   case 16:
     return 4;
@@ -61,10 +61,19 @@ uint8_t fc::id_to_len(size_t id) {
   case 80:
     return 4;
     break;
+  case 81:
+    return 4;
+    break;
+  case 82:
+    return 4;
+    break;
+  case 83:
+    return 12;
+    break;
   }
 }
 
-enum fc::units fc::id_to_source(size_t id) {
+enum fc::units fc::id_to_source(uint8_t id) {
   switch (id) {
   case 16:
     return units::ground_station;
@@ -120,10 +129,19 @@ enum fc::units fc::id_to_source(size_t id) {
   case 80:
     return units::flight_controller;
     break;
+  case 81:
+    return units::flight_controller;
+    break;
+  case 82:
+    return units::flight_controller;
+    break;
+  case 83:
+    return units::flight_controller;
+    break;
   }
 }
 
-enum fc::units fc::id_to_target(size_t id) {
+enum fc::units fc::id_to_target(uint8_t id) {
   switch (id) {
   case 16:
     return units::flight_controller_tc;
@@ -178,6 +196,83 @@ enum fc::units fc::id_to_target(size_t id) {
     break;
   case 80:
     return units::ground_station_tm;
+    break;
+  case 81:
+    return units::ground_station_tm;
+    break;
+  case 82:
+    return units::ground_station_tm;
+    break;
+  case 83:
+    return units::ground_station_tm;
+    break;
+  }
+}
+
+enum fc::datatypes fc::id_to_datatype(uint8_t id) {
+  switch (id) {
+  case 16:
+    return datatypes::time_sync;
+    break;
+  case 17:
+    return datatypes::set_power_mode;
+    break;
+  case 18:
+    return datatypes::set_radio_equipment;
+    break;
+  case 19:
+    return datatypes::set_parachute_output;
+    break;
+  case 20:
+    return datatypes::set_data_logging;
+    break;
+  case 21:
+    return datatypes::dump_flash_chip;
+    break;
+  case 22:
+    return datatypes::handshake;
+    break;
+  case 32:
+    return datatypes::return_time_sync;
+    break;
+  case 33:
+    return datatypes::return_power_mode;
+    break;
+  case 34:
+    return datatypes::return_radio_equipment;
+    break;
+  case 35:
+    return datatypes::return_parachute_output;
+    break;
+  case 36:
+    return datatypes::onboard_battery_voltage;
+    break;
+  case 37:
+    return datatypes::gnss_data;
+    break;
+  case 38:
+    return datatypes::flight_controller_status;
+    break;
+  case 39:
+    return datatypes::return_data_logging;
+    break;
+  case 40:
+    return datatypes::return_dump_flash;
+    break;
+  case 41:
+    return datatypes::return_handshake;
+    break;
+  case 80:
+    return datatypes::ms_since_boot;
+    break;
+  case 81:
+    return datatypes::us_since_boot;
+    break;
+  case 82:
+    return datatypes::current_time;
+    break;
+  case 83:
+    return datatypes::GNSS_data_1;
     break;
   }
 }
