@@ -73,6 +73,7 @@ bool data_logging_enabled = false;
 bool telemetry_enabled = true;
 bool FPV_enabled = false;
 bool gps_led_on = false;
+bool rfm_init_success = 0;
 
 void showError() {
   strip.setPixelColor(STATE_LED, RED);
@@ -215,10 +216,17 @@ void resetRadio() {
 }
 
 void initRadio() {
+  /* Init radio communication and set frequency and power parameters */
   resetRadio();
-  if (not rfm.init()) {
+
+  rfm_init_success = rfm.init();
+  Serial.println(rfm_init_success);
+  if (rfm_init_success) {
+    rfm.setFrequency(RFM_FREQ);
+    rfm.setTxPower(RFM_TX_POWER);
+  } else {
     showError();
-  }
+  } 
 }
 
 void initSD() {
