@@ -7,6 +7,15 @@
 #define HEADER_SIZE 3
 #define PAYLOAD_BUF_LEN 32
 
+#define EC_TO_GC_TC_START 0x40
+#define EC_TO_GC_TC_END 0x4F
+
+#define GC_TO_EC_TC_START 0x30 
+#define GC_TO_EC_TC_END 0x3F
+
+#define EC_TO_GC_TM_START 0x90
+#define EC_TO_GC_TM_END 0xFF
+
 enum receiver_state {
     START1,
     START2,

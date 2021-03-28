@@ -8,34 +8,71 @@ GENERATED FILE DO NOT EDIT
 
 namespace fc {
 enum struct units : uint8_t {
-  ground_station = 0,
-  flight_controller_tc = 1,
-  flight_controller = 2,
-  ground_station_tc = 3,
-  ground_station_tm = 4,
+  local = 0,
+  test = 1,
+  ground_station = 2,
+  flight_controller_tc = 3,
+  flight_controller = 4,
+  ground_station_tc = 5,
+  ground_station_tm = 6,
 };
 enum struct datatypes : uint8_t {
-  time_sync = 0,
-  set_power_mode = 1,
-  set_radio_equipment = 2,
-  set_parachute_output = 3,
-  set_data_logging = 4,
-  dump_flash_chip = 5,
-  handshake = 6,
-  return_time_sync = 7,
-  return_power_mode = 8,
-  return_radio_equipment = 9,
-  return_parachute_output = 10,
-  onboard_battery_voltage = 11,
-  gnss_data = 12,
-  flight_controller_status = 13,
-  return_data_logging = 14,
-  return_dump_flash = 15,
-  return_handshake = 16,
-  ms_since_boot = 17,
-  us_since_boot = 18,
-  current_time = 19,
-  GNSS_data_1 = 20,
+  local_timestamp = 0,
+  ms_since_boot = 1,
+  altitude = 2,
+  acceleration = 3,
+  pressure = 4,
+  catastrophe = 5,
+  gyro = 6,
+  time_sync = 7,
+  set_power_mode = 8,
+  set_radio_equipment = 9,
+  set_parachute_output = 10,
+  set_data_logging = 11,
+  dump_flash = 12,
+  handshake = 13,
+  return_time_sync = 14,
+  return_power_mode = 15,
+  return_radio_equipment = 16,
+  return_parachute_output = 17,
+  onboard_battery_voltage = 18,
+  gnss_data = 19,
+  flight_controller_status = 20,
+  return_data_logging = 21,
+  return_dump_flash = 22,
+  return_handshake = 23,
+  us_since_boot = 24,
+  current_time = 25,
+  GNSS_data_1 = 26,
+};
+enum struct fields : uint8_t {
+  timestamp = 0,
+  ms_since_boot = 1,
+  altitude = 2,
+  catastrophe = 3,
+  x = 4,
+  y = 5,
+  z = 6,
+  system_time = 7,
+  is_fpv_en = 8,
+  is_tm_en = 9,
+  is_parachute_armed = 10,
+  is_parachute1_en = 11,
+  is_parachute2_en = 12,
+  is_logging_en = 13,
+  dump_sd = 14,
+  dump_usb = 15,
+  battery_1 = 16,
+  battery_2 = 17,
+  gnss_time = 18,
+  latitude = 19,
+  longitude = 20,
+  h_dop = 21,
+  n_satellites = 22,
+  HW_state = 23,
+  SW_state = 24,
+  mission_state = 25,
+  us_since_boot = 26,
 };
 template <typename T>
 void scaledFloat_to_uint(double value, double scale, T *out) {
@@ -60,6 +97,177 @@ void uint_to_packedFloat(T value, double min, double max, double *out) {
   double difference = max - min;
   *out = difference * value / max_value;
 }
+
+class local_timestamp {
+public:
+  uint32_t timestamp;
+  static_assert((sizeof(timestamp) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&timestamp, buf + index, sizeof(timestamp));
+    index += sizeof(timestamp);
+  }
+  uint32_t get_timestamp() { return timestamp; }
+};
+
+class ms_since_boot {
+public:
+  uint32_t ms_since_boot;
+  static_assert((sizeof(ms_since_boot) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&ms_since_boot, buf + index, sizeof(ms_since_boot));
+    index += sizeof(ms_since_boot);
+  }
+  uint32_t get_ms_since_boot() { return ms_since_boot; }
+};
+
+class altitude {
+public:
+  uint16_t altitude;
+  static_assert((sizeof(altitude) == 2), "invalid size");
+  uint8_t size = 2;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&altitude, buf + index, sizeof(altitude));
+    index += sizeof(altitude);
+  }
+  uint16_t get_altitude() { return altitude; }
+};
+
+class acceleration {
+public:
+  uint8_t altitude;
+  static_assert((sizeof(altitude) == 1), "invalid size");
+  uint8_t size = 1;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&altitude, buf + index, sizeof(altitude));
+    index += sizeof(altitude);
+  }
+  uint8_t get_altitude() { return altitude; }
+};
+
+class pressure {
+public:
+  uint16_t altitude;
+  static_assert((sizeof(altitude) == 2), "invalid size");
+  uint8_t size = 2;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&altitude, buf + index, sizeof(altitude));
+    index += sizeof(altitude);
+  }
+  uint16_t get_altitude() { return altitude; }
+};
+
+class catastrophe {
+public:
+  uint8_t bit_field;
+  static_assert((sizeof(bit_field) == 1), "invalid size");
+  bool get_catastrophe() { return bit_field & (1 << 0); }
+  uint8_t size = 1;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&bit_field, buf + index, sizeof(bit_field));
+    index += sizeof(bit_field);
+  }
+};
+
+class gyro {
+public:
+  uint8_t x;
+  static_assert((sizeof(x) == 1), "invalid size");
+  uint8_t y;
+  static_assert((sizeof(y) == 1), "invalid size");
+  uint8_t z;
+  static_assert((sizeof(z) == 1), "invalid size");
+  uint8_t size = 3;
+  uint8_t get_size() { return size; }
+  enum units source;
+  enum units target;
+  uint8_t id;
+  enum units get_source() { return source; }
+  enum units get_target() { return target; }
+  uint8_t get_id() { return id; }
+  void set_id(uint8_t value) { id = value; }
+  void set_source(enum units value) { source = value; }
+  void set_target(enum units value) { target = value; }
+  void parse_buf(uint8_t *buf) {
+    uint8_t index = 0;
+    memcpy(&x, buf + index, sizeof(x));
+    index += sizeof(x);
+    memcpy(&y, buf + index, sizeof(y));
+    index += sizeof(y);
+    memcpy(&z, buf + index, sizeof(z));
+    index += sizeof(z);
+  }
+  uint8_t get_x() { return x; }
+  uint8_t get_y() { return y; }
+  uint8_t get_z() { return z; }
+};
 
 class time_sync {
 public:
@@ -172,7 +380,7 @@ public:
   }
 };
 
-class dump_flash_chip {
+class dump_flash {
 public:
   uint8_t bit_field;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -472,34 +680,11 @@ public:
   void parse_buf(uint8_t *buf) {}
 };
 
-class ms_since_boot {
-public:
-  uint32_t ms_since_boot;
-  static_assert((sizeof(ms_since_boot) == 4), "invalid size");
-  uint8_t size = 4;
-  uint8_t get_size() { return size; }
-  enum units source;
-  enum units target;
-  uint8_t id;
-  enum units get_source() { return source; }
-  enum units get_target() { return target; }
-  uint8_t get_id() { return id; }
-  void set_id(uint8_t value) { id = value; }
-  void set_source(enum units value) { source = value; }
-  void set_target(enum units value) { target = value; }
-  void parse_buf(uint8_t *buf) {
-    uint8_t index = 0;
-    memcpy(&ms_since_boot, buf + index, sizeof(ms_since_boot));
-    index += sizeof(ms_since_boot);
-  }
-  uint32_t get_ms_since_boot() { return ms_since_boot; }
-};
-
 class us_since_boot {
 public:
-  uint32_t us_since_boot;
-  static_assert((sizeof(us_since_boot) == 4), "invalid size");
-  uint8_t size = 4;
+  uint64_t us_since_boot;
+  static_assert((sizeof(us_since_boot) == 8), "invalid size");
+  uint8_t size = 8;
   uint8_t get_size() { return size; }
   enum units source;
   enum units target;
@@ -515,7 +700,7 @@ public:
     memcpy(&us_since_boot, buf + index, sizeof(us_since_boot));
     index += sizeof(us_since_boot);
   }
-  uint32_t get_us_since_boot() { return us_since_boot; }
+  uint64_t get_us_since_boot() { return us_since_boot; }
 };
 
 class current_time {
@@ -572,6 +757,94 @@ public:
   uint32_t get_gnss_time() { return gnss_time; }
   int32_t get_latitude() { return latitude; }
   int32_t get_longitude() { return longitude; }
+};
+
+class altitude_from_test_to_test {
+public:
+  uint16_t altitude;
+  static_assert((sizeof(altitude) == 2), "invalid size");
+  uint8_t size = 2;
+  uint8_t get_size() { return size; }
+  uint8_t id = 0;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &altitude, sizeof(altitude));
+    *index += sizeof(altitude);
+  }
+  void set_altitude(uint16_t value) { altitude = value; }
+};
+
+class acceleration_from_test_to_test {
+public:
+  uint8_t altitude;
+  static_assert((sizeof(altitude) == 1), "invalid size");
+  uint8_t size = 1;
+  uint8_t get_size() { return size; }
+  uint8_t id = 1;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &altitude, sizeof(altitude));
+    *index += sizeof(altitude);
+  }
+  void set_altitude(uint8_t value) { altitude = value; }
+};
+
+class pressure_from_test_to_test {
+public:
+  uint16_t altitude;
+  static_assert((sizeof(altitude) == 2), "invalid size");
+  uint8_t size = 2;
+  uint8_t get_size() { return size; }
+  uint8_t id = 2;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &altitude, sizeof(altitude));
+    *index += sizeof(altitude);
+  }
+  void set_altitude(uint16_t value) { altitude = value; }
+};
+
+class catastrophe_from_test_to_test {
+public:
+  uint8_t bit_field = 0;
+  static_assert((sizeof(bit_field) == 1), "invalid size");
+  void set_catastrophe(bool value) {
+    bit_field =
+        value * (bit_field | (1 << 0)) + !value * (bit_field & ~(1 << 0));
+  }
+  uint8_t size = 1;
+  uint8_t get_size() { return size; }
+  uint8_t id = 3;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &bit_field, sizeof(bit_field));
+    *index += sizeof(bit_field);
+  }
+};
+
+class gyro_from_test_to_test {
+public:
+  uint8_t x;
+  static_assert((sizeof(x) == 1), "invalid size");
+  uint8_t y;
+  static_assert((sizeof(y) == 1), "invalid size");
+  uint8_t z;
+  static_assert((sizeof(z) == 1), "invalid size");
+  uint8_t size = 3;
+  uint8_t get_size() { return size; }
+  uint8_t id = 4;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &x, sizeof(x));
+    *index += sizeof(x);
+    memcpy(buf + *index, &y, sizeof(y));
+    *index += sizeof(y);
+    memcpy(buf + *index, &z, sizeof(z));
+    *index += sizeof(z);
+  }
+  void set_x(uint8_t value) { x = value; }
+  void set_y(uint8_t value) { y = value; }
+  void set_z(uint8_t value) { z = value; }
 };
 
 class time_sync_from_ground_station_to_flight_controller_tc {
@@ -664,7 +937,7 @@ public:
   }
 };
 
-class dump_flash_chip_from_ground_station_to_flight_controller_tc {
+class dump_flash_from_ground_station_to_flight_controller_tc {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -894,6 +1167,21 @@ public:
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
+class ms_since_boot_from_test_to_test {
+public:
+  uint32_t ms_since_boot;
+  static_assert((sizeof(ms_since_boot) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  uint8_t id = 64;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &ms_since_boot, sizeof(ms_since_boot));
+    *index += sizeof(ms_since_boot);
+  }
+  void set_ms_since_boot(uint32_t value) { ms_since_boot = value; }
+};
+
 class ms_since_boot_from_flight_controller_to_ground_station_tm {
 public:
   uint32_t ms_since_boot;
@@ -911,9 +1199,9 @@ public:
 
 class us_since_boot_from_flight_controller_to_ground_station_tm {
 public:
-  uint32_t us_since_boot;
-  static_assert((sizeof(us_since_boot) == 4), "invalid size");
-  uint8_t size = 4;
+  uint64_t us_since_boot;
+  static_assert((sizeof(us_since_boot) == 8), "invalid size");
+  uint8_t size = 8;
   uint8_t get_size() { return size; }
   uint8_t id = 81;
   uint8_t get_id() { return id; }
@@ -921,7 +1209,7 @@ public:
     memcpy(buf + *index, &us_since_boot, sizeof(us_since_boot));
     *index += sizeof(us_since_boot);
   }
-  void set_us_since_boot(uint32_t value) { us_since_boot = value; }
+  void set_us_since_boot(uint64_t value) { us_since_boot = value; }
 };
 
 class current_time_from_flight_controller_to_ground_station_tm {
@@ -964,8 +1252,68 @@ public:
   void set_longitude(int32_t value) { longitude = value; }
 };
 
+class local_timestamp_from_local_to_local {
+public:
+  uint32_t timestamp;
+  static_assert((sizeof(timestamp) == 4), "invalid size");
+  uint8_t size = 4;
+  uint8_t get_size() { return size; }
+  uint8_t id = 255;
+  uint8_t get_id() { return id; }
+  void build_buf(uint8_t *buf, uint8_t *index) {
+    memcpy(buf + *index, &timestamp, sizeof(timestamp));
+    *index += sizeof(timestamp);
+  }
+  void set_timestamp(uint32_t value) { timestamp = value; }
+};
+
 #define FC_PARSE_MESSAGE(id, buf)                                              \
   switch (id) {                                                                \
+  case 0: {                                                                    \
+    fc::altitude __message;                                                    \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::test);                                     \
+    __message.set_target(fc::units::test);                                     \
+    __message.set_id(0);                                                       \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
+  case 1: {                                                                    \
+    fc::acceleration __message;                                                \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::test);                                     \
+    __message.set_target(fc::units::test);                                     \
+    __message.set_id(1);                                                       \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
+  case 2: {                                                                    \
+    fc::pressure __message;                                                    \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::test);                                     \
+    __message.set_target(fc::units::test);                                     \
+    __message.set_id(2);                                                       \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
+  case 3: {                                                                    \
+    fc::catastrophe __message;                                                 \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::test);                                     \
+    __message.set_target(fc::units::test);                                     \
+    __message.set_id(3);                                                       \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
+  case 4: {                                                                    \
+    fc::gyro __message;                                                        \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::test);                                     \
+    __message.set_target(fc::units::test);                                     \
+    __message.set_id(4);                                                       \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
   case 16: {                                                                   \
     fc::time_sync __message;                                                   \
     __message.parse_buf(buf);                                                  \
@@ -1012,7 +1360,7 @@ public:
     break;                                                                     \
   }                                                                            \
   case 21: {                                                                   \
-    fc::dump_flash_chip __message;                                             \
+    fc::dump_flash __message;                                                  \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
     __message.set_target(fc::units::flight_controller_tc);                     \
@@ -1119,6 +1467,15 @@ public:
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
+  case 64: {                                                                   \
+    fc::ms_since_boot __message;                                               \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::test);                                     \
+    __message.set_target(fc::units::test);                                     \
+    __message.set_id(64);                                                      \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
   case 80: {                                                                   \
     fc::ms_since_boot __message;                                               \
     __message.parse_buf(buf);                                                  \
@@ -1155,8 +1512,18 @@ public:
     fc_rx(__message);                                                          \
     break;                                                                     \
   }                                                                            \
+  case 255: {                                                                  \
+    fc::local_timestamp __message;                                             \
+    __message.parse_buf(buf);                                                  \
+    __message.set_source(fc::units::local);                                    \
+    __message.set_target(fc::units::local);                                    \
+    __message.set_id(255);                                                     \
+    fc_rx(__message);                                                          \
+    break;                                                                     \
+  }                                                                            \
   }
 
+bool is_valid_id(uint8_t id);
 uint8_t id_to_len(uint8_t id);
 enum units id_to_source(uint8_t id);
 enum units id_to_target(uint8_t id);

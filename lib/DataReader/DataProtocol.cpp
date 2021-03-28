@@ -2,6 +2,7 @@
 #include "fc.h"
 #include <FlexCAN.h>
 
+//Can only read messages defined by the flight controller protocol
 void DataProtocol::parse_byte(uint8_t byte) {
   switch(state) {
     case START1:
@@ -19,6 +20,10 @@ void DataProtocol::parse_byte(uint8_t byte) {
       break;
 
     case TYPE:
+      if (not fc::is_valid_id(byte)) {
+        state = START1;
+        break;
+      }
       payload_length = fc::id_to_len(byte);
       payload_id = byte;
       state = PAYLOAD;
@@ -38,6 +43,7 @@ void DataProtocol::parse_byte(uint8_t byte) {
   }
 }
 
+//can read all messages
 void DataProtocol::parse_frame(uint8_t* buf, uint8_t len) {
   if (buf[0] != INIT_FRAME_1 || buf[1] != INIT_FRAME_2) {
     return;
@@ -57,6 +63,7 @@ void DataProtocol::parse_CAN_message(CAN_message_t msg) {
   DataProtocol_callback(msg.id, msg.buf, msg.len);
 }
 
+//can read all messages
 void DataProtocol::build_header(uint8_t id, uint8_t* buf, uint8_t* index) {
   *index = 0;
   buf[(*index)++] = INIT_FRAME_1;

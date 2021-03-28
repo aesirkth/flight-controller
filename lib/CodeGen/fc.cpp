@@ -5,8 +5,114 @@ GENERATED FILE DO NOT EDIT
 #include "fc.h"
 #include <stdint.h>
 
+bool fc::is_valid_id(uint8_t id) {
+  switch (id) {
+  case 0:
+    return true;
+    break;
+  case 1:
+    return true;
+    break;
+  case 2:
+    return true;
+    break;
+  case 3:
+    return true;
+    break;
+  case 4:
+    return true;
+    break;
+  case 16:
+    return true;
+    break;
+  case 17:
+    return true;
+    break;
+  case 18:
+    return true;
+    break;
+  case 19:
+    return true;
+    break;
+  case 20:
+    return true;
+    break;
+  case 21:
+    return true;
+    break;
+  case 22:
+    return true;
+    break;
+  case 32:
+    return true;
+    break;
+  case 33:
+    return true;
+    break;
+  case 34:
+    return true;
+    break;
+  case 35:
+    return true;
+    break;
+  case 36:
+    return true;
+    break;
+  case 37:
+    return true;
+    break;
+  case 38:
+    return true;
+    break;
+  case 39:
+    return true;
+    break;
+  case 40:
+    return true;
+    break;
+  case 41:
+    return true;
+    break;
+  case 64:
+    return true;
+    break;
+  case 80:
+    return true;
+    break;
+  case 81:
+    return true;
+    break;
+  case 82:
+    return true;
+    break;
+  case 83:
+    return true;
+    break;
+  case 255:
+    return true;
+    break;
+  default:
+    return false;
+  }
+}
+
 uint8_t fc::id_to_len(uint8_t id) {
   switch (id) {
+  case 0:
+    return 2;
+    break;
+  case 1:
+    return 1;
+    break;
+  case 2:
+    return 2;
+    break;
+  case 3:
+    return 1;
+    break;
+  case 4:
+    return 3;
+    break;
   case 16:
     return 4;
     break;
@@ -58,11 +164,14 @@ uint8_t fc::id_to_len(uint8_t id) {
   case 41:
     return 0;
     break;
+  case 64:
+    return 4;
+    break;
   case 80:
     return 4;
     break;
   case 81:
-    return 4;
+    return 8;
     break;
   case 82:
     return 4;
@@ -70,11 +179,29 @@ uint8_t fc::id_to_len(uint8_t id) {
   case 83:
     return 12;
     break;
+  case 255:
+    return 4;
+    break;
   }
 }
 
 enum fc::units fc::id_to_source(uint8_t id) {
   switch (id) {
+  case 0:
+    return units::test;
+    break;
+  case 1:
+    return units::test;
+    break;
+  case 2:
+    return units::test;
+    break;
+  case 3:
+    return units::test;
+    break;
+  case 4:
+    return units::test;
+    break;
   case 16:
     return units::ground_station;
     break;
@@ -126,6 +253,9 @@ enum fc::units fc::id_to_source(uint8_t id) {
   case 41:
     return units::flight_controller;
     break;
+  case 64:
+    return units::test;
+    break;
   case 80:
     return units::flight_controller;
     break;
@@ -137,12 +267,30 @@ enum fc::units fc::id_to_source(uint8_t id) {
     break;
   case 83:
     return units::flight_controller;
+    break;
+  case 255:
+    return units::local;
     break;
   }
 }
 
 enum fc::units fc::id_to_target(uint8_t id) {
   switch (id) {
+  case 0:
+    return units::test;
+    break;
+  case 1:
+    return units::test;
+    break;
+  case 2:
+    return units::test;
+    break;
+  case 3:
+    return units::test;
+    break;
+  case 4:
+    return units::test;
+    break;
   case 16:
     return units::flight_controller_tc;
     break;
@@ -194,6 +342,9 @@ enum fc::units fc::id_to_target(uint8_t id) {
   case 41:
     return units::ground_station_tc;
     break;
+  case 64:
+    return units::test;
+    break;
   case 80:
     return units::ground_station_tm;
     break;
@@ -206,11 +357,29 @@ enum fc::units fc::id_to_target(uint8_t id) {
   case 83:
     return units::ground_station_tm;
     break;
+  case 255:
+    return units::local;
+    break;
   }
 }
 
 enum fc::datatypes fc::id_to_datatype(uint8_t id) {
   switch (id) {
+  case 0:
+    return datatypes::altitude;
+    break;
+  case 1:
+    return datatypes::acceleration;
+    break;
+  case 2:
+    return datatypes::pressure;
+    break;
+  case 3:
+    return datatypes::catastrophe;
+    break;
+  case 4:
+    return datatypes::gyro;
+    break;
   case 16:
     return datatypes::time_sync;
     break;
@@ -227,7 +396,7 @@ enum fc::datatypes fc::id_to_datatype(uint8_t id) {
     return datatypes::set_data_logging;
     break;
   case 21:
-    return datatypes::dump_flash_chip;
+    return datatypes::dump_flash;
     break;
   case 22:
     return datatypes::handshake;
@@ -262,6 +431,9 @@ enum fc::datatypes fc::id_to_datatype(uint8_t id) {
   case 41:
     return datatypes::return_handshake;
     break;
+  case 64:
+    return datatypes::ms_since_boot;
+    break;
   case 80:
     return datatypes::ms_since_boot;
     break;
@@ -273,6 +445,9 @@ enum fc::datatypes fc::id_to_datatype(uint8_t id) {
     break;
   case 83:
     return datatypes::GNSS_data_1;
+    break;
+  case 255:
+    return datatypes::local_timestamp;
     break;
   }
 }
