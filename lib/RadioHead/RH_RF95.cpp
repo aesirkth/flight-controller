@@ -331,9 +331,9 @@ bool RH_RF95::send(const uint8_t* data, uint8_t len)
     if (len > RH_RF95_MAX_MESSAGE_LEN)
 	return false;
     if (millis() - _last_message_sent_at < MESSAGE_DELAY) {
-        _last_message_sent_at = millis();
         return false;
     }
+    _last_message_sent_at = millis();
 
     //waitpacketsent does not work for some reason
     //waitPacketSent(); // Make sure we dont interrupt an outgoing message
