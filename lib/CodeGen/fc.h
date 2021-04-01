@@ -11,10 +11,7 @@ enum struct units : uint8_t {
   local = 0,
   test = 1,
   ground_station = 2,
-  flight_controller_tc = 3,
-  flight_controller = 4,
-  ground_station_tc = 5,
-  ground_station_tm = 6,
+  flight_controller = 3,
 };
 enum struct datatypes : uint8_t {
   local_timestamp = 0,
@@ -847,7 +844,7 @@ public:
   void set_z(uint8_t value) { z = value; }
 };
 
-class time_sync_from_ground_station_to_flight_controller_tc {
+class time_sync_from_ground_station_to_flight_controller {
 public:
   uint32_t system_time;
   static_assert((sizeof(system_time) == 4), "invalid size");
@@ -862,7 +859,7 @@ public:
   void set_system_time(uint32_t value) { system_time = value; }
 };
 
-class set_power_mode_from_ground_station_to_flight_controller_tc {
+class set_power_mode_from_ground_station_to_flight_controller {
 public:
   uint8_t size = 0;
   uint8_t get_size() { return size; }
@@ -871,7 +868,7 @@ public:
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
-class set_radio_equipment_from_ground_station_to_flight_controller_tc {
+class set_radio_equipment_from_ground_station_to_flight_controller {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -893,7 +890,7 @@ public:
   }
 };
 
-class set_parachute_output_from_ground_station_to_flight_controller_tc {
+class set_parachute_output_from_ground_station_to_flight_controller {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -919,7 +916,7 @@ public:
   }
 };
 
-class set_data_logging_from_ground_station_to_flight_controller_tc {
+class set_data_logging_from_ground_station_to_flight_controller {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -937,7 +934,7 @@ public:
   }
 };
 
-class dump_flash_from_ground_station_to_flight_controller_tc {
+class dump_flash_from_ground_station_to_flight_controller {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -959,7 +956,7 @@ public:
   }
 };
 
-class handshake_from_ground_station_to_flight_controller_tc {
+class handshake_from_ground_station_to_flight_controller {
 public:
   uint8_t size = 0;
   uint8_t get_size() { return size; }
@@ -968,7 +965,7 @@ public:
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
-class return_time_sync_from_flight_controller_to_ground_station_tc {
+class return_time_sync_from_flight_controller_to_ground_station {
 public:
   uint8_t size = 0;
   uint8_t get_size() { return size; }
@@ -977,7 +974,7 @@ public:
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
-class return_power_mode_from_flight_controller_to_ground_station_tc {
+class return_power_mode_from_flight_controller_to_ground_station {
 public:
   uint8_t size = 0;
   uint8_t get_size() { return size; }
@@ -986,7 +983,7 @@ public:
   void build_buf(uint8_t *buf, uint8_t *index) {}
 };
 
-class return_radio_equipment_from_flight_controller_to_ground_station_tc {
+class return_radio_equipment_from_flight_controller_to_ground_station {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -1008,7 +1005,7 @@ public:
   }
 };
 
-class return_parachute_output_from_flight_controller_to_ground_station_tc {
+class return_parachute_output_from_flight_controller_to_ground_station {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -1034,7 +1031,7 @@ public:
   }
 };
 
-class onboard_battery_voltage_from_flight_controller_to_ground_station_tc {
+class onboard_battery_voltage_from_flight_controller_to_ground_station {
 public:
   uint16_t battery_1;
   static_assert((sizeof(battery_1) == 2), "invalid size");
@@ -1058,7 +1055,7 @@ public:
   }
 };
 
-class gnss_data_from_flight_controller_to_ground_station_tc {
+class gnss_data_from_flight_controller_to_ground_station {
 public:
   uint32_t gnss_time;
   static_assert((sizeof(gnss_time) == 4), "invalid size");
@@ -1093,7 +1090,7 @@ public:
   void set_n_satellites(uint8_t value) { n_satellites = value; }
 };
 
-class flight_controller_status_from_flight_controller_to_ground_station_tc {
+class flight_controller_status_from_flight_controller_to_ground_station {
 public:
   uint8_t HW_state;
   static_assert((sizeof(HW_state) == 1), "invalid size");
@@ -1118,7 +1115,7 @@ public:
   void set_mission_state(uint8_t value) { mission_state = value; }
 };
 
-class return_data_logging_from_flight_controller_to_ground_station_tc {
+class return_data_logging_from_flight_controller_to_ground_station {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -1136,7 +1133,7 @@ public:
   }
 };
 
-class return_dump_flash_from_flight_controller_to_ground_station_tc {
+class return_dump_flash_from_flight_controller_to_ground_station {
 public:
   uint8_t bit_field = 0;
   static_assert((sizeof(bit_field) == 1), "invalid size");
@@ -1158,7 +1155,7 @@ public:
   }
 };
 
-class return_handshake_from_flight_controller_to_ground_station_tc {
+class return_handshake_from_flight_controller_to_ground_station {
 public:
   uint8_t size = 0;
   uint8_t get_size() { return size; }
@@ -1182,7 +1179,7 @@ public:
   void set_ms_since_boot(uint32_t value) { ms_since_boot = value; }
 };
 
-class ms_since_boot_from_flight_controller_to_ground_station_tm {
+class ms_since_boot_from_flight_controller_to_ground_station {
 public:
   uint32_t ms_since_boot;
   static_assert((sizeof(ms_since_boot) == 4), "invalid size");
@@ -1197,7 +1194,7 @@ public:
   void set_ms_since_boot(uint32_t value) { ms_since_boot = value; }
 };
 
-class us_since_boot_from_flight_controller_to_ground_station_tm {
+class us_since_boot_from_flight_controller_to_ground_station {
 public:
   uint64_t us_since_boot;
   static_assert((sizeof(us_since_boot) == 8), "invalid size");
@@ -1212,7 +1209,7 @@ public:
   void set_us_since_boot(uint64_t value) { us_since_boot = value; }
 };
 
-class current_time_from_flight_controller_to_ground_station_tm {
+class current_time_from_flight_controller_to_ground_station {
 public:
   uint32_t ms_since_boot;
   static_assert((sizeof(ms_since_boot) == 4), "invalid size");
@@ -1227,7 +1224,7 @@ public:
   void set_ms_since_boot(uint32_t value) { ms_since_boot = value; }
 };
 
-class GNSS_data_1_from_flight_controller_to_ground_station_tm {
+class GNSS_data_1_from_flight_controller_to_ground_station {
 public:
   uint32_t gnss_time;
   static_assert((sizeof(gnss_time) == 4), "invalid size");
@@ -1318,7 +1315,7 @@ public:
     fc::time_sync __message;                                                   \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
-    __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_target(fc::units::flight_controller);                        \
     __message.set_id(16);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1327,7 +1324,7 @@ public:
     fc::set_power_mode __message;                                              \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
-    __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_target(fc::units::flight_controller);                        \
     __message.set_id(17);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1336,7 +1333,7 @@ public:
     fc::set_radio_equipment __message;                                         \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
-    __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_target(fc::units::flight_controller);                        \
     __message.set_id(18);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1345,7 +1342,7 @@ public:
     fc::set_parachute_output __message;                                        \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
-    __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_target(fc::units::flight_controller);                        \
     __message.set_id(19);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1354,7 +1351,7 @@ public:
     fc::set_data_logging __message;                                            \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
-    __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_target(fc::units::flight_controller);                        \
     __message.set_id(20);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1363,7 +1360,7 @@ public:
     fc::dump_flash __message;                                                  \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
-    __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_target(fc::units::flight_controller);                        \
     __message.set_id(21);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1372,7 +1369,7 @@ public:
     fc::handshake __message;                                                   \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::ground_station);                           \
-    __message.set_target(fc::units::flight_controller_tc);                     \
+    __message.set_target(fc::units::flight_controller);                        \
     __message.set_id(22);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1381,7 +1378,7 @@ public:
     fc::return_time_sync __message;                                            \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(32);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1390,7 +1387,7 @@ public:
     fc::return_power_mode __message;                                           \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(33);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1399,7 +1396,7 @@ public:
     fc::return_radio_equipment __message;                                      \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(34);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1408,7 +1405,7 @@ public:
     fc::return_parachute_output __message;                                     \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(35);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1417,7 +1414,7 @@ public:
     fc::onboard_battery_voltage __message;                                     \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(36);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1426,7 +1423,7 @@ public:
     fc::gnss_data __message;                                                   \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(37);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1435,7 +1432,7 @@ public:
     fc::flight_controller_status __message;                                    \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(38);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1444,7 +1441,7 @@ public:
     fc::return_data_logging __message;                                         \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(39);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1453,7 +1450,7 @@ public:
     fc::return_dump_flash __message;                                           \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(40);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1462,7 +1459,7 @@ public:
     fc::return_handshake __message;                                            \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tc);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(41);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1480,7 +1477,7 @@ public:
     fc::ms_since_boot __message;                                               \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(80);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1489,7 +1486,7 @@ public:
     fc::us_since_boot __message;                                               \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(81);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1498,7 +1495,7 @@ public:
     fc::current_time __message;                                                \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(82);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \
@@ -1507,7 +1504,7 @@ public:
     fc::GNSS_data_1 __message;                                                 \
     __message.parse_buf(buf);                                                  \
     __message.set_source(fc::units::flight_controller);                        \
-    __message.set_target(fc::units::ground_station_tm);                        \
+    __message.set_target(fc::units::ground_station);                           \
     __message.set_id(83);                                                      \
     fc_rx(__message);                                                          \
     break;                                                                     \

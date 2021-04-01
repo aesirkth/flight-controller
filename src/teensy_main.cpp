@@ -279,7 +279,7 @@ void fc_rx(fc::set_parachute_output msg) {
     analogWrite(PIN_BUZZER, 122);
     para2_timer.begin(enableParachute1, PARACHUTE_DELAY_US); 
   }
-  fc::return_parachute_output_from_flight_controller_to_ground_station_tc response;
+  fc::return_parachute_output_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
   uint8_t buf[len];
   response.set_is_parachute1_en(para1);
@@ -292,7 +292,7 @@ void fc_rx(fc::set_parachute_output msg) {
 
 void fc_rx(fc::set_data_logging msg) {
   data_logging_enabled = msg.get_is_logging_en();
-  fc::return_data_logging_from_flight_controller_to_ground_station_tc response;
+  fc::return_data_logging_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
   uint8_t buf[len];
   protocol.build_buf(response, buf, &len);
@@ -301,7 +301,7 @@ void fc_rx(fc::set_data_logging msg) {
 }
 
 void fc_rx(fc::handshake msg) {
-  fc::return_handshake_from_flight_controller_to_ground_station_tc response;
+  fc::return_handshake_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
   uint8_t buf[len];
   protocol.build_buf(response, buf, &len);
@@ -338,8 +338,11 @@ void DataProtocol_callback(uint64_t id, uint8_t* buf, uint8_t len) {
   }
   //relay ec -> telemetry
   if (EC_TO_GC_TM_START <= id && id <= EC_TO_GC_TM_END) {
-    add_to_telemetry_buf(header_buf, header_index);
-    add_to_telemetry_buf(buf, len);
+    can_message_count[id] = (can_message_count[id] + 1) % can_relay_frequency[id].val;
+    if (can_message_count[id] == 0) {
+      add_to_telemetry_buf(header_buf, header_index);
+      add_to_telemetry_buf(buf, len);
+    }
   }
 }
 
@@ -380,8 +383,8 @@ void loop() {
       //PONG!
     }
     if (cycle_count % TC_GNSS_CYCLE == 0) {
-      fc::gnss_data_from_flight_controller_to_ground_station_tc tc_msg;
-      fc::GNSS_data_1_from_flight_controller_to_ground_station_tm tm_msg;
+      fc::gnss_data_from_flight_controller_to_ground_station tc_msg;
+      fc::GNSS_data_1_from_flight_controller_to_ground_station tm_msg;
       uint8_t len = 0;
       uint8_t buf[50];
       uint32_t gnss_time = 0;
@@ -425,7 +428,7 @@ void loop() {
     //empty all buffers
     if (telemetry_index > LEN_MS_SINCE_BOOT_MSG) {
       uint8_t index = 0;
-      fc::ms_since_boot_from_flight_controller_to_ground_station_tm msg;
+      fc::ms_since_boot_from_flight_controller_to_ground_station msg;
       msg.set_ms_since_boot(current_time);
       protocol.build_buf(msg, telemetry_buf, &index);
       if (telemetry_enabled) {
@@ -436,7 +439,7 @@ void loop() {
     }
     if (backup_index > LEN_MS_SINCE_BOOT_MSG) {
       uint8_t index = 0;
-      fc::ms_since_boot_from_flight_controller_to_ground_station_tm msg;
+      fc::ms_since_boot_from_flight_controller_to_ground_station msg;
       msg.set_ms_since_boot(current_time);
       protocol.build_buf(msg, backup_buf, &index);
       if (data_logging_enabled) {
@@ -446,7 +449,7 @@ void loop() {
     }
     if (telecommand_index > LEN_MS_SINCE_BOOT_MSG && (cycle_count % LORA_SEND_CYCLE  == 0)) {
       uint8_t index = 0;
-      fc::ms_since_boot_from_flight_controller_to_ground_station_tm msg;
+      fc::ms_since_boot_from_flight_controller_to_ground_station msg;
       msg.set_ms_since_boot(current_time);
       protocol.build_buf(msg, telecommand_buf, &index);
       rfm.send(telecommand_buf, telecommand_index);

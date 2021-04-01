@@ -292,70 +292,70 @@ enum fc::units fc::id_to_target(uint8_t id) {
     return units::test;
     break;
   case 16:
-    return units::flight_controller_tc;
+    return units::flight_controller;
     break;
   case 17:
-    return units::flight_controller_tc;
+    return units::flight_controller;
     break;
   case 18:
-    return units::flight_controller_tc;
+    return units::flight_controller;
     break;
   case 19:
-    return units::flight_controller_tc;
+    return units::flight_controller;
     break;
   case 20:
-    return units::flight_controller_tc;
+    return units::flight_controller;
     break;
   case 21:
-    return units::flight_controller_tc;
+    return units::flight_controller;
     break;
   case 22:
-    return units::flight_controller_tc;
+    return units::flight_controller;
     break;
   case 32:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 33:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 34:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 35:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 36:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 37:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 38:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 39:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 40:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 41:
-    return units::ground_station_tc;
+    return units::ground_station;
     break;
   case 64:
     return units::test;
     break;
   case 80:
-    return units::ground_station_tm;
+    return units::ground_station;
     break;
   case 81:
-    return units::ground_station_tm;
+    return units::ground_station;
     break;
   case 82:
-    return units::ground_station_tm;
+    return units::ground_station;
     break;
   case 83:
-    return units::ground_station_tm;
+    return units::ground_station;
     break;
   case 255:
     return units::local;
