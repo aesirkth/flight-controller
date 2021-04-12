@@ -1,5 +1,7 @@
-#include "FlashMemory.hpp"
+#include <string.h>
 
+#include "FlashMemory.hpp"
+#include "DmaSpi.h"
 /* 
     Class constructor
 */
@@ -10,7 +12,6 @@ Flash::Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_
     _ss = pin_ss;
     _wp = pin_wp;
     _hold = pin_hold;
-
     pinMode(_ss, OUTPUT);
     pinMode(_wp, OUTPUT);
     pinMode(_hold, OUTPUT);
@@ -155,6 +156,27 @@ int Flash::writeEnable()
     return ret_val;
 }
 
+void Flash::bufferedWrite(uint8_t* buf, uint8_t len) {
+     if (_write_buf_index + len > PAGE_SIZE) {
+         uint8_t remaining = PAGE_SIZE - _write_buf_index;
+         memcpy(_write_buf + _write_buf_index, buf, remaining);
+         programDataLoad(_write_buf, 0);
+         programExecute(_buffered_page_index);
+         memcpy(_write_buf, buf + remaining, len - remaining);
+         _write_buf_index = len - remaining;
+         _buffered_page_index++;
+         return;
+     }
+     memcpy(_write_buf + _write_buf_index, buf, len);
+}
+
+void Flash::flush() {
+    programDataLoad(_write_buf, _write_buf_index);
+    programExecute(_buffered_page_index);
+    _buffered_page_index++;
+    _write_buf_index = 0;
+}
+
 /*
     This instruction transfer the data stored in the given Page Address into the memory's 
     data buffer. This process will complete after max 'tRD = 60us'.
@@ -262,6 +284,30 @@ int Flash::programDataLoad(uint8_t * data_buffer, uint16_t column_addr)
     ret_val = RET_SUCCESS;
 
     return ret_val;
+}
+
+void Flash::programDataLoadAsync(uint8_t * data_buffer, uint16_t column_addr)
+{
+    static DmaSpi1::Transfer* trx;
+    static AbstractChipSelect* cs;
+
+    _spi->beginTransaction(_spi_settings);
+    while (isBusy())
+    {
+        delayMicroseconds(1);
+    }
+    _spi->endTransaction();
+ 
+    uint16_t len = 3 + PAGE_SIZE - column_addr;
+    _dma_buf[0] = OPCODE_PROGRAM_LOAD;
+    _dma_buf[1] = (uint8_t)(column_addr >> 8);
+    _dma_buf[2] = (uint8_t)(column_addr);
+    memcpy(_dma_buf + 3, data_buffer, PAGE_SIZE - column_addr);
+    free(trx);
+    free(cs);
+    cs = new ActiveLowChipSelect1(_ss, _spi_settings);
+    trx = new DmaSpi1::Transfer(_dma_buf, len, nullptr, 0, cs);
+    _dma_spi->registerTransfer(*trx);
 }
 
 /*
@@ -445,7 +491,7 @@ void testFlashMemory(Flash * obj)
     uint8_t write_buff[2048];
     uint8_t read_buff[2048];
     uint8_t page_count;
-    uint8_t ret_val = 0;
+    int8_t ret_val = 0;
     
     Serial.println("** ERASE block 0**");
     obj->writeEnable();

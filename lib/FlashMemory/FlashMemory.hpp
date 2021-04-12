@@ -3,6 +3,9 @@
 
 #include <Arduino.h>
 #include <SPI.h>
+#include "DmaSpi.h"
+
+#define PAGE_SIZE 2048
 
 #define RET_ERROR   -1
 #define RET_BUSY    0
@@ -64,12 +67,17 @@ class Flash
 {
     // SPI bus and specific pins configuration
     SPIClass * _spi;
+    DmaSpi1* _dma_spi = &DMASPI1; // hard code this until i feel like implementing templates
     SPISettings _spi_settings;
     uint8_t _ss;
     uint8_t _wp;
     uint8_t _hold;
 
-
+    uint8_t _write_buf[PAGE_SIZE];
+    uint8_t _dma_buf[3 + PAGE_SIZE];
+    //uint8_t* _dma_buf = (uint8_t*) malloc(3 + PAGE_SIZE);
+    uint8_t _write_buf_index = 0;
+    uint8_t _buffered_page_index = 0;
 
 public:
     Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_t pin_wp, uint8_t pin_hold);
@@ -79,13 +87,16 @@ public:
     int readStatusRegister(uint8_t reg_address, uint8_t * reg_value);
     int writeStatusRegister(uint8_t reg_address, uint8_t reg_value);
     int writeEnable();
+    void bufferedWrite(uint8_t* buf, uint8_t len);
+    void flush();
+    
     //int writeDisable();
     int pageDataRead(uint16_t page_addr);
     int readData(uint8_t * data_buffer, uint16_t column_addr);
     int programDataLoad(uint8_t * data_buffer, uint16_t column_addr);
+    void programDataLoadAsync(uint8_t * data_buffer, uint16_t column_addr);
     int programExecute(uint16_t page_addr);
     int blockErase(uint16_t page_addr);
-
 
     uint8_t isBusy();
     void checkFactoryBadBlocks(); // Use always before using the memory for its intended application

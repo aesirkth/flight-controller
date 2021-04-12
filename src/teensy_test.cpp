@@ -1,221 +1,144 @@
-// Simple performance test for Teensy 3.5/3.6 4.0 SDHC.
-// Demonstrates yield() efficiency for SDIO modes.
-#include <SdFat.h>
+#include <Arduino.h>
+#include <FlexCAN.h>  //https://github.com/pawelsky/FlexCAN_Library
+#include <SPI.h>
+#include <Adafruit_NeoPixel.h>
+#include <stdio.h>
+#include <map>
 
-// Use built-in SD for SPI modes on Teensy 3.5/3.6.
-// Teensy 4.0 use first SPI port.
-// SDCARD_SS_PIN is defined for the built-in SD on some boards.
-#ifndef SDCARD_SS_PIN
-const uint8_t SD_CS_PIN = SS;
-#else  // SDCARD_SS_PIN
-// Assume built-in SD is used.
-const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
-#endif  // SDCARD_SS_PIN
+#include "MS5611.h"
+#include "DmaSpi.h"
+#include "SdFat.h"
+#include "RH_RF95.h"  //THIS IS A MODIFIED LIBRARY WITHOUT ERROR CHECKING 
+#include "RHHardwareSPI1.h"
+#include "hardware_definition_teensy.h"
+#include "Gps.h"
+#include "DataProtocol.h"
+#include "fc.h"
+#include "FlashMemory.hpp"
+#include "ChipSelect.h"
 
-// SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
-// 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.
-#define SD_FAT_TYPE 3
+//*********************************** IMPORTANT *******************************************
+// DUE TO A HARDWARE FAULT DO NOT USE THE LORA MORE THAN ONCE EVERY 3 SECONDS!!!
+// The radiohead library has been modified to not do it.
+//*********************************** IMPORTANT *******************************************
 
-// 32 KiB buffer.
-const size_t BUF_DIM = 32768;
+//*********************************** IMPORTANT *******************************************
+// modify the serial2.c to increase the buffer size 
+// On linux it can be found here
+// "/home/olof/.platformio/packages/framework-arduinoteensy/cores/teensy3/serial2.c"
+// line 40:
+// #define SERIAL2_TX_BUFFER_SIZE     40
+// change it to 256
+// Otherwise everything will be waaay too slow
+// slow code might be ok for debugging but WILL NOT work when actively using the telemetry modem
+//*********************************** IMPORTANT *******************************************
 
-// 8 MiB file.
-const uint32_t FILE_SIZE = 256UL*BUF_DIM;
+#define LIVE_FILE_NAME "/LIVEDATA.BIN"
+#define DUMPED_FILE_NAME "/DUMPEDDATA.BIN"
+#define LEN_MS_SINCE_BOOT_MSG 7
+#define GPS_LED 0
+#define STATE_LED 1
+#define PARACHUTE_DELAY_US 5000000
+#define TELECOMMAND_MAX_MSG_LEN 30
+#define GPS_BAUD 38400
+#define TELEMETRY_BAUD 57600
+#define BLUE 0x0000FF //blue
+#define GREEN 0x00FF00 //green
+#define RED 0xFF0000 //red
+#define BACKUP_BUF_LEN 100
+#define TELEMETRY_BUF_LEN 100
+#define TELECOMMAND_BUF_LEN 100
 
-#if SD_FAT_TYPE == 0
-SdFat sd;
-File file;
-#elif SD_FAT_TYPE == 1
-SdFat32 sd;
-File32 file;
-#elif SD_FAT_TYPE == 2
-SdExFat sd;
-ExFile file;
-#elif SD_FAT_TYPE == 3
-SdFs sd;
-FsFile file;
-#else  // SD_FAT_TYPE
-#error Invalid SD_FAT_TYPE
-#endif  // SD_FAT_TYPE
+#define CYCLES_PER_SEC 1000
+#define CYCLE_DELAY_US (1000000 / CYCLES_PER_SEC)
+#define CYCLE_DELAY_MS (1000 / CYCLES_PER_SEC)
+#define LORA_SEND_CYCLE 3000
+#define BLINK_LED_CYCLE 3000
+#define PING_EDDA_CYCLE 5000
+#define TC_GNSS_CYCLE 6000
 
-uint8_t buf[BUF_DIM];
+#define WT_PAGE_MSB 0x00
+#define WT_PAGE_LSB 0x01
 
-// buffer as uint32_t
-uint32_t* buf32 = (uint32_t*)buf;
+SPISettings settingsFlash(10000000, MSBFIRST, SPI_MODE0); // SPI bus settings to communicate with the Flash IC
 
-// Total usec in read/write calls.
-uint32_t totalMicros = 0;
-// Time in yield() function.
-uint32_t yieldMicros = 0;
-// Number of yield calls.
-uint32_t yieldCalls = 0;
-// Max busy time for single yield call.
-uint32_t yieldMaxUsec = 0;
-//------------------------------------------------------------------------------
-void clearSerialInput() {
-  uint32_t m = micros();
-  do {
-    if (Serial.read() >= 0) {
-      m = micros();
-    }
-  } while (micros() - m < 10000);
+struct default_uint8 {
+  uint8_t val = 1;
+};
+
+std::map<uint8_t, struct default_uint8> can_relay_frequency;
+std::map<uint8_t, uint8_t> can_message_count;
+
+Flash flash(&SPI1, settingsFlash, PIN_CS_FLASH, PIN_WP, PIN_HOLD); // flash chip
+MS5611 ms1(PIN_CS_MS1, SPI); // pressure sensor
+IntervalTimer para1_timer; // timer for parachute 1
+IntervalTimer para2_timer; // timer for parachute 1
+DataProtocol protocol; // data protocol reader
+static CAN_message_t can_msg; // msg for the can bus
+FlexCAN CANbus(1000000, 0, 1, 1);  // 1Mbs, CAN0, pins 29&30 for TX&RX
+GPS gps1; // for gps on Serial1
+GPS gps2; // for gps on Serial3
+GPS* best_gps; // stores the best gps
+RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), hardware_spi1); // LoRa modem
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400); // led lights
+SdFs SD; // SD card handler
+FsFile live_file; // sd file that should be written to in real time
+uint8_t backup_buf[BACKUP_BUF_LEN]; // buf for the flashchip
+uint8_t backup_index = LEN_MS_SINCE_BOOT_MSG; // index for flashchip buf
+uint8_t telemetry_buf[TELEMETRY_BUF_LEN]; // buf for the telemetry modem
+uint8_t telemetry_index = LEN_MS_SINCE_BOOT_MSG; // index for telemetry buf
+uint8_t telecommand_buf[TELECOMMAND_BUF_LEN]; // buf for the LoRa modem
+uint8_t telecommand_index = LEN_MS_SINCE_BOOT_MSG; // index for the LoRa modem buf
+bool error = false;
+bool parachute_armed = false;
+bool data_logging_enabled = false;
+bool telemetry_enabled = true;
+bool telecommand_enabled = true;
+bool FPV_enabled = false;
+bool gps_led_on = false;
+bool rfm_init_success = 0;
+
+void initPins() {
+  pinMode(PIN_RFD_DIS, OUTPUT);
+  pinMode(PIN_FPV_DIS, OUTPUT);
+  pinMode(PIN_RFM_RST, OUTPUT);
+  pinMode(PIN_PARA1, OUTPUT);
+  pinMode(PIN_PARA2, OUTPUT);
+  pinMode(PIN_BUZZER, OUTPUT);
+  analogWriteFrequency(PIN_BUZZER, BUZZER_FREQ);
+  analogWriteRes(8);
+  digitalWriteFast(PIN_RFD_DIS, LOW); //HIGH MEANS DISABLED
+  digitalWriteFast(PIN_FPV_DIS, LOW); //HIGH MEANS DISABLED
+  digitalWriteFast(PIN_PARA1, LOW); //LOW IS INACTIVE
+  digitalWriteFast(PIN_PARA2, LOW); //LOW IS INACTIVE
+  SPI1.setMOSI(PIN_MOSI1);
+  SPI1.setMISO(PIN_MISO1);
+  SPI1.setSCK(PIN_SCK1);
+  SPI1.begin();
+  SPI.setMOSI(PIN_MOSI0);
+  SPI.setMISO(PIN_MISO0);
+  SPI.setSCK(PIN_SCK0);
+  SPI.begin();
+  delay(100);
 }
-//------------------------------------------------------------------------------
-void errorHalt(const char* msg) {
-  Serial.print("Error: ");
-  Serial.println(msg);
-  if (sd.sdErrorCode()) {
-    if (sd.sdErrorCode() == SD_CARD_ERROR_ACMD41) {
-      Serial.println("Try power cycling the SD card.");
-    }
-    printSdErrorSymbol(&Serial, sd.sdErrorCode());
-    Serial.print(", ErrorData: 0X");
-    Serial.println(sd.sdErrorData(), HEX);
-  }
-  while (true) {}
-}
-bool ready = false;
-//------------------------------------------------------------------------------
-bool sdBusy() {
-  return ready ? sd.card()->isBusy() : false;
-}
-//------------------------------------------------------------------------------
-// Replace "weak" system yield() function.
-void yield() {
-  // Only count cardBusy time.
-  if (!sdBusy()) {
-    return;
-  }
-  uint32_t m = micros();
-  yieldCalls++;
-  while (sdBusy()) {
-    // Do something here.
-  }
-  m = micros() - m;
-  if (m > yieldMaxUsec) {
-    yieldMaxUsec = m;
-  }
-  yieldMicros += m;
-}
-//------------------------------------------------------------------------------
-void runTest() {
-  // Zero Stats
-  totalMicros = 0;
-  yieldMicros = 0;
-  yieldCalls = 0;
-  yieldMaxUsec = 0;
-  if (!file.open("TeensyDemo.bin", O_RDWR | O_CREAT)) {
-    errorHalt("open failed");
-  }
-  Serial.println("\nsize,write,read");
-  Serial.println("bytes,KB/sec,KB/sec");
-  for (size_t nb = 512; nb <= BUF_DIM; nb *= 2) {
-    uint32_t nRdWr = FILE_SIZE/nb;
-    if (!file.truncate(0)) {
-      errorHalt("truncate failed");
-    }
 
-    Serial.print(nb);
-    Serial.print(',');
-    uint32_t t = micros();
-    for (uint32_t n = 0; n < nRdWr; n++) {
-      // Set start and end of buffer.
-      buf32[0] = n;
-      buf32[nb/4 - 1] = n;
-      if (nb != file.write(buf, nb)) {
-        errorHalt("write failed");
-      }
-    }
-    t = micros() - t;
-    totalMicros += t;
-    Serial.print(1000.0*FILE_SIZE/t);
-    Serial.print(',');
-    file.rewind();
-    t = micros();
-
-    for (uint32_t n = 0; n < nRdWr; n++) {
-      if ((int)nb != file.read(buf, nb)) {
-        errorHalt("read failed");
-      }
-      // crude check of data.
-      if (buf32[0] != n || buf32[nb/4 - 1] != n) {
-        errorHalt("data check");
-      }
-    }
-    t = micros() - t;
-    totalMicros += t;
-    Serial.println(1000.0*FILE_SIZE/t);
-  }
-  file.close();
-  Serial.print("\ntotalMicros  ");
-  Serial.println(totalMicros);
-  Serial.print("yieldMicros  ");
-  Serial.println(yieldMicros);
-  Serial.print("yieldCalls   ");
-  Serial.println(yieldCalls);
-  Serial.print("yieldMaxUsec ");
-  Serial.println(yieldMaxUsec);
-//  Serial.print("kHzSdClk     ");
-//  Serial.println(kHzSdClk());
-  Serial.println("Done");
-}
-//------------------------------------------------------------------------------
 void setup() {
-  Serial.begin(9600);
-  while (!Serial) {
+  initPins();
+
+  uint8_t buf[2048];
+  for (uint16_t i = 0; i < 2048; i++) {
+    buf[i] = 34;
   }
+  DMASPI1.begin();
+  DMASPI1.start();
+
+  while (!Serial){}
+  Serial.println("init");
+  uint32_t before = micros();
+  uint32_t after = micros();
+  Serial.println(flash.writeEnable());
+  Serial.println(flash.blockErase(70));
 }
-//------------------------------------------------------------------------------
+
 void loop() {
-  static bool warn = true;
-  if (warn) {
-    warn = false;
-    Serial.println(
-      "SD cards must be power cycled to leave\n"
-      "SPI mode so do SDIO tests first.\n"
-      "\nCycle power on the card if an error occurs.");
-  }
-  clearSerialInput();
-
-  Serial.println(
-    "\nType '1' for FIFO SDIO"
-    "\n     '2' for DMA SDIO"
-    "\n     '3' for Dedicated SPI"
-    "\n     '4' for Shared SPI");
-  while (!Serial.available()) {
-  }
-  char c = Serial.read();
-
-  if (c =='1') {
-    if (!sd.begin(SdioConfig(FIFO_SDIO))) {
-      errorHalt("begin failed");
-    }
-    Serial.println("\nFIFO SDIO mode.");
-  } else if (c == '2') {
-    if (!sd.begin(SdioConfig(DMA_SDIO))) {
-      errorHalt("begin failed");
-    }
-    Serial.println("\nDMA SDIO mode - slow for small transfers.");
-  } else if (c == '3') {
-#if ENABLE_DEDICATED_SPI
-    if (!sd.begin(SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(50)))) {
-      errorHalt("begin failed");
-    }
-    Serial.println("\nDedicated SPI mode.");
-#else  // ENABLE_DEDICATED_SPI
-    Serial.println("ENABLE_DEDICATED_SPI must be non-zero.");
-    return;
-#endif  // ENABLE_DEDICATED_SPI
-  } else if (c == '4') {
-    if (!sd.begin(SdSpiConfig(SD_CS_PIN, SHARED_SPI, SD_SCK_MHZ(50)))) {
-      errorHalt("begin failed");
-    }
-    Serial.println("\nShared SPI mode - slow for small transfers.");
-  } else {
-    Serial.println("Invalid input");
-    return;
-  }
-  ready = true;
-  runTest();
-  ready = false;
 }

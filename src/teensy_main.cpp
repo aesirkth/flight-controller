@@ -1,23 +1,36 @@
-//DUE TO A HARDWARE FAULT DO NOT USE THE LORA MORE THAN ONCE EVERY 3 SECONDS!!!
-
+#include <Arduino.h>
 #include <FlexCAN.h>  //https://github.com/pawelsky/FlexCAN_Library
 #include <SPI.h>
-#include <RH_RF95.h> //THIS IS A MODIFIED LIBRARY WITHOUT ERROR CHECKING 
-#include <RHHardwareSPI1.h>
 #include <Adafruit_NeoPixel.h>
-#include <SdFat.h>
 #include <stdio.h>
 #include <map>
 
+#include "MS5611.h"
+#include "DmaSpi.h" // SPI using DMA, KurtE's branch, chipselect.h modified to support callbacks
+#include "SdFat.h" // read and write from the sd-card
+#include "RH_RF95.h" // LoRa radio, modified to skip some error checking 
+#include "RHHardwareSPI1.h" // headers for SPI1 and radiohead
+#include "hardware_definition_teensy.h" // pin definitions
+#include "Gps.h" // GPS
+#include "DataProtocol.h" // to extract and find data in a stream
+#include "fc.h" // to decode and encode data
+#include "FlashMemory.hpp" // read and write to the flash chip, hard coded to use SPI1
 
-#include "hardware_definition_teensy.h"
-#include "Gps.h"
-#include "Clock.h"
-#include "DataProtocol.h"
-#include "fc.h"
-#include "FlashMemory.hpp"
+//*********************************** IMPORTANT *******************************************
+// DUE TO A HARDWARE FAULT DO NOT USE THE LORA MORE THAN ONCE EVERY 3 SECONDS!!!
+// The radiohead library has been modified to not do it.
+//*********************************** IMPORTANT *******************************************
 
-#define LIVE_FILE_NAME "/LIVEDATA.BIN"
+//*********************************** IMPORTANT *******************************************
+// modify the serial2.c to increase the buffer size 
+// On linux it can be found here
+// "/home/olof/.platformio/packages/framework-arduinoteensy/cores/teensy3/serial2.c"
+// line 40:
+// #define SERIAL2_TX_BUFFER_SIZE     40
+// change it to 256
+// Otherwise everything will be waaay too slow
+// slow code might be ok for debugging but WILL NOT work when actively using the telemetry modem
+//*********************************** IMPORTANT *******************************************
 #define DUMPED_FILE_NAME "/DUMPEDDATA.BIN"
 #define LEN_MS_SINCE_BOOT_MSG 7
 #define GPS_LED 0
@@ -41,15 +54,6 @@
 #define PING_EDDA_CYCLE 5000
 #define TC_GNSS_CYCLE 6000
 
-#define WT_PAGE_MSB 0x00
-#define WT_PAGE_LSB 0x01
-
-SPISettings settingsFlash(10000000, MSBFIRST, SPI_MODE0); // SPI bus settings to communicate with the Flash IC
-Flash memory(&SPI1, settingsFlash, PIN_CS_FLASH, PIN_WP, PIN_HOLD);
-uint8_t write_buffer[2048];
-uint8_t read_buffer[2048];
-
-uint8_t checkBusyFlash();
 struct default_uint8 {
   uint8_t val = 1;
 };
@@ -57,32 +61,31 @@ struct default_uint8 {
 std::map<uint8_t, struct default_uint8> can_relay_frequency;
 std::map<uint8_t, uint8_t> can_message_count;
 
-IntervalTimer para1_timer;
-IntervalTimer para2_timer;
-DataProtocol protocol;
-static CAN_message_t can_msg;
+GPS gps1; // for gps on Serial1
+GPS gps2; // for gps on Serial3
+SPISettings settingsFlash(10000000, MSBFIRST, SPI_MODE0); // SPI bus settings to communicate with the Flash IC
+Flash flash(&SPI1, settingsFlash, PIN_CS_FLASH, PIN_WP, PIN_HOLD); // flash chip
+MS5611 ms1(PIN_CS_MS1, SPI); // pressure sensor
+IntervalTimer para1_timer; // timer for parachute 1
+IntervalTimer para2_timer; // timer for parachute 1
+DataProtocol protocol; // data protocol reader
+static CAN_message_t can_msg; // msg for the can bus
 FlexCAN CANbus(1000000, 0, 1, 1);  // 1Mbs, CAN0, pins 29&30 for TX&RX
-GPS gps1;
-GPS gps2;
-GPS* best_gps;
-uint32_t gps_updated = 0;
-RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), hardware_spi1);
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400);
-SdFs SD;
-FsFile live_file;
-uint8_t backup_buf[BACKUP_BUF_LEN];
-uint8_t backup_index = LEN_MS_SINCE_BOOT_MSG;
-uint8_t telemetry_buf[TELEMETRY_BUF_LEN];
-uint8_t telemetry_index = LEN_MS_SINCE_BOOT_MSG;
-uint8_t telecommand_buf[TELECOMMAND_BUF_LEN];
-uint8_t telecommand_index = LEN_MS_SINCE_BOOT_MSG;
-uint32_t gps_led_updated = 0;
-uint64_t last_cycle_time = 0;
-uint64_t cycle_count = 0;
+GPS* best_gps; // stores the best gps
+RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), hardware_spi1); // LoRa modem
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400); // led lights
+SdFs SD; // SD card handler
+uint8_t backup_buf[BACKUP_BUF_LEN]; // buf for the flashchip
+uint8_t backup_index = LEN_MS_SINCE_BOOT_MSG; // index for flashchip buf
+uint8_t telemetry_buf[TELEMETRY_BUF_LEN]; // buf for the telemetry modem
+uint8_t telemetry_index = LEN_MS_SINCE_BOOT_MSG; // index for telemetry buf
+uint8_t telecommand_buf[TELECOMMAND_BUF_LEN]; // buf for the LoRa modem
+uint8_t telecommand_index = LEN_MS_SINCE_BOOT_MSG; // index for the LoRa modem buf
 bool error = false;
 bool parachute_armed = false;
 bool data_logging_enabled = false;
 bool telemetry_enabled = true;
+bool telecommand_enabled = true;
 bool FPV_enabled = false;
 bool gps_led_on = false;
 bool rfm_init_success = 0;
@@ -90,7 +93,6 @@ bool rfm_init_success = 0;
 void showError() {
   strip.setPixelColor(STATE_LED, RED);
   strip.show();
-  digitalWriteFast(LED_BUILTIN, HIGH);
   error = true;
 }
 
@@ -100,7 +102,6 @@ void showOk() {
   }
   strip.setPixelColor(STATE_LED, GREEN);
   strip.show();
-  digitalWriteFast(LED_BUILTIN, LOW);
 }
 
 void showNeutral() {
@@ -109,7 +110,6 @@ void showNeutral() {
   }
   strip.setPixelColor(STATE_LED, BLUE);
   strip.show();
-  digitalWriteFast(LED_BUILTIN, HIGH);
 }
 
 void add_to_backup_buf(uint8_t* buf, uint8_t size) {
@@ -131,13 +131,11 @@ void initPins() {
   pinMode(PIN_RFD_DIS, OUTPUT);
   pinMode(PIN_FPV_DIS, OUTPUT);
   pinMode(PIN_RFM_RST, OUTPUT);
-  pinMode(LED_BUILTIN, OUTPUT);
   pinMode(PIN_PARA1, OUTPUT);
   pinMode(PIN_PARA2, OUTPUT);
   pinMode(PIN_BUZZER, OUTPUT);
   analogWriteFrequency(PIN_BUZZER, BUZZER_FREQ);
   analogWriteRes(8);
-
   digitalWriteFast(PIN_RFD_DIS, LOW); //HIGH MEANS DISABLED
   digitalWriteFast(PIN_FPV_DIS, LOW); //HIGH MEANS DISABLED
   digitalWriteFast(PIN_PARA1, LOW); //LOW IS INACTIVE
@@ -145,7 +143,11 @@ void initPins() {
   SPI1.setMOSI(PIN_MOSI1);
   SPI1.setMISO(PIN_MISO1);
   SPI1.setSCK(PIN_SCK1);
-
+  SPI1.begin();
+  SPI.setMOSI(PIN_MOSI0);
+  SPI.setMISO(PIN_MISO0);
+  SPI.setSCK(PIN_SCK0);
+  SPI.begin();
   delay(100);
 }
 
@@ -174,6 +176,7 @@ void initGps() {
 }
 
 void updateGps() {
+  static uint32_t gps_led_updated = 0;
   //gps 1
   bool updated = false;
   while (Serial1.available() > 0) {
@@ -232,7 +235,6 @@ void initRadio() {
   resetRadio();
 
   rfm_init_success = rfm.init();
-  Serial.println(rfm_init_success);
   if (rfm_init_success) {
     rfm.setFrequency(RFM_FREQ);
     rfm.setTxPower(RFM_TX_POWER);
@@ -246,20 +248,36 @@ void initSD() {
     showError();
     return;
   }
-  if (not live_file.open(LIVE_FILE_NAME, O_RDWR | O_CREAT)) {
+}
+
+void initFlash() {
+  int8_t ret = flash.test();
+  if (ret != RET_SUCCESS) {
     showError();
-    return;
   }
 }
 
+void initDMA() {
+  if (not DMASPI1.begin()) {
+    showError();
+  }
+  DMASPI1.start();
+}
+
+void initSensors() {
+  ms1.begin();
+}
+
 void enableParachute1() {
-  digitalWriteFast(PIN_PARA1, LOW);
+  digitalWriteFast(PIN_PARA1, HIGH);
   analogWrite(PIN_BUZZER, 0);
+  para1_timer.end();
 }
 
 void enableParachute2() {
-  digitalWriteFast(PIN_PARA2, LOW);
+  digitalWriteFast(PIN_PARA2, HIGH);
   analogWrite(PIN_BUZZER, 0);
+  para2_timer.end();
 }
 
 void handleDataStreams() {
@@ -278,7 +296,7 @@ void handleDataStreams() {
   }
 }
 
-void fc_rx(fc::set_parachute_output msg) {
+void fc_rx(fc::set_parachute_output_from_ground_station_to_flight_controller msg) {
   bool para1 = parachute_armed && msg.get_is_parachute1_en();
   bool para2 = parachute_armed && msg.get_is_parachute2_en();
   parachute_armed = msg.get_is_parachute_armed();
@@ -302,7 +320,7 @@ void fc_rx(fc::set_parachute_output msg) {
   add_to_backup_buf(buf, len);
 }
 
-void fc_rx(fc::set_data_logging msg) {
+void fc_rx(fc::set_data_logging_from_ground_station_to_flight_controller msg) {
   data_logging_enabled = msg.get_is_logging_en();
   fc::return_data_logging_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
@@ -312,7 +330,7 @@ void fc_rx(fc::set_data_logging msg) {
   add_to_backup_buf(buf, len);
 }
 
-void fc_rx(fc::handshake msg) {
+void fc_rx(fc::handshake_from_ground_station_to_flight_controller msg) {
   fc::return_handshake_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
   uint8_t buf[len];
@@ -365,15 +383,38 @@ void setup() {
   initGps();
   initPins();
   initRadio();
-  //initSD();
+  initSD();
+  initFlash();
+  initDMA();
+  initSensors();
   //init telemetry
   Serial2.setRX(PIN_RX2);
   Serial2.setTX(PIN_TX2);
   Serial2.begin(TELEMETRY_BAUD);
+  //This is very important, see above
+  if (Serial2.availableForWrite() < 128) {
+    showError();
+  }
   showOk();
+
+  uint8_t buf[2048];
+  for (uint16_t i = 0; i < 2048; i++) {
+    buf[i] = 34;
+  }
+
+  while (!Serial){}
+  Serial.println("init");
+  uint32_t before = micros(); 
+  flash.programDataLoadAsync(buf, 0);
+  //Serial2.write(buf, 64);
+  uint32_t after = micros();
+  Serial.println(after- before);
 }
 
 void loop() {
+  static uint64_t last_cycle_time = 0;
+  static uint64_t cycle_count = 0;
+
   updateGps();
   handleDataStreams();
 
@@ -382,6 +423,7 @@ void loop() {
     if (current_time - last_cycle_time > CYCLE_DELAY_MS) {
       //Serial.println(current_time);
     }
+
     last_cycle_time = current_time;
     cycle_count++;
     if (cycle_count % BLINK_LED_CYCLE == 0) {
@@ -403,7 +445,7 @@ void loop() {
       int32_t latitude = 0, longitude = 0; 
       uint16_t h_dop = 0;
       uint8_t n_satellites = 0;
-      if (gps1.is_set(FLAG_HDOP))
+      if (best_gps->is_set(FLAG_HDOP))
       if (best_gps->is_set(FLAG_TIME)) {
         gnss_time = best_gps->raw_time;
       }
@@ -455,323 +497,21 @@ void loop() {
       msg.set_ms_since_boot(current_time);
       protocol.build_buf(msg, backup_buf, &index);
       if (data_logging_enabled) {
-        live_file.write(backup_buf, backup_index);
+        flash.bufferedWrite(backup_buf, backup_index);
       }
+      Serial.write(telecommand_buf, telecommand_index);
       backup_index = LEN_MS_SINCE_BOOT_MSG;
     }
-    if (telecommand_index > LEN_MS_SINCE_BOOT_MSG && (cycle_count % LORA_SEND_CYCLE  == 0)) {
+    if (telecommand_index > LEN_MS_SINCE_BOOT_MSG &&
+        cycle_count % LORA_SEND_CYCLE  == 0 && !DMASPI1.busy()) {
       uint8_t index = 0;
       fc::ms_since_boot_from_flight_controller_to_ground_station msg;
       msg.set_ms_since_boot(current_time);
       protocol.build_buf(msg, telecommand_buf, &index);
-      rfm.send(telecommand_buf, telecommand_index);
-      Serial.write(telecommand_buf, telecommand_index);
+      if (telecommand_enabled) {
+        rfm.send(telecommand_buf, telecommand_index);
+      }
       telecommand_index = LEN_MS_SINCE_BOOT_MSG;
     }
   }
-
-void setup()
-{
-    pinMode(PIN_RFM_NSS, OUTPUT);
-    digitalWrite(PIN_RFM_NSS, HIGH);
-    // Set Flash IC CS, WP, HOLD line to high (this should be done through pullup resistors)
-
-    // Set I/O we don't care about at the moment
-    pinMode(PIN_PARA1, OUTPUT);
-    pinMode(PIN_PARA2, OUTPUT);
-    digitalWrite(PIN_PARA1, LOW);  // LOW means inactive parachute
-    digitalWrite(PIN_PARA2, LOW);  // LOW means inactive parachute
-    pinMode(PIN_J2_DIS, OUTPUT);
-    pinMode(PIN_J4_DIS, OUTPUT);
-    digitalWrite(PIN_J2_DIS, LOW);  // LOW means active Telemetry output
-    digitalWrite(PIN_J4_DIS, LOW);
-
-    uint8_t count = 0;
-    for (int i = 0; i < 2048; i++)
-    {
-        read_buffer[i] = 0;
-        write_buffer[i] = count;
-        count++;
-        //count--;
-    }
-    
-
-    delay(3000); //Make sure everything had time to initialize after power up
-
-    SPI1.begin(); // Initialize the SPI bus for the Flash IC
-    Serial.begin(57600); // Open Serial port with the PC
-/*    for (int i = 0; i < 200; i++)
-    {
-    Serial.print(write_buffer[i]);
-    Serial.print(",");
-    }*/
-    Serial.println("\nINIT");
-}
-
-void loop()
-{
-    if (memory.test() == RET_SUCCESS)
-    {
-        Serial.println("JEDEC ID match");
-    }
-    else
-    {
-        Serial.println("JEDEC don't match ERROR");
-    }
-
-    //memory.checkFactoryBadBlocks();
-    //memory.readBadBlockLUT();
-
-
-    uint8_t reg_val = 0;
-    memory.readStatusRegister(SR_1_ADDR, &reg_val);
-    Serial.print("SR-1: ");
-    Serial.println(reg_val, BIN);
-
-    memory.writeStatusRegister(SR_1_ADDR, 0x00);
-
-    memory.readStatusRegister(SR_1_ADDR, &reg_val);
-    Serial.print("SR-1: ");
-    Serial.println(reg_val, BIN);
-
-    testFlashMemory(&memory);
-
-/*
-    uint8_t register_val = 0;
-    SPI1.beginTransaction(settingsFlash);
-
-    // Read Status Register SR-1
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0xA0); //Register address
-    register_val = SPI1.transfer(0xFF);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-    // Print register values
-    Serial.print("SR-1: ");
-    Serial.println(register_val, BIN);
-
-    // Read Status Register SR-2
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0xB0); //Register address
-    register_val = SPI1.transfer(0xFF);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-    // Print register values
-    Serial.print("SR-2: ");
-    Serial.println(register_val, BIN);
-
-    // Read Status Register SR-3
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0xC0); //Register address
-    register_val = SPI1.transfer(0xFF);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-    // Print register values
-    Serial.print("SR-3: ");
-    Serial.println(register_val, BIN);
-
-    // Write Status Register SR-1 (Disable Block Protect Bits)
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x1F); // Read Status Register
-    SPI1.transfer(0xA0); //Register address
-    SPI1.transfer(0x00); // Reset all bits on the register
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Read Status Register SR-1
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0xA0); //Register address
-    register_val = SPI1.transfer(0xFF);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-    // Print register values
-    Serial.print("SR-1: ");
-    Serial.println(register_val, BIN);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash())
-    {
-        delay (1);
-    }
-
-    // Read Device ID
-    uint8_t temp = 0;
-    uint8_t manu_id = 0;
-    uint16_t ic_id = 0;
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x9F); // Read chip ID
-    SPI1.transfer(0xFF); // Dummy
-    temp = SPI1.transfer(0xFF); // Get Manufacturer ID
-    manu_id = temp;
-    temp = SPI1.transfer(0xFF); // Get Device ID 1/2
-    ic_id = (uint16_t)temp << 8;
-    temp = SPI1.transfer(0xFF); // Get Device ID 2/2
-    ic_id |= (uint16_t)temp;
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Print IC info
-    Serial.print("Manufacturer ID: ");
-    Serial.println(manu_id, HEX);
-    Serial.print("Device ID: ");
-    Serial.println(ic_id, HEX);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-
-uint32_t time_dif = 0;
-// Read data from the memory
-    time_dif = micros();
-    // Load page data into buffer
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x13); // Page Data Read
-    SPI1.transfer(0xFF); // 8 dummy clock cycles
-    // Page Address (16 bits)
-    SPI1.transfer(WT_PAGE_MSB);
-    SPI1.transfer(WT_PAGE_LSB);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = micros() - time_dif;
-    Serial.print("Page Data Read => ");
-    Serial.print(time_dif);
-    Serial.println(" us");
-
-    time_dif = micros();
-    // Read memory buffer
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x03); // Read Data
-    SPI1.transfer(0x00); // Column Address (16-bit)
-    SPI1.transfer(0x00);
-    SPI1.transfer(0xFF); // 8 dummy clock cycles
-    for (int i = 0; i < 2048; i++)
-    {
-        read_buffer[i] = SPI1.transfer(0xFF); // Read 1 byte of data
-    }
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = micros() - time_dif;
-    Serial.print("Read Data (2048 Bytes) => ");
-    Serial.print(time_dif);
-    Serial.println(" us");
-
-// Read data from the memory
-Serial.println("READ DATA");
-for (int i = 0; i < 200; i++)
-{
-    Serial.print(read_buffer[i]);
-    Serial.print(",");
-}
-Serial.println("\nREAD DATA \n");
-
-// Write data to the memory
-    // Write enable
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x06);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Read Status Register SR-3
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x0F); // Read Status Register
-    SPI1.transfer(0xC0); //Register address
-    register_val = SPI1.transfer(0xFF);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-    // Print register values
-    Serial.print("SR-3: ");
-    Serial.println(register_val, BIN);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-
-    time_dif = micros();
-    // Load data into buffer
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x02); // Load Program Data
-    SPI1.transfer(0x00); // Column Address (16-bit)
-    SPI1.transfer(0x00);
-    for (int i = 0; i < 2048; i++)
-    {
-        SPI1.transfer(write_buffer[i]); // Transfer 1 byte of data
-    }
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = micros() - time_dif;
-    Serial.print("Load Program Data (2048 Bytes) => ");
-    Serial.print(time_dif);
-    Serial.println(" us");
-
-    time_dif = micros();
-    // Save buffer into memory
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x10); // Program Execute
-    SPI1.transfer(0xFF); // 8 dummy clock cycles
-    // Page Address (16 bits)
-    SPI1.transfer(WT_PAGE_MSB);
-    SPI1.transfer(WT_PAGE_LSB);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = micros() - time_dif;
-    Serial.print("Program Execute => ");
-    Serial.print(time_dif);
-    Serial.println(" us");
-// Write data to the memory
-
-// Read data from the memory
-    time_dif = micros();
-    // Load page data into buffer
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x13); // Page Data Read
-    SPI1.transfer(0xFF); // 8 dummy clock cycles
-    // Page Address (16 bits)
-    SPI1.transfer(WT_PAGE_MSB);
-    SPI1.transfer(WT_PAGE_LSB);
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = micros() - time_dif;
-    Serial.print("Page Data Read => ");
-    Serial.print(time_dif);
-    Serial.println(" us");
-
-    time_dif = micros();
-    // Read memory buffer
-    digitalWrite(PIN_CS_FLASH, LOW);
-    SPI1.transfer(0x03); // Read Data
-    SPI1.transfer(0x00); // Column Address (16-bit)
-    SPI1.transfer(0x00);
-    SPI1.transfer(0xFF); // 8 dummy clock cycles
-    for (int i = 0; i < 2048; i++)
-    {
-        read_buffer[i] = SPI1.transfer(0xFF); // Read 1 byte of data
-    }
-    digitalWrite(PIN_CS_FLASH, HIGH);
-
-    // Check Busy flag == 0
-    while (checkBusyFlash()) {delayMicroseconds (1);}
-    time_dif = micros() - time_dif;
-    Serial.print("Read Data (2048 Bytes) => ");
-    Serial.print(time_dif);
-    Serial.println(" us");
-
-// Read data from the memory
-Serial.println("READ DATA");
-for (int i = 0; i < 200; i++)
-{
-    Serial.print(read_buffer[i]);
-    Serial.print(",");
-}
-Serial.println("\nREAD DATA \n");
-*/
-    while(1)
-    {
-        delay(1000);
-        Serial.print(".");
-    }
-
 }
