@@ -66,6 +66,7 @@ GPS gps2; // for gps on Serial3
 SPISettings settingsFlash(10000000, MSBFIRST, SPI_MODE0); // SPI bus settings to communicate with the Flash IC
 Flash flash(&SPI1, settingsFlash, PIN_CS_FLASH, PIN_WP, PIN_HOLD); // flash chip
 MS5611 ms1(PIN_CS_MS1, SPI); // pressure sensor
+MS5611 ms2(PIN_CS_MS2, SPI); // pressure sensor
 IntervalTimer para1_timer; // timer for parachute 1
 IntervalTimer para2_timer; // timer for parachute 1
 DataProtocol protocol; // data protocol reader
@@ -89,6 +90,10 @@ bool telecommand_enabled = true;
 bool FPV_enabled = false;
 bool gps_led_on = false;
 bool rfm_init_success = 0;
+
+void showError();
+void showOk();
+void showNeutral();
 
 void showError() {
   strip.setPixelColor(STATE_LED, RED);
@@ -175,52 +180,6 @@ void initGps() {
   Serial3.begin(GPS_BAUD);
 }
 
-void updateGps() {
-  static uint32_t gps_led_updated = 0;
-  //gps 1
-  bool updated = false;
-  while (Serial1.available() > 0) {
-    if (gps1.parse_byte(Serial1.read())) {
-      updated |= true;
-    }
-  }
-
-  //gps 2
-  while (Serial3.available() > 0) {
-    if (gps2.parse_byte(Serial3.read())) {
-      updated |= true;
-    }
-  }
-
-  //get best GPS
-  if (gps1.is_set(FLAG_HDOP) && gps2.is_set(FLAG_HDOP)) {
-    best_gps = gps1.hdop < gps2.hdop ? &gps1 : &gps2;
-  } else {
-    best_gps = gps1.is_set(FLAG_HDOP) ? &gps1 : &gps2;
-  }
-
-  //update led
-  if (updated && not gps_led_on) {
-    if (gps1.is_set(FLAG_LATITUDE) || gps2.is_set(FLAG_LATITUDE)) {
-      gps_led_updated = millis();
-      strip.setPixelColor(GPS_LED, GREEN);
-      gps_led_on = true;
-      strip.show();
-    } else
-    if (gps1.is_set(FLAG_TIME) || gps2.is_set(FLAG_TIME)) {
-      gps_led_updated = millis();
-      strip.setPixelColor(GPS_LED, BLUE);
-      gps_led_on = true;
-      strip.show();
-    }
-  }
-  if (millis() - gps_led_updated > 100 && gps_led_on) {
-    strip.setPixelColor(0, 0);
-    strip.show();
-    gps_led_on = false;
-  }
-}
-
 void resetRadio() {
   digitalWriteFast(PIN_RFM_RST, HIGH);
   delay(100);
@@ -266,6 +225,52 @@ void initDMA() {
 
 void initSensors() {
   ms1.begin();
+}
+
+void updateGps() {
+  static uint32_t gps_led_updated = 0;
+  //gps 1
+  bool updated = false;
+  while (Serial1.available() > 0) {
+    if (gps1.parse_byte(Serial1.read())) {
+      updated |= true;
+    }
+  }
+
+  //gps 2
+  while (Serial3.available() > 0) {
+    if (gps2.parse_byte(Serial3.read())) {
+      updated |= true;
+    }
+  }
+
+  //get best GPS
+  if (gps1.is_set(FLAG_HDOP) && gps2.is_set(FLAG_HDOP)) {
+    best_gps = gps1.hdop < gps2.hdop ? &gps1 : &gps2;
+  } else {
+    best_gps = gps1.is_set(FLAG_HDOP) ? &gps1 : &gps2;
+  }
+
+  //update led
+  if (updated && not gps_led_on) {
+    if (gps1.is_set(FLAG_LATITUDE) || gps2.is_set(FLAG_LATITUDE)) {
+      gps_led_updated = millis();
+      strip.setPixelColor(GPS_LED, GREEN);
+      gps_led_on = true;
+      strip.show();
+    } else
+    if (gps1.is_set(FLAG_TIME) || gps2.is_set(FLAG_TIME)) {
+      gps_led_updated = millis();
+      strip.setPixelColor(GPS_LED, BLUE);
+      gps_led_on = true;
+      strip.show();
+    }
+  }
+  if (millis() - gps_led_updated > 100 && gps_led_on) {
+    strip.setPixelColor(0, 0);
+    strip.show();
+    gps_led_on = false;
+  }
 }
 
 void enableParachute1() {
@@ -376,6 +381,43 @@ void DataProtocol_callback(uint64_t id, uint8_t* buf, uint8_t len) {
   }
 }
 
+void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
+  //empty all buffers
+  if (telemetry_index > LEN_MS_SINCE_BOOT_MSG) {
+    uint8_t index = 0;
+    fc::ms_since_boot_from_flight_controller_to_ground_station msg;
+    msg.set_ms_since_boot(current_time);
+    protocol.build_buf(msg, telemetry_buf, &index);
+    if (telemetry_enabled) {
+      Serial2.write(telemetry_buf, telemetry_index);
+      Serial.write(telemetry_buf, telemetry_index);
+    }
+    telemetry_index = LEN_MS_SINCE_BOOT_MSG;
+  }
+  if (backup_index > LEN_MS_SINCE_BOOT_MSG) {
+    uint8_t index = 0;
+    fc::ms_since_boot_from_flight_controller_to_ground_station msg;
+    msg.set_ms_since_boot(current_time);
+    protocol.build_buf(msg, backup_buf, &index);
+    if (data_logging_enabled) {
+      flash.bufferedWrite(backup_buf, backup_index);
+    }
+    Serial.write(telecommand_buf, telecommand_index);
+    backup_index = LEN_MS_SINCE_BOOT_MSG;
+  }
+  if (telecommand_index > LEN_MS_SINCE_BOOT_MSG &&
+      cycle_count % LORA_SEND_CYCLE  == 0 && !DMASPI1.busy()) {
+    uint8_t index = 0;
+    fc::ms_since_boot_from_flight_controller_to_ground_station msg;
+    msg.set_ms_since_boot(current_time);
+    protocol.build_buf(msg, telecommand_buf, &index);
+    if (telecommand_enabled) {
+      rfm.send(telecommand_buf, telecommand_index);
+    }
+    telecommand_index = LEN_MS_SINCE_BOOT_MSG;
+  }
+}
+
 void setup() {
   CANbus.begin();
   Serial.begin(115200);
@@ -396,19 +438,6 @@ void setup() {
     showError();
   }
   showOk();
-
-  uint8_t buf[2048];
-  for (uint16_t i = 0; i < 2048; i++) {
-    buf[i] = 34;
-  }
-
-  while (!Serial){}
-  Serial.println("init");
-  uint32_t before = micros(); 
-  flash.programDataLoadAsync(buf, 0);
-  //Serial2.write(buf, 64);
-  uint32_t after = micros();
-  Serial.println(after- before);
 }
 
 void loop() {
@@ -478,40 +507,7 @@ void loop() {
       add_to_telemetry_buf(buf, len);
       add_to_backup_buf(buf, len);
     }
-
-    //empty all buffers
-    if (telemetry_index > LEN_MS_SINCE_BOOT_MSG) {
-      uint8_t index = 0;
-      fc::ms_since_boot_from_flight_controller_to_ground_station msg;
-      msg.set_ms_since_boot(current_time);
-      protocol.build_buf(msg, telemetry_buf, &index);
-      if (telemetry_enabled) {
-        Serial2.write(telemetry_buf, telemetry_index);
-        Serial.write(telemetry_buf, telemetry_index);
-      }
-      telemetry_index = LEN_MS_SINCE_BOOT_MSG;
-    }
-    if (backup_index > LEN_MS_SINCE_BOOT_MSG) {
-      uint8_t index = 0;
-      fc::ms_since_boot_from_flight_controller_to_ground_station msg;
-      msg.set_ms_since_boot(current_time);
-      protocol.build_buf(msg, backup_buf, &index);
-      if (data_logging_enabled) {
-        flash.bufferedWrite(backup_buf, backup_index);
-      }
-      Serial.write(telecommand_buf, telecommand_index);
-      backup_index = LEN_MS_SINCE_BOOT_MSG;
-    }
-    if (telecommand_index > LEN_MS_SINCE_BOOT_MSG &&
-        cycle_count % LORA_SEND_CYCLE  == 0 && !DMASPI1.busy()) {
-      uint8_t index = 0;
-      fc::ms_since_boot_from_flight_controller_to_ground_station msg;
-      msg.set_ms_since_boot(current_time);
-      protocol.build_buf(msg, telecommand_buf, &index);
-      if (telecommand_enabled) {
-        rfm.send(telecommand_buf, telecommand_index);
-      }
-      telecommand_index = LEN_MS_SINCE_BOOT_MSG;
-    }
   }
+
+  emptyBuffers(cycle_count, current_time);
 }
