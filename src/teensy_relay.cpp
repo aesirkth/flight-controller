@@ -95,7 +95,7 @@ void initRadio()
     }
 }
 
-void fc_rx(fc::handshake_from_ground_station_to_flight_controller msg) {
+void fc::rx(fc::handshake_from_ground_station_to_flight_controller msg) {
     fc::return_handshake_from_flight_controller_to_ground_station response;
     uint8_t len = response.get_size() + HEADER_SIZE;
     uint8_t buf[len];
@@ -105,11 +105,8 @@ void fc_rx(fc::handshake_from_ground_station_to_flight_controller msg) {
     delay(500);
 }
 
-template<typename T>
-void fc_rx(T msg){}
-
 void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
-    FC_PARSE_MESSAGE(id, buf);
+    fc::parse_message(id, buf);
 }
 
 void setup()

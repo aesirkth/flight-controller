@@ -301,7 +301,7 @@ void handleDataStreams() {
   }
 }
 
-void fc_rx(fc::set_parachute_output_from_ground_station_to_flight_controller msg) {
+void fc::rx(fc::set_parachute_output_from_ground_station_to_flight_controller msg) {
   bool para1 = parachute_armed && msg.get_is_parachute1_en();
   bool para2 = parachute_armed && msg.get_is_parachute2_en();
   parachute_armed = msg.get_is_parachute_armed();
@@ -325,7 +325,7 @@ void fc_rx(fc::set_parachute_output_from_ground_station_to_flight_controller msg
   add_to_backup_buf(buf, len);
 }
 
-void fc_rx(fc::set_data_logging_from_ground_station_to_flight_controller msg) {
+void fc::rx(fc::set_data_logging_from_ground_station_to_flight_controller msg) {
   data_logging_enabled = msg.get_is_logging_en();
   fc::return_data_logging_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
@@ -335,7 +335,7 @@ void fc_rx(fc::set_data_logging_from_ground_station_to_flight_controller msg) {
   add_to_backup_buf(buf, len);
 }
 
-void fc_rx(fc::handshake_from_ground_station_to_flight_controller msg) {
+void fc::rx(fc::handshake_from_ground_station_to_flight_controller msg) {
   fc::return_handshake_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
   uint8_t buf[len];
@@ -347,10 +347,6 @@ void fc_rx(fc::handshake_from_ground_station_to_flight_controller msg) {
   delay(500);
 }
 
-//catch messages we don't care about
-template <class T>
-void fc_rx(T msg) {}
-
 void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
   uint8_t header_buf[HEADER_SIZE];
   uint8_t header_index = 0;
@@ -358,7 +354,7 @@ void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
   add_to_backup_buf(header_buf, header_index); // add header
   add_to_backup_buf(buf, len); // add message
   // parse the message no matter what, nothing will happen if it's invalid
-  FC_PARSE_MESSAGE(id, buf); 
+  fc::parse_message(id, buf); 
   //relay gc -> ec messages
   if (GC_TO_EC_TC_START <= id && id <= GC_TO_EC_TC_END) {
     can_msg.id = id;

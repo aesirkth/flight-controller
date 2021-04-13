@@ -23,10 +23,12 @@ enum receiver_state {
     PAYLOAD,
 };
 
-void DataProtocol_callback(uint64_t id, uint8_t* buf, uint8_t len);
-
 class DataProtocol {
 public:
+  void set_callback(void (*func)(uint8_t id, uint8_t* buf, uint8_t len)){
+    callback=func;
+  }
+
   void parse_byte(uint8_t byte);
   void parse_frame(uint8_t* buf, uint8_t len);
   void parse_CAN_message(CAN_message_t msg);
@@ -52,6 +54,7 @@ public:
   }
 
 private:
+  void (*callback)(uint8_t id, uint8_t* buf, uint8_t len);
   enum receiver_state state = START1;
   uint8_t payload_length;
   uint8_t payload_buf[PAYLOAD_BUF_LEN];
