@@ -95,8 +95,26 @@ void initRadio()
     }
 }
 
+void fc_rx(fc::handshake_from_ground_station_to_flight_controller msg) {
+    fc::return_handshake_from_flight_controller_to_ground_station response;
+    uint8_t len = response.get_size() + HEADER_SIZE;
+    uint8_t buf[len];
+    protocol.build_buf(response, buf, &len);
+    delay(100);
+    Serial.write(buf, len);
+    delay(500);
+}
+
+template<typename T>
+void fc_rx(T msg){}
+
+void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
+    FC_PARSE_MESSAGE(id, buf);
+}
+
 void setup()
 {
+    protocol.set_callback(&DataProtocolCallback);
     Serial.begin(115200);
     while(!Serial);
     initRGB();
@@ -111,6 +129,7 @@ void handleDataStreams()
     // Sending from station to FC
     while (Serial.available() > 0) { // Fill up relay buffer
         char byte = Serial.read();
+        protocol.parse_byte(byte);
         Serial.print(byte); // Show that character is registered
 
         if (RELAY_BUFFER_LEN >= TELECOMMAND_MAX_MSG_LEN){

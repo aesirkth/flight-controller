@@ -351,7 +351,7 @@ void fc_rx(fc::handshake_from_ground_station_to_flight_controller msg) {
 template <class T>
 void fc_rx(T msg) {}
 
-void DataProtocol_callback(uint64_t id, uint8_t* buf, uint8_t len) {
+void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
   uint8_t header_buf[HEADER_SIZE];
   uint8_t header_index = 0;
   protocol.build_header(id, header_buf, &header_index);
@@ -419,6 +419,7 @@ void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
 }
 
 void setup() {
+  protocol.set_callback(&DataProtocolCallback);
   CANbus.begin();
   Serial.begin(115200);
   initRGB();
