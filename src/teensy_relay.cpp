@@ -4,6 +4,7 @@
 #include <RH_RF95.h> //THIS IS A MODIFIED LIBRARY WITHOUT ERROR CHECKING
 #include <RHHardwareSPI1.h>
 #include <stdio.h>
+#include <array>
 
 #include "hardware_definition_teensy.h"
 #include "DataProtocol.h"
@@ -20,6 +21,9 @@
 
 bool rfm_init_success = 0;
 bool error = false;
+
+char RELAY_BUFFER[TELECOMMAND_MAX_MSG_LEN];
+uint8_t RELAY_BUFFER_LEN = 0; 
 
 // LEDs
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400);
@@ -94,6 +98,7 @@ void initRadio()
 void setup()
 {
     Serial.begin(115200);
+    while(!Serial);
     initRGB();
     initRadio();
     showOk();
@@ -103,14 +108,36 @@ void handleDataStreams()
 {
     uint8_t buffer[TELECOMMAND_MAX_MSG_LEN];
     uint8_t len = TELECOMMAND_MAX_MSG_LEN;
-    while (Serial.available() > 0)
-    {
-        uint8_t byte = Serial.read();
-        rfm.send(byte, sizeof(byte)); 
+    // Sending from station to FC
+    while (Serial.available() > 0) { // Fill up relay buffer
+        char byte = Serial.read();
+        Serial.print(byte); // Show that character is registered
+
+        if (RELAY_BUFFER_LEN >= TELECOMMAND_MAX_MSG_LEN){
+            Serial.println("Message length overridden!!");
+        } else {
+            RELAY_BUFFER[RELAY_BUFFER_LEN] = uint8_t(byte);
+            RELAY_BUFFER_LEN++; 
+        }
     }
+    if (RELAY_BUFFER_LEN>0) { // Try to send buffer
+        // The following conversion should not be necessary..
+        uint8_t bytes_formatted[TELECOMMAND_MAX_MSG_LEN];
+        for (int i=0; i<TELECOMMAND_MAX_MSG_LEN; i++) { 
+            bytes_formatted[i] = uint8_t(RELAY_BUFFER[i]); 
+        }
+        if (rfm.send(bytes_formatted, RELAY_BUFFER_LEN)) {
+            RELAY_BUFFER_LEN = 0; // Reset to buffer is filled with new characters
+        }
+    }
+    // Receiving from FC to ground station
     if (rfm.recv(buffer, &len))
     {
-        Serial.write(buffer, &len); 
+        // Serial.write(buffer, len); 
+
+        for (int i=0; i<len; i++) {
+            Serial.print(char(buffer[i]));
+        }
     }
 }
 
