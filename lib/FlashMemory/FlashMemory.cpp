@@ -26,17 +26,12 @@ Flash::Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_
 void Flash::reset()
 {
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
 
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_RESET);
-    digitalWrite(_ss, HIGH);
-
     delayMicroseconds(FLASH_TIME_RESET);
-    _spi->endTransaction();
+    digitalWrite(_ss, HIGH);
 }
 
 /* 
@@ -68,6 +63,15 @@ int Flash::test()
     if ((manu_id == MANUFACTURER_ID) && (ic_id == DEVICE_ID)) ret_val = RET_SUCCESS;
 
     return ret_val;
+}
+
+bool Flash::begin() {
+    if (test() != RET_SUCCESS) 
+    {
+        return false;
+    }
+    writeStatusRegister(SR_1_ADDR, 0); // remove pesky write protect bits
+    return true;
 }
 
 /*
@@ -105,10 +109,7 @@ int Flash::writeStatusRegister(uint8_t reg_address, uint8_t reg_value)
     if ((reg_address == SR_1_ADDR) || (reg_address == SR_2_ADDR) || (reg_address == SR_3_ADDR)) // Check valid Status Register address
     {
         _spi->beginTransaction(_spi_settings);
-        while (isBusy())
-        {
-            delayMicroseconds(1);
-        }
+        waitBusy();
 
         digitalWrite(_ss, LOW);
         _spi->transfer(OPCODE_WRITE_STATUS_REG); // Read Status Register
@@ -133,17 +134,11 @@ int Flash::writeEnable()
     int ret_val = RET_ERROR;
 
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_WRITE_ENABLE);
     digitalWrite(_ss, HIGH);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
     _spi->endTransaction();
 
     uint8_t temp = 0;
@@ -156,25 +151,41 @@ int Flash::writeEnable()
     return ret_val;
 }
 
+void Flash::findBadBlocks() {
+    uint8_t buf[2048] = {0};
+    for(uint16_t i = 0; i < AMOUNT_OF_BLOCKS; i++) {
+        blockErase(i * 64);
+        programDataLoad(buf, 2048, 0, true);
+        programExecute(i * 64);
+        pageDataRead(i * 64);
+        readData(buf, 0);
+        for (uint16_t j = 0; j < PAGE_SIZE; j++) {
+            if (buf[j] != 0) {
+                Serial.print("BAD: ");
+                Serial.println(i);
+            }
+        }
+    }
+}
+
 void Flash::bufferedWrite(uint8_t* buf, uint8_t len) {
-     if (_write_buf_index + len > PAGE_SIZE) {
-         uint8_t remaining = PAGE_SIZE - _write_buf_index;
-         memcpy(_write_buf + _write_buf_index, buf, remaining);
-         programDataLoad(_write_buf, 0);
-         programExecute(_buffered_page_index);
-         memcpy(_write_buf, buf + remaining, len - remaining);
-         _write_buf_index = len - remaining;
-         _buffered_page_index++;
-         return;
-     }
-     memcpy(_write_buf + _write_buf_index, buf, len);
+    if (_buffered_column_index + len >= PAGE_SIZE) {
+        uint8_t bytes_left = PAGE_SIZE - _buffered_column_index;
+        programDataLoad(buf, bytes_left, _buffered_column_index, false);
+        programExecute(_buffered_page_index);
+        _buffered_page_index++;
+        programDataLoad(buf, len - bytes_left, 0, false);
+        _buffered_column_index = len - bytes_left;
+        return;
+    }
+    programDataLoad(buf, len, _buffered_column_index, false);
+    _buffered_column_index += len;
 }
 
 void Flash::flush() {
-    programDataLoad(_write_buf, _write_buf_index);
     programExecute(_buffered_page_index);
     _buffered_page_index++;
-    _write_buf_index = 0;
+    _buffered_column_index = 0;
 }
 
 /*
@@ -187,10 +198,7 @@ int Flash::pageDataRead(uint16_t page_addr)
     int ret_val = RET_ERROR;
 
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
 
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_PAGE_READ);
@@ -216,10 +224,7 @@ int Flash::readData(uint8_t * data_buffer, uint16_t column_addr)
     int ret_val = RET_ERROR;
 
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
 
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_READ);
@@ -236,18 +241,8 @@ int Flash::readData(uint8_t * data_buffer, uint16_t column_addr)
     _spi->endTransaction();
 
     //Check SR-3 for ECC related errors
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
     uint8_t reg_val = 0;
-    if (readStatusRegister(SR_3_ADDR, &reg_val) == RET_SUCCESS)
-    {
-        reg_val = (reg_val & (SR_3_ECC1 | SR_3_ECC0)) >> 4;
-        Serial.print("Page readed. ECC status -> ");
-        Serial.println(reg_val, BIN);
-    }
-
     ret_val = RET_SUCCESS;
 
     return ret_val;
@@ -260,21 +255,19 @@ int Flash::readData(uint8_t * data_buffer, uint16_t column_addr)
     data that can be written.
     ret_val -> int -> 'RET_SUCCESS' Data has been loaded in the memory buffer
 */
-int Flash::programDataLoad(uint8_t * data_buffer, uint16_t column_addr)
+int Flash::programDataLoad(uint8_t * data_buffer, uint16_t len, uint16_t column_addr, bool reset)
 {
     int ret_val = RET_ERROR;
 
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
 
     digitalWrite(_ss, LOW);
-    _spi->transfer(OPCODE_PROGRAM_LOAD); // Load Program Data
+    uint8_t op_code = reset ?  OPCODE_PROGRAM_LOAD : OPCODE_RANDOM_PROGRAM_LOAD;
+    _spi->transfer(op_code); // Load Program Data
     _spi->transfer((uint8_t)(column_addr >> 8)); // Column Address (16-bit)
     _spi->transfer((uint8_t)column_addr);
-    for (int i = column_addr; i < 2048; i++)
+    for (int i = 0; i < len; i++)
     {
         _spi->transfer(data_buffer[i]); // Transfer 1 byte of data
     }
@@ -286,28 +279,47 @@ int Flash::programDataLoad(uint8_t * data_buffer, uint16_t column_addr)
     return ret_val;
 }
 
-void Flash::programDataLoadAsync(uint8_t * data_buffer, uint16_t column_addr)
+
+void Flash::programDataLoadAsync(uint8_t * data_buffer, uint16_t len, uint16_t column_addr, bool reset)
 {
     static DmaSpi1::Transfer* trx;
     static AbstractChipSelect* cs;
-
+    digitalWriteFast(_ss, LOW);
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
     _spi->endTransaction();
+    digitalWriteFast(_ss, HIGH);
  
-    uint16_t len = 3 + PAGE_SIZE - column_addr;
-    _dma_buf[0] = OPCODE_PROGRAM_LOAD;
+    uint16_t total_len = 3 + len;
+    uint8_t op_code = reset ?  OPCODE_PROGRAM_LOAD : OPCODE_RANDOM_PROGRAM_LOAD;
+    _dma_buf[0] = op_code;
     _dma_buf[1] = (uint8_t)(column_addr >> 8);
     _dma_buf[2] = (uint8_t)(column_addr);
-    memcpy(_dma_buf + 3, data_buffer, PAGE_SIZE - column_addr);
+    memcpy(_dma_buf + 3, data_buffer, len);
     free(trx);
     free(cs);
     cs = new ActiveLowChipSelect1(_ss, _spi_settings);
-    trx = new DmaSpi1::Transfer(_dma_buf, len, nullptr, 0, cs);
+    trx = new DmaSpi1::Transfer(_dma_buf, total_len, nullptr, 0, cs);
     _dma_spi->registerTransfer(*trx);
+}
+
+void Flash::printAllRegisters() 
+{
+    uint8_t val;
+    _spi->beginTransaction(_spi_settings);
+    waitBusy();
+    digitalWriteFast(_ss, LOW);
+    readStatusRegister(SR_1_ADDR, &val);
+    Serial.print("SR-1: ");
+    Serial.println(val, BIN);
+    readStatusRegister(SR_2_ADDR, &val);
+    Serial.print("SR-2: ");
+    Serial.println(val, BIN);
+    readStatusRegister(SR_3_ADDR, &val);
+    Serial.print("SR-3: ");
+    Serial.println(val, BIN);
+    digitalWriteFast(_ss, HIGH);
+    _spi->endTransaction();
 }
 
 /*
@@ -324,10 +336,7 @@ int Flash::programExecute(uint16_t page_addr)
     int ret_val = RET_ERROR;
 
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
 
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_PROGRAM_EXECUTE);
@@ -338,16 +347,10 @@ int Flash::programExecute(uint16_t page_addr)
     _spi->endTransaction();
 
     //Check SR-3 for errors during program operation
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
     uint8_t reg_val = 0;
     if (readStatusRegister(SR_3_ADDR, &reg_val) == RET_SUCCESS)
     {
-        Serial.print("SR_3 -> ");
-        Serial.println(reg_val, BIN);
-        // If SR_3_PFAIL bit is asserted there was an error during program execute operation
         ret_val = (reg_val & SR_3_PFAIL) ? RET_ERROR : RET_SUCCESS;
     }
 
@@ -369,10 +372,7 @@ int Flash::blockErase(uint16_t page_addr)
     int ret_val = RET_ERROR;
 
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
 
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_BLOCK_ERASE);
@@ -383,16 +383,10 @@ int Flash::blockErase(uint16_t page_addr)
     _spi->endTransaction();
 
     //Check SR-3 for errors during erase operation
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
     uint8_t reg_val = 0;
     if (readStatusRegister(SR_3_ADDR, &reg_val) == RET_SUCCESS)
     {
-        Serial.print("SR_3 -> ");
-        Serial.println(reg_val, BIN);
-        // If SR_3_EFAIL bit is asserted there was an error during block erase operation
         ret_val = (reg_val & SR_3_EFAIL) ? RET_ERROR : RET_SUCCESS;
     }
     
@@ -414,6 +408,15 @@ uint8_t Flash::isBusy()
     digitalWrite(_ss, HIGH);
 
     return ret_val;
+}
+
+void Flash::waitBusy()
+{
+    uint32_t start = micros();
+    while (isBusy() && micros() - start < BUSY_MAX_WAIT)
+    {
+        yield();
+    }
 }
 
 /* 
@@ -449,10 +452,7 @@ void Flash::readBadBlockLUT()
     uint16_t physical_blocks[20];
 
     _spi->beginTransaction(_spi_settings);
-    while (isBusy())
-    {
-        delayMicroseconds(1);
-    }
+    waitBusy();
 
     digitalWrite(_ss, LOW);
     _spi->transfer(OPCODE_BBM_READ);
@@ -488,6 +488,7 @@ void Flash::readBadBlockLUT()
 
 void testFlashMemory(Flash * obj)
 {
+    /*
     uint8_t write_buff[2048];
     uint8_t read_buff[2048];
     uint8_t page_count;
@@ -634,4 +635,5 @@ void testFlashMemory(Flash * obj)
         Serial.print(", ");
         Serial.println(read_buff[3], HEX);
     }
+    */
 }

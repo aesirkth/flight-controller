@@ -6,6 +6,8 @@
 #include "DmaSpi.h"
 
 #define PAGE_SIZE 2048
+#define AMOUNT_OF_BLOCKS 1024
+#define AMOUNT_OF_PAGES (AMOUNT_OF_BLOCKS * 64)
 
 #define RET_ERROR   -1
 #define RET_BUSY    0
@@ -53,15 +55,16 @@
 #define OPCODE_LAST_ECC_FAIL    0xA9
 #define OPCODE_BLOCK_ERASE      0xD8
 #define OPCODE_PROGRAM_LOAD     0x02
+#define OPCODE_RANDOM_PROGRAM_LOAD  0x84
 #define OPCODE_PROGRAM_EXECUTE  0x10
 #define OPCODE_PAGE_READ        0x13
 #define OPCODE_READ             0x03
 
 #define DUMMY_BYTE   0xFF
-#define FLASH_TIME_RESET    500u   // Microseconds
+#define FLASH_TIME_RESET    1000u   // Microseconds
 #define MANUFACTURER_ID     0xEF
 #define DEVICE_ID           0xAA21
-
+#define BUSY_MAX_WAIT       500u
 /* NOTE: The device is supposed to work in Buffer Mode => 'SR_2_BUF' = 1 */
 class Flash
 {
@@ -73,31 +76,32 @@ class Flash
     uint8_t _wp;
     uint8_t _hold;
 
-    uint8_t _write_buf[PAGE_SIZE];
     uint8_t _dma_buf[3 + PAGE_SIZE];
-    //uint8_t* _dma_buf = (uint8_t*) malloc(3 + PAGE_SIZE);
-    uint8_t _write_buf_index = 0;
+    uint8_t _buffered_column_index = 0;
     uint8_t _buffered_page_index = 0;
 
 public:
     Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_t pin_wp, uint8_t pin_hold);
     void reset();
     int test();
+    bool begin();
     //int init();
     int readStatusRegister(uint8_t reg_address, uint8_t * reg_value);
     int writeStatusRegister(uint8_t reg_address, uint8_t reg_value);
     int writeEnable();
     void bufferedWrite(uint8_t* buf, uint8_t len);
     void flush();
-    
+    void findBadBlocks();
+
     //int writeDisable();
     int pageDataRead(uint16_t page_addr);
     int readData(uint8_t * data_buffer, uint16_t column_addr);
-    int programDataLoad(uint8_t * data_buffer, uint16_t column_addr);
-    void programDataLoadAsync(uint8_t * data_buffer, uint16_t column_addr);
+    int programDataLoad(uint8_t * data_buffer, uint16_t len, uint16_t column_addr, bool reset);
+    void programDataLoadAsync(uint8_t * data_buffer, uint16_t len, uint16_t column_addr, bool reset);
     int programExecute(uint16_t page_addr);
     int blockErase(uint16_t page_addr);
-
+    void waitBusy();
+    void printAllRegisters();
     uint8_t isBusy();
     void checkFactoryBadBlocks(); // Use always before using the memory for its intended application
     void readBadBlockLUT();

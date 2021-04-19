@@ -127,18 +127,17 @@ void setup() {
 
   uint8_t buf[2048];
   for (uint16_t i = 0; i < 2048; i++) {
-    buf[i] = 34;
+    buf[i] = (uint8_t) i;
   }
   DMASPI1.begin();
   DMASPI1.start();
+  flash.begin();
 
   while (!Serial){}
-  Serial.println("init");
-  uint32_t before = micros();
-  uint32_t after = micros();
-  Serial.println(flash.writeEnable());
-  Serial.println(flash.blockErase(70));
+  flash.checkFactoryBadBlocks();
+  //flash.readBadBlockLUT();
 }
 
 void loop() {
+
 }
