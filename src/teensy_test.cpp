@@ -119,6 +119,8 @@ void initPins() {
   SPI.setMISO(PIN_MISO0);
   SPI.setSCK(PIN_SCK0);
   SPI.begin();
+  ms1.begin(); 
+  ms1.setOSR(0); 
   delay(100);
 }
 
@@ -131,7 +133,7 @@ void setup() {
   }
   DMASPI1.begin();
   DMASPI1.start();
-
+  Serial.begin(115200); 
   while (!Serial){}
   Serial.println("init");
   uint32_t before = micros();
@@ -141,4 +143,11 @@ void setup() {
 }
 
 void loop() {
+  uint32_t before = micros(); 
+  ms1.update();
+  uint32_t after = micros(); 
+  Serial.println("--------");
+  Serial.printf("Timediff:\t%d\tms\n",(after - before)/1000); 
+  Serial.printf("Pressure:\t%d \tmBar\nTemperature:\t%d\tC\n", ms1.pressure/100, ms1.temperature/100);
+  Serial.println("--------");
 }
