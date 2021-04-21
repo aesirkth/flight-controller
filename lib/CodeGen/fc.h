@@ -1318,217 +1318,40 @@ public:
   }
 };
 
-#define FC_PARSE_MESSAGE(id, buf)                                              \
-  switch (id) {                                                                \
-  case 0: {                                                                    \
-    fc::altitude_from_test_to_test __message;                                  \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 1: {                                                                    \
-    fc::acceleration_from_test_to_test __message;                              \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 2: {                                                                    \
-    fc::pressure_from_test_to_test __message;                                  \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 3: {                                                                    \
-    fc::catastrophe_from_test_to_test __message;                               \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 4: {                                                                    \
-    fc::gyro_from_test_to_test __message;                                      \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 16: {                                                                   \
-    fc::time_sync_from_ground_station_to_flight_controller __message;          \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 17: {                                                                   \
-    fc::set_power_mode_from_ground_station_to_flight_controller __message;     \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 18: {                                                                   \
-    fc::set_radio_equipment_from_ground_station_to_flight_controller           \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 19: {                                                                   \
-    fc::set_parachute_output_from_ground_station_to_flight_controller          \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 20: {                                                                   \
-    fc::set_data_logging_from_ground_station_to_flight_controller __message;   \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 21: {                                                                   \
-    fc::dump_flash_from_ground_station_to_flight_controller __message;         \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 22: {                                                                   \
-    fc::handshake_from_ground_station_to_flight_controller __message;          \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 32: {                                                                   \
-    fc::return_time_sync_from_flight_controller_to_ground_station __message;   \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 33: {                                                                   \
-    fc::return_power_mode_from_flight_controller_to_ground_station __message;  \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 34: {                                                                   \
-    fc::return_radio_equipment_from_flight_controller_to_ground_station        \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 35: {                                                                   \
-    fc::return_parachute_output_from_flight_controller_to_ground_station       \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 36: {                                                                   \
-    fc::onboard_battery_voltage_from_flight_controller_to_ground_station       \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 37: {                                                                   \
-    fc::gnss_data_from_flight_controller_to_ground_station __message;          \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 38: {                                                                   \
-    fc::flight_controller_status_from_flight_controller_to_ground_station      \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 39: {                                                                   \
-    fc::return_data_logging_from_flight_controller_to_ground_station           \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 40: {                                                                   \
-    fc::return_dump_flash_from_flight_controller_to_ground_station __message;  \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 41: {                                                                   \
-    fc::return_handshake_from_flight_controller_to_ground_station __message;   \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 64: {                                                                   \
-    fc::ms_since_boot_from_test_to_test __message;                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 80: {                                                                   \
-    fc::ms_since_boot_from_flight_controller_to_ground_station __message;      \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 81: {                                                                   \
-    fc::us_since_boot_from_flight_controller_to_ground_station __message;      \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 82: {                                                                   \
-    fc::current_time_from_flight_controller_to_ground_station __message;       \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 83: {                                                                   \
-    fc::GNSS_data_1_from_flight_controller_to_ground_station __message;        \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 84: {                                                                   \
-    fc::GNSS_data_2_from_flight_controller_to_ground_station __message;        \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 85: {                                                                   \
-    fc::inside_static_temperature_from_flight_controller_to_ground_station     \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 86: {                                                                   \
-    fc::inside_static_pressure_from_flight_controller_to_ground_station        \
-        __message;                                                             \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 87: {                                                                   \
-    fc::IMU1_from_flight_controller_to_ground_station __message;               \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 88: {                                                                   \
-    fc::IMU2_from_flight_controller_to_ground_station __message;               \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  case 255: {                                                                  \
-    fc::local_timestamp_from_local_to_local __message;                         \
-    __message.parse_buf(buf);                                                  \
-    fc_rx(__message);                                                          \
-    break;                                                                     \
-  }                                                                            \
-  }
-
+void rx(altitude_from_test_to_test msg);
+void rx(acceleration_from_test_to_test msg);
+void rx(pressure_from_test_to_test msg);
+void rx(catastrophe_from_test_to_test msg);
+void rx(gyro_from_test_to_test msg);
+void rx(time_sync_from_ground_station_to_flight_controller msg);
+void rx(set_power_mode_from_ground_station_to_flight_controller msg);
+void rx(set_radio_equipment_from_ground_station_to_flight_controller msg);
+void rx(set_parachute_output_from_ground_station_to_flight_controller msg);
+void rx(set_data_logging_from_ground_station_to_flight_controller msg);
+void rx(dump_flash_from_ground_station_to_flight_controller msg);
+void rx(handshake_from_ground_station_to_flight_controller msg);
+void rx(return_time_sync_from_flight_controller_to_ground_station msg);
+void rx(return_power_mode_from_flight_controller_to_ground_station msg);
+void rx(return_radio_equipment_from_flight_controller_to_ground_station msg);
+void rx(return_parachute_output_from_flight_controller_to_ground_station msg);
+void rx(onboard_battery_voltage_from_flight_controller_to_ground_station msg);
+void rx(gnss_data_from_flight_controller_to_ground_station msg);
+void rx(flight_controller_status_from_flight_controller_to_ground_station msg);
+void rx(return_data_logging_from_flight_controller_to_ground_station msg);
+void rx(return_dump_flash_from_flight_controller_to_ground_station msg);
+void rx(return_handshake_from_flight_controller_to_ground_station msg);
+void rx(ms_since_boot_from_test_to_test msg);
+void rx(ms_since_boot_from_flight_controller_to_ground_station msg);
+void rx(us_since_boot_from_flight_controller_to_ground_station msg);
+void rx(current_time_from_flight_controller_to_ground_station msg);
+void rx(GNSS_data_1_from_flight_controller_to_ground_station msg);
+void rx(GNSS_data_2_from_flight_controller_to_ground_station msg);
+void rx(inside_static_temperature_from_flight_controller_to_ground_station msg);
+void rx(inside_static_pressure_from_flight_controller_to_ground_station msg);
+void rx(IMU1_from_flight_controller_to_ground_station msg);
+void rx(IMU2_from_flight_controller_to_ground_station msg);
+void rx(local_timestamp_from_local_to_local msg);
+void parse_message(uint8_t id, uint8_t *buf);
 bool is_valid_id(uint8_t id);
 uint8_t id_to_len(uint8_t id);
 enum units id_to_source(uint8_t id);

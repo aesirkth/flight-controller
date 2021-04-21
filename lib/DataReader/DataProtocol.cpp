@@ -39,7 +39,7 @@ void DataProtocol::parse_byte(uint8_t byte) {
   if (payload_index == payload_length && state == PAYLOAD) {
     state = START1;
     payload_index = 0;
-    DataProtocol_callback(payload_id, payload_buf, payload_length);
+    (*callback)(payload_id, payload_buf, payload_length);
   }
 }
 
@@ -52,7 +52,7 @@ void DataProtocol::parse_frame(uint8_t* buf, uint8_t len) {
   if (fc::id_to_len(id) != len - 3) {
     return;
   }
-  DataProtocol_callback(id, buf + 3, len);
+  (*callback)(id, buf + 3, len);
 }
 
 void DataProtocol::parse_CAN_message(CAN_message_t msg) {
@@ -60,7 +60,7 @@ void DataProtocol::parse_CAN_message(CAN_message_t msg) {
   if (len != msg.len) {
     return;
   }
-  DataProtocol_callback(msg.id, msg.buf, msg.len);
+  (*callback)(msg.id, msg.buf, msg.len);
 }
 
 //can read all messages
