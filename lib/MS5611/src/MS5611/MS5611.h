@@ -31,7 +31,7 @@ class MS5611 {
   void updateAsync(); 
   void startSampling();
   void triggerAsync(uint8_t addr); 
-  bool waiting = false; 
+  bool sample_available = false; 
   uint8_t last_trigger_time = 0;         // in ms
 
   int32_t temperature = 0;  // In 0.01°C
