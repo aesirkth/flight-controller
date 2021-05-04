@@ -92,6 +92,42 @@ void MS5611::update() {
   convertMeasurement(D1, D2);
 }
 
+void MS5611::updateAsync() {
+  if (last_trigger_time >= _del) {
+    uint32_t D1, D2;
+    D1 = readAsync(MS5611_PRES);
+    D2 = readAsync(MS5611_TEMP);
+    convertMeasurement(D1, D2);
+    sample_available = true; 
+  }
+}
+
+void MS5611::startSampling() {
+    triggerAsync(MS5611_PRES); 
+    triggerAsync(MS5611_TEMP); 
+    last_trigger_time = millis(); 
+    sample_available = false; 
+}
+
+/* Async trigger of sensor reading */
+void MS5611::triggerAsync(uint8_t addr) {
+  readByte(addr + _osr);
+}
+
+/* Async reading of values called 
+  only if delay time has passed */
+uint32_t MS5611::readAsync(uint8_t addr) {
+  uint32_t val = 0;
+  uint8_t data[3];
+
+  readBytes(0x00, 3, data);  // Read measurement
+  val += data[0] << 16;
+  val += data[1] << 8;
+  val += data[2];
+
+  return val;
+}
+
 /*
   Set the Oversampling Ratio
 
@@ -245,6 +281,7 @@ uint32_t MS5611::readAdc(uint8_t addr) {
 
   return val;
 }
+
 
 /*
   Read a single byte

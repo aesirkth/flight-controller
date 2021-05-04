@@ -143,7 +143,7 @@ void setup() {
 
 void loop() {
   uint32_t before = micros(); 
-  ms1.update();
+  ms1.updateAsync();
   uint32_t after = micros(); 
   Serial.println("--------");
   Serial.printf("Timediff:\t%d\tms\n",(after - before)/1000); 
