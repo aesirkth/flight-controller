@@ -20,12 +20,19 @@
 // #define MS5611_SKIP_COMP
 
 class MS5611 {
- public:
+  public:
   MS5611(uint8_t cs_pin, SPIClass &spi_interface);
   MS5611(uint8_t cs_pin, SPIClass &spi_interface, uint32_t spi_freq);
   void begin();
   void update();
   uint8_t setOSR(uint8_t osr);
+
+  // Async functionality
+  void updateAsync(); 
+  void startSampling();
+  void triggerAsync(uint8_t addr); 
+  bool sample_available = false; 
+  uint8_t last_trigger_time = 0;         // in ms
 
   int32_t temperature = 0;  // In 0.01°C
   int32_t pressure = 0;     // In 0.01 mbar
@@ -37,6 +44,7 @@ class MS5611 {
   void readProm();
   void convertMeasurement(uint32_t D1, uint32_t D2);
   uint32_t readAdc(uint8_t addr);
+  uint32_t readAsync(uint8_t addr);
   uint8_t readByte(uint8_t address);
   void readBytes(uint8_t address, uint8_t count, uint8_t *data);
   void csbLow();
