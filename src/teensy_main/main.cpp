@@ -3,18 +3,9 @@
 #include <SPI.h>
 #include <Adafruit_NeoPixel.h>
 #include <stdio.h>
-#include <map>
 
-#include "MS5611.h"
-#include "DmaSpi.h" // SPI using DMA, KurtE's branch, chipselect.h modified to support callbacks
-#include "SdFat.h" // read and write from the sd-card
-#include "RH_RF95.h" // LoRa radio, modified to skip some error checking 
-#include "RHHardwareSPI1.h" // headers for SPI1 and radiohead
-#include "hardware_definition_teensy.h" // pin definitions
-#include "Gps.h" // GPS
-#include "DataProtocol.h" // to extract and find data in a stream
-#include "fc.h" // to decode and encode data
-#include "FlashMemory.hpp" // read and write to the flash chip, hard coded to use SPI1
+#include "main.h"
+#include "protocol.h"
 
 //*********************************** IMPORTANT *******************************************
 // DUE TO A HARDWARE FAULT DO NOT USE THE LORA MORE THAN ONCE EVERY 3 SECONDS!!!
@@ -35,8 +26,6 @@
 #define LEN_MS_SINCE_BOOT_MSG 7
 #define GPS_LED 0
 #define STATE_LED 1
-#define PARACHUTE_DELAY_US 5000000
-#define TELECOMMAND_MAX_MSG_LEN 30
 #define GPS_BAUD 38400
 #define TELEMETRY_BAUD 57600
 #define BLUE 0x0000FF //blue
@@ -54,13 +43,6 @@
 #define PING_EDDA_CYCLE 5000
 #define TC_GNSS_CYCLE 6000
 
-struct default_uint8 {
-  uint8_t val = 1;
-};
-
-std::map<uint8_t, struct default_uint8> can_relay_frequency;
-std::map<uint8_t, uint8_t> can_message_count;
-
 GPS gps1; // for gps on Serial1
 GPS gps2; // for gps on Serial3
 SPISettings settingsFlash(10000000, MSBFIRST, SPI_MODE0); // SPI bus settings to communicate with the Flash IC
@@ -70,7 +52,6 @@ MS5611 ms2(PIN_CS_MS2, SPI); // pressure sensor
 IntervalTimer para1_timer; // timer for parachute 1
 IntervalTimer para2_timer; // timer for parachute 1
 DataProtocol protocol; // data protocol reader
-static CAN_message_t can_msg; // msg for the can bus
 FlexCAN CANbus(1000000, 0, 1, 1);  // 1Mbs, CAN0, pins 29&30 for TX&RX
 GPS* best_gps; // stores the best gps
 RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), hardware_spi1); // LoRa modem
@@ -272,108 +253,27 @@ void updateGps() {
   }
 }
 
-void enableParachute1() {
-  digitalWriteFast(PIN_PARA1, HIGH);
-  analogWrite(PIN_BUZZER, 0);
-  para1_timer.end();
-}
-
-void enableParachute2() {
-  digitalWriteFast(PIN_PARA2, HIGH);
-  analogWrite(PIN_BUZZER, 0);
-  para2_timer.end();
-}
-
-void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
-  uint8_t header_buf[HEADER_SIZE];
-  uint8_t header_index = 0;
-  protocol.build_header(id, header_buf, &header_index);
-  add_to_backup_buf(header_buf, header_index); // add header
-  add_to_backup_buf(buf, len); // add message
-  // parse the message no matter what, nothing will happen if it's invalid
-  fc::parse_message(id, buf); 
-  //relay gc -> ec messages
-  if (GC_TO_EC_TC_START <= id && id <= GC_TO_EC_TC_END) {
-    can_msg.id = id;
-    memcpy(can_msg.buf, buf, len);
-    can_msg.len = len;
-    CANbus.write(can_msg);
+void setup() {
+  protocol.set_callback(&DataProtocolCallback);
+  CANbus.begin();
+  Serial.begin(115200);
+  initRGB();
+  initGps();
+  initPins();
+  initRadio();
+  initSD();
+  initFlash();
+  initDMA();
+  initSensors();
+  //init telemetry
+  Serial2.setRX(PIN_RX2);
+  Serial2.setTX(PIN_TX2);
+  Serial2.begin(TELEMETRY_BAUD);
+  //This is very important, see above
+  if (Serial2.availableForWrite() < 128) {
+    showError();
   }
-  //relay ec -> telecommand
-  if (EC_TO_GC_TC_START <= id && id <= EC_TO_GC_TC_END) {
-    add_to_telecommand_buf(header_buf, header_index);
-    add_to_telecommand_buf(buf, len);
-  }
-  //relay ec -> telemetry
-  if (EC_TO_GC_TM_START <= id && id <= EC_TO_GC_TM_END) {
-    can_message_count[id] = (can_message_count[id] + 1) % can_relay_frequency[id].val;
-    if (can_message_count[id] == 0) {
-      add_to_telemetry_buf(header_buf, header_index);
-      add_to_telemetry_buf(buf, len);
-    }
-  }
-}
-
-void handleDataStreams() {
-  uint8_t buf[TELECOMMAND_MAX_MSG_LEN];
-  uint8_t len = TELECOMMAND_MAX_MSG_LEN;
-  while (Serial.available() > 0) {
-    uint8_t byte = Serial.read();
-    protocol.parse_byte(byte);
-  }
-  if (rfm.recv(buf, &len)) {
-    protocol.parse_frame(buf, len);
-  }
-  if(CANbus.available()) {
-    CANbus.read(can_msg);
-    protocol.parse_CAN_message(can_msg);
-  }
-}
-
-void fc::rx(fc::set_parachute_output_from_ground_station_to_flight_controller msg) {
-  bool para1 = parachute_armed && msg.get_is_parachute1_en();
-  bool para2 = parachute_armed && msg.get_is_parachute2_en();
-  parachute_armed = msg.get_is_parachute_armed();
-
-  if (para1) {
-    analogWrite(PIN_BUZZER, 122);
-    para1_timer.begin(enableParachute1, PARACHUTE_DELAY_US);
-  }
-  if (para2) {
-    analogWrite(PIN_BUZZER, 122);
-    para2_timer.begin(enableParachute1, PARACHUTE_DELAY_US); 
-  }
-  fc::return_parachute_output_from_flight_controller_to_ground_station response;
-  uint8_t len = response.get_size() + HEADER_SIZE;
-  uint8_t buf[len];
-  response.set_is_parachute1_en(para1);
-  response.set_is_parachute2_en(para2);
-  response.set_is_parachute_armed(parachute_armed);
-  protocol.build_buf(response, buf, &len);
-  add_to_telecommand_buf(buf, len);
-  add_to_backup_buf(buf, len);
-}
-
-void fc::rx(fc::set_data_logging_from_ground_station_to_flight_controller msg) {
-  data_logging_enabled = msg.get_is_logging_en();
-  fc::return_data_logging_from_flight_controller_to_ground_station response;
-  uint8_t len = response.get_size() + HEADER_SIZE;
-  uint8_t buf[len];
-  protocol.build_buf(response, buf, &len);
-  add_to_telecommand_buf(buf, len);
-  add_to_backup_buf(buf, len);
-}
-
-void fc::rx(fc::handshake_from_ground_station_to_flight_controller msg) {
-  fc::return_handshake_from_flight_controller_to_ground_station response;
-  uint8_t len = response.get_size() + HEADER_SIZE;
-  uint8_t buf[len];
-  protocol.build_buf(response, buf, &len);
-  add_to_telecommand_buf(buf, len);
-  add_to_backup_buf(buf, len);
-  delay(100);
-  Serial.write(buf, len);
-  delay(500);
+  showOk();
 }
 
 void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
@@ -413,36 +313,12 @@ void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
   }
 }
 
-void setup() {
-  protocol.set_callback(&DataProtocolCallback);
-  CANbus.begin();
-  Serial.begin(115200);
-  initRGB();
-  initGps();
-  initPins();
-  initRadio();
-  initSD();
-  initFlash();
-  initDMA();
-  initSensors();
-  //init telemetry
-  Serial2.setRX(PIN_RX2);
-  Serial2.setTX(PIN_TX2);
-  Serial2.begin(TELEMETRY_BAUD);
-  //This is very important, see above
-  if (Serial2.availableForWrite() < 128) {
-    showError();
-  }
-  showOk();
-}
-
 void loop() {
   static uint64_t last_cycle_time = 0;
   static uint64_t cycle_count = 0;
 
   updateGps();
   handleDataStreams();
-
   uint32_t current_time = millis();
   if (current_time - last_cycle_time >= CYCLE_DELAY_MS) {
     if (current_time - last_cycle_time > CYCLE_DELAY_MS) {
@@ -454,6 +330,8 @@ void loop() {
     if (cycle_count % BLINK_LED_CYCLE == 0) {
       showOk();
     }
+
+    
     if ((cycle_count + BLINK_LED_CYCLE / 2) % BLINK_LED_CYCLE == 0) {
       showNeutral();
     }
@@ -461,6 +339,7 @@ void loop() {
       //PING!
       //PONG!
     }
+    // sample GPS
     if (cycle_count % TC_GNSS_CYCLE == 0) {
       fc::gnss_data_from_flight_controller_to_ground_station tc_msg;
       fc::GNSS_data_1_from_flight_controller_to_ground_station tm_msg;

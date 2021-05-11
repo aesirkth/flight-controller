@@ -74,7 +74,6 @@ MS5611 ms1(PIN_CS_MS1, SPI); // pressure sensor
 IntervalTimer para1_timer; // timer for parachute 1
 IntervalTimer para2_timer; // timer for parachute 1
 DataProtocol protocol; // data protocol reader
-static CAN_message_t can_msg; // msg for the can bus
 FlexCAN CANbus(1000000, 0, 1, 1);  // 1Mbs, CAN0, pins 29&30 for TX&RX
 GPS gps1; // for gps on Serial1
 GPS gps2; // for gps on Serial3
@@ -97,6 +96,15 @@ bool telecommand_enabled = true;
 bool FPV_enabled = false;
 bool gps_led_on = false;
 bool rfm_init_success = 0;
+
+void resetRadio() {
+  digitalWriteFast(PIN_RFM_RST, HIGH);
+  delay(100);
+  digitalWriteFast(PIN_RFM_RST, LOW);
+  delay(100);
+  digitalWriteFast(PIN_RFM_RST, HIGH);
+  delay(100);  
+}
 
 void initPins() {
   pinMode(PIN_RFD_DIS, OUTPUT);
@@ -123,21 +131,19 @@ void initPins() {
 }
 
 void setup() {
+  return;
   initPins();
-
-  uint8_t buf[2048];
-  for (uint16_t i = 0; i < 2048; i++) {
-    buf[i] = (uint8_t) i;
-  }
-  DMASPI1.begin();
-  DMASPI1.start();
-  flash.begin();
-
+  Serial.begin(115200);
   while (!Serial){}
-  flash.checkFactoryBadBlocks();
-  //flash.readBadBlockLUT();
+  resetRadio();
+  rfm.init();
+  strip.begin();
+  strip.setBrightness(100);
 }
 
 void loop() {
-
+  return;
+  uint8_t buf[20];
+  delay(1000);
+  rfm.send(buf, 20);
 }
