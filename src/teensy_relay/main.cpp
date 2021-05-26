@@ -13,14 +13,19 @@
 #define BLUE 0x0000FF  //blue
 #define GREEN 0x00FF00 //green
 #define RED 0xFF0000   //red
+#define PINK 0xFF7070
+#define YELLOW 0x00FFFF
 #define STATE_LED 1
 #define TELECOMMAND_MAX_MSG_LEN 30
 #define BACKUP_BUF_LEN 100
 #define TELEMETRY_BUF_LEN 100
 #define TELECOMMAND_BUF_LEN 100
 
+#define PARACHUTE_ON_TIME 1000
+
 bool rfm_init_success = 0;
 bool error = false;
+bool armed = false;
 
 char RELAY_BUFFER[TELECOMMAND_MAX_MSG_LEN];
 uint8_t RELAY_BUFFER_LEN = 0; 
@@ -47,7 +52,17 @@ void showOk()
     {
         return;
     }
-    strip.setPixelColor(STATE_LED, GREEN);
+    strip.setPixelColor(STATE_LED, PINK);
+    strip.show();
+    digitalWriteFast(LED_BUILTIN, LOW);
+}
+
+void showNeutral() {
+    if (error)
+    {
+        return;
+    }
+    strip.setPixelColor(STATE_LED, YELLOW);
     strip.show();
     digitalWriteFast(LED_BUILTIN, LOW);
 }
@@ -83,7 +98,7 @@ void initRadio()
 
     resetRadio();
     rfm_init_success = rfm.init();
-    Serial.println(rfm_init_success);
+    //Serial.println(rfm_init_success);
     if (rfm_init_success)
     {
         rfm.setFrequency(RFM_FREQ);
@@ -100,7 +115,6 @@ void fc::rx(fc::handshake_from_ground_station_to_flight_controller msg) {
     uint8_t len = response.get_size() + HEADER_SIZE;
     uint8_t buf[len];
     protocol.build_buf(response, buf, &len);
-    delay(100);
     Serial.write(buf, len);
     delay(500);
 }
@@ -113,7 +127,7 @@ void setup()
 {
     protocol.set_callback(&DataProtocolCallback);
     Serial.begin(115200);
-    while(!Serial);
+    //while(!Serial);
     initRGB();
     initRadio();
     showOk();
@@ -144,20 +158,80 @@ void handleDataStreams()
         }
         if (rfm.send(bytes_formatted, RELAY_BUFFER_LEN)) {
             RELAY_BUFFER_LEN = 0; // Reset to buffer is filled with new characters
+            showNeutral();
+            delay(50);
+            showOk();
         }
     }
     // Receiving from FC to ground station
     if (rfm.recv(buffer, &len))
     {
-        // Serial.write(buffer, len); 
-
-        for (int i=0; i<len; i++) {
-            Serial.print(char(buffer[i]));
-        }
+        Serial.write(buffer, len); 
     }
 }
 
 void loop()
 {
-    handleDataStreams(); 
+    
+    uint8_t buf[255];
+    uint8_t len = 255;
+    //handleDataStreams();
+
+    if (rfm.recv(buf, &len)) {
+        Serial.write(buf, len);
+        rfm.send(buf, len);
+        /*
+        if (memcmp(buf, "arm", 3) == 0) {
+            armed = true;
+            analogWrite(PIN_BUZZER, 128);
+            delay(200);
+            analogWrite(PIN_BUZZER, 0);
+            delay(200);
+            analogWrite(PIN_BUZZER, 128);
+            delay(200);
+            analogWrite(PIN_BUZZER, 0);
+        }
+        if (memcmp(buf, "dearm", 5) == 0) {
+            armed = false;
+            analogWrite(PIN_BUZZER, 128);
+            delay(200);
+            analogWrite(PIN_BUZZER, 0);
+            delay(200);
+        }
+
+        if (memcmp(buf, "enable1", 7) == 0 && armed) {
+            analogWrite(PIN_BUZZER, 128);
+            delay(8000);
+            analogWrite(PIN_BUZZER, 0);
+            digitalWrite(PIN_PARA1, HIGH);
+            delay(PARACHUTE_ON_TIME);
+            digitalWrite(PIN_PARA1, LOW);
+        }
+
+        if (memcmp(buf, "enable2", 7) == 0 && armed) {
+            analogWrite(PIN_BUZZER, 128);
+            delay(8000);
+            analogWrite(PIN_BUZZER, 0);
+            digitalWrite(PIN_PARA1, HIGH);
+            delay(PARACHUTE_ON_TIME);
+            digitalWrite(PIN_PARA1, LOW);
+            analogWrite(PIN_BUZZER, 0);
+        }
+        */
+    } 
+
+    if (Serial.available() > 0) {
+        delay(200);
+        len = Serial.available();
+        for (uint8_t i = 0; i < len; i++) {
+            uint8_t byte = Serial.read();
+            protocol.parse_byte(byte);
+            buf[i] = byte;
+        }
+        Serial2.write(buf, len); 
+        rfm.send(buf, len);
+        showNeutral();
+        delay(500);
+        showOk();
+    }
 }

@@ -49,7 +49,7 @@ void DataProtocol::parse_frame(uint8_t* buf, uint8_t len) {
     return;
   }
   uint8_t id = buf[2];
-  if (fc::id_to_len(id) != len - 3) {
+  if (fc::id_to_len(id) + 3 != len) {
     return;
   }
   (*callback)(id, buf + 3, len);

@@ -2,8 +2,11 @@
 
 #include "main.h"
 
-#define TELECOMMAND_MAX_MSG_LEN 30
-#define PARACHUTE_DELAY_US 5000000
+
+#define TELECOMMAND_MAX_MSG_LEN RH_RF95_MAX_MESSAGE_LEN
+
+#define PARACHUTE_ACTIVATE_DELAY_US (5 * 1000 * 1000) //5s
+#define PARACHUTE_DEACTIVATE_DELAY_US (2 * 1000 * 1000) //500ms
 
 struct default_uint8 {
   uint8_t val = 1;
@@ -47,7 +50,7 @@ void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
 void handleDataStreams() {
   uint8_t buf[TELECOMMAND_MAX_MSG_LEN];
   uint8_t len = TELECOMMAND_MAX_MSG_LEN;
-  CAN_message_t can_msg;
+  CAN_message_t can_msg; 
   
   while (Serial.available() > 0) {
     uint8_t byte = Serial.read();
@@ -56,22 +59,39 @@ void handleDataStreams() {
   if (rfm.recv(buf, &len)) {
     protocol.parse_frame(buf, len);
   }
+  while (Serial2.available()) {
+    uint8_t byte = Serial2.read();
+    protocol.parse_byte(byte);
+    Serial.write(byte);
+  }
   if(CANbus.available()) {
     CANbus.read(can_msg);
     protocol.parse_CAN_message(can_msg);
   }
 }
 
-void enableParachute1() {
-  digitalWriteFast(PIN_PARA1, HIGH);
+void disableParachute1() {
+  digitalWriteFast(PIN_PARA1, LOW);
   analogWrite(PIN_BUZZER, 0);
   para1_timer.end();
 }
 
-void enableParachute2() {
-  digitalWriteFast(PIN_PARA2, HIGH);
+void disableParachute2() {
+  digitalWriteFast(PIN_PARA2, LOW);
   analogWrite(PIN_BUZZER, 0);
   para2_timer.end();
+}
+
+void enableParachute1() {
+  digitalWriteFast(PIN_PARA1, HIGH);
+  para1_timer.end();
+  para1_timer.begin(disableParachute1, PARACHUTE_DEACTIVATE_DELAY_US);
+}
+
+void enableParachute2() {
+  digitalWriteFast(PIN_PARA2, HIGH);
+  para2_timer.end();
+  para2_timer.begin(disableParachute2, PARACHUTE_DEACTIVATE_DELAY_US);
 }
 
 void fc::rx(fc::set_parachute_output_from_ground_station_to_flight_controller msg) {
@@ -81,11 +101,11 @@ void fc::rx(fc::set_parachute_output_from_ground_station_to_flight_controller ms
 
   if (para1) {
     analogWrite(PIN_BUZZER, 122);
-    para1_timer.begin(enableParachute1, PARACHUTE_DELAY_US);
+    para1_timer.begin(enableParachute1, PARACHUTE_ACTIVATE_DELAY_US);
   }
   if (para2) {
     analogWrite(PIN_BUZZER, 122);
-    para2_timer.begin(enableParachute1, PARACHUTE_DELAY_US); 
+    para2_timer.begin(enableParachute2, PARACHUTE_ACTIVATE_DELAY_US); 
   }
   fc::return_parachute_output_from_flight_controller_to_ground_station response;
   uint8_t len = response.get_size() + HEADER_SIZE;
@@ -122,6 +142,7 @@ void fc::rx(fc::handshake_from_ground_station_to_flight_controller msg) {
 
 void fc::rx(fc::time_sync_from_ground_station_to_flight_controller msg) {
   fc::return_time_sync_from_flight_controller_to_ground_station response;
+  //showError();
   uint8_t len = response.get_size() + HEADER_SIZE;
   uint8_t buf[len];
   protocol.build_buf(response, buf, &len);

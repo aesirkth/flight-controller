@@ -15,7 +15,7 @@
 #include <RHSPIDriver.h>
 
 //how long to wait before each message
-#define MESSAGE_DELAY 3000
+#define MESSAGE_DELAY 4000
 
 // This is the maximum number of interrupts the driver can support
 // Most Arduinos can handle 2, Megas can handle more

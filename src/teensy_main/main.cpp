@@ -122,8 +122,8 @@ void initPins() {
   pinMode(PIN_BUZZER, OUTPUT);
   analogWriteFrequency(PIN_BUZZER, BUZZER_FREQ);
   analogWriteRes(8);
-  digitalWriteFast(PIN_RFD_DIS, LOW); //HIGH MEANS DISABLED
-  digitalWriteFast(PIN_FPV_DIS, LOW); //HIGH MEANS DISABLED
+  digitalWriteFast(PIN_RFD_DIS, !telemetry_enabled); //HIGH MEANS DISABLED
+  digitalWriteFast(PIN_FPV_DIS, !FPV_enabled); //HIGH MEANS DISABLED
   digitalWriteFast(PIN_PARA1, LOW); //LOW IS INACTIVE
   digitalWriteFast(PIN_PARA2, LOW); //LOW IS INACTIVE
   SPI1.setMOSI(PIN_MOSI1);
@@ -302,87 +302,91 @@ void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
   }
   if (telecommand_index > LEN_MS_SINCE_BOOT_MSG &&
       cycle_count % LORA_SEND_CYCLE  == 0 && !DMASPI1.busy()) {
+
     uint8_t index = 0;
     fc::ms_since_boot_from_flight_controller_to_ground_station msg;
     msg.set_ms_since_boot(current_time);
     protocol.build_buf(msg, telecommand_buf, &index);
     if (telecommand_enabled) {
       rfm.send(telecommand_buf, telecommand_index);
+      Serial2.write(telecommand_buf, telecommand_index);
     }
     telecommand_index = LEN_MS_SINCE_BOOT_MSG;
   }
 }
 
 void loop() {
-  static uint64_t last_cycle_time = 0;
-  static uint64_t cycle_count = 0;
+  static uint32_t last_cycle_time = 0;
+  static uint32_t cycle_count = 0;
 
   updateGps();
   handleDataStreams();
   uint32_t current_time = millis();
-  if (current_time - last_cycle_time >= CYCLE_DELAY_MS) {
-    if (current_time - last_cycle_time > CYCLE_DELAY_MS) {
-      //Serial.println(current_time);
-    }
+  if (current_time - last_cycle_time < CYCLE_DELAY_MS) {
+    return;
+  }
+  if (current_time - last_cycle_time > CYCLE_DELAY_MS) {
+    //Serial.println(current_time);
+  }
+  last_cycle_time = current_time;
+  cycle_count++;
 
-    last_cycle_time = current_time;
-    cycle_count++;
-    if (cycle_count % BLINK_LED_CYCLE == 0) {
-      showOk();
-    }
+  //Serial.println(cycle_count);
 
-    
-    if ((cycle_count + BLINK_LED_CYCLE / 2) % BLINK_LED_CYCLE == 0) {
-      showNeutral();
-    }
-    if (cycle_count % PING_EDDA_CYCLE == 0) {
-      //PING!
-      //PONG!
-    }
-    // sample GPS
-    if (cycle_count % TC_GNSS_CYCLE == 0) {
-      fc::gnss_data_from_flight_controller_to_ground_station tc_msg;
-      fc::GNSS_data_1_from_flight_controller_to_ground_station tm_msg;
-      uint8_t len = 0;
-      uint8_t buf[50];
-      uint32_t gnss_time = 0;
-      int32_t latitude = 0, longitude = 0; 
-      uint16_t h_dop = 0;
-      uint8_t n_satellites = 0;
-      if (best_gps->is_set(FLAG_HDOP))
-      if (best_gps->is_set(FLAG_TIME)) {
-        gnss_time = best_gps->raw_time;
-      }
-      if (best_gps->is_set(FLAG_LATITUDE)) {
-        latitude = best_gps->latitude_degrees * 100 + best_gps->latitude_minutes;
-      }
-      if (best_gps->is_set(FLAG_LONGITUDE)) {
-        latitude = best_gps->longitude_degrees * 100 + best_gps->longitude_minutes;
-      }
-      if (best_gps->is_set(FLAG_HDOP)) {
-        h_dop = best_gps->hdop;
-      }
-      if (best_gps->is_set(FLAG_N_SATELLITES)) {
-        n_satellites = best_gps->n_satellites;
-      }
-      gps1.clear_flags();
-      gps2.clear_flags();
-      tc_msg.set_gnss_time(gnss_time);
-      tc_msg.set_latitude(latitude);
-      tc_msg.set_longitude(longitude);
-      tc_msg.set_h_dop(h_dop);
-      tc_msg.set_n_satellites(n_satellites);
-      protocol.build_buf(tc_msg, buf, &len);
-      add_to_telecommand_buf(buf, len);
-      add_to_backup_buf(buf, len);
-      tm_msg.set_gnss_time(gnss_time);
-      tm_msg.set_latitude(latitude);
-      tm_msg.set_longitude(longitude);
-      protocol.build_buf(tm_msg, buf, &len);
-      add_to_telemetry_buf(buf, len);
-      add_to_backup_buf(buf, len);
-    }
+  if (cycle_count % BLINK_LED_CYCLE == 0) {
+    showOk();
   }
 
+  
+  if ((cycle_count + BLINK_LED_CYCLE / 2) % BLINK_LED_CYCLE == 0) {
+    showNeutral();
+  }
+  if (cycle_count % PING_EDDA_CYCLE == 0) {
+    //PING!
+    //PONG!
+  }
+  // sample GPS
+  if (cycle_count % TC_GNSS_CYCLE == 0) {
+    fc::gnss_data_from_flight_controller_to_ground_station tc_msg;
+    fc::GNSS_data_1_from_flight_controller_to_ground_station tm_msg;
+    uint8_t len = 0;
+    uint8_t buf[50];
+    uint32_t gnss_time = 0;
+    int32_t latitude = 0, longitude = 0; 
+    uint16_t h_dop = 0;
+    uint8_t n_satellites = 0;
+    if (best_gps->is_set(FLAG_HDOP))
+    if (best_gps->is_set(FLAG_TIME)) {
+      gnss_time = best_gps->raw_time;
+    }
+    if (best_gps->is_set(FLAG_LATITUDE)) {
+      latitude = best_gps->latitude_degrees * 100 + best_gps->latitude_minutes;
+    }
+    if (best_gps->is_set(FLAG_LONGITUDE)) {
+      latitude = best_gps->longitude_degrees * 100 + best_gps->longitude_minutes;
+    }
+    if (best_gps->is_set(FLAG_HDOP)) {
+      h_dop = best_gps->hdop;
+    }
+    if (best_gps->is_set(FLAG_N_SATELLITES)) {
+      n_satellites = best_gps->n_satellites;
+    }
+    gps1.clear_flags();
+    gps2.clear_flags();
+    tc_msg.set_gnss_time(gnss_time);
+    tc_msg.set_latitude(latitude);
+    tc_msg.set_longitude(longitude);
+    tc_msg.set_h_dop(h_dop);
+    tc_msg.set_n_satellites(n_satellites);
+    protocol.build_buf(tc_msg, buf, &len);
+    //add_to_telecommand_buf(buf, len);
+    //add_to_backup_buf(buf, len);
+    tm_msg.set_gnss_time(gnss_time);
+    tm_msg.set_latitude(latitude);
+    tm_msg.set_longitude(longitude);
+    protocol.build_buf(tm_msg, buf, &len);
+    //add_to_telemetry_buf(buf, len);
+    //add_to_backup_buf(buf, len);
+  }
   emptyBuffers(cycle_count, current_time);
 }

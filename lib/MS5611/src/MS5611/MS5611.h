@@ -31,6 +31,7 @@ class MS5611 {
   void updateAsync(); 
   void startSampling();
   void triggerAsync(uint8_t addr); 
+  bool isSampleAvailable();
   bool sample_available = false; 
   uint8_t last_trigger_time = 0;         // in ms
 

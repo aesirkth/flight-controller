@@ -289,6 +289,7 @@ void RH_RF95::validateRxBuf()
 bool RH_RF95::available()
 {
     RH_MUTEX_LOCK(lock); // Multithreading support
+    
     if (_mode == RHModeTx)
     {
     	RH_MUTEX_UNLOCK(lock);

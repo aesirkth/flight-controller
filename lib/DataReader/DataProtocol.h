@@ -33,9 +33,9 @@ public:
   void parse_frame(uint8_t* buf, uint8_t len);
   void parse_CAN_message(CAN_message_t msg);
   
-  void build_header(uint8_t id, uint8_t* buf, uint8_t* index);
+  static void build_header(uint8_t id, uint8_t* buf, uint8_t* index);
   template <typename T>
-  void build_buf(T msg, uint8_t* buf, uint8_t* len) {
+  static void build_buf(T msg, uint8_t* buf, uint8_t* len) {
     *len = 0;
     buf[(*len)++] = INIT_FRAME_1;
     buf[(*len)++] = INIT_FRAME_2;
@@ -44,7 +44,7 @@ public:
   }
 
   template <typename T>
-  void build_CAN_message(T msg, CAN_message_t can) {
+  static void build_CAN_message(T msg, CAN_message_t can) {
     uint8_t index = 0;
     can.id = msg.get_id();
     can.len = msg.get_size();

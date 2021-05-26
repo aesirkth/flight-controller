@@ -109,6 +109,14 @@ void MS5611::startSampling() {
     sample_available = false; 
 }
 
+bool MS5611::isSampleAvailable() {
+  if (sample_available) {
+    sample_available = false;
+    return true;
+  }
+  return false;
+}
+
 /* Async trigger of sensor reading */
 void MS5611::triggerAsync(uint8_t addr) {
   readByte(addr + _osr);
