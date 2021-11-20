@@ -4,7 +4,7 @@
 #define TELECOMMAND_MAX_MSG_LEN RH_RF95_MAX_MESSAGE_LEN
 
 #define PARACHUTE_ACTIVATE_DELAY_US (5 * 1000 * 1000) //5s
-#define PARACHUTE_DEACTIVATE_DELAY_US (2 * 1000 * 1000) //500ms
+#define PARACHUTE_DEACTIVATE_DELAY_US (0.5 * 1000 * 1000) //500ms
 
 uint8_t previous_length[255] = {0};
 
@@ -13,11 +13,10 @@ struct default_uint8 {
 };
 
 enum struct where {
-  internal,
   telemetry,
-  can,
   response,
-  everywhere,
+  important,
+  offline
 };
 
 struct default_uint8 send_frequency[255];
@@ -32,7 +31,7 @@ send response - always over radio
 send everywhere - can and radio
 */
 
-void sendMessage(fc::MessageBase* msg, enum where target, bool skip_internal = false) {
+void sendMessage(fc::MessageBase* msg, enum where target) {
   uint8_t header_len = HEADER_SIZE;
   uint8_t header_buf[header_len];
   uint8_t msg_index = 0;
@@ -42,77 +41,52 @@ void sendMessage(fc::MessageBase* msg, enum where target, bool skip_internal = f
   msg->build_buf(msg_buf, &msg_index);
   uint8_t checksum = DataProtocol::get_checksum(msg_buf, msg->get_size());
   DataProtocol::build_header(id, checksum, header_buf, &header_len);
-  
 
-  add_to_backup_buf(header_buf, header_len);
-  add_to_backup_buf(msg_buf, msg_index);
-  if (!skip_internal) {
-    fc::parse_message(id, msg_buf);
-  }
+  //store everything
+  flash_queue.enqueue(header_buf, header_len);
+  flash_queue.enqueue(msg_buf, msg_index);
   
   switch(target) {
-    case where::internal:
-      break; 
-    
+    case where::offline:
+      break;
     case where::telemetry:
       message_count[id] = (message_count[id] + 1) % send_frequency[id].val;
       if (message_count[id] == 0) {
-        add_to_telemetry_buf(header_buf, header_len);
-        add_to_telemetry_buf(msg_buf, msg_index);
+        telemetry_queue.enqueue(header_buf, header_len);
+        telemetry_queue.enqueue(msg_buf, msg_index);
       }
       break;
     
-    case where::can:
-      DataProtocol::build_CAN_message(msg, &can_msg);
-      CANbus.write(can_msg);
+    case where::important:
+      telemetry_queue.enqueue(header_buf, header_len);
+      telemetry_queue.enqueue(msg_buf, msg_index);
+      lora_queue.enqueue(header_buf, header_len);
+      lora_queue.enqueue(msg_buf, msg_index);
       break;
     
     case where::response:
-      add_to_telemetry_buf(header_buf, header_len);
-      add_to_telemetry_buf(msg_buf, msg_index);
-      break;
-  
-    case where::everywhere:
-      DataProtocol::build_CAN_message(msg, &can_msg);
-      CANbus.write(can_msg);
-
-      add_to_telemetry_buf(header_buf, header_len);
-      add_to_telemetry_buf(msg_buf, msg_index);
+      telemetry_queue.enqueue(header_buf, header_len);
+      telemetry_queue.enqueue(msg_buf, msg_index);
       break;
   }
 }
 
 void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
-  //Serial.print("chungus");
   uint8_t header_buf[HEADER_SIZE];
   uint8_t header_index = 0;
   uint8_t checksum = DataProtocol::get_checksum(buf, len);
   DataProtocol::build_header(id, checksum, header_buf, &header_index);
-  add_to_backup_buf(header_buf, header_index); // add header
-  add_to_backup_buf(buf, len); // add message
+  flash_queue.enqueue(header_buf, header_index); //add header
+  flash_queue.enqueue(buf, len);  //add message
   // parse the message no matter what, nothing will happen if it's invalid
   fc::parse_message(id, buf);
 
-  //relay gc -> ec messages
-  if (GC_TO_EC_TC_START <= id && id <= GC_TO_EC_TC_END) {
+  if (EDDA::is_valid_id(id)) {
     CAN_message_t can_msg;
     can_msg.id = id;
-    memcpy(can_msg.buf, buf, len);
     can_msg.len = len;
-    CANbus.write(can_msg);
-  }
-  //relay ec -> telecommand
-  if (EC_TO_GC_TC_START <= id && id <= EC_TO_GC_TC_END) {
-    //add_to_telecommand_buf(header_buf, header_index);
-    //add_to_telecommand_buf(buf, len);
-  }
-  //relay ec -> telemetry
-  if (EC_TO_GC_TM_START <= id && id <= EC_TO_GC_TM_END) {
-    message_count[id] = (message_count[id] + 1) % send_frequency[id].val;
-    if (message_count[id] == 0) {
-      //add_to_telemetry_buf(header_buf, header_index);
-      //add_to_telemetry_buf(buf, len);
-    }
+    memcpy(can_msg.buf, buf, len);
+    can.write(can_msg); 
   }
 }
 
@@ -137,37 +111,40 @@ void handleDataStreams() {
     telemetry_protocol.parse_byte(byte);
   }
 
-  if(CANbus.read(can_msg)) {
-    if (not (fc::is_valid_id(can_msg.id) || EDDA::is_valid_id(can_msg.id))) {
-      Serial.print("Invalid id: ");
-      Serial.println(can_msg.id);
-      delay(1000);
+  if(can.read(can_msg)) {
+    if (not EDDA::is_valid_id(can_msg.id)) {
       return;
     }
-    can_protocol.parse_CAN_message(can_msg);
+    uint8_t buf[can_msg.len + HEADER_SIZE];
+    uint8_t len  = can_protocol.build_buf(can_msg, buf);
+    flash_queue.enqueue(buf, len);
+
+    if ((can_msg.id & 0x400) == 0x400) {
+      telemetry_queue.enqueue(buf, len);
+    }
   }
 }
 
 void disableParachute1() {
-  digitalWriteFast(PIN_PARA1, LOW);
+  digitalWriteFast(PIN_PYRO_1, LOW);
   analogWrite(PIN_BUZZER, 0);
   para1_timer.end();
 }
 
 void disableParachute2() {
-  digitalWriteFast(PIN_PARA2, LOW);
+  digitalWriteFast(PIN_PYRO_2, LOW);
   analogWrite(PIN_BUZZER, 0);
   para2_timer.end();
 }
 
 void enableParachute1() {
-  digitalWriteFast(PIN_PARA1, HIGH);
+  digitalWriteFast(PIN_PYRO_1, HIGH);
   para1_timer.end();
   para1_timer.begin(disableParachute1, PARACHUTE_DEACTIVATE_DELAY_US);
 }
 
 void enableParachute2() {
-  digitalWriteFast(PIN_PARA2, HIGH);
+  digitalWriteFast(PIN_PYRO_2, HIGH);
   para2_timer.end();
   para2_timer.begin(disableParachute2, PARACHUTE_DEACTIVATE_DELAY_US);
 }
@@ -226,7 +203,7 @@ void fc::rx(fc::dump_flash_from_ground_station_to_flight_controller msg) {
     if (not file.isWritable()) {
       return;
     }
-
+    flash.flush();
     uint8_t buf[2048];
     for (uint16_t i = 0; i < flash.getBufferedAddress(); i++) {
       flash.pageDataRead(i);

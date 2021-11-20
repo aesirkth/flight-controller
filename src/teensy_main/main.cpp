@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <FlexCAN.h>  //https://github.com/pawelsky/FlexCAN_Library
+#include <FlexCAN_T4.h>  //https://github.com/pawelsky/FlexCAN_Library
 #include <SPI.h>
 #include <Adafruit_NeoPixel.h>
 #include <stdio.h>
@@ -22,7 +22,6 @@
 // Otherwise everything will be waaay too slow
 // slow code might be ok for debugging but WILL NOT work when actively using the telemetry modem
 //*********************************** IMPORTANT *******************************************
-#define DUMPED_FILE_NAME "/DUMPEDDATA.BIN"
 #define LEN_MS_SINCE_BOOT_MSG 7
 #define GPS_LED 0
 #define STATE_LED 1
@@ -31,7 +30,7 @@
 #define BLUE 0x0000FF //blue
 #define GREEN 0x00FF00 //green
 #define RED 0xFF0000 //red
-#define BACKUP_BUF_LEN 100
+#define BACKUP_BUF_LEN 512
 #define TELEMETRY_BUF_LEN 100
 #define TELECOMMAND_BUF_LEN 100
 
@@ -51,14 +50,13 @@ MS5611 ms1(PIN_CS_MS1, SPI); // pressure sensor
 MS5611 ms2(PIN_CS_MS2, SPI); // pressure sensor
 IntervalTimer para1_timer; // timer for parachute 1
 IntervalTimer para2_timer; // timer for parachute 1
-DataProtocol protocol; // data protocol reader
-FlexCAN CANbus(1000000, 0, 1, 1);  // 1Mbs, CAN0, pins 29&30 for TX&RX
+FlexCAN_T4<CAN0, RX_SIZE_128, TX_SIZE_128> CANbus;
 GPS* best_gps; // stores the best gps
 RH_RF95 rfm(PIN_RFM_NSS, digitalPinToInterrupt(PIN_RFM_INT), hardware_spi1); // LoRa modem
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_RGB_LEDS, PIN_LED_CTRL, NEO_GRB + NEO_KHZ400); // led lights
 SdFs SD; // SD card handler
 uint8_t backup_buf[BACKUP_BUF_LEN]; // buf for the flashchip
-uint8_t backup_index = LEN_MS_SINCE_BOOT_MSG; // index for flashchip buf
+uint16_t backup_index = LEN_MS_SINCE_BOOT_MSG; // index for flashchip buf
 uint8_t telemetry_buf[TELEMETRY_BUF_LEN]; // buf for the telemetry modem
 uint8_t telemetry_index = LEN_MS_SINCE_BOOT_MSG; // index for telemetry buf
 uint8_t telecommand_buf[TELECOMMAND_BUF_LEN]; // buf for the LoRa modem
@@ -104,13 +102,14 @@ void add_to_backup_buf(uint8_t* buf, uint8_t size) {
 }
 
 void add_to_telemetry_buf(uint8_t* buf, uint8_t size) {
-  memcpy(telemetry_buf + telemetry_index, buf, size);
-  telemetry_index += size;
+  //memcpy(telemetry_buf + telemetry_index, buf, size);
+  //telemetry_index += size;
 }
 
 void add_to_telecommand_buf(uint8_t* buf, uint8_t size) {
-  memcpy(telecommand_buf + telecommand_index, buf, size);
-  telecommand_index += size;
+  add_to_telemetry_buf(buf, size);
+  //memcpy(telecommand_buf + telecommand_index, buf, size);
+  //telecommand_index += size;
 }
 
 void initPins() {
@@ -183,13 +182,6 @@ void initRadio() {
   } 
 }
 
-void initSD() {
-  if (not SD.begin(SdioConfig(FIFO_SDIO))) {
-    showError();
-    return;
-  }
-}
-
 void initFlash() {
   if (!flash.begin()) {
     showError();
@@ -254,14 +246,16 @@ void updateGps() {
 }
 
 void setup() {
-  protocol.set_callback(&DataProtocolCallback);
+  while(!Serial){}
   CANbus.begin();
+  CANbus.setBaudRate(1000000);
+  CANbus.setRX(ALT);
+  CANbus.setTX(ALT);
   Serial.begin(115200);
   initRGB();
   initGps();
   initPins();
   initRadio();
-  initSD();
   initFlash();
   initDMA();
   initSensors();
@@ -273,6 +267,13 @@ void setup() {
   if (Serial2.availableForWrite() < 128) {
     showError();
   }
+
+  flash.writeEnable();
+  flash.blockErase(2);
+  uint8_t write_buf[2048];
+  uint8_t read_buf[2048] = {0};
+  uint8_t byte = 0;
+  
   showOk();
 }
 
@@ -282,10 +283,10 @@ void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
     uint8_t index = 0;
     fc::ms_since_boot_from_flight_controller_to_ground_station msg;
     msg.set_ms_since_boot(current_time);
-    protocol.build_buf(msg, telemetry_buf, &index);
+    DataProtocol::build_buf(&msg, telemetry_buf, &index);
     if (telemetry_enabled) {
       Serial2.write(telemetry_buf, telemetry_index);
-      Serial.write(telemetry_buf, telemetry_index);
+      //Serial.write(telemetry_buf, telemetry_index);
     }
     telemetry_index = LEN_MS_SINCE_BOOT_MSG;
   }
@@ -293,20 +294,19 @@ void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
     uint8_t index = 0;
     fc::ms_since_boot_from_flight_controller_to_ground_station msg;
     msg.set_ms_since_boot(current_time);
-    protocol.build_buf(msg, backup_buf, &index);
+    DataProtocol::build_buf(&msg, backup_buf, &index);
     if (data_logging_enabled) {
       flash.bufferedWrite(backup_buf, backup_index);
     }
-    Serial.write(telecommand_buf, telecommand_index);
+    Serial.write(backup_buf, backup_index);
     backup_index = LEN_MS_SINCE_BOOT_MSG;
   }
   if (telecommand_index > LEN_MS_SINCE_BOOT_MSG &&
       cycle_count % LORA_SEND_CYCLE  == 0 && !DMASPI1.busy()) {
-
     uint8_t index = 0;
     fc::ms_since_boot_from_flight_controller_to_ground_station msg;
     msg.set_ms_since_boot(current_time);
-    protocol.build_buf(msg, telecommand_buf, &index);
+    DataProtocol::build_buf(&msg, telecommand_buf, &index);
     if (telecommand_enabled) {
       rfm.send(telecommand_buf, telecommand_index);
       Serial2.write(telecommand_buf, telecommand_index);
@@ -316,77 +316,14 @@ void emptyBuffers(uint64_t cycle_count, uint64_t current_time) {
 }
 
 void loop() {
+  return;
   static uint32_t last_cycle_time = 0;
   static uint32_t cycle_count = 0;
-
   updateGps();
   handleDataStreams();
   uint32_t current_time = millis();
   if (current_time - last_cycle_time < CYCLE_DELAY_MS) {
     return;
-  }
-  if (current_time - last_cycle_time > CYCLE_DELAY_MS) {
-    //Serial.println(current_time);
-  }
-  last_cycle_time = current_time;
-  cycle_count++;
-
-  //Serial.println(cycle_count);
-
-  if (cycle_count % BLINK_LED_CYCLE == 0) {
-    showOk();
-  }
-
-  
-  if ((cycle_count + BLINK_LED_CYCLE / 2) % BLINK_LED_CYCLE == 0) {
-    showNeutral();
-  }
-  if (cycle_count % PING_EDDA_CYCLE == 0) {
-    //PING!
-    //PONG!
-  }
-  // sample GPS
-  if (cycle_count % TC_GNSS_CYCLE == 0) {
-    fc::gnss_data_from_flight_controller_to_ground_station tc_msg;
-    fc::GNSS_data_1_from_flight_controller_to_ground_station tm_msg;
-    uint8_t len = 0;
-    uint8_t buf[50];
-    uint32_t gnss_time = 0;
-    int32_t latitude = 0, longitude = 0; 
-    uint16_t h_dop = 0;
-    uint8_t n_satellites = 0;
-    if (best_gps->is_set(FLAG_HDOP))
-    if (best_gps->is_set(FLAG_TIME)) {
-      gnss_time = best_gps->raw_time;
-    }
-    if (best_gps->is_set(FLAG_LATITUDE)) {
-      latitude = best_gps->latitude_degrees * 100 + best_gps->latitude_minutes;
-    }
-    if (best_gps->is_set(FLAG_LONGITUDE)) {
-      latitude = best_gps->longitude_degrees * 100 + best_gps->longitude_minutes;
-    }
-    if (best_gps->is_set(FLAG_HDOP)) {
-      h_dop = best_gps->hdop;
-    }
-    if (best_gps->is_set(FLAG_N_SATELLITES)) {
-      n_satellites = best_gps->n_satellites;
-    }
-    gps1.clear_flags();
-    gps2.clear_flags();
-    tc_msg.set_gnss_time(gnss_time);
-    tc_msg.set_latitude(latitude);
-    tc_msg.set_longitude(longitude);
-    tc_msg.set_h_dop(h_dop);
-    tc_msg.set_n_satellites(n_satellites);
-    protocol.build_buf(tc_msg, buf, &len);
-    //add_to_telecommand_buf(buf, len);
-    //add_to_backup_buf(buf, len);
-    tm_msg.set_gnss_time(gnss_time);
-    tm_msg.set_latitude(latitude);
-    tm_msg.set_longitude(longitude);
-    protocol.build_buf(tm_msg, buf, &len);
-    //add_to_telemetry_buf(buf, len);
-    //add_to_backup_buf(buf, len);
   }
   emptyBuffers(cycle_count, current_time);
 }

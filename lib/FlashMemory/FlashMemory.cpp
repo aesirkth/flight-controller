@@ -1,7 +1,6 @@
 #include <string.h>
 
 #include "FlashMemory.hpp"
-#include "DmaSpi.h"
 /* 
     Class constructor
 */
@@ -18,6 +17,15 @@ Flash::Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_
     digitalWrite(_ss, HIGH);
     digitalWrite(_wp, HIGH);
     digitalWrite(_hold, HIGH);
+}
+
+Flash::Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss)
+{
+    _spi = spi_bus;
+    _spi_settings = spi_settings;
+    _ss = pin_ss;
+    pinMode(_ss, OUTPUT);
+    digitalWrite(_ss, HIGH);
 }
 
 /* 
@@ -171,16 +179,24 @@ void Flash::findBadBlocks() {
 void Flash::bufferedWrite(uint8_t* buf, uint8_t len) {
     if (_buffered_column_index + len >= PAGE_SIZE) {
         uint8_t bytes_left = PAGE_SIZE - _buffered_column_index;
+        writeEnable();
         programDataLoad(buf, bytes_left, _buffered_column_index, false);
+        writeEnable();
         programExecute(_buffered_page_index);
         _buffered_page_index++;
-        programDataLoad(buf, len - bytes_left, 0, false);
+        writeEnable();
+        programDataLoad(buf + bytes_left, len - bytes_left, 0, false);
         _buffered_column_index = len - bytes_left;
         return;
     }
+    writeEnable();
     programDataLoad(buf, len, _buffered_column_index, false);
     _buffered_column_index += len;
 }
+
+uint16_t Flash::getBufferedAddress() {
+    return _buffered_page_index;
+};
 
 void Flash::flush() {
     programExecute(_buffered_page_index);
@@ -279,7 +295,7 @@ int Flash::programDataLoad(uint8_t * data_buffer, uint16_t len, uint16_t column_
     return ret_val;
 }
 
-
+/*
 void Flash::programDataLoadAsync(uint8_t * data_buffer, uint16_t len, uint16_t column_addr, bool reset)
 {
     static DmaSpi1::Transfer* trx;
@@ -301,7 +317,7 @@ void Flash::programDataLoadAsync(uint8_t * data_buffer, uint16_t len, uint16_t c
     cs = new ActiveLowChipSelect1(_ss, _spi_settings);
     trx = new DmaSpi1::Transfer(_dma_buf, total_len, nullptr, 0, cs);
     _dma_spi->registerTransfer(*trx);
-}
+}*/
 
 void Flash::printAllRegisters() 
 {

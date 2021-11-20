@@ -3,7 +3,6 @@
 
 #include <Arduino.h>
 #include <SPI.h>
-#include "DmaSpi.h"
 
 #define PAGE_SIZE 2048
 #define AMOUNT_OF_BLOCKS 1024
@@ -70,18 +69,18 @@ class Flash
 {
     // SPI bus and specific pins configuration
     SPIClass * _spi;
-    DmaSpi1* _dma_spi = &DMASPI1; // hard code this until i feel like implementing templates
     SPISettings _spi_settings;
     uint8_t _ss;
     uint8_t _wp;
     uint8_t _hold;
 
     uint8_t _dma_buf[3 + PAGE_SIZE];
-    uint8_t _buffered_column_index = 0;
-    uint8_t _buffered_page_index = 0;
+    uint16_t _buffered_column_index = 0;
+    uint16_t _buffered_page_index = 0;
 
 public:
     Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss, uint8_t pin_wp, uint8_t pin_hold);
+    Flash(SPIClass* spi_bus, SPISettings spi_settings, uint8_t pin_ss);
     void reset();
     int test();
     bool begin();
@@ -90,6 +89,7 @@ public:
     int writeStatusRegister(uint8_t reg_address, uint8_t reg_value);
     int writeEnable();
     void bufferedWrite(uint8_t* buf, uint8_t len);
+    uint16_t getBufferedAddress();
     void flush();
     void findBadBlocks();
 
