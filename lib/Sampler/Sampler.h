@@ -28,10 +28,6 @@ public:
         *entry = new_entry;
     }
 
-    void runAfter() {
-
-    }
-
     void update(uint32_t dt) {
        clock += dt;
         SampleEntry* entry = first_entry;

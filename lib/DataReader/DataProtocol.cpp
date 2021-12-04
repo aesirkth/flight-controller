@@ -10,12 +10,9 @@ void DataProtocol::parse_byte(uint8_t byte) {
       if (byte == INIT_FRAME_1) {
         state = TYPE;
       }
-      Serial.println(byte);
-      Serial.println("start1");
       break;
 
     case TYPE:
-      Serial.println("type");
       if (not (fc::is_valid_id(byte) || EDDA::is_valid_id(byte))) {
         state = START1;
         break;
@@ -27,20 +24,17 @@ void DataProtocol::parse_byte(uint8_t byte) {
       break;
     
     case CHECKSUM:
-      Serial.println("checksum");
       checksum = byte;
       state = PAYLOAD;
       break;
 
     case PAYLOAD:
-      Serial.println("payload");
       payload_buf[payload_index] = byte;
       payload_index++;
       break;
   }
 
   if (payload_index == payload_length && state == PAYLOAD) {
-    Serial.println("end");
     state = START1;
     payload_index = 0;
     if (checksum == get_checksum(payload_buf, payload_length)) {

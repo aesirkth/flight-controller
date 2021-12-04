@@ -46,7 +46,7 @@ public:
     buf[index++] = INIT_FRAME_1;
     buf[index++] = msg.id;
     buf[index++] = get_checksum(msg.buf, msg.len);
-    memcpy(buf, msg.buf, msg.len);
+    memcpy(buf + index, msg.buf, msg.len);
     return index + msg.len;
   }
 
