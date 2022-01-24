@@ -147,8 +147,6 @@ bool GPS::parse_byte(uint8_t byte) {
   message_buf_index++;
   if (byte == '\n') {
     bool result =  parse_message(message_buf, message_buf_index);
-    Serial.println();
-    Serial.write(message_buf, message_buf_index);
     message_buf_index = 0;
     return result;
   }
@@ -167,7 +165,7 @@ void GPS::parse_gns(uint8_t message[]) {
     index++; //skip '.'
     uint8_t start = index;
     parse_field_to_uint(&milliseconds, message, &index);
-    milliseconds *= pow(10,  - index + start);
+    milliseconds *= pow(10, -index + start);
     ms_precision = start - index;
     raw_time = milliseconds + seconds * 1000 + minutes * 1000 * 100 + hours * 1000 * 100 * 100;
   } else {

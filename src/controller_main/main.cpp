@@ -7,7 +7,7 @@
 #include "main.h"
 #include "protocol.h"
 
-//#define SERIAL_TELEMETRY
+#define SERIAL_TELEMETRY
 
 //*********************************** IMPORTANT *******************************************
 // modify the serial2.c to increase the buffer size 
@@ -22,24 +22,24 @@
 #define LEN_MS_SINCE_BOOT_MSG 7
 #define GPS_LED 0
 #define STATE_LED 1
-#define GPS_BAUD 38400
+#define GPS_BAUD 9600
 #define TELEMETRY_BAUD 115200
 
 #define TELEMETRY_BANDWIDTH 4000 //bytes
-#define TELEMETRY_WRITE_FREQUENCY 100 //Hz
-#define TELEMETRY_WRITE_AMOUNT 20 //bytes
+#define TELEMETRY_WRITE_FREQUENCY 10 //Hz
+#define TELEMETRY_WRITE_AMOUNT 350 //bytes
 #define TELEMETRY_MAX_BURST 256
-static_assert(TELEMETRY_WRITE_FREQUENCY * TELEMETRY_WRITE_AMOUNT < TELEMETRY_BANDWIDTH, "invalid telemtry configuration");
+static_assert(TELEMETRY_WRITE_FREQUENCY * TELEMETRY_WRITE_AMOUNT <= TELEMETRY_BANDWIDTH, "invalid telemtry configuration");
 
-#define FLASH_BANDWIDTH 1250000 //bytes
-#define FLASH_WRITE_FREQUENCY 1000 //Hz
-#define FLASH_WRITE_AMOUNT 30 //bytes
+#define FLASH_BANDWIDTH 12500 //bytes
+#define FLASH_WRITE_FREQUENCY 500 //Hz
+#define FLASH_WRITE_AMOUNT 25 //bytes
 #define FLASH_MAX_BURST 2048
-static_assert(FLASH_WRITE_FREQUENCY * FLASH_WRITE_AMOUNT < FLASH_BANDWIDTH, "invalid flash configuration");
+static_assert(FLASH_WRITE_FREQUENCY * FLASH_WRITE_AMOUNT <= FLASH_BANDWIDTH, "invalid flash configuration");
 
 #define LORA_WRITE_FREQUENCY 0.2 //Hz
 //too slow to properly do this
-static_assert(FLASH_WRITE_FREQUENCY * FLASH_WRITE_AMOUNT < FLASH_BANDWIDTH, "invalid flash configuration");
+//static_assert(FLASH_WRITE_FREQUENCY * FLASH_WRITE_AMOUNT <= FLASH_BANDWIDTH, "invalid flash configuration");
 
 
 uint8_t telemetry_buf[2048];
@@ -103,6 +103,7 @@ void initPins() {
   pinMode(PIN_TM_MOS, OUTPUT);
   pinMode(PIN_CAN_MOS, OUTPUT);
   pinMode(PIN_FPV_MOS, OUTPUT);
+  pinMode(PIN_GPS_MOS, OUTPUT);
   pinMode(PIN_RF_RESET, OUTPUT);
   pinMode(PIN_PYRO_1, OUTPUT);
   pinMode(PIN_PYRO_2, OUTPUT);
@@ -128,6 +129,7 @@ void initPins() {
   digitalWriteFast(PIN_PYRO_EN, LOW);
   digitalWriteFast(PIN_CAN_MOS, LOW);
   digitalWriteFast(PIN_TM_MOS, LOW);
+  digitalWriteFast(PIN_GPS_MOS, LOW);
 
   SPI1.setMOSI(PIN_MOSI1);
   SPI1.setMISO(PIN_MISO1);
@@ -138,6 +140,21 @@ void initPins() {
   SPI.setSCK(PIN_SCK0);
   SPI.begin();
   delay(100);
+}
+
+void sampleGps(void*) {
+  fc::GNSS_data_from_flight_controller_to_ground_station msg;
+  if (gps1.is_set(FLAG_TIME)) {
+    msg.set_gnss_time(gps1.raw_time);
+  } else {
+    msg.set_gnss_time(0);
+  }
+  msg.set_gnss_time(gps1.raw_time);
+  msg.set_fix_status((fc::fix_status) 0);
+  uint8_t buf[HEADER_SIZE + msg.get_size()];
+  uint8_t len;
+  DataProtocol::build_buf(&msg, buf, &len);
+  telemetry_queue.enqueue(buf, len);
 }
 
 void initRGB() {
@@ -184,11 +201,7 @@ void saveFlash(void*) {
   flash_queue.dequeue(content_buf, should_send);
   //flash.bufferedWrite(content_buf, should_send);
 
-  uint32_t before = micros();
   file.write(content_buf, should_send);
-  uint32_t after = micros();
-  Serial.print("write took (us): ");
-  Serial.println(after - before);
 }
 
 void sendTelemetry(void*) {
@@ -219,18 +232,15 @@ void sendLora(void*) {
 }
 
 void sdSync(void*) {
-  uint32_t before = micros();
   file.sync();
-  uint32_t after = micros();
-  Serial.print("sync took (us): ");
-  Serial.println(after - before);
 }
 
 void initSampler() {
   sampler.insertFunction(saveFlash, FLASH_WRITE_FREQUENCY);
   sampler.insertFunction(sendTelemetry, TELEMETRY_WRITE_FREQUENCY);
   sampler.insertFunction(sendLora, LORA_WRITE_FREQUENCY);
-  sampler.insertFunction(sdSync, 5);
+  sampler.insertFunction(sdSync, 10);
+  sampler.insertFunction(sampleGps, 1);
 }
 
 void resetRadio() {
@@ -263,14 +273,14 @@ void initFlash() {
 
 void initSd() {
   if (!SD.begin(SdioConfig(FIFO_SDIO))) {
-    Serial.println("SD_ERROR");
+    //Serial.println("SD_ERROR");
     error = true;
     return;
   }
   file = SD.open("data.bin", O_WRITE | O_CREAT);
 
   if (not file.isWritable()) {
-    Serial.println("FILE_ERROR");
+    //Serial.println("FILE_ERROR");
     error = true;
     return;
   }
@@ -289,7 +299,7 @@ void updateGps() {
       updated |= true;
     }
   }
-
+ 
   //gps 2
   while (EXT_SERIAL.available() > 0) {
     if (gps2.parse_byte(EXT_SERIAL.read())) {

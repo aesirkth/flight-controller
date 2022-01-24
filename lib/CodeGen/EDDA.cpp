@@ -7,129 +7,6 @@ GENERATED FILE DO NOT EDIT
 
 namespace EDDA {
 __attribute__((weak)) void
-rx(CurrentTimePing_from_Ground_Controller_to_Edda_Controller msg) {}
-__attribute__((weak)) void
-rx(CurrentTimePing_from_Ground_Controller_to_Edda_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(CurrentTimePong_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CurrentTimePong_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(SayHi_from_Ground_Controller_to_Edda_Controller msg) {}
-__attribute__((weak)) void
-rx(SayHi_from_Ground_Controller_to_Edda_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Pressure_Top_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(Hello_from_Edda_Pressure_Bottom_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Pressure_Top_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Ground_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CanStatistics_from_Ground_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(CanLatency_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CanLatency_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(CanLatency_from_Ground_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(CanLatency_from_Ground_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(SetDebugStatusLedsModeRequest_from_Ground_Controller_to_Edda_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(SetDebugStatusLedsModeRequest_from_Ground_Controller_to_Edda_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(SetDebugMessagesModeRequest_from_Ground_Controller_to_Edda_Controller msg) {}
-__attribute__((weak)) void
-rx(SetDebugMessagesModeRequest_from_Ground_Controller_to_Edda_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_SetDebugMode_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_SetDebugMode_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_GetState_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_GetState_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_TransitionRequest_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_TransitionRequest_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_Hello_from_Edda_Power_Control_Boards_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_Hello_from_Edda_Power_Control_Boards_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_CurrentState_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_CurrentState_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_TransitionResponse_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_TransitionResponse_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_CheckResult_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_CheckResult_from_Edda_Power_Control_Boards_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
 rx(CurrentTimePing_from_Edda_Controller_to_Edda_Telemetry msg) {}
 __attribute__((weak)) void
 rx(CurrentTimePing_from_Edda_Controller_to_Edda_Telemetry msg, void *misc) {}
@@ -183,1754 +60,1210 @@ rx(WenOrbit_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
 __attribute__((weak)) void
 rx(WenOrbit_from_Edda_Pressure_Bottom_to_Flight_Controller msg, void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Controller_to_Ground_Controller msg) {}
+rx(SetDebugStatusLedsModeRequest_from_Ground_Controller_to_Edda_Controller
+       msg) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Controller_to_Ground_Controller msg,
+rx(SetDebugStatusLedsModeRequest_from_Ground_Controller_to_Edda_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Telemetry_to_Ground_Controller msg) {}
+rx(SetDebugMessagesModeRequest_from_Ground_Controller_to_Edda_Controller msg) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Telemetry_to_Ground_Controller msg,
+rx(SetDebugMessagesModeRequest_from_Ground_Controller_to_Edda_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+rx(PowerCAN_SetDebugMode_from_Edda_Controller_to_Ground_Controller msg) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Pressure_Top_to_Ground_Controller msg,
+rx(PowerCAN_SetDebugMode_from_Edda_Controller_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
+rx(PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller msg) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurement_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
+rx(PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Controller_to_Ground_Controller msg) {}
+rx(PowerCAN_GetState_from_Edda_Controller_to_Ground_Controller msg) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Controller_to_Ground_Controller msg,
+rx(PowerCAN_GetState_from_Edda_Controller_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Telemetry_to_Ground_Controller msg) {}
+rx(PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller msg) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Telemetry_to_Ground_Controller msg,
+rx(PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Pressure_Top_to_Ground_Controller msg) {
+rx(PowerCAN_TransitionRequest_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(PowerCAN_TransitionRequest_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller msg) {}
+__attribute__((weak)) void
+rx(PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(PowerCAN_Hello_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(PowerCAN_Hello_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
+__attribute__((weak)) void
+rx(PowerCAN_CurrentState_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(PowerCAN_CurrentState_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(PowerCAN_TransitionResponse_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(PowerCAN_TransitionResponse_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(PowerCAN_CheckResult_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(PowerCAN_CheckResult_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Frame_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(TelemetryMeta_Time_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__1_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__1_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__2_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__2_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__3_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__3_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__4_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__4_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__5_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__5_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__6_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__6_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__7_from_Edda_Pressure_Bottom_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerInput__7_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__1_from_Edda_Controller_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__1_from_Edda_Controller_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__2_from_Edda_Controller_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__2_from_Edda_Controller_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerOutput__1_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerOutput__1_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerOutput__2_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerOutput__2_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerOutput__3_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__PowerOutput__3_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsTemperature__1_from_Edda_Controller_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsTemperature__1_from_Edda_Controller_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsTemperature__2_from_Edda_Controller_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsTemperature__2_from_Edda_Controller_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__1_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__1_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__2_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__2_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__3_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__3_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__4_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__4_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__5_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__5_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__6_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__6_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__7_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__7_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__8_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__8_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__9_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__9_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__a_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__a_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__b_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__b_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__c_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__c_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__d_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__d_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__e_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__e_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__f_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__f_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__10_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__10_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__11_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__11_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__12_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__12_from_Edda_Pressure_Top_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__LoopTime__13_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {
 }
 __attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Pressure_Top_to_Ground_Controller msg,
+rx(Telemetry__LoopTime__13_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Pressure_Bottom_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerInputMeasurementError_from_Edda_Pressure_Bottom_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Pressure_Top_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(ColdSideTemperature_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(RawTransducerVoltage_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(RawTransducerVoltage_from_Edda_Pressure_Top_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(RawTransducerVoltage_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(RawTransducerVoltage_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(TransducerPressure_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TransducerPressure_from_Edda_Pressure_Top_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(TransducerPressure_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TransducerPressure_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(TransducerError_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TransducerError_from_Edda_Pressure_Top_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(TransducerError_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TransducerError_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(AmbientPressure_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AmbientPressure_from_Edda_Pressure_Top_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(AmbientPressure_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AmbientPressure_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(AmbientPressureCoefficient_from_Edda_Pressure_Top_to_Ground_Controller msg) {
+rx(Telemetry__LoopTime__14_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {
 }
 __attribute__((weak)) void
-rx(AmbientPressureCoefficient_from_Edda_Pressure_Top_to_Ground_Controller msg,
+rx(Telemetry__LoopTime__14_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(AmbientPressureCoefficient_from_Edda_Pressure_Bottom_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(AmbientPressureCoefficient_from_Edda_Pressure_Bottom_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(AmbientPressureError_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AmbientPressureError_from_Edda_Pressure_Top_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(AmbientPressureError_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AmbientPressureError_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PlatinumSensorTemperature_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PlatinumSensorTemperature_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PlatinumSensorResistance_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PlatinumSensorResistance_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PlatinumSensorRatio_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PlatinumSensorRatio_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(ThermocoupleTypeKTemperature_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(ThermocoupleTypeKTemperature_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(ThermocoupleColdsideTemperature_from_Edda_Telemetry_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(ThermocoupleColdsideTemperature_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(Humidity_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(Humidity_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(HumidityError_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(HumidityError_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(Acceleration_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(Acceleration_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(AccelerationError_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AccelerationError_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(AccelerationSelfTest_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AccelerationSelfTest_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(AmbientLight_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AmbientLight_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(AmbientLightError_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(AmbientLightError_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Pressure_Top_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(TaskInfo_from_Edda_Pressure_Bottom_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Pressure_Top_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(LoopInfo_from_Edda_Pressure_Bottom_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(OneWireDevicePairedWithSensor_from_Edda_Telemetry_to_Ground_Controller msg) {
+rx(Telemetry__LoopTime__15_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {
 }
 __attribute__((weak)) void
-rx(OneWireDevicePairedWithSensor_from_Edda_Telemetry_to_Ground_Controller msg,
+rx(Telemetry__LoopTime__15_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(OneWireSearchFamilyMismatch_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(OneWireSearchFamilyMismatch_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(OneWireSearchCRCMismatch_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(OneWireSearchCRCMismatch_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(OneWireSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(OneWireSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_Temperature_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_Temperature_from_Edda_Power_Control_Boards_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_Voltage_from_Edda_Power_Control_Boards_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_Voltage_from_Edda_Power_Control_Boards_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ChannelMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ChannelMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ChannelMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ChannelMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ChannelMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ChannelMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_LoadMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_FailedLoadMeasurementValue_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_FailedLoadMeasurementValue_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_FailedLoadMeasurementThreshold_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_FailedLoadMeasurementThreshold_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementReferenceVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementReferenceVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementDifferentialVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementDifferentialVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementPositiveVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementPositiveVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementNegativeVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ResistanceMeasurementNegativeVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CBusStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CBusStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchFoundDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchFoundDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchMissingDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchMissingDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchEnded_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchEnded_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_LTC2992Error_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_LTC2992Error_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ADS122C04Error_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ADS122C04Error_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchError_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_I2CSearchError_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PowerCAN_ErrorStatistics_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg) {}
-__attribute__((weak)) void
-rx(PowerCAN_ErrorStatistics_from_Edda_Power_Control_Boards_to_Ground_Controller
-       msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(DS2482Error_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(DS2482Error_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Controller_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Controller_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Telemetry_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Telemetry_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Pressure_Top_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Pressure_Top_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage1_from_Edda_Pressure_Bottom_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(OneWireSearchStarted_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(OneWireSearchStarted_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Pressure_Top_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CBusStarted_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(DS28E18QError_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(DS28E18QError_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Controller_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Controller_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Telemetry_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Telemetry_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Pressure_Top_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Pressure_Top_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage2_from_Edda_Pressure_Bottom_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(OneWireSearchEnded_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(OneWireSearchEnded_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Controller_to_Ground_Controller msg, void *misc) {
+rx(Telemetry__LoopTime__16_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {
 }
 __attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Pressure_Top_to_Ground_Controller msg,
+rx(Telemetry__LoopTime__16_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchStarted_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(MAX31850KError_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(MAX31850KError_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Controller_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Controller_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Telemetry_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Telemetry_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Pressure_Top_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Pressure_Top_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage3_from_Edda_Pressure_Bottom_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(OneWireDeviceStartupSuccess_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(OneWireDeviceStartupSuccess_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Pressure_Top_to_Ground_Controller msg, void *misc) {
+rx(Telemetry__LoopTime__17_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {
 }
 __attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchError_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
+rx(Telemetry__LoopTime__17_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(MAX31856Error_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(MAX31856Error_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Controller_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Controller_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Telemetry_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Telemetry_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Pressure_Top_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Pressure_Top_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage4_from_Edda_Pressure_Bottom_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(OneWireDeviceStartupFailure_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(OneWireDeviceStartupFailure_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Controller_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Pressure_Top_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchFoundDevice_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(MAX31865Error_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(MAX31865Error_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Controller_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Controller_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Telemetry_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Telemetry_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Pressure_Top_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Pressure_Top_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
-__attribute__((weak)) void
-rx(PartialDebugMessage5_from_Edda_Pressure_Bottom_to_Flight_Controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Controller_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Controller_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Telemetry_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Telemetry_to_Ground_Controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Pressure_Top_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Pressure_Top_to_Ground_Controller msg, void *misc) {
+rx(Telemetry__LoopTime__18_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {
 }
 __attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Pressure_Bottom_to_Ground_Controller msg) {}
-__attribute__((weak)) void
-rx(I2CSearchEnded_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
+rx(Telemetry__LoopTime__18_from_Edda_Pressure_Bottom_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Controller_to_Flight_Controller msg) {}
+rx(Telemetry__ElectronicsTemperature__3_from_Edda_Telemetry_to_Ground_Controller
+       msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Controller_to_Flight_Controller msg,
+rx(Telemetry__ElectronicsTemperature__3_from_Edda_Telemetry_to_Ground_Controller
+       msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Telemetry_to_Flight_Controller msg) {}
+rx(Telemetry__ElectronicsTemperature__4_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Telemetry_to_Flight_Controller msg,
+rx(Telemetry__ElectronicsTemperature__4_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Pressure_Top_to_Flight_Controller msg) {}
+rx(Telemetry__ElectronicsTemperature__5_from_Edda_Pressure_Bottom_to_Ground_Controller
+       msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Pressure_Top_to_Flight_Controller msg,
+rx(Telemetry__ElectronicsTemperature__5_from_Edda_Pressure_Bottom_to_Ground_Controller
+       msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
+rx(Telemetry__Temperature__1_from_Edda_Telemetry_to_Ground_Controller msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage6_from_Edda_Pressure_Bottom_to_Flight_Controller msg,
+rx(Telemetry__Temperature__1_from_Edda_Telemetry_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Controller_to_Flight_Controller msg) {}
+rx(Telemetry__Temperature__2_from_Edda_Telemetry_to_Ground_Controller msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Controller_to_Flight_Controller msg,
+rx(Telemetry__Temperature__2_from_Edda_Telemetry_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Telemetry_to_Flight_Controller msg) {}
+rx(Telemetry__Temperature__3_from_Edda_Telemetry_to_Ground_Controller msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Telemetry_to_Flight_Controller msg,
+rx(Telemetry__Temperature__3_from_Edda_Telemetry_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Pressure_Top_to_Flight_Controller msg) {}
+rx(Telemetry__Temperature__4_from_Edda_Telemetry_to_Ground_Controller msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Pressure_Top_to_Flight_Controller msg,
+rx(Telemetry__Temperature__4_from_Edda_Telemetry_to_Ground_Controller msg,
    void *misc) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Pressure_Bottom_to_Flight_Controller msg) {}
+rx(Telemetry__Temperature__5_from_Edda_Telemetry_to_Ground_Controller msg) {}
 __attribute__((weak)) void
-rx(PartialDebugMessage7_from_Edda_Pressure_Bottom_to_Flight_Controller msg,
+rx(Telemetry__Temperature__5_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__6_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__6_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__7_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__7_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__CompensatingTemperature__1_from_Edda_Telemetry_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__CompensatingTemperature__1_from_Edda_Telemetry_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__CompensatingTemperature__2_from_Edda_Telemetry_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__CompensatingTemperature__2_from_Edda_Telemetry_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__CompensatingTemperature__3_from_Edda_Telemetry_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__CompensatingTemperature__3_from_Edda_Telemetry_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__8_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__8_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__9_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__9_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__a_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__a_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__b_from_Edda_Telemetry_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Temperature__b_from_Edda_Telemetry_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Light__1_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Light__1_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Light__2_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Light__2_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__Acceleration__1_from_Edda_Controller_to_Ground_Controller msg) {}
+__attribute__((weak)) void
+rx(Telemetry__Acceleration__1_from_Edda_Controller_to_Ground_Controller msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__AmbientPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__AmbientPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__AmbientPressure__2_from_Edda_Pressure_Bottom_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__AmbientPressure__2_from_Edda_Pressure_Bottom_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__2_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__2_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__3_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__3_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__4_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__4_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__5_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerPressure__5_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__1_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__1_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__2_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__2_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__4_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__4_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__5_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__TransducerVoltage__5_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
+       msg,
+   void *misc) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__4_from_Edda_Pressure_Bottom_to_Ground_Controller
+       msg) {}
+__attribute__((weak)) void
+rx(Telemetry__ElectronicsVoltage__4_from_Edda_Pressure_Bottom_to_Ground_Controller
+       msg,
    void *misc) {}
 void parse_message(uint8_t id, uint8_t *buf) {
   switch (id) {
-  case 0: {
-    CurrentTimePing_from_Ground_Controller_to_Edda_Controller __message;
+  case 15: {
+    CurrentTimePing_from_Edda_Controller_to_Edda_Telemetry __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 1: {
-    CurrentTimePong_from_Edda_Controller_to_Ground_Controller __message;
+  case 16: {
+    CurrentTimePong_from_Edda_Telemetry_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 2: {
-    SayHi_from_Ground_Controller_to_Edda_Controller __message;
+  case 17: {
+    CurrentTimePong_from_Edda_Pressure_Top_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 3: {
-    Hello_from_Edda_Controller_to_Ground_Controller __message;
+  case 18: {
+    CurrentTimePong_from_Edda_Pressure_Bottom_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 4: {
-    Hello_from_Edda_Telemetry_to_Ground_Controller __message;
+  case 19: {
+    SayHi_from_Edda_Controller_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 5: {
-    Hello_from_Edda_Pressure_Top_to_Ground_Controller __message;
+  case 20: {
+    WenHop_from_Edda_Controller_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 6: {
-    Hello_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
+  case 21: {
+    WenHop_from_Edda_Telemetry_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 7: {
-    CanStatistics_from_Edda_Controller_to_Ground_Controller __message;
+  case 22: {
+    WenHop_from_Edda_Pressure_Top_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 8: {
-    CanStatistics_from_Edda_Telemetry_to_Ground_Controller __message;
+  case 23: {
+    WenHop_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 9: {
-    CanStatistics_from_Edda_Pressure_Top_to_Ground_Controller __message;
+  case 24: {
+    WenOrbit_from_Edda_Controller_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 10: {
-    CanStatistics_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
+  case 25: {
+    WenOrbit_from_Edda_Telemetry_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 11: {
-    CanStatistics_from_Ground_Controller_to_Ground_Controller __message;
+  case 26: {
+    WenOrbit_from_Edda_Pressure_Top_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 12: {
-    CanLatency_from_Edda_Controller_to_Ground_Controller __message;
+  case 27: {
+    WenOrbit_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 13: {
-    CanLatency_from_Ground_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 48: {
+  case 28: {
     SetDebugStatusLedsModeRequest_from_Ground_Controller_to_Edda_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 49: {
+  case 29: {
     SetDebugMessagesModeRequest_from_Ground_Controller_to_Edda_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 50: {
-    PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 51: {
-    PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 52: {
-    PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 64: {
+  case 30: {
     PowerCAN_SetDebugMode_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 65: {
+  case 31: {
+    PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 32: {
     PowerCAN_GetState_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 66: {
+  case 33: {
+    PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 34: {
     PowerCAN_TransitionRequest_from_Edda_Controller_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 67: {
-    PowerCAN_Hello_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 35: {
+    PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller
         __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 36: {
+    PowerCAN_Hello_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 37: {
+    PowerCAN_CurrentState_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 38: {
+    PowerCAN_TransitionResponse_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 39: {
+    PowerCAN_CheckResult_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 40: {
+    TelemetryMeta_Frame_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 41: {
+    TelemetryMeta_Frame_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 42: {
+    TelemetryMeta_Frame_from_Edda_Pressure_Top_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 43: {
+    TelemetryMeta_Frame_from_Edda_Pressure_Bottom_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 44: {
+    TelemetryMeta_Time_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 45: {
+    TelemetryMeta_Time_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 46: {
+    TelemetryMeta_Time_from_Edda_Pressure_Top_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 47: {
+    TelemetryMeta_Time_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 48: {
+    Telemetry__PowerInput__1_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 49: {
+    Telemetry__PowerInput__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 50: {
+    Telemetry__PowerInput__3_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 51: {
+    Telemetry__PowerInput__4_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 52: {
+    Telemetry__PowerInput__5_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 53: {
+    Telemetry__PowerInput__6_from_Edda_Pressure_Top_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 54: {
+    Telemetry__PowerInput__7_from_Edda_Pressure_Bottom_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 55: {
+    Telemetry__ElectronicsVoltage__1_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 56: {
+    Telemetry__ElectronicsVoltage__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 57: {
+    Telemetry__PowerOutput__1_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 58: {
+    Telemetry__PowerOutput__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 59: {
+    Telemetry__PowerOutput__3_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 60: {
+    Telemetry__ElectronicsTemperature__1_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 61: {
+    Telemetry__ElectronicsTemperature__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 62: {
+    Telemetry__LoopTime__1_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 63: {
+    Telemetry__LoopTime__2_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 64: {
+    Telemetry__LoopTime__3_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 65: {
+    Telemetry__LoopTime__4_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 66: {
+    Telemetry__LoopTime__5_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 67: {
+    Telemetry__LoopTime__6_from_Edda_Telemetry_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
   case 68: {
-    PowerCAN_CurrentState_from_Edda_Power_Control_Boards_to_Ground_Controller
-        __message;
+    Telemetry__LoopTime__7_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
   case 69: {
-    PowerCAN_TransitionResponse_from_Edda_Power_Control_Boards_to_Ground_Controller
-        __message;
+    Telemetry__LoopTime__8_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
   case 70: {
-    PowerCAN_CheckResult_from_Edda_Power_Control_Boards_to_Ground_Controller
+    Telemetry__LoopTime__9_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 71: {
+    Telemetry__LoopTime__a_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 72: {
+    Telemetry__LoopTime__b_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 73: {
+    Telemetry__LoopTime__c_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 74: {
+    Telemetry__LoopTime__d_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 144: {
-    CurrentTimePing_from_Edda_Controller_to_Edda_Telemetry __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 145: {
-    CurrentTimePong_from_Edda_Telemetry_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 146: {
-    CurrentTimePong_from_Edda_Pressure_Top_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 147: {
-    CurrentTimePong_from_Edda_Pressure_Bottom_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 148: {
-    SayHi_from_Edda_Controller_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 149: {
-    WenHop_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 150: {
-    WenHop_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 151: {
-    WenHop_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 152: {
-    WenHop_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 153: {
-    WenOrbit_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 154: {
-    WenOrbit_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 155: {
-    WenOrbit_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 156: {
-    WenOrbit_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 157: {
-    PowerInputMeasurement_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 158: {
-    PowerInputMeasurement_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 159: {
-    PowerInputMeasurement_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 160: {
-    PowerInputMeasurement_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 75: {
+    Telemetry__LoopTime__e_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 161: {
-    PowerInputMeasurementError_from_Edda_Controller_to_Ground_Controller
+  case 76: {
+    Telemetry__LoopTime__f_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 162: {
-    PowerInputMeasurementError_from_Edda_Telemetry_to_Ground_Controller
+  case 77: {
+    Telemetry__LoopTime__10_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 163: {
-    PowerInputMeasurementError_from_Edda_Pressure_Top_to_Ground_Controller
+  case 78: {
+    Telemetry__LoopTime__11_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 164: {
-    PowerInputMeasurementError_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 79: {
+    Telemetry__LoopTime__12_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 165: {
-    ColdSideTemperature_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 166: {
-    ColdSideTemperature_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 167: {
-    ColdSideTemperature_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 168: {
-    ColdSideTemperature_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 80: {
+    Telemetry__LoopTime__13_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 169: {
-    RawTransducerVoltage_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 170: {
-    RawTransducerVoltage_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 81: {
+    Telemetry__LoopTime__14_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 171: {
-    TransducerPressure_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 172: {
-    TransducerPressure_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 173: {
-    TransducerError_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 174: {
-    TransducerError_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 175: {
-    AmbientPressure_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 176: {
-    AmbientPressure_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 177: {
-    AmbientPressureCoefficient_from_Edda_Pressure_Top_to_Ground_Controller
+  case 82: {
+    Telemetry__LoopTime__15_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 178: {
-    AmbientPressureCoefficient_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 83: {
+    Telemetry__LoopTime__16_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 179: {
-    AmbientPressureError_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 180: {
-    AmbientPressureError_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 84: {
+    Telemetry__LoopTime__17_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 181: {
-    PlatinumSensorTemperature_from_Edda_Telemetry_to_Ground_Controller
+  case 85: {
+    Telemetry__LoopTime__18_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 182: {
-    PlatinumSensorResistance_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 183: {
-    PlatinumSensorRatio_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 184: {
-    ThermocoupleTypeKTemperature_from_Edda_Telemetry_to_Ground_Controller
+  case 86: {
+    Telemetry__ElectronicsTemperature__3_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 185: {
-    ThermocoupleColdsideTemperature_from_Edda_Telemetry_to_Ground_Controller
+  case 87: {
+    Telemetry__ElectronicsTemperature__4_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 187: {
-    Humidity_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 188: {
-    HumidityError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 189: {
-    Acceleration_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 190: {
-    AccelerationError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 191: {
-    AccelerationSelfTest_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 192: {
-    AmbientLight_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 193: {
-    AmbientLightError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 198: {
-    TaskInfo_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 199: {
-    TaskInfo_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 200: {
-    TaskInfo_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 201: {
-    TaskInfo_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 202: {
-    LoopInfo_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 203: {
-    LoopInfo_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 204: {
-    LoopInfo_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 205: {
-    LoopInfo_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 207: {
-    OneWireDevicePairedWithSensor_from_Edda_Telemetry_to_Ground_Controller
+  case 88: {
+    Telemetry__ElectronicsTemperature__5_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 208: {
-    OneWireSearchFamilyMismatch_from_Edda_Telemetry_to_Ground_Controller
+  case 89: {
+    Telemetry__Temperature__1_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 209: {
-    OneWireSearchCRCMismatch_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 210: {
-    OneWireSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 215: {
-    PowerCAN_Temperature_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 90: {
+    Telemetry__Temperature__2_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 216: {
-    PowerCAN_Voltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 91: {
+    Telemetry__Temperature__3_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 217: {
-    PowerCAN_ChannelMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 92: {
+    Telemetry__Temperature__4_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 218: {
-    PowerCAN_ChannelMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 93: {
+    Telemetry__Temperature__5_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 219: {
-    PowerCAN_ChannelMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 94: {
+    Telemetry__Temperature__6_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 220: {
-    PowerCAN_LoadMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 95: {
+    Telemetry__Temperature__7_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 221: {
-    PowerCAN_LoadMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 96: {
+    Telemetry__CompensatingTemperature__1_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 222: {
-    PowerCAN_LoadMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 97: {
+    Telemetry__CompensatingTemperature__2_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 223: {
-    PowerCAN_LoadMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 98: {
+    Telemetry__CompensatingTemperature__3_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 224: {
-    PowerCAN_FailedLoadMeasurementValue_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 99: {
+    Telemetry__Temperature__8_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 225: {
-    PowerCAN_FailedLoadMeasurementThreshold_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 100: {
+    Telemetry__Temperature__9_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 226: {
-    PowerCAN_ResistanceMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 101: {
+    Telemetry__Temperature__a_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 227: {
-    PowerCAN_ResistanceMeasurementReferenceVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 102: {
+    Telemetry__Temperature__b_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 228: {
-    PowerCAN_ResistanceMeasurementDifferentialVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 103: {
+    Telemetry__Light__1_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 104: {
+    Telemetry__Light__2_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message);
+    break;
+  }
+  case 105: {
+    Telemetry__Acceleration__1_from_Edda_Controller_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 229: {
-    PowerCAN_ResistanceMeasurementPositiveVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 106: {
+    Telemetry__AmbientPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 230: {
-    PowerCAN_ResistanceMeasurementNegativeVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 107: {
+    Telemetry__AmbientPressure__2_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 231: {
-    PowerCAN_I2CBusStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 108: {
+    Telemetry__TransducerPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 232: {
-    PowerCAN_I2CSearchStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 109: {
+    Telemetry__TransducerPressure__2_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 233: {
-    PowerCAN_I2CSearchFoundDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 110: {
+    Telemetry__TransducerPressure__3_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 234: {
-    PowerCAN_I2CSearchMissingDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 111: {
+    Telemetry__TransducerPressure__4_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 235: {
-    PowerCAN_I2CSearchEnded_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 112: {
+    Telemetry__TransducerPressure__5_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 236: {
-    PowerCAN_LTC2992Error_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 113: {
+    Telemetry__TransducerVoltage__1_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 237: {
-    PowerCAN_ADS122C04Error_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 114: {
+    Telemetry__TransducerVoltage__2_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 238: {
-    PowerCAN_I2CSearchError_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 115: {
+    Telemetry__TransducerVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 239: {
-    PowerCAN_ErrorStatistics_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 116: {
+    Telemetry__TransducerVoltage__4_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 442: {
-    DS2482Error_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 450: {
-    PartialDebugMessage1_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 451: {
-    PartialDebugMessage1_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 452: {
-    PartialDebugMessage1_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 453: {
-    PartialDebugMessage1_from_Edda_Pressure_Bottom_to_Flight_Controller
+  case 117: {
+    Telemetry__TransducerVoltage__5_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 462: {
-    OneWireSearchStarted_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 467: {
-    I2CBusStarted_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 468: {
-    I2CBusStarted_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 469: {
-    I2CBusStarted_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 470: {
-    I2CBusStarted_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 698: {
-    DS28E18QError_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 706: {
-    PartialDebugMessage2_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 707: {
-    PartialDebugMessage2_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 708: {
-    PartialDebugMessage2_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 709: {
-    PartialDebugMessage2_from_Edda_Pressure_Bottom_to_Flight_Controller
+  case 118: {
+    Telemetry__ElectronicsVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 718: {
-    OneWireSearchEnded_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 723: {
-    I2CSearchStarted_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 724: {
-    I2CSearchStarted_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 725: {
-    I2CSearchStarted_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 726: {
-    I2CSearchStarted_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 954: {
-    MAX31850KError_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 962: {
-    PartialDebugMessage3_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 963: {
-    PartialDebugMessage3_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 964: {
-    PartialDebugMessage3_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 965: {
-    PartialDebugMessage3_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 974: {
-    OneWireDeviceStartupSuccess_from_Edda_Telemetry_to_Ground_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 979: {
-    I2CSearchError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 980: {
-    I2CSearchError_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 981: {
-    I2CSearchError_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 982: {
-    I2CSearchError_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1210: {
-    MAX31856Error_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1218: {
-    PartialDebugMessage4_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1219: {
-    PartialDebugMessage4_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1220: {
-    PartialDebugMessage4_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1221: {
-    PartialDebugMessage4_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1230: {
-    OneWireDeviceStartupFailure_from_Edda_Telemetry_to_Ground_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1235: {
-    I2CSearchFoundDevice_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1236: {
-    I2CSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1237: {
-    I2CSearchFoundDevice_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1238: {
-    I2CSearchFoundDevice_from_Edda_Pressure_Bottom_to_Ground_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1466: {
-    MAX31865Error_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1474: {
-    PartialDebugMessage5_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1475: {
-    PartialDebugMessage5_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1476: {
-    PartialDebugMessage5_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1477: {
-    PartialDebugMessage5_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1491: {
-    I2CSearchEnded_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1492: {
-    I2CSearchEnded_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1493: {
-    I2CSearchEnded_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1494: {
-    I2CSearchEnded_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1730: {
-    PartialDebugMessage6_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1731: {
-    PartialDebugMessage6_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1732: {
-    PartialDebugMessage6_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1733: {
-    PartialDebugMessage6_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1986: {
-    PartialDebugMessage7_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1987: {
-    PartialDebugMessage7_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1988: {
-    PartialDebugMessage7_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 1989: {
-    PartialDebugMessage7_from_Edda_Pressure_Bottom_to_Flight_Controller
+  case 119: {
+    Telemetry__ElectronicsVoltage__4_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message);
@@ -1941,1073 +1274,694 @@ void parse_message(uint8_t id, uint8_t *buf) {
 
 void parse_message(uint8_t id, uint8_t *buf, void *misc) {
   switch (id) {
-  case 0: {
-    CurrentTimePing_from_Ground_Controller_to_Edda_Controller __message;
+  case 15: {
+    CurrentTimePing_from_Edda_Controller_to_Edda_Telemetry __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 1: {
-    CurrentTimePong_from_Edda_Controller_to_Ground_Controller __message;
+  case 16: {
+    CurrentTimePong_from_Edda_Telemetry_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 2: {
-    SayHi_from_Ground_Controller_to_Edda_Controller __message;
+  case 17: {
+    CurrentTimePong_from_Edda_Pressure_Top_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 3: {
-    Hello_from_Edda_Controller_to_Ground_Controller __message;
+  case 18: {
+    CurrentTimePong_from_Edda_Pressure_Bottom_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 4: {
-    Hello_from_Edda_Telemetry_to_Ground_Controller __message;
+  case 19: {
+    SayHi_from_Edda_Controller_to_Edda_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 5: {
-    Hello_from_Edda_Pressure_Top_to_Ground_Controller __message;
+  case 20: {
+    WenHop_from_Edda_Controller_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 6: {
-    Hello_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
+  case 21: {
+    WenHop_from_Edda_Telemetry_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 7: {
-    CanStatistics_from_Edda_Controller_to_Ground_Controller __message;
+  case 22: {
+    WenHop_from_Edda_Pressure_Top_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 8: {
-    CanStatistics_from_Edda_Telemetry_to_Ground_Controller __message;
+  case 23: {
+    WenHop_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 9: {
-    CanStatistics_from_Edda_Pressure_Top_to_Ground_Controller __message;
+  case 24: {
+    WenOrbit_from_Edda_Controller_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 10: {
-    CanStatistics_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
+  case 25: {
+    WenOrbit_from_Edda_Telemetry_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 11: {
-    CanStatistics_from_Ground_Controller_to_Ground_Controller __message;
+  case 26: {
+    WenOrbit_from_Edda_Pressure_Top_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 12: {
-    CanLatency_from_Edda_Controller_to_Ground_Controller __message;
+  case 27: {
+    WenOrbit_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 13: {
-    CanLatency_from_Ground_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 48: {
+  case 28: {
     SetDebugStatusLedsModeRequest_from_Ground_Controller_to_Edda_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 49: {
+  case 29: {
     SetDebugMessagesModeRequest_from_Ground_Controller_to_Edda_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 50: {
-    PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 51: {
-    PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 52: {
-    PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 64: {
+  case 30: {
     PowerCAN_SetDebugMode_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 65: {
+  case 31: {
+    PowerCAN_SetDebugMode_from_Ground_Controller_to_Edda_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 32: {
     PowerCAN_GetState_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 66: {
+  case 33: {
+    PowerCAN_GetState_from_Ground_Controller_to_Edda_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 34: {
     PowerCAN_TransitionRequest_from_Edda_Controller_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 67: {
-    PowerCAN_Hello_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 35: {
+    PowerCAN_TransitionRequest_from_Ground_Controller_to_Edda_Controller
         __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 36: {
+    PowerCAN_Hello_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 37: {
+    PowerCAN_CurrentState_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 38: {
+    PowerCAN_TransitionResponse_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 39: {
+    PowerCAN_CheckResult_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 40: {
+    TelemetryMeta_Frame_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 41: {
+    TelemetryMeta_Frame_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 42: {
+    TelemetryMeta_Frame_from_Edda_Pressure_Top_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 43: {
+    TelemetryMeta_Frame_from_Edda_Pressure_Bottom_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 44: {
+    TelemetryMeta_Time_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 45: {
+    TelemetryMeta_Time_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 46: {
+    TelemetryMeta_Time_from_Edda_Pressure_Top_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 47: {
+    TelemetryMeta_Time_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 48: {
+    Telemetry__PowerInput__1_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 49: {
+    Telemetry__PowerInput__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 50: {
+    Telemetry__PowerInput__3_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 51: {
+    Telemetry__PowerInput__4_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 52: {
+    Telemetry__PowerInput__5_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 53: {
+    Telemetry__PowerInput__6_from_Edda_Pressure_Top_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 54: {
+    Telemetry__PowerInput__7_from_Edda_Pressure_Bottom_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 55: {
+    Telemetry__ElectronicsVoltage__1_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 56: {
+    Telemetry__ElectronicsVoltage__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 57: {
+    Telemetry__PowerOutput__1_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 58: {
+    Telemetry__PowerOutput__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 59: {
+    Telemetry__PowerOutput__3_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 60: {
+    Telemetry__ElectronicsTemperature__1_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 61: {
+    Telemetry__ElectronicsTemperature__2_from_Edda_Controller_to_Ground_Controller
+        __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 62: {
+    Telemetry__LoopTime__1_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 63: {
+    Telemetry__LoopTime__2_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 64: {
+    Telemetry__LoopTime__3_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 65: {
+    Telemetry__LoopTime__4_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 66: {
+    Telemetry__LoopTime__5_from_Edda_Telemetry_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 67: {
+    Telemetry__LoopTime__6_from_Edda_Telemetry_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
   case 68: {
-    PowerCAN_CurrentState_from_Edda_Power_Control_Boards_to_Ground_Controller
-        __message;
+    Telemetry__LoopTime__7_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
   case 69: {
-    PowerCAN_TransitionResponse_from_Edda_Power_Control_Boards_to_Ground_Controller
-        __message;
+    Telemetry__LoopTime__8_from_Edda_Controller_to_Ground_Controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
   case 70: {
-    PowerCAN_CheckResult_from_Edda_Power_Control_Boards_to_Ground_Controller
+    Telemetry__LoopTime__9_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 71: {
+    Telemetry__LoopTime__a_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 72: {
+    Telemetry__LoopTime__b_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 73: {
+    Telemetry__LoopTime__c_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 74: {
+    Telemetry__LoopTime__d_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 144: {
-    CurrentTimePing_from_Edda_Controller_to_Edda_Telemetry __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 145: {
-    CurrentTimePong_from_Edda_Telemetry_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 146: {
-    CurrentTimePong_from_Edda_Pressure_Top_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 147: {
-    CurrentTimePong_from_Edda_Pressure_Bottom_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 148: {
-    SayHi_from_Edda_Controller_to_Edda_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 149: {
-    WenHop_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 150: {
-    WenHop_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 151: {
-    WenHop_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 152: {
-    WenHop_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 153: {
-    WenOrbit_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 154: {
-    WenOrbit_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 155: {
-    WenOrbit_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 156: {
-    WenOrbit_from_Edda_Pressure_Bottom_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 157: {
-    PowerInputMeasurement_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 158: {
-    PowerInputMeasurement_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 159: {
-    PowerInputMeasurement_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 160: {
-    PowerInputMeasurement_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 75: {
+    Telemetry__LoopTime__e_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 161: {
-    PowerInputMeasurementError_from_Edda_Controller_to_Ground_Controller
+  case 76: {
+    Telemetry__LoopTime__f_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 162: {
-    PowerInputMeasurementError_from_Edda_Telemetry_to_Ground_Controller
+  case 77: {
+    Telemetry__LoopTime__10_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 163: {
-    PowerInputMeasurementError_from_Edda_Pressure_Top_to_Ground_Controller
+  case 78: {
+    Telemetry__LoopTime__11_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 164: {
-    PowerInputMeasurementError_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 79: {
+    Telemetry__LoopTime__12_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 165: {
-    ColdSideTemperature_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 166: {
-    ColdSideTemperature_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 167: {
-    ColdSideTemperature_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 168: {
-    ColdSideTemperature_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 80: {
+    Telemetry__LoopTime__13_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 169: {
-    RawTransducerVoltage_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 170: {
-    RawTransducerVoltage_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 81: {
+    Telemetry__LoopTime__14_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 171: {
-    TransducerPressure_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 172: {
-    TransducerPressure_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 173: {
-    TransducerError_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 174: {
-    TransducerError_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 175: {
-    AmbientPressure_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 176: {
-    AmbientPressure_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 177: {
-    AmbientPressureCoefficient_from_Edda_Pressure_Top_to_Ground_Controller
+  case 82: {
+    Telemetry__LoopTime__15_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 178: {
-    AmbientPressureCoefficient_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 83: {
+    Telemetry__LoopTime__16_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 179: {
-    AmbientPressureError_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 180: {
-    AmbientPressureError_from_Edda_Pressure_Bottom_to_Ground_Controller
+  case 84: {
+    Telemetry__LoopTime__17_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 181: {
-    PlatinumSensorTemperature_from_Edda_Telemetry_to_Ground_Controller
+  case 85: {
+    Telemetry__LoopTime__18_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 182: {
-    PlatinumSensorResistance_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 183: {
-    PlatinumSensorRatio_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 184: {
-    ThermocoupleTypeKTemperature_from_Edda_Telemetry_to_Ground_Controller
+  case 86: {
+    Telemetry__ElectronicsTemperature__3_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 185: {
-    ThermocoupleColdsideTemperature_from_Edda_Telemetry_to_Ground_Controller
+  case 87: {
+    Telemetry__ElectronicsTemperature__4_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 187: {
-    Humidity_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 188: {
-    HumidityError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 189: {
-    Acceleration_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 190: {
-    AccelerationError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 191: {
-    AccelerationSelfTest_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 192: {
-    AmbientLight_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 193: {
-    AmbientLightError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 198: {
-    TaskInfo_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 199: {
-    TaskInfo_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 200: {
-    TaskInfo_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 201: {
-    TaskInfo_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 202: {
-    LoopInfo_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 203: {
-    LoopInfo_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 204: {
-    LoopInfo_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 205: {
-    LoopInfo_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 207: {
-    OneWireDevicePairedWithSensor_from_Edda_Telemetry_to_Ground_Controller
+  case 88: {
+    Telemetry__ElectronicsTemperature__5_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 208: {
-    OneWireSearchFamilyMismatch_from_Edda_Telemetry_to_Ground_Controller
+  case 89: {
+    Telemetry__Temperature__1_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 209: {
-    OneWireSearchCRCMismatch_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 210: {
-    OneWireSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 215: {
-    PowerCAN_Temperature_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 90: {
+    Telemetry__Temperature__2_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 216: {
-    PowerCAN_Voltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 91: {
+    Telemetry__Temperature__3_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 217: {
-    PowerCAN_ChannelMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 92: {
+    Telemetry__Temperature__4_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 218: {
-    PowerCAN_ChannelMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 93: {
+    Telemetry__Temperature__5_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 219: {
-    PowerCAN_ChannelMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 94: {
+    Telemetry__Temperature__6_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 220: {
-    PowerCAN_LoadMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 95: {
+    Telemetry__Temperature__7_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 221: {
-    PowerCAN_LoadMeasurementVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 96: {
+    Telemetry__CompensatingTemperature__1_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 222: {
-    PowerCAN_LoadMeasurementPower_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 97: {
+    Telemetry__CompensatingTemperature__2_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 223: {
-    PowerCAN_LoadMeasurementCurrent_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 98: {
+    Telemetry__CompensatingTemperature__3_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 224: {
-    PowerCAN_FailedLoadMeasurementValue_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 99: {
+    Telemetry__Temperature__8_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 225: {
-    PowerCAN_FailedLoadMeasurementThreshold_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 100: {
+    Telemetry__Temperature__9_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 226: {
-    PowerCAN_ResistanceMeasurementResistance_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 101: {
+    Telemetry__Temperature__a_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 227: {
-    PowerCAN_ResistanceMeasurementReferenceVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 102: {
+    Telemetry__Temperature__b_from_Edda_Telemetry_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 228: {
-    PowerCAN_ResistanceMeasurementDifferentialVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 103: {
+    Telemetry__Light__1_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 104: {
+    Telemetry__Light__2_from_Edda_Controller_to_Ground_Controller __message;
+    __message.parse_buf(buf);
+    rx(__message, misc);
+    break;
+  }
+  case 105: {
+    Telemetry__Acceleration__1_from_Edda_Controller_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 229: {
-    PowerCAN_ResistanceMeasurementPositiveVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 106: {
+    Telemetry__AmbientPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 230: {
-    PowerCAN_ResistanceMeasurementNegativeVoltage_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 107: {
+    Telemetry__AmbientPressure__2_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 231: {
-    PowerCAN_I2CBusStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 108: {
+    Telemetry__TransducerPressure__1_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 232: {
-    PowerCAN_I2CSearchStarted_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 109: {
+    Telemetry__TransducerPressure__2_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 233: {
-    PowerCAN_I2CSearchFoundDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 110: {
+    Telemetry__TransducerPressure__3_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 234: {
-    PowerCAN_I2CSearchMissingDevice_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 111: {
+    Telemetry__TransducerPressure__4_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 235: {
-    PowerCAN_I2CSearchEnded_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 112: {
+    Telemetry__TransducerPressure__5_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 236: {
-    PowerCAN_LTC2992Error_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 113: {
+    Telemetry__TransducerVoltage__1_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 237: {
-    PowerCAN_ADS122C04Error_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 114: {
+    Telemetry__TransducerVoltage__2_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 238: {
-    PowerCAN_I2CSearchError_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 115: {
+    Telemetry__TransducerVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 239: {
-    PowerCAN_ErrorStatistics_from_Edda_Power_Control_Boards_to_Ground_Controller
+  case 116: {
+    Telemetry__TransducerVoltage__4_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 442: {
-    DS2482Error_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 450: {
-    PartialDebugMessage1_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 451: {
-    PartialDebugMessage1_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 452: {
-    PartialDebugMessage1_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 453: {
-    PartialDebugMessage1_from_Edda_Pressure_Bottom_to_Flight_Controller
+  case 117: {
+    Telemetry__TransducerVoltage__5_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 462: {
-    OneWireSearchStarted_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 467: {
-    I2CBusStarted_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 468: {
-    I2CBusStarted_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 469: {
-    I2CBusStarted_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 470: {
-    I2CBusStarted_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 698: {
-    DS28E18QError_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 706: {
-    PartialDebugMessage2_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 707: {
-    PartialDebugMessage2_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 708: {
-    PartialDebugMessage2_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 709: {
-    PartialDebugMessage2_from_Edda_Pressure_Bottom_to_Flight_Controller
+  case 118: {
+    Telemetry__ElectronicsVoltage__3_from_Edda_Pressure_Top_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 718: {
-    OneWireSearchEnded_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 723: {
-    I2CSearchStarted_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 724: {
-    I2CSearchStarted_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 725: {
-    I2CSearchStarted_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 726: {
-    I2CSearchStarted_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 954: {
-    MAX31850KError_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 962: {
-    PartialDebugMessage3_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 963: {
-    PartialDebugMessage3_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 964: {
-    PartialDebugMessage3_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 965: {
-    PartialDebugMessage3_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 974: {
-    OneWireDeviceStartupSuccess_from_Edda_Telemetry_to_Ground_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 979: {
-    I2CSearchError_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 980: {
-    I2CSearchError_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 981: {
-    I2CSearchError_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 982: {
-    I2CSearchError_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1210: {
-    MAX31856Error_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1218: {
-    PartialDebugMessage4_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1219: {
-    PartialDebugMessage4_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1220: {
-    PartialDebugMessage4_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1221: {
-    PartialDebugMessage4_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1230: {
-    OneWireDeviceStartupFailure_from_Edda_Telemetry_to_Ground_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1235: {
-    I2CSearchFoundDevice_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1236: {
-    I2CSearchFoundDevice_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1237: {
-    I2CSearchFoundDevice_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1238: {
-    I2CSearchFoundDevice_from_Edda_Pressure_Bottom_to_Ground_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1466: {
-    MAX31865Error_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1474: {
-    PartialDebugMessage5_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1475: {
-    PartialDebugMessage5_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1476: {
-    PartialDebugMessage5_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1477: {
-    PartialDebugMessage5_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1491: {
-    I2CSearchEnded_from_Edda_Controller_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1492: {
-    I2CSearchEnded_from_Edda_Telemetry_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1493: {
-    I2CSearchEnded_from_Edda_Pressure_Top_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1494: {
-    I2CSearchEnded_from_Edda_Pressure_Bottom_to_Ground_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1730: {
-    PartialDebugMessage6_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1731: {
-    PartialDebugMessage6_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1732: {
-    PartialDebugMessage6_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1733: {
-    PartialDebugMessage6_from_Edda_Pressure_Bottom_to_Flight_Controller
-        __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1986: {
-    PartialDebugMessage7_from_Edda_Controller_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1987: {
-    PartialDebugMessage7_from_Edda_Telemetry_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1988: {
-    PartialDebugMessage7_from_Edda_Pressure_Top_to_Flight_Controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 1989: {
-    PartialDebugMessage7_from_Edda_Pressure_Bottom_to_Flight_Controller
+  case 119: {
+    Telemetry__ElectronicsVoltage__4_from_Edda_Pressure_Bottom_to_Ground_Controller
         __message;
     __message.parse_buf(buf);
     rx(__message, misc);
@@ -3018,46 +1972,103 @@ void parse_message(uint8_t id, uint8_t *buf, void *misc) {
 
 bool is_valid_id(uint8_t id) {
   switch (id) {
-  case 0:
+  case 15:
     return true;
     break;
-  case 1:
+  case 16:
     return true;
     break;
-  case 2:
+  case 17:
     return true;
     break;
-  case 3:
+  case 18:
     return true;
     break;
-  case 4:
+  case 19:
     return true;
     break;
-  case 5:
+  case 20:
     return true;
     break;
-  case 6:
+  case 21:
     return true;
     break;
-  case 7:
+  case 22:
     return true;
     break;
-  case 8:
+  case 23:
     return true;
     break;
-  case 9:
+  case 24:
     return true;
     break;
-  case 10:
+  case 25:
     return true;
     break;
-  case 11:
+  case 26:
     return true;
     break;
-  case 12:
+  case 27:
     return true;
     break;
-  case 13:
+  case 28:
+    return true;
+    break;
+  case 29:
+    return true;
+    break;
+  case 30:
+    return true;
+    break;
+  case 31:
+    return true;
+    break;
+  case 32:
+    return true;
+    break;
+  case 33:
+    return true;
+    break;
+  case 34:
+    return true;
+    break;
+  case 35:
+    return true;
+    break;
+  case 36:
+    return true;
+    break;
+  case 37:
+    return true;
+    break;
+  case 38:
+    return true;
+    break;
+  case 39:
+    return true;
+    break;
+  case 40:
+    return true;
+    break;
+  case 41:
+    return true;
+    break;
+  case 42:
+    return true;
+    break;
+  case 43:
+    return true;
+    break;
+  case 44:
+    return true;
+    break;
+  case 45:
+    return true;
+    break;
+  case 46:
+    return true;
+    break;
+  case 47:
     return true;
     break;
   case 48:
@@ -3073,6 +2084,39 @@ bool is_valid_id(uint8_t id) {
     return true;
     break;
   case 52:
+    return true;
+    break;
+  case 53:
+    return true;
+    break;
+  case 54:
+    return true;
+    break;
+  case 55:
+    return true;
+    break;
+  case 56:
+    return true;
+    break;
+  case 57:
+    return true;
+    break;
+  case 58:
+    return true;
+    break;
+  case 59:
+    return true;
+    break;
+  case 60:
+    return true;
+    break;
+  case 61:
+    return true;
+    break;
+  case 62:
+    return true;
+    break;
+  case 63:
     return true;
     break;
   case 64:
@@ -3096,433 +2140,151 @@ bool is_valid_id(uint8_t id) {
   case 70:
     return true;
     break;
-  case 144:
+  case 71:
     return true;
     break;
-  case 145:
+  case 72:
     return true;
     break;
-  case 146:
+  case 73:
     return true;
     break;
-  case 147:
+  case 74:
     return true;
     break;
-  case 148:
+  case 75:
     return true;
     break;
-  case 149:
+  case 76:
     return true;
     break;
-  case 150:
+  case 77:
     return true;
     break;
-  case 151:
+  case 78:
     return true;
     break;
-  case 152:
+  case 79:
     return true;
     break;
-  case 153:
+  case 80:
     return true;
     break;
-  case 154:
+  case 81:
     return true;
     break;
-  case 155:
+  case 82:
     return true;
     break;
-  case 156:
+  case 83:
     return true;
     break;
-  case 157:
+  case 84:
     return true;
     break;
-  case 158:
+  case 85:
     return true;
     break;
-  case 159:
+  case 86:
     return true;
     break;
-  case 160:
+  case 87:
     return true;
     break;
-  case 161:
+  case 88:
     return true;
     break;
-  case 162:
+  case 89:
     return true;
     break;
-  case 163:
+  case 90:
     return true;
     break;
-  case 164:
+  case 91:
     return true;
     break;
-  case 165:
+  case 92:
     return true;
     break;
-  case 166:
+  case 93:
     return true;
     break;
-  case 167:
+  case 94:
     return true;
     break;
-  case 168:
+  case 95:
     return true;
     break;
-  case 169:
+  case 96:
     return true;
     break;
-  case 170:
+  case 97:
     return true;
     break;
-  case 171:
+  case 98:
     return true;
     break;
-  case 172:
+  case 99:
     return true;
     break;
-  case 173:
+  case 100:
     return true;
     break;
-  case 174:
+  case 101:
     return true;
     break;
-  case 175:
+  case 102:
     return true;
     break;
-  case 176:
+  case 103:
     return true;
     break;
-  case 177:
+  case 104:
     return true;
     break;
-  case 178:
+  case 105:
     return true;
     break;
-  case 179:
+  case 106:
     return true;
     break;
-  case 180:
+  case 107:
     return true;
     break;
-  case 181:
+  case 108:
     return true;
     break;
-  case 182:
+  case 109:
     return true;
     break;
-  case 183:
+  case 110:
     return true;
     break;
-  case 184:
+  case 111:
     return true;
     break;
-  case 185:
+  case 112:
     return true;
     break;
-  case 187:
+  case 113:
     return true;
     break;
-  case 188:
+  case 114:
     return true;
     break;
-  case 189:
+  case 115:
     return true;
     break;
-  case 190:
+  case 116:
     return true;
     break;
-  case 191:
+  case 117:
     return true;
     break;
-  case 192:
+  case 118:
     return true;
     break;
-  case 193:
-    return true;
-    break;
-  case 198:
-    return true;
-    break;
-  case 199:
-    return true;
-    break;
-  case 200:
-    return true;
-    break;
-  case 201:
-    return true;
-    break;
-  case 202:
-    return true;
-    break;
-  case 203:
-    return true;
-    break;
-  case 204:
-    return true;
-    break;
-  case 205:
-    return true;
-    break;
-  case 207:
-    return true;
-    break;
-  case 208:
-    return true;
-    break;
-  case 209:
-    return true;
-    break;
-  case 210:
-    return true;
-    break;
-  case 215:
-    return true;
-    break;
-  case 216:
-    return true;
-    break;
-  case 217:
-    return true;
-    break;
-  case 218:
-    return true;
-    break;
-  case 219:
-    return true;
-    break;
-  case 220:
-    return true;
-    break;
-  case 221:
-    return true;
-    break;
-  case 222:
-    return true;
-    break;
-  case 223:
-    return true;
-    break;
-  case 224:
-    return true;
-    break;
-  case 225:
-    return true;
-    break;
-  case 226:
-    return true;
-    break;
-  case 227:
-    return true;
-    break;
-  case 228:
-    return true;
-    break;
-  case 229:
-    return true;
-    break;
-  case 230:
-    return true;
-    break;
-  case 231:
-    return true;
-    break;
-  case 232:
-    return true;
-    break;
-  case 233:
-    return true;
-    break;
-  case 234:
-    return true;
-    break;
-  case 235:
-    return true;
-    break;
-  case 236:
-    return true;
-    break;
-  case 237:
-    return true;
-    break;
-  case 238:
-    return true;
-    break;
-  case 239:
-    return true;
-    break;
-  case 442:
-    return true;
-    break;
-  case 450:
-    return true;
-    break;
-  case 451:
-    return true;
-    break;
-  case 452:
-    return true;
-    break;
-  case 453:
-    return true;
-    break;
-  case 462:
-    return true;
-    break;
-  case 467:
-    return true;
-    break;
-  case 468:
-    return true;
-    break;
-  case 469:
-    return true;
-    break;
-  case 470:
-    return true;
-    break;
-  case 698:
-    return true;
-    break;
-  case 706:
-    return true;
-    break;
-  case 707:
-    return true;
-    break;
-  case 708:
-    return true;
-    break;
-  case 709:
-    return true;
-    break;
-  case 718:
-    return true;
-    break;
-  case 723:
-    return true;
-    break;
-  case 724:
-    return true;
-    break;
-  case 725:
-    return true;
-    break;
-  case 726:
-    return true;
-    break;
-  case 954:
-    return true;
-    break;
-  case 962:
-    return true;
-    break;
-  case 963:
-    return true;
-    break;
-  case 964:
-    return true;
-    break;
-  case 965:
-    return true;
-    break;
-  case 974:
-    return true;
-    break;
-  case 979:
-    return true;
-    break;
-  case 980:
-    return true;
-    break;
-  case 981:
-    return true;
-    break;
-  case 982:
-    return true;
-    break;
-  case 1210:
-    return true;
-    break;
-  case 1218:
-    return true;
-    break;
-  case 1219:
-    return true;
-    break;
-  case 1220:
-    return true;
-    break;
-  case 1221:
-    return true;
-    break;
-  case 1230:
-    return true;
-    break;
-  case 1235:
-    return true;
-    break;
-  case 1236:
-    return true;
-    break;
-  case 1237:
-    return true;
-    break;
-  case 1238:
-    return true;
-    break;
-  case 1466:
-    return true;
-    break;
-  case 1474:
-    return true;
-    break;
-  case 1475:
-    return true;
-    break;
-  case 1476:
-    return true;
-    break;
-  case 1477:
-    return true;
-    break;
-  case 1491:
-    return true;
-    break;
-  case 1492:
-    return true;
-    break;
-  case 1493:
-    return true;
-    break;
-  case 1494:
-    return true;
-    break;
-  case 1730:
-    return true;
-    break;
-  case 1731:
-    return true;
-    break;
-  case 1732:
-    return true;
-    break;
-  case 1733:
-    return true;
-    break;
-  case 1986:
-    return true;
-    break;
-  case 1987:
-    return true;
-    break;
-  case 1988:
-    return true;
-    break;
-  case 1989:
+  case 119:
     return true;
     break;
   default:
@@ -3532,512 +2294,320 @@ bool is_valid_id(uint8_t id) {
 
 uint8_t id_to_len(uint8_t id) {
   switch (id) {
-  case 0:
+  case 15:
     return 8;
     break;
-  case 1:
+  case 16:
     return 8;
     break;
-  case 2:
+  case 17:
+    return 8;
+    break;
+  case 18:
+    return 8;
+    break;
+  case 19:
     return 0;
     break;
-  case 3:
+  case 20:
     return 6;
     break;
-  case 4:
+  case 21:
     return 6;
     break;
-  case 5:
+  case 22:
     return 6;
     break;
-  case 6:
+  case 23:
     return 6;
     break;
-  case 7:
+  case 24:
     return 8;
     break;
-  case 8:
+  case 25:
     return 8;
     break;
-  case 9:
+  case 26:
     return 8;
     break;
-  case 10:
+  case 27:
     return 8;
     break;
-  case 11:
-    return 8;
+  case 28:
+    return 2;
     break;
-  case 12:
+  case 29:
+    return 2;
+    break;
+  case 30:
+    return 2;
+    break;
+  case 31:
+    return 2;
+    break;
+  case 32:
+    return 1;
+    break;
+  case 33:
+    return 1;
+    break;
+  case 34:
+    return 4;
+    break;
+  case 35:
+    return 4;
+    break;
+  case 36:
+    return 2;
+    break;
+  case 37:
+    return 3;
+    break;
+  case 38:
+    return 3;
+    break;
+  case 39:
     return 5;
     break;
-  case 13:
+  case 40:
     return 5;
+    break;
+  case 41:
+    return 5;
+    break;
+  case 42:
+    return 5;
+    break;
+  case 43:
+    return 5;
+    break;
+  case 44:
+    return 7;
+    break;
+  case 45:
+    return 7;
+    break;
+  case 46:
+    return 7;
+    break;
+  case 47:
+    return 7;
     break;
   case 48:
-    return 2;
+    return 7;
     break;
   case 49:
-    return 2;
+    return 7;
     break;
   case 50:
-    return 2;
+    return 7;
     break;
   case 51:
-    return 1;
+    return 7;
     break;
   case 52:
-    return 4;
+    return 7;
+    break;
+  case 53:
+    return 7;
+    break;
+  case 54:
+    return 7;
+    break;
+  case 55:
+    return 7;
+    break;
+  case 56:
+    return 7;
+    break;
+  case 57:
+    return 7;
+    break;
+  case 58:
+    return 7;
+    break;
+  case 59:
+    return 7;
+    break;
+  case 60:
+    return 6;
+    break;
+  case 61:
+    return 5;
+    break;
+  case 62:
+    return 7;
+    break;
+  case 63:
+    return 7;
     break;
   case 64:
-    return 2;
+    return 7;
     break;
   case 65:
-    return 1;
+    return 7;
     break;
   case 66:
-    return 4;
+    return 7;
     break;
   case 67:
-    return 2;
+    return 7;
     break;
   case 68:
-    return 3;
+    return 7;
     break;
   case 69:
-    return 3;
+    return 7;
     break;
   case 70:
-    return 5;
+    return 7;
     break;
-  case 144:
-    return 8;
+  case 71:
+    return 7;
     break;
-  case 145:
-    return 8;
+  case 72:
+    return 7;
     break;
-  case 146:
-    return 8;
+  case 73:
+    return 7;
     break;
-  case 147:
-    return 8;
+  case 74:
+    return 7;
     break;
-  case 148:
-    return 0;
+  case 75:
+    return 7;
     break;
-  case 149:
-    return 6;
+  case 76:
+    return 7;
     break;
-  case 150:
-    return 6;
+  case 77:
+    return 7;
     break;
-  case 151:
-    return 6;
+  case 78:
+    return 7;
     break;
-  case 152:
-    return 6;
+  case 79:
+    return 7;
     break;
-  case 153:
-    return 8;
+  case 80:
+    return 7;
     break;
-  case 154:
-    return 8;
+  case 81:
+    return 7;
     break;
-  case 155:
-    return 8;
+  case 82:
+    return 7;
     break;
-  case 156:
-    return 8;
+  case 83:
+    return 7;
     break;
-  case 157:
-    return 6;
+  case 84:
+    return 7;
     break;
-  case 158:
-    return 6;
+  case 85:
+    return 7;
     break;
-  case 159:
-    return 6;
-    break;
-  case 160:
-    return 6;
-    break;
-  case 161:
-    return 1;
-    break;
-  case 162:
-    return 1;
-    break;
-  case 163:
-    return 1;
-    break;
-  case 164:
-    return 1;
-    break;
-  case 165:
+  case 86:
     return 3;
     break;
-  case 166:
-    return 3;
-    break;
-  case 167:
-    return 3;
-    break;
-  case 168:
-    return 3;
-    break;
-  case 169:
-    return 5;
-    break;
-  case 170:
-    return 5;
-    break;
-  case 171:
-    return 5;
-    break;
-  case 172:
-    return 5;
-    break;
-  case 173:
-    return 2;
-    break;
-  case 174:
-    return 2;
-    break;
-  case 175:
+  case 87:
     return 4;
     break;
-  case 176:
+  case 88:
     return 4;
     break;
-  case 177:
-    return 3;
-    break;
-  case 178:
-    return 3;
-    break;
-  case 179:
-    return 1;
-    break;
-  case 180:
-    return 1;
-    break;
-  case 181:
-    return 6;
-    break;
-  case 182:
-    return 6;
-    break;
-  case 183:
-    return 6;
-    break;
-  case 184:
-    return 6;
-    break;
-  case 185:
-    return 4;
-    break;
-  case 187:
-    return 3;
-    break;
-  case 188:
-    return 1;
-    break;
-  case 189:
-    return 8;
-    break;
-  case 190:
-    return 1;
-    break;
-  case 191:
-    return 8;
-    break;
-  case 192:
-    return 4;
-    break;
-  case 193:
-    return 1;
-    break;
-  case 198:
-    return 8;
-    break;
-  case 199:
-    return 8;
-    break;
-  case 200:
-    return 8;
-    break;
-  case 201:
-    return 8;
-    break;
-  case 202:
-    return 8;
-    break;
-  case 203:
-    return 8;
-    break;
-  case 204:
-    return 8;
-    break;
-  case 205:
-    return 8;
-    break;
-  case 207:
-    return 8;
-    break;
-  case 208:
-    return 8;
-    break;
-  case 209:
-    return 8;
-    break;
-  case 210:
+  case 89:
     return 7;
     break;
-  case 215:
-    return 6;
-    break;
-  case 216:
-    return 6;
-    break;
-  case 217:
-    return 6;
-    break;
-  case 218:
-    return 6;
-    break;
-  case 219:
-    return 6;
-    break;
-  case 220:
+  case 90:
     return 7;
     break;
-  case 221:
+  case 91:
     return 7;
     break;
-  case 222:
+  case 92:
     return 7;
     break;
-  case 223:
+  case 93:
     return 7;
     break;
-  case 224:
+  case 94:
     return 7;
     break;
-  case 225:
-    return 7;
-    break;
-  case 226:
-    return 7;
-    break;
-  case 227:
-    return 7;
-    break;
-  case 228:
-    return 7;
-    break;
-  case 229:
-    return 7;
-    break;
-  case 230:
-    return 7;
-    break;
-  case 231:
-    return 6;
-    break;
-  case 232:
-    return 2;
-    break;
-  case 233:
-    return 3;
-    break;
-  case 234:
-    return 3;
-    break;
-  case 235:
-    return 8;
-    break;
-  case 236:
-    return 7;
-    break;
-  case 237:
-    return 7;
-    break;
-  case 238:
-    return 4;
-    break;
-  case 239:
+  case 95:
     return 5;
     break;
-  case 442:
-    return 5;
+  case 96:
+    return 8;
     break;
-  case 450:
-    return 1;
+  case 97:
+    return 8;
     break;
-  case 451:
-    return 1;
-    break;
-  case 452:
-    return 1;
-    break;
-  case 453:
-    return 1;
-    break;
-  case 462:
-    return 5;
-    break;
-  case 467:
-    return 5;
-    break;
-  case 468:
-    return 5;
-    break;
-  case 469:
-    return 5;
-    break;
-  case 470:
-    return 5;
-    break;
-  case 698:
-    return 5;
-    break;
-  case 706:
-    return 2;
-    break;
-  case 707:
-    return 2;
-    break;
-  case 708:
-    return 2;
-    break;
-  case 709:
-    return 2;
-    break;
-  case 718:
-    return 6;
-    break;
-  case 723:
-    return 1;
-    break;
-  case 724:
-    return 1;
-    break;
-  case 725:
-    return 1;
-    break;
-  case 726:
-    return 1;
-    break;
-  case 954:
-    return 3;
-    break;
-  case 962:
-    return 3;
-    break;
-  case 963:
-    return 3;
-    break;
-  case 964:
-    return 3;
-    break;
-  case 965:
-    return 3;
-    break;
-  case 974:
+  case 98:
     return 7;
     break;
-  case 979:
-    return 3;
-    break;
-  case 980:
-    return 3;
-    break;
-  case 981:
-    return 3;
-    break;
-  case 982:
-    return 3;
-    break;
-  case 1210:
-    return 3;
-    break;
-  case 1218:
-    return 4;
-    break;
-  case 1219:
-    return 4;
-    break;
-  case 1220:
-    return 4;
-    break;
-  case 1221:
-    return 4;
-    break;
-  case 1230:
-    return 7;
-    break;
-  case 1235:
-    return 2;
-    break;
-  case 1236:
-    return 2;
-    break;
-  case 1237:
-    return 2;
-    break;
-  case 1238:
-    return 2;
-    break;
-  case 1466:
-    return 3;
-    break;
-  case 1474:
+  case 99:
     return 5;
     break;
-  case 1475:
+  case 100:
     return 5;
     break;
-  case 1476:
+  case 101:
     return 5;
     break;
-  case 1477:
+  case 102:
     return 5;
     break;
-  case 1491:
+  case 103:
+    return 5;
+    break;
+  case 104:
+    return 3;
+    break;
+  case 105:
     return 7;
     break;
-  case 1492:
+  case 106:
+    return 3;
+    break;
+  case 107:
+    return 3;
+    break;
+  case 108:
+    return 3;
+    break;
+  case 109:
     return 7;
     break;
-  case 1493:
+  case 110:
     return 7;
     break;
-  case 1494:
+  case 111:
     return 7;
     break;
-  case 1730:
-    return 6;
+  case 112:
+    return 5;
     break;
-  case 1731:
-    return 6;
+  case 113:
+    return 5;
     break;
-  case 1732:
-    return 6;
+  case 114:
+    return 5;
     break;
-  case 1733:
-    return 6;
-    break;
-  case 1986:
+  case 115:
     return 7;
     break;
-  case 1987:
+  case 116:
     return 7;
     break;
-  case 1988:
-    return 7;
+  case 117:
+    return 5;
     break;
-  case 1989:
-    return 7;
+  case 118:
+    return 5;
+    break;
+  case 119:
+    return 5;
     break;
   default:
     return 0;
@@ -4046,511 +2616,319 @@ uint8_t id_to_len(uint8_t id) {
 
 enum nodes id_to_sender(uint8_t id) {
   switch (id) {
-  case 0:
-    return nodes::Ground_Controller;
-    break;
-  case 1:
+  case 15:
     return nodes::Edda_Controller;
     break;
-  case 2:
-    return nodes::Ground_Controller;
-    break;
-  case 3:
-    return nodes::Edda_Controller;
-    break;
-  case 4:
+  case 16:
     return nodes::Edda_Telemetry;
     break;
-  case 5:
+  case 17:
     return nodes::Edda_Pressure_Top;
     break;
-  case 6:
+  case 18:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 7:
+  case 19:
     return nodes::Edda_Controller;
     break;
-  case 8:
+  case 20:
+    return nodes::Edda_Controller;
+    break;
+  case 21:
     return nodes::Edda_Telemetry;
     break;
-  case 9:
+  case 22:
     return nodes::Edda_Pressure_Top;
     break;
-  case 10:
+  case 23:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 11:
-    return nodes::Ground_Controller;
-    break;
-  case 12:
+  case 24:
     return nodes::Edda_Controller;
     break;
-  case 13:
+  case 25:
+    return nodes::Edda_Telemetry;
+    break;
+  case 26:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 27:
+    return nodes::Edda_Pressure_Bottom;
+    break;
+  case 28:
     return nodes::Ground_Controller;
+    break;
+  case 29:
+    return nodes::Ground_Controller;
+    break;
+  case 30:
+    return nodes::Edda_Controller;
+    break;
+  case 31:
+    return nodes::Ground_Controller;
+    break;
+  case 32:
+    return nodes::Edda_Controller;
+    break;
+  case 33:
+    return nodes::Ground_Controller;
+    break;
+  case 34:
+    return nodes::Edda_Controller;
+    break;
+  case 35:
+    return nodes::Ground_Controller;
+    break;
+  case 36:
+    return nodes::Edda_Controller;
+    break;
+  case 37:
+    return nodes::Edda_Controller;
+    break;
+  case 38:
+    return nodes::Edda_Controller;
+    break;
+  case 39:
+    return nodes::Edda_Controller;
+    break;
+  case 40:
+    return nodes::Edda_Telemetry;
+    break;
+  case 41:
+    return nodes::Edda_Controller;
+    break;
+  case 42:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 43:
+    return nodes::Edda_Pressure_Bottom;
+    break;
+  case 44:
+    return nodes::Edda_Telemetry;
+    break;
+  case 45:
+    return nodes::Edda_Controller;
+    break;
+  case 46:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 47:
+    return nodes::Edda_Pressure_Bottom;
     break;
   case 48:
-    return nodes::Ground_Controller;
+    return nodes::Edda_Telemetry;
     break;
   case 49:
-    return nodes::Ground_Controller;
+    return nodes::Edda_Controller;
     break;
   case 50:
-    return nodes::Ground_Controller;
+    return nodes::Edda_Controller;
     break;
   case 51:
-    return nodes::Ground_Controller;
+    return nodes::Edda_Controller;
     break;
   case 52:
-    return nodes::Ground_Controller;
+    return nodes::Edda_Controller;
+    break;
+  case 53:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 54:
+    return nodes::Edda_Pressure_Bottom;
+    break;
+  case 55:
+    return nodes::Edda_Controller;
+    break;
+  case 56:
+    return nodes::Edda_Controller;
+    break;
+  case 57:
+    return nodes::Edda_Controller;
+    break;
+  case 58:
+    return nodes::Edda_Controller;
+    break;
+  case 59:
+    return nodes::Edda_Controller;
+    break;
+  case 60:
+    return nodes::Edda_Controller;
+    break;
+  case 61:
+    return nodes::Edda_Controller;
+    break;
+  case 62:
+    return nodes::Edda_Telemetry;
+    break;
+  case 63:
+    return nodes::Edda_Telemetry;
     break;
   case 64:
-    return nodes::Edda_Controller;
+    return nodes::Edda_Telemetry;
     break;
   case 65:
-    return nodes::Edda_Controller;
+    return nodes::Edda_Telemetry;
     break;
   case 66:
-    return nodes::Edda_Controller;
+    return nodes::Edda_Telemetry;
     break;
   case 67:
-    return nodes::Edda_Power_Control_Boards;
+    return nodes::Edda_Telemetry;
     break;
   case 68:
-    return nodes::Edda_Power_Control_Boards;
+    return nodes::Edda_Controller;
     break;
   case 69:
-    return nodes::Edda_Power_Control_Boards;
+    return nodes::Edda_Controller;
     break;
   case 70:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 144:
     return nodes::Edda_Controller;
     break;
-  case 145:
-    return nodes::Edda_Telemetry;
+  case 71:
+    return nodes::Edda_Controller;
     break;
-  case 146:
+  case 72:
+    return nodes::Edda_Controller;
+    break;
+  case 73:
+    return nodes::Edda_Controller;
+    break;
+  case 74:
     return nodes::Edda_Pressure_Top;
     break;
-  case 147:
+  case 75:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 76:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 77:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 78:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 79:
+    return nodes::Edda_Pressure_Top;
+    break;
+  case 80:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 148:
-    return nodes::Edda_Controller;
-    break;
-  case 149:
-    return nodes::Edda_Controller;
-    break;
-  case 150:
-    return nodes::Edda_Telemetry;
-    break;
-  case 151:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 152:
+  case 81:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 153:
-    return nodes::Edda_Controller;
-    break;
-  case 154:
-    return nodes::Edda_Telemetry;
-    break;
-  case 155:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 156:
+  case 82:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 157:
-    return nodes::Edda_Controller;
-    break;
-  case 158:
-    return nodes::Edda_Telemetry;
-    break;
-  case 159:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 160:
+  case 83:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 161:
-    return nodes::Edda_Controller;
-    break;
-  case 162:
-    return nodes::Edda_Telemetry;
-    break;
-  case 163:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 164:
+  case 84:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 165:
-    return nodes::Edda_Controller;
-    break;
-  case 166:
-    return nodes::Edda_Telemetry;
-    break;
-  case 167:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 168:
+  case 85:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 169:
+  case 86:
+    return nodes::Edda_Telemetry;
+    break;
+  case 87:
     return nodes::Edda_Pressure_Top;
     break;
-  case 170:
+  case 88:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 171:
+  case 89:
+    return nodes::Edda_Telemetry;
+    break;
+  case 90:
+    return nodes::Edda_Telemetry;
+    break;
+  case 91:
+    return nodes::Edda_Telemetry;
+    break;
+  case 92:
+    return nodes::Edda_Telemetry;
+    break;
+  case 93:
+    return nodes::Edda_Telemetry;
+    break;
+  case 94:
+    return nodes::Edda_Telemetry;
+    break;
+  case 95:
+    return nodes::Edda_Telemetry;
+    break;
+  case 96:
+    return nodes::Edda_Telemetry;
+    break;
+  case 97:
+    return nodes::Edda_Telemetry;
+    break;
+  case 98:
+    return nodes::Edda_Telemetry;
+    break;
+  case 99:
+    return nodes::Edda_Telemetry;
+    break;
+  case 100:
+    return nodes::Edda_Telemetry;
+    break;
+  case 101:
+    return nodes::Edda_Telemetry;
+    break;
+  case 102:
+    return nodes::Edda_Telemetry;
+    break;
+  case 103:
+    return nodes::Edda_Controller;
+    break;
+  case 104:
+    return nodes::Edda_Controller;
+    break;
+  case 105:
+    return nodes::Edda_Controller;
+    break;
+  case 106:
     return nodes::Edda_Pressure_Top;
     break;
-  case 172:
+  case 107:
     return nodes::Edda_Pressure_Bottom;
     break;
-  case 173:
+  case 108:
     return nodes::Edda_Pressure_Top;
     break;
-  case 174:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 175:
+  case 109:
     return nodes::Edda_Pressure_Top;
     break;
-  case 176:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 177:
+  case 110:
     return nodes::Edda_Pressure_Top;
     break;
-  case 178:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 179:
+  case 111:
     return nodes::Edda_Pressure_Top;
     break;
-  case 180:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 181:
-    return nodes::Edda_Telemetry;
-    break;
-  case 182:
-    return nodes::Edda_Telemetry;
-    break;
-  case 183:
-    return nodes::Edda_Telemetry;
-    break;
-  case 184:
-    return nodes::Edda_Telemetry;
-    break;
-  case 185:
-    return nodes::Edda_Telemetry;
-    break;
-  case 187:
-    return nodes::Edda_Controller;
-    break;
-  case 188:
-    return nodes::Edda_Controller;
-    break;
-  case 189:
-    return nodes::Edda_Controller;
-    break;
-  case 190:
-    return nodes::Edda_Controller;
-    break;
-  case 191:
-    return nodes::Edda_Controller;
-    break;
-  case 192:
-    return nodes::Edda_Controller;
-    break;
-  case 193:
-    return nodes::Edda_Controller;
-    break;
-  case 198:
-    return nodes::Edda_Controller;
-    break;
-  case 199:
-    return nodes::Edda_Telemetry;
-    break;
-  case 200:
+  case 112:
     return nodes::Edda_Pressure_Top;
     break;
-  case 201:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 202:
-    return nodes::Edda_Controller;
-    break;
-  case 203:
-    return nodes::Edda_Telemetry;
-    break;
-  case 204:
+  case 113:
     return nodes::Edda_Pressure_Top;
     break;
-  case 205:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 207:
-    return nodes::Edda_Telemetry;
-    break;
-  case 208:
-    return nodes::Edda_Telemetry;
-    break;
-  case 209:
-    return nodes::Edda_Telemetry;
-    break;
-  case 210:
-    return nodes::Edda_Telemetry;
-    break;
-  case 215:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 216:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 217:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 218:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 219:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 220:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 221:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 222:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 223:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 224:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 225:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 226:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 227:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 228:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 229:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 230:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 231:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 232:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 233:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 234:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 235:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 236:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 237:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 238:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 239:
-    return nodes::Edda_Power_Control_Boards;
-    break;
-  case 442:
-    return nodes::Edda_Telemetry;
-    break;
-  case 450:
-    return nodes::Edda_Controller;
-    break;
-  case 451:
-    return nodes::Edda_Telemetry;
-    break;
-  case 452:
+  case 114:
     return nodes::Edda_Pressure_Top;
     break;
-  case 453:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 462:
-    return nodes::Edda_Telemetry;
-    break;
-  case 467:
-    return nodes::Edda_Controller;
-    break;
-  case 468:
-    return nodes::Edda_Telemetry;
-    break;
-  case 469:
+  case 115:
     return nodes::Edda_Pressure_Top;
     break;
-  case 470:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 698:
-    return nodes::Edda_Telemetry;
-    break;
-  case 706:
-    return nodes::Edda_Controller;
-    break;
-  case 707:
-    return nodes::Edda_Telemetry;
-    break;
-  case 708:
+  case 116:
     return nodes::Edda_Pressure_Top;
     break;
-  case 709:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 718:
-    return nodes::Edda_Telemetry;
-    break;
-  case 723:
-    return nodes::Edda_Controller;
-    break;
-  case 724:
-    return nodes::Edda_Telemetry;
-    break;
-  case 725:
+  case 117:
     return nodes::Edda_Pressure_Top;
     break;
-  case 726:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 954:
-    return nodes::Edda_Telemetry;
-    break;
-  case 962:
-    return nodes::Edda_Controller;
-    break;
-  case 963:
-    return nodes::Edda_Telemetry;
-    break;
-  case 964:
+  case 118:
     return nodes::Edda_Pressure_Top;
     break;
-  case 965:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 974:
-    return nodes::Edda_Telemetry;
-    break;
-  case 979:
-    return nodes::Edda_Controller;
-    break;
-  case 980:
-    return nodes::Edda_Telemetry;
-    break;
-  case 981:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 982:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 1210:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1218:
-    return nodes::Edda_Controller;
-    break;
-  case 1219:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1220:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 1221:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 1230:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1235:
-    return nodes::Edda_Controller;
-    break;
-  case 1236:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1237:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 1238:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 1466:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1474:
-    return nodes::Edda_Controller;
-    break;
-  case 1475:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1476:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 1477:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 1491:
-    return nodes::Edda_Controller;
-    break;
-  case 1492:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1493:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 1494:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 1730:
-    return nodes::Edda_Controller;
-    break;
-  case 1731:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1732:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 1733:
-    return nodes::Edda_Pressure_Bottom;
-    break;
-  case 1986:
-    return nodes::Edda_Controller;
-    break;
-  case 1987:
-    return nodes::Edda_Telemetry;
-    break;
-  case 1988:
-    return nodes::Edda_Pressure_Top;
-    break;
-  case 1989:
+  case 119:
     return nodes::Edda_Pressure_Bottom;
     break;
   }
@@ -4558,62 +2936,152 @@ enum nodes id_to_sender(uint8_t id) {
 
 enum nodes id_to_receiver(uint8_t id) {
   switch (id) {
-  case 0:
+  case 15:
+    return nodes::Edda_Telemetry;
+    break;
+  case 16:
     return nodes::Edda_Controller;
     break;
-  case 1:
-    return nodes::Ground_Controller;
-    break;
-  case 2:
+  case 17:
     return nodes::Edda_Controller;
     break;
-  case 3:
+  case 18:
+    return nodes::Edda_Controller;
+    break;
+  case 19:
+    return nodes::Edda_Controller;
+    break;
+  case 20:
+    return nodes::Flight_Controller;
+    break;
+  case 21:
+    return nodes::Flight_Controller;
+    break;
+  case 22:
+    return nodes::Flight_Controller;
+    break;
+  case 23:
+    return nodes::Flight_Controller;
+    break;
+  case 24:
+    return nodes::Flight_Controller;
+    break;
+  case 25:
+    return nodes::Flight_Controller;
+    break;
+  case 26:
+    return nodes::Flight_Controller;
+    break;
+  case 27:
+    return nodes::Flight_Controller;
+    break;
+  case 28:
+    return nodes::Edda_Controller;
+    break;
+  case 29:
+    return nodes::Edda_Controller;
+    break;
+  case 30:
     return nodes::Ground_Controller;
     break;
-  case 4:
+  case 31:
+    return nodes::Edda_Controller;
+    break;
+  case 32:
     return nodes::Ground_Controller;
     break;
-  case 5:
+  case 33:
+    return nodes::Edda_Controller;
+    break;
+  case 34:
     return nodes::Ground_Controller;
     break;
-  case 6:
+  case 35:
+    return nodes::Edda_Controller;
+    break;
+  case 36:
     return nodes::Ground_Controller;
     break;
-  case 7:
+  case 37:
     return nodes::Ground_Controller;
     break;
-  case 8:
+  case 38:
     return nodes::Ground_Controller;
     break;
-  case 9:
+  case 39:
     return nodes::Ground_Controller;
     break;
-  case 10:
+  case 40:
     return nodes::Ground_Controller;
     break;
-  case 11:
+  case 41:
     return nodes::Ground_Controller;
     break;
-  case 12:
+  case 42:
     return nodes::Ground_Controller;
     break;
-  case 13:
+  case 43:
+    return nodes::Ground_Controller;
+    break;
+  case 44:
+    return nodes::Ground_Controller;
+    break;
+  case 45:
+    return nodes::Ground_Controller;
+    break;
+  case 46:
+    return nodes::Ground_Controller;
+    break;
+  case 47:
     return nodes::Ground_Controller;
     break;
   case 48:
-    return nodes::Edda_Controller;
+    return nodes::Ground_Controller;
     break;
   case 49:
-    return nodes::Edda_Controller;
+    return nodes::Ground_Controller;
     break;
   case 50:
-    return nodes::Edda_Controller;
+    return nodes::Ground_Controller;
     break;
   case 51:
-    return nodes::Edda_Controller;
+    return nodes::Ground_Controller;
     break;
   case 52:
-    return nodes::Edda_Controller;
+    return nodes::Ground_Controller;
+    break;
+  case 53:
+    return nodes::Ground_Controller;
+    break;
+  case 54:
+    return nodes::Ground_Controller;
+    break;
+  case 55:
+    return nodes::Ground_Controller;
+    break;
+  case 56:
+    return nodes::Ground_Controller;
+    break;
+  case 57:
+    return nodes::Ground_Controller;
+    break;
+  case 58:
+    return nodes::Ground_Controller;
+    break;
+  case 59:
+    return nodes::Ground_Controller;
+    break;
+  case 60:
+    return nodes::Ground_Controller;
+    break;
+  case 61:
+    return nodes::Ground_Controller;
+    break;
+  case 62:
+    return nodes::Ground_Controller;
+    break;
+  case 63:
+    return nodes::Ground_Controller;
     break;
   case 64:
     return nodes::Ground_Controller;
@@ -4636,480 +3104,255 @@ enum nodes id_to_receiver(uint8_t id) {
   case 70:
     return nodes::Ground_Controller;
     break;
-  case 144:
-    return nodes::Edda_Telemetry;
-    break;
-  case 145:
-    return nodes::Edda_Controller;
-    break;
-  case 146:
-    return nodes::Edda_Controller;
-    break;
-  case 147:
-    return nodes::Edda_Controller;
-    break;
-  case 148:
-    return nodes::Edda_Controller;
-    break;
-  case 149:
-    return nodes::Flight_Controller;
-    break;
-  case 150:
-    return nodes::Flight_Controller;
-    break;
-  case 151:
-    return nodes::Flight_Controller;
-    break;
-  case 152:
-    return nodes::Flight_Controller;
-    break;
-  case 153:
-    return nodes::Flight_Controller;
-    break;
-  case 154:
-    return nodes::Flight_Controller;
-    break;
-  case 155:
-    return nodes::Flight_Controller;
-    break;
-  case 156:
-    return nodes::Flight_Controller;
-    break;
-  case 157:
-    return nodes::Ground_Controller;
-    break;
-  case 158:
-    return nodes::Ground_Controller;
-    break;
-  case 159:
-    return nodes::Ground_Controller;
-    break;
-  case 160:
-    return nodes::Ground_Controller;
-    break;
-  case 161:
-    return nodes::Ground_Controller;
-    break;
-  case 162:
-    return nodes::Ground_Controller;
-    break;
-  case 163:
-    return nodes::Ground_Controller;
-    break;
-  case 164:
-    return nodes::Ground_Controller;
-    break;
-  case 165:
-    return nodes::Ground_Controller;
-    break;
-  case 166:
-    return nodes::Ground_Controller;
-    break;
-  case 167:
-    return nodes::Ground_Controller;
-    break;
-  case 168:
-    return nodes::Ground_Controller;
-    break;
-  case 169:
-    return nodes::Ground_Controller;
-    break;
-  case 170:
-    return nodes::Ground_Controller;
-    break;
-  case 171:
-    return nodes::Ground_Controller;
-    break;
-  case 172:
-    return nodes::Ground_Controller;
-    break;
-  case 173:
-    return nodes::Ground_Controller;
-    break;
-  case 174:
-    return nodes::Ground_Controller;
-    break;
-  case 175:
-    return nodes::Ground_Controller;
-    break;
-  case 176:
-    return nodes::Ground_Controller;
-    break;
-  case 177:
-    return nodes::Ground_Controller;
-    break;
-  case 178:
-    return nodes::Ground_Controller;
-    break;
-  case 179:
-    return nodes::Ground_Controller;
-    break;
-  case 180:
-    return nodes::Ground_Controller;
-    break;
-  case 181:
-    return nodes::Ground_Controller;
-    break;
-  case 182:
-    return nodes::Ground_Controller;
-    break;
-  case 183:
-    return nodes::Ground_Controller;
-    break;
-  case 184:
-    return nodes::Ground_Controller;
-    break;
-  case 185:
-    return nodes::Ground_Controller;
-    break;
-  case 187:
-    return nodes::Ground_Controller;
-    break;
-  case 188:
+  case 71:
     return nodes::Ground_Controller;
     break;
-  case 189:
+  case 72:
     return nodes::Ground_Controller;
     break;
-  case 190:
+  case 73:
     return nodes::Ground_Controller;
     break;
-  case 191:
+  case 74:
     return nodes::Ground_Controller;
     break;
-  case 192:
+  case 75:
     return nodes::Ground_Controller;
     break;
-  case 193:
+  case 76:
     return nodes::Ground_Controller;
     break;
-  case 198:
+  case 77:
     return nodes::Ground_Controller;
     break;
-  case 199:
+  case 78:
     return nodes::Ground_Controller;
     break;
-  case 200:
+  case 79:
     return nodes::Ground_Controller;
     break;
-  case 201:
+  case 80:
     return nodes::Ground_Controller;
     break;
-  case 202:
+  case 81:
     return nodes::Ground_Controller;
     break;
-  case 203:
+  case 82:
     return nodes::Ground_Controller;
     break;
-  case 204:
+  case 83:
     return nodes::Ground_Controller;
     break;
-  case 205:
+  case 84:
     return nodes::Ground_Controller;
     break;
-  case 207:
+  case 85:
     return nodes::Ground_Controller;
     break;
-  case 208:
+  case 86:
     return nodes::Ground_Controller;
     break;
-  case 209:
+  case 87:
     return nodes::Ground_Controller;
     break;
-  case 210:
+  case 88:
     return nodes::Ground_Controller;
     break;
-  case 215:
+  case 89:
     return nodes::Ground_Controller;
     break;
-  case 216:
+  case 90:
     return nodes::Ground_Controller;
     break;
-  case 217:
+  case 91:
     return nodes::Ground_Controller;
     break;
-  case 218:
+  case 92:
     return nodes::Ground_Controller;
     break;
-  case 219:
+  case 93:
     return nodes::Ground_Controller;
     break;
-  case 220:
+  case 94:
     return nodes::Ground_Controller;
     break;
-  case 221:
+  case 95:
     return nodes::Ground_Controller;
     break;
-  case 222:
+  case 96:
     return nodes::Ground_Controller;
     break;
-  case 223:
+  case 97:
     return nodes::Ground_Controller;
     break;
-  case 224:
+  case 98:
     return nodes::Ground_Controller;
     break;
-  case 225:
+  case 99:
     return nodes::Ground_Controller;
     break;
-  case 226:
+  case 100:
     return nodes::Ground_Controller;
     break;
-  case 227:
+  case 101:
     return nodes::Ground_Controller;
     break;
-  case 228:
+  case 102:
     return nodes::Ground_Controller;
     break;
-  case 229:
+  case 103:
     return nodes::Ground_Controller;
     break;
-  case 230:
+  case 104:
     return nodes::Ground_Controller;
     break;
-  case 231:
+  case 105:
     return nodes::Ground_Controller;
     break;
-  case 232:
+  case 106:
     return nodes::Ground_Controller;
     break;
-  case 233:
+  case 107:
     return nodes::Ground_Controller;
     break;
-  case 234:
+  case 108:
     return nodes::Ground_Controller;
     break;
-  case 235:
+  case 109:
     return nodes::Ground_Controller;
     break;
-  case 236:
+  case 110:
     return nodes::Ground_Controller;
     break;
-  case 237:
+  case 111:
     return nodes::Ground_Controller;
     break;
-  case 238:
+  case 112:
     return nodes::Ground_Controller;
     break;
-  case 239:
+  case 113:
     return nodes::Ground_Controller;
     break;
-  case 442:
+  case 114:
     return nodes::Ground_Controller;
     break;
-  case 450:
-    return nodes::Flight_Controller;
-    break;
-  case 451:
-    return nodes::Flight_Controller;
-    break;
-  case 452:
-    return nodes::Flight_Controller;
-    break;
-  case 453:
-    return nodes::Flight_Controller;
-    break;
-  case 462:
-    return nodes::Ground_Controller;
-    break;
-  case 467:
-    return nodes::Ground_Controller;
-    break;
-  case 468:
-    return nodes::Ground_Controller;
-    break;
-  case 469:
-    return nodes::Ground_Controller;
-    break;
-  case 470:
-    return nodes::Ground_Controller;
-    break;
-  case 698:
-    return nodes::Ground_Controller;
-    break;
-  case 706:
-    return nodes::Flight_Controller;
-    break;
-  case 707:
-    return nodes::Flight_Controller;
-    break;
-  case 708:
-    return nodes::Flight_Controller;
-    break;
-  case 709:
-    return nodes::Flight_Controller;
-    break;
-  case 718:
-    return nodes::Ground_Controller;
-    break;
-  case 723:
-    return nodes::Ground_Controller;
-    break;
-  case 724:
-    return nodes::Ground_Controller;
-    break;
-  case 725:
-    return nodes::Ground_Controller;
-    break;
-  case 726:
-    return nodes::Ground_Controller;
-    break;
-  case 954:
-    return nodes::Ground_Controller;
-    break;
-  case 962:
-    return nodes::Flight_Controller;
-    break;
-  case 963:
-    return nodes::Flight_Controller;
-    break;
-  case 964:
-    return nodes::Flight_Controller;
-    break;
-  case 965:
-    return nodes::Flight_Controller;
-    break;
-  case 974:
-    return nodes::Ground_Controller;
-    break;
-  case 979:
-    return nodes::Ground_Controller;
-    break;
-  case 980:
-    return nodes::Ground_Controller;
-    break;
-  case 981:
-    return nodes::Ground_Controller;
-    break;
-  case 982:
-    return nodes::Ground_Controller;
-    break;
-  case 1210:
-    return nodes::Ground_Controller;
-    break;
-  case 1218:
-    return nodes::Flight_Controller;
-    break;
-  case 1219:
-    return nodes::Flight_Controller;
-    break;
-  case 1220:
-    return nodes::Flight_Controller;
-    break;
-  case 1221:
-    return nodes::Flight_Controller;
-    break;
-  case 1230:
-    return nodes::Ground_Controller;
-    break;
-  case 1235:
-    return nodes::Ground_Controller;
-    break;
-  case 1236:
-    return nodes::Ground_Controller;
-    break;
-  case 1237:
-    return nodes::Ground_Controller;
-    break;
-  case 1238:
-    return nodes::Ground_Controller;
-    break;
-  case 1466:
+  case 115:
     return nodes::Ground_Controller;
-    break;
-  case 1474:
-    return nodes::Flight_Controller;
-    break;
-  case 1475:
-    return nodes::Flight_Controller;
     break;
-  case 1476:
-    return nodes::Flight_Controller;
-    break;
-  case 1477:
-    return nodes::Flight_Controller;
-    break;
-  case 1491:
+  case 116:
     return nodes::Ground_Controller;
     break;
-  case 1492:
+  case 117:
     return nodes::Ground_Controller;
     break;
-  case 1493:
+  case 118:
     return nodes::Ground_Controller;
     break;
-  case 1494:
+  case 119:
     return nodes::Ground_Controller;
-    break;
-  case 1730:
-    return nodes::Flight_Controller;
-    break;
-  case 1731:
-    return nodes::Flight_Controller;
-    break;
-  case 1732:
-    return nodes::Flight_Controller;
-    break;
-  case 1733:
-    return nodes::Flight_Controller;
-    break;
-  case 1986:
-    return nodes::Flight_Controller;
-    break;
-  case 1987:
-    return nodes::Flight_Controller;
-    break;
-  case 1988:
-    return nodes::Flight_Controller;
-    break;
-  case 1989:
-    return nodes::Flight_Controller;
     break;
   }
 }
 
 enum categories id_to_category(uint8_t id) {
   switch (id) {
-  case 0:
+  case 15:
     return categories::none;
     break;
-  case 1:
+  case 16:
     return categories::none;
     break;
-  case 2:
+  case 17:
     return categories::none;
     break;
-  case 3:
+  case 18:
     return categories::none;
     break;
-  case 4:
+  case 19:
     return categories::none;
     break;
-  case 5:
+  case 20:
     return categories::none;
     break;
-  case 6:
+  case 21:
     return categories::none;
     break;
-  case 7:
+  case 22:
     return categories::none;
     break;
-  case 8:
+  case 23:
     return categories::none;
     break;
-  case 9:
+  case 24:
     return categories::none;
     break;
-  case 10:
+  case 25:
     return categories::none;
     break;
-  case 11:
+  case 26:
     return categories::none;
     break;
-  case 12:
+  case 27:
     return categories::none;
     break;
-  case 13:
+  case 28:
+    return categories::none;
+    break;
+  case 29:
+    return categories::none;
+    break;
+  case 30:
+    return categories::none;
+    break;
+  case 31:
+    return categories::none;
+    break;
+  case 32:
+    return categories::none;
+    break;
+  case 33:
+    return categories::none;
+    break;
+  case 34:
+    return categories::none;
+    break;
+  case 35:
+    return categories::none;
+    break;
+  case 36:
+    return categories::none;
+    break;
+  case 37:
+    return categories::none;
+    break;
+  case 38:
+    return categories::none;
+    break;
+  case 39:
+    return categories::none;
+    break;
+  case 40:
+    return categories::none;
+    break;
+  case 41:
+    return categories::none;
+    break;
+  case 42:
+    return categories::none;
+    break;
+  case 43:
+    return categories::none;
+    break;
+  case 44:
+    return categories::none;
+    break;
+  case 45:
+    return categories::none;
+    break;
+  case 46:
+    return categories::none;
+    break;
+  case 47:
     return categories::none;
     break;
   case 48:
@@ -5125,6 +3368,39 @@ enum categories id_to_category(uint8_t id) {
     return categories::none;
     break;
   case 52:
+    return categories::none;
+    break;
+  case 53:
+    return categories::none;
+    break;
+  case 54:
+    return categories::none;
+    break;
+  case 55:
+    return categories::none;
+    break;
+  case 56:
+    return categories::none;
+    break;
+  case 57:
+    return categories::none;
+    break;
+  case 58:
+    return categories::none;
+    break;
+  case 59:
+    return categories::none;
+    break;
+  case 60:
+    return categories::none;
+    break;
+  case 61:
+    return categories::none;
+    break;
+  case 62:
+    return categories::none;
+    break;
+  case 63:
     return categories::none;
     break;
   case 64:
@@ -5148,433 +3424,151 @@ enum categories id_to_category(uint8_t id) {
   case 70:
     return categories::none;
     break;
-  case 144:
+  case 71:
     return categories::none;
     break;
-  case 145:
+  case 72:
     return categories::none;
     break;
-  case 146:
+  case 73:
     return categories::none;
     break;
-  case 147:
+  case 74:
     return categories::none;
     break;
-  case 148:
+  case 75:
     return categories::none;
     break;
-  case 149:
+  case 76:
     return categories::none;
     break;
-  case 150:
+  case 77:
     return categories::none;
     break;
-  case 151:
+  case 78:
     return categories::none;
     break;
-  case 152:
+  case 79:
     return categories::none;
     break;
-  case 153:
+  case 80:
     return categories::none;
     break;
-  case 154:
+  case 81:
     return categories::none;
     break;
-  case 155:
+  case 82:
     return categories::none;
     break;
-  case 156:
+  case 83:
     return categories::none;
     break;
-  case 157:
+  case 84:
     return categories::none;
     break;
-  case 158:
+  case 85:
     return categories::none;
     break;
-  case 159:
+  case 86:
     return categories::none;
     break;
-  case 160:
+  case 87:
     return categories::none;
     break;
-  case 161:
+  case 88:
     return categories::none;
     break;
-  case 162:
+  case 89:
     return categories::none;
     break;
-  case 163:
+  case 90:
     return categories::none;
     break;
-  case 164:
+  case 91:
     return categories::none;
     break;
-  case 165:
+  case 92:
     return categories::none;
     break;
-  case 166:
+  case 93:
     return categories::none;
     break;
-  case 167:
+  case 94:
     return categories::none;
     break;
-  case 168:
+  case 95:
     return categories::none;
     break;
-  case 169:
+  case 96:
     return categories::none;
     break;
-  case 170:
+  case 97:
     return categories::none;
     break;
-  case 171:
+  case 98:
     return categories::none;
     break;
-  case 172:
+  case 99:
     return categories::none;
     break;
-  case 173:
+  case 100:
     return categories::none;
     break;
-  case 174:
+  case 101:
     return categories::none;
     break;
-  case 175:
+  case 102:
     return categories::none;
     break;
-  case 176:
+  case 103:
     return categories::none;
     break;
-  case 177:
+  case 104:
     return categories::none;
     break;
-  case 178:
+  case 105:
     return categories::none;
     break;
-  case 179:
+  case 106:
     return categories::none;
     break;
-  case 180:
+  case 107:
     return categories::none;
     break;
-  case 181:
+  case 108:
     return categories::none;
     break;
-  case 182:
+  case 109:
     return categories::none;
     break;
-  case 183:
+  case 110:
     return categories::none;
     break;
-  case 184:
+  case 111:
     return categories::none;
     break;
-  case 185:
+  case 112:
     return categories::none;
     break;
-  case 187:
+  case 113:
     return categories::none;
     break;
-  case 188:
+  case 114:
     return categories::none;
     break;
-  case 189:
+  case 115:
     return categories::none;
     break;
-  case 190:
+  case 116:
     return categories::none;
     break;
-  case 191:
+  case 117:
     return categories::none;
     break;
-  case 192:
+  case 118:
     return categories::none;
     break;
-  case 193:
-    return categories::none;
-    break;
-  case 198:
-    return categories::none;
-    break;
-  case 199:
-    return categories::none;
-    break;
-  case 200:
-    return categories::none;
-    break;
-  case 201:
-    return categories::none;
-    break;
-  case 202:
-    return categories::none;
-    break;
-  case 203:
-    return categories::none;
-    break;
-  case 204:
-    return categories::none;
-    break;
-  case 205:
-    return categories::none;
-    break;
-  case 207:
-    return categories::none;
-    break;
-  case 208:
-    return categories::none;
-    break;
-  case 209:
-    return categories::none;
-    break;
-  case 210:
-    return categories::none;
-    break;
-  case 215:
-    return categories::none;
-    break;
-  case 216:
-    return categories::none;
-    break;
-  case 217:
-    return categories::none;
-    break;
-  case 218:
-    return categories::none;
-    break;
-  case 219:
-    return categories::none;
-    break;
-  case 220:
-    return categories::none;
-    break;
-  case 221:
-    return categories::none;
-    break;
-  case 222:
-    return categories::none;
-    break;
-  case 223:
-    return categories::none;
-    break;
-  case 224:
-    return categories::none;
-    break;
-  case 225:
-    return categories::none;
-    break;
-  case 226:
-    return categories::none;
-    break;
-  case 227:
-    return categories::none;
-    break;
-  case 228:
-    return categories::none;
-    break;
-  case 229:
-    return categories::none;
-    break;
-  case 230:
-    return categories::none;
-    break;
-  case 231:
-    return categories::none;
-    break;
-  case 232:
-    return categories::none;
-    break;
-  case 233:
-    return categories::none;
-    break;
-  case 234:
-    return categories::none;
-    break;
-  case 235:
-    return categories::none;
-    break;
-  case 236:
-    return categories::none;
-    break;
-  case 237:
-    return categories::none;
-    break;
-  case 238:
-    return categories::none;
-    break;
-  case 239:
-    return categories::none;
-    break;
-  case 442:
-    return categories::none;
-    break;
-  case 450:
-    return categories::none;
-    break;
-  case 451:
-    return categories::none;
-    break;
-  case 452:
-    return categories::none;
-    break;
-  case 453:
-    return categories::none;
-    break;
-  case 462:
-    return categories::none;
-    break;
-  case 467:
-    return categories::none;
-    break;
-  case 468:
-    return categories::none;
-    break;
-  case 469:
-    return categories::none;
-    break;
-  case 470:
-    return categories::none;
-    break;
-  case 698:
-    return categories::none;
-    break;
-  case 706:
-    return categories::none;
-    break;
-  case 707:
-    return categories::none;
-    break;
-  case 708:
-    return categories::none;
-    break;
-  case 709:
-    return categories::none;
-    break;
-  case 718:
-    return categories::none;
-    break;
-  case 723:
-    return categories::none;
-    break;
-  case 724:
-    return categories::none;
-    break;
-  case 725:
-    return categories::none;
-    break;
-  case 726:
-    return categories::none;
-    break;
-  case 954:
-    return categories::none;
-    break;
-  case 962:
-    return categories::none;
-    break;
-  case 963:
-    return categories::none;
-    break;
-  case 964:
-    return categories::none;
-    break;
-  case 965:
-    return categories::none;
-    break;
-  case 974:
-    return categories::none;
-    break;
-  case 979:
-    return categories::none;
-    break;
-  case 980:
-    return categories::none;
-    break;
-  case 981:
-    return categories::none;
-    break;
-  case 982:
-    return categories::none;
-    break;
-  case 1210:
-    return categories::none;
-    break;
-  case 1218:
-    return categories::none;
-    break;
-  case 1219:
-    return categories::none;
-    break;
-  case 1220:
-    return categories::none;
-    break;
-  case 1221:
-    return categories::none;
-    break;
-  case 1230:
-    return categories::none;
-    break;
-  case 1235:
-    return categories::none;
-    break;
-  case 1236:
-    return categories::none;
-    break;
-  case 1237:
-    return categories::none;
-    break;
-  case 1238:
-    return categories::none;
-    break;
-  case 1466:
-    return categories::none;
-    break;
-  case 1474:
-    return categories::none;
-    break;
-  case 1475:
-    return categories::none;
-    break;
-  case 1476:
-    return categories::none;
-    break;
-  case 1477:
-    return categories::none;
-    break;
-  case 1491:
-    return categories::none;
-    break;
-  case 1492:
-    return categories::none;
-    break;
-  case 1493:
-    return categories::none;
-    break;
-  case 1494:
-    return categories::none;
-    break;
-  case 1730:
-    return categories::none;
-    break;
-  case 1731:
-    return categories::none;
-    break;
-  case 1732:
-    return categories::none;
-    break;
-  case 1733:
-    return categories::none;
-    break;
-  case 1986:
-    return categories::none;
-    break;
-  case 1987:
-    return categories::none;
-    break;
-  case 1988:
-    return categories::none;
-    break;
-  case 1989:
+  case 119:
     return categories::none;
     break;
   }

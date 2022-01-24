@@ -68,7 +68,7 @@ void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len) {
   flash_queue.enqueue(buf, len);  //add message
   // parse the message no matter what, nothing will happen if it's invalid
   fc::parse_message(id, buf);
-
+  // TODO: temporary
   if (EDDA::is_valid_id(id)) {
     CAN_message_t can_msg;
     can_msg.id = id;
@@ -98,10 +98,7 @@ void handleDataStreams() {
   }
 
   if(can.read(can_msg)) {
-    if (not EDDA::is_valid_id(can_msg.id)) {
-      return;
-    }
-    if (can_msg.id & 0x400 != 0x400) {
+    if (can_msg.id > 255) {
       return;
     }
 
@@ -110,9 +107,7 @@ void handleDataStreams() {
     if (data_logging_enabled) {
       flash_queue.enqueue(buf, len);
     }
-    if ((can_msg.id & 0x400) == 0x400) {
-      telemetry_queue.enqueue(buf, len);
-    }
+    telemetry_queue.enqueue(buf, len);
   }
 }
 

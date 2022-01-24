@@ -351,7 +351,7 @@ public:
   enum fc::nodes sender = fc::nodes::ground_station;
   enum fc::nodes receiver = fc::nodes::flight_controller;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 21;
+  uint8_t id = 3;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }
@@ -622,7 +622,7 @@ public:
   enum fc::nodes sender = fc::nodes::flight_controller;
   enum fc::nodes receiver = fc::nodes::ground_station;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 80;
+  uint8_t id = 0;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }
@@ -662,7 +662,7 @@ public:
   enum fc::nodes sender = fc::nodes::flight_controller;
   enum fc::nodes receiver = fc::nodes::ground_station;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 81;
+  uint8_t id = 1;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }
@@ -744,7 +744,7 @@ public:
   enum fc::nodes sender = fc::nodes::flight_controller;
   enum fc::nodes receiver = fc::nodes::ground_station;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 82;
+  uint8_t id = 80;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }
@@ -780,7 +780,7 @@ public:
   enum fc::nodes sender = fc::nodes::flight_controller;
   enum fc::nodes receiver = fc::nodes::ground_station;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 83;
+  uint8_t id = 81;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }
@@ -832,7 +832,7 @@ public:
   enum fc::nodes sender = fc::nodes::flight_controller;
   enum fc::nodes receiver = fc::nodes::ground_station;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 84;
+  uint8_t id = 82;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }
@@ -918,7 +918,7 @@ public:
   enum fc::nodes sender = fc::nodes::flight_controller;
   enum fc::nodes receiver = fc::nodes::ground_station;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 85;
+  uint8_t id = 83;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }
@@ -959,7 +959,7 @@ public:
   enum fc::nodes sender = fc::nodes::flight_controller;
   enum fc::nodes receiver = fc::nodes::ground_station;
   enum fc::categories category = fc::categories::none;
-  uint8_t id = 86;
+  uint8_t id = 84;
   enum categories get_category() override { return category; }
   uint8_t get_size() override { return size; }
   enum nodes get_sender() override { return sender; }

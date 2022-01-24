@@ -1,0 +1,3844 @@
+EESchema Schematic File Version 5
+EELAYER 36 0
+EELAYER END
+$Descr A2 23386 16535
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
+$EndDescr
+Connection ~ 1800 14600
+Connection ~ 2150 13450
+Connection ~ 2300 13450
+Connection ~ 2400 13550
+Connection ~ 2500 14900
+Connection ~ 2650 13550
+Connection ~ 3150 13950
+Connection ~ 3450 14900
+Connection ~ 3450 15200
+Connection ~ 3650 7150
+Connection ~ 3650 12150
+Connection ~ 3700 4000
+Connection ~ 3700 5050
+Connection ~ 3700 5950
+Connection ~ 4000 13350
+Connection ~ 6400 2650
+Connection ~ 7750 9000
+Connection ~ 7750 9300
+Connection ~ 7850 10200
+Connection ~ 7850 10500
+Connection ~ 7850 11400
+Connection ~ 7850 11700
+Connection ~ 7850 12650
+Connection ~ 7850 12950
+Connection ~ 7850 13900
+Connection ~ 7850 14200
+Connection ~ 7850 15150
+Connection ~ 7850 15450
+Connection ~ 8500 9000
+Connection ~ 8500 9300
+Connection ~ 8500 10200
+Connection ~ 8500 10500
+Connection ~ 8500 11400
+Connection ~ 8500 11700
+Connection ~ 8500 12650
+Connection ~ 8500 12950
+Connection ~ 8500 13900
+Connection ~ 8500 14200
+Connection ~ 8500 15150
+Connection ~ 8500 15450
+Connection ~ 8600 9000
+Connection ~ 8600 9300
+Connection ~ 8600 9400
+Connection ~ 8600 10200
+Connection ~ 8600 10500
+Connection ~ 8600 10600
+Connection ~ 8600 11400
+Connection ~ 8600 11700
+Connection ~ 8600 11800
+Connection ~ 8600 12650
+Connection ~ 8600 12950
+Connection ~ 8600 13050
+Connection ~ 8600 13900
+Connection ~ 8600 14200
+Connection ~ 8600 14300
+Connection ~ 8600 15150
+Connection ~ 8600 15450
+Connection ~ 8600 15550
+Connection ~ 9200 8650
+Connection ~ 9200 9900
+Connection ~ 9200 11050
+Connection ~ 9200 12350
+Connection ~ 9200 13600
+Connection ~ 9200 14850
+Connection ~ 9450 3150
+Connection ~ 10100 10400
+Connection ~ 10100 10950
+Connection ~ 10100 11600
+Connection ~ 10100 12850
+Connection ~ 10100 14100
+Connection ~ 12950 1450
+Connection ~ 13350 2350
+Connection ~ 16100 1400
+Connection ~ 16100 1750
+Connection ~ 16300 4050
+Connection ~ 16350 14150
+Connection ~ 16700 900 
+Connection ~ 16700 14150
+Connection ~ 16850 15100
+Connection ~ 17100 14150
+Connection ~ 17150 10650
+Connection ~ 17900 1000
+Connection ~ 17950 800 
+Connection ~ 17950 850 
+Connection ~ 19200 1400
+Connection ~ 19200 2150
+Connection ~ 19200 2550
+Connection ~ 19400 12300
+Connection ~ 19550 2800
+Connection ~ 19600 11700
+Connection ~ 19750 11700
+Connection ~ 19900 1400
+Connection ~ 19900 1700
+Connection ~ 19950 11700
+Connection ~ 19950 12300
+Connection ~ 20000 3150
+Connection ~ 20300 2800
+Connection ~ 20300 13650
+Connection ~ 20650 13650
+Connection ~ 20700 1700
+Connection ~ 21150 9550
+Connection ~ 21150 10150
+Connection ~ 21500 1700
+NoConn ~ 9550 9100
+NoConn ~ 9550 10300
+NoConn ~ 9550 11500
+NoConn ~ 9550 12750
+NoConn ~ 9550 14000
+NoConn ~ 9550 15250
+Wire Wire Line
+	1400 13150 1800 13150
+Wire Wire Line
+	1400 13250 1600 13250
+Wire Wire Line
+	1400 13800 2400 13800
+Wire Wire Line
+	1400 14000 1800 14000
+Wire Wire Line
+	1400 15100 1800 15100
+Wire Wire Line
+	1400 15200 1550 15200
+Wire Wire Line
+	1400 15750 1550 15750
+Wire Wire Line
+	1400 15850 1550 15850
+Wire Wire Line
+	1450 7350 2100 7350
+Wire Wire Line
+	1450 7450 1800 7450
+Wire Wire Line
+	1450 8550 1800 8550
+Wire Wire Line
+	1450 9400 1750 9400
+Wire Wire Line
+	1450 9700 1600 9700
+Wire Wire Line
+	1450 10450 2100 10450
+Wire Wire Line
+	1450 10550 2100 10550
+Wire Wire Line
+	1450 10650 1700 10650
+Wire Wire Line
+	1450 10750 1600 10750
+Wire Wire Line
+	1500 4200 2150 4200
+Wire Wire Line
+	1500 4300 1850 4300
+Wire Wire Line
+	1500 4500 1600 4500
+Wire Wire Line
+	1500 5250 2150 5250
+Wire Wire Line
+	1500 5350 1850 5350
+Wire Wire Line
+	1500 5550 1600 5550
+Wire Wire Line
+	1500 6150 2150 6150
+Wire Wire Line
+	1500 6250 1850 6250
+Wire Wire Line
+	1500 8400 1500 8450
+Wire Wire Line
+	1500 8450 1450 8450
+Wire Wire Line
+	1500 14100 1400 14100
+Wire Wire Line
+	1550 7850 1450 7850
+Wire Wire Line
+	1550 7850 1550 7900
+Wire Wire Line
+	1550 8400 1500 8400
+Wire Wire Line
+	1550 8750 1450 8750
+Wire Wire Line
+	1550 8750 1550 8800
+Wire Wire Line
+	1550 15200 1550 15250
+Wire Wire Line
+	1550 15900 1550 15850
+Wire Wire Line
+	1600 4500 1600 4550
+Wire Wire Line
+	1600 5550 1600 5600
+Wire Wire Line
+	1600 6650 1500 6650
+Wire Wire Line
+	1600 6650 1600 6700
+Wire Wire Line
+	1600 9700 1600 9750
+Wire Wire Line
+	1600 10750 1600 10800
+Wire Wire Line
+	1600 12350 2100 12350
+Wire Wire Line
+	1600 13250 1600 12350
+Wire Wire Line
+	1750 9500 1450 9500
+Wire Wire Line
+	1750 9600 1450 9600
+Wire Wire Line
+	1800 7550 1450 7550
+Wire Wire Line
+	1800 7650 1450 7650
+Wire Wire Line
+	1800 7750 1450 7750
+Wire Wire Line
+	1800 8650 1450 8650
+Wire Wire Line
+	1800 13150 1800 13200
+Wire Wire Line
+	1800 14000 1800 14050
+Wire Wire Line
+	1800 14550 1800 14600
+Wire Wire Line
+	1800 14600 1800 14700
+Wire Wire Line
+	1850 4400 1500 4400
+Wire Wire Line
+	1850 5450 1500 5450
+Wire Wire Line
+	1850 6350 1500 6350
+Wire Wire Line
+	1850 6450 1500 6450
+Wire Wire Line
+	1850 6550 1500 6550
+Wire Wire Line
+	2000 12950 1400 12950
+Wire Wire Line
+	2000 12950 2000 13550
+Wire Wire Line
+	2000 13550 2400 13550
+Wire Wire Line
+	2100 6850 2100 6950
+Wire Wire Line
+	2100 11850 2100 11950
+Wire Wire Line
+	2100 13050 1400 13050
+Wire Wire Line
+	2100 13450 2100 13050
+Wire Wire Line
+	2150 3700 2150 3800
+Wire Wire Line
+	2150 4750 2150 4850
+Wire Wire Line
+	2150 5650 2150 5750
+Wire Wire Line
+	2150 13200 2150 13450
+Wire Wire Line
+	2150 13450 2100 13450
+Wire Wire Line
+	2150 14900 2100 14900
+Wire Wire Line
+	2300 13450 2150 13450
+Wire Wire Line
+	2300 13450 2300 13900
+Wire Wire Line
+	2300 13450 2750 13450
+Wire Wire Line
+	2300 13900 1400 13900
+Wire Wire Line
+	2400 13550 2400 13800
+Wire Wire Line
+	2400 13550 2650 13550
+Wire Wire Line
+	2500 14600 1800 14600
+Wire Wire Line
+	2500 14900 2450 14900
+Wire Wire Line
+	2650 13200 2650 13550
+Wire Wire Line
+	2650 13550 2750 13550
+Wire Wire Line
+	2800 14900 2500 14900
+Wire Wire Line
+	2950 10350 3650 10350
+Wire Wire Line
+	2950 10450 3200 10450
+Wire Wire Line
+	3050 6750 3050 6850
+Wire Wire Line
+	3050 11750 3050 11850
+Wire Wire Line
+	3100 3600 3100 3700
+Wire Wire Line
+	3100 4650 3100 4750
+Wire Wire Line
+	3100 5550 3100 5650
+Wire Wire Line
+	3100 13950 3150 13950
+Wire Wire Line
+	3150 13150 4000 13150
+Wire Wire Line
+	3150 13850 3150 13950
+Wire Wire Line
+	3150 13950 3250 13950
+Wire Wire Line
+	3200 6750 3050 6750
+Wire Wire Line
+	3200 6800 3200 6750
+Wire Wire Line
+	3200 10550 2950 10550
+Wire Wire Line
+	3200 11750 3050 11750
+Wire Wire Line
+	3200 11800 3200 11750
+Wire Wire Line
+	3250 3600 3100 3600
+Wire Wire Line
+	3250 3650 3250 3600
+Wire Wire Line
+	3250 4650 3100 4650
+Wire Wire Line
+	3250 4700 3250 4650
+Wire Wire Line
+	3250 5550 3100 5550
+Wire Wire Line
+	3250 5600 3250 5550
+Wire Wire Line
+	3400 7150 3650 7150
+Wire Wire Line
+	3400 12150 3650 12150
+Wire Wire Line
+	3450 4000 3700 4000
+Wire Wire Line
+	3450 5050 3700 5050
+Wire Wire Line
+	3450 5950 3700 5950
+Wire Wire Line
+	3450 14900 3200 14900
+Wire Wire Line
+	3450 14900 3600 14900
+Wire Wire Line
+	3450 15200 3300 15200
+Wire Wire Line
+	3550 13550 3850 13550
+Wire Wire Line
+	3550 13950 3600 13950
+Wire Wire Line
+	3600 13950 3600 14000
+Wire Wire Line
+	3600 14900 3600 14950
+Wire Wire Line
+	3650 7150 3950 7150
+Wire Wire Line
+	3650 10350 3650 10400
+Wire Wire Line
+	3650 12150 3950 12150
+Wire Wire Line
+	3700 4000 4000 4000
+Wire Wire Line
+	3700 5050 4000 5050
+Wire Wire Line
+	3700 5950 4000 5950
+Wire Wire Line
+	3850 13650 3550 13650
+Wire Wire Line
+	4000 13150 4000 13350
+Wire Wire Line
+	4000 13350 3550 13350
+Wire Wire Line
+	4050 15200 3450 15200
+Wire Wire Line
+	5550 1850 5900 1850
+Wire Wire Line
+	5550 1950 5900 1950
+Wire Wire Line
+	5550 2050 5900 2050
+Wire Wire Line
+	5550 2250 5900 2250
+Wire Wire Line
+	5900 1750 5550 1750
+Wire Wire Line
+	6400 1500 6450 1500
+Wire Wire Line
+	6400 1550 6400 1500
+Wire Wire Line
+	6400 2650 6300 2650
+Wire Wire Line
+	6400 2650 6400 2750
+Wire Wire Line
+	6500 2650 6400 2650
+Wire Wire Line
+	6900 2450 7400 2450
+Wire Wire Line
+	7100 1650 7100 1750
+Wire Wire Line
+	7100 1750 6900 1750
+Wire Wire Line
+	7300 1450 7400 1450
+Wire Wire Line
+	7400 1450 7400 1550
+Wire Wire Line
+	7650 9000 7750 9000
+Wire Wire Line
+	7650 9100 7650 9000
+Wire Wire Line
+	7650 9200 7650 9300
+Wire Wire Line
+	7650 9300 7750 9300
+Wire Wire Line
+	7650 10200 7850 10200
+Wire Wire Line
+	7650 10300 7650 10200
+Wire Wire Line
+	7650 10400 7650 10500
+Wire Wire Line
+	7650 10500 7850 10500
+Wire Wire Line
+	7650 11400 7850 11400
+Wire Wire Line
+	7650 11500 7650 11400
+Wire Wire Line
+	7650 11600 7650 11700
+Wire Wire Line
+	7650 11700 7850 11700
+Wire Wire Line
+	7650 12650 7850 12650
+Wire Wire Line
+	7650 12750 7650 12650
+Wire Wire Line
+	7650 12850 7650 12950
+Wire Wire Line
+	7650 12950 7850 12950
+Wire Wire Line
+	7650 13900 7850 13900
+Wire Wire Line
+	7650 14000 7650 13900
+Wire Wire Line
+	7650 14100 7650 14200
+Wire Wire Line
+	7650 14200 7850 14200
+Wire Wire Line
+	7650 15150 7850 15150
+Wire Wire Line
+	7650 15250 7650 15150
+Wire Wire Line
+	7650 15350 7650 15450
+Wire Wire Line
+	7650 15450 7850 15450
+Wire Wire Line
+	7750 9000 8500 9000
+Wire Wire Line
+	7750 9300 8500 9300
+Wire Wire Line
+	7850 10200 8500 10200
+Wire Wire Line
+	7850 10500 8500 10500
+Wire Wire Line
+	7850 11400 8500 11400
+Wire Wire Line
+	7850 11700 8500 11700
+Wire Wire Line
+	7850 12650 8500 12650
+Wire Wire Line
+	7850 12950 8500 12950
+Wire Wire Line
+	7850 13900 8500 13900
+Wire Wire Line
+	7850 14200 8500 14200
+Wire Wire Line
+	7850 15150 8500 15150
+Wire Wire Line
+	7850 15450 8500 15450
+Wire Wire Line
+	8500 9000 8600 9000
+Wire Wire Line
+	8500 9300 8600 9300
+Wire Wire Line
+	8500 10200 8600 10200
+Wire Wire Line
+	8500 10500 8600 10500
+Wire Wire Line
+	8500 11400 8600 11400
+Wire Wire Line
+	8500 11700 8600 11700
+Wire Wire Line
+	8500 12650 8600 12650
+Wire Wire Line
+	8500 12950 8600 12950
+Wire Wire Line
+	8500 13900 8600 13900
+Wire Wire Line
+	8500 14200 8600 14200
+Wire Wire Line
+	8500 15150 8600 15150
+Wire Wire Line
+	8500 15450 8600 15450
+Wire Wire Line
+	8600 8900 8600 9000
+Wire Wire Line
+	8600 9000 8800 9000
+Wire Wire Line
+	8600 9100 8600 9000
+Wire Wire Line
+	8600 9200 8600 9300
+Wire Wire Line
+	8600 9300 8800 9300
+Wire Wire Line
+	8600 9400 8600 9300
+Wire Wire Line
+	8600 10100 8600 10200
+Wire Wire Line
+	8600 10200 8800 10200
+Wire Wire Line
+	8600 10300 8600 10200
+Wire Wire Line
+	8600 10400 8600 10500
+Wire Wire Line
+	8600 10500 8800 10500
+Wire Wire Line
+	8600 10600 8600 10500
+Wire Wire Line
+	8600 11300 8600 11400
+Wire Wire Line
+	8600 11400 8800 11400
+Wire Wire Line
+	8600 11500 8600 11400
+Wire Wire Line
+	8600 11600 8600 11700
+Wire Wire Line
+	8600 11700 8800 11700
+Wire Wire Line
+	8600 11800 8600 11700
+Wire Wire Line
+	8600 12550 8600 12650
+Wire Wire Line
+	8600 12650 8800 12650
+Wire Wire Line
+	8600 12750 8600 12650
+Wire Wire Line
+	8600 12850 8600 12950
+Wire Wire Line
+	8600 12950 8800 12950
+Wire Wire Line
+	8600 13050 8600 12950
+Wire Wire Line
+	8600 13800 8600 13900
+Wire Wire Line
+	8600 13900 8800 13900
+Wire Wire Line
+	8600 14000 8600 13900
+Wire Wire Line
+	8600 14100 8600 14200
+Wire Wire Line
+	8600 14200 8800 14200
+Wire Wire Line
+	8600 14300 8600 14200
+Wire Wire Line
+	8600 15050 8600 15150
+Wire Wire Line
+	8600 15150 8800 15150
+Wire Wire Line
+	8600 15250 8600 15150
+Wire Wire Line
+	8600 15350 8600 15450
+Wire Wire Line
+	8600 15450 8800 15450
+Wire Wire Line
+	8600 15550 8600 15450
+Wire Wire Line
+	8800 8900 8600 8900
+Wire Wire Line
+	8800 9100 8600 9100
+Wire Wire Line
+	8800 9200 8600 9200
+Wire Wire Line
+	8800 9400 8600 9400
+Wire Wire Line
+	8800 10100 8600 10100
+Wire Wire Line
+	8800 10300 8600 10300
+Wire Wire Line
+	8800 10400 8600 10400
+Wire Wire Line
+	8800 10600 8600 10600
+Wire Wire Line
+	8800 11300 8600 11300
+Wire Wire Line
+	8800 11500 8600 11500
+Wire Wire Line
+	8800 11600 8600 11600
+Wire Wire Line
+	8800 11800 8600 11800
+Wire Wire Line
+	8800 12550 8600 12550
+Wire Wire Line
+	8800 12750 8600 12750
+Wire Wire Line
+	8800 12850 8600 12850
+Wire Wire Line
+	8800 13050 8600 13050
+Wire Wire Line
+	8800 13800 8600 13800
+Wire Wire Line
+	8800 14000 8600 14000
+Wire Wire Line
+	8800 14100 8600 14100
+Wire Wire Line
+	8800 14300 8600 14300
+Wire Wire Line
+	8800 15050 8600 15050
+Wire Wire Line
+	8800 15250 8600 15250
+Wire Wire Line
+	8800 15350 8600 15350
+Wire Wire Line
+	8800 15550 8600 15550
+Wire Wire Line
+	9200 8650 9150 8650
+Wire Wire Line
+	9200 8650 9200 8750
+Wire Wire Line
+	9200 9850 9150 9850
+Wire Wire Line
+	9200 9900 9200 9850
+Wire Wire Line
+	9200 9900 9200 9950
+Wire Wire Line
+	9200 11050 9150 11050
+Wire Wire Line
+	9200 11050 9200 11150
+Wire Wire Line
+	9200 12300 9150 12300
+Wire Wire Line
+	9200 12350 9200 12300
+Wire Wire Line
+	9200 12350 9200 12400
+Wire Wire Line
+	9200 13550 9150 13550
+Wire Wire Line
+	9200 13600 9200 13550
+Wire Wire Line
+	9200 13600 9200 13650
+Wire Wire Line
+	9200 14800 9150 14800
+Wire Wire Line
+	9200 14850 9200 14800
+Wire Wire Line
+	9200 14850 9200 14900
+Wire Wire Line
+	9450 3100 9450 3150
+Wire Wire Line
+	9450 3150 9350 3150
+Wire Wire Line
+	9450 3200 9450 3150
+Wire Wire Line
+	9500 8650 9650 8650
+Wire Wire Line
+	9500 9900 9650 9900
+Wire Wire Line
+	9500 11050 9650 11050
+Wire Wire Line
+	9500 12350 9650 12350
+Wire Wire Line
+	9500 13600 9650 13600
+Wire Wire Line
+	9500 14850 9650 14850
+Wire Wire Line
+	9550 3100 9450 3100
+Wire Wire Line
+	9550 3200 9450 3200
+Wire Wire Line
+	9550 9000 9900 9000
+Wire Wire Line
+	9550 9200 10100 9200
+Wire Wire Line
+	9550 9300 9900 9300
+Wire Wire Line
+	9550 10200 9900 10200
+Wire Wire Line
+	9550 10400 10100 10400
+Wire Wire Line
+	9550 10500 9900 10500
+Wire Wire Line
+	9550 11400 9900 11400
+Wire Wire Line
+	9550 11600 10100 11600
+Wire Wire Line
+	9550 11700 9900 11700
+Wire Wire Line
+	9550 12650 9900 12650
+Wire Wire Line
+	9550 12850 10100 12850
+Wire Wire Line
+	9550 12950 9900 12950
+Wire Wire Line
+	9550 13900 9900 13900
+Wire Wire Line
+	9550 14100 10100 14100
+Wire Wire Line
+	9550 14200 9900 14200
+Wire Wire Line
+	9550 15150 9900 15150
+Wire Wire Line
+	9550 15350 10100 15350
+Wire Wire Line
+	9550 15450 9900 15450
+Wire Wire Line
+	9650 1600 10300 1600
+Wire Wire Line
+	9650 1650 9650 1600
+Wire Wire Line
+	9650 8650 9650 8700
+Wire Wire Line
+	9650 9900 9650 9950
+Wire Wire Line
+	9650 11050 9650 11100
+Wire Wire Line
+	9650 12350 9650 12400
+Wire Wire Line
+	9650 13600 9650 13650
+Wire Wire Line
+	9650 14850 9650 14900
+Wire Wire Line
+	9850 2600 10300 2600
+Wire Wire Line
+	9850 2700 10300 2700
+Wire Wire Line
+	9850 2900 10300 2900
+Wire Wire Line
+	9850 3300 10300 3300
+Wire Wire Line
+	9850 3400 10300 3400
+Wire Wire Line
+	9900 3900 10300 3900
+Wire Wire Line
+	10100 2950 10050 2950
+Wire Wire Line
+	10100 3000 10100 2950
+Wire Wire Line
+	10100 10400 10100 9200
+Wire Wire Line
+	10100 10400 10100 10950
+Wire Wire Line
+	10100 11600 10100 10950
+Wire Wire Line
+	10100 12850 10100 11600
+Wire Wire Line
+	10100 14100 10100 12850
+Wire Wire Line
+	10100 15350 10100 14100
+Wire Wire Line
+	10300 1700 10000 1700
+Wire Wire Line
+	10300 1800 10000 1800
+Wire Wire Line
+	10300 1900 9850 1900
+Wire Wire Line
+	10300 2000 9950 2000
+Wire Wire Line
+	10300 2100 9850 2100
+Wire Wire Line
+	10300 2200 9850 2200
+Wire Wire Line
+	10300 2300 9850 2300
+Wire Wire Line
+	10300 2400 9850 2400
+Wire Wire Line
+	10300 2500 9850 2500
+Wire Wire Line
+	10300 2800 9850 2800
+Wire Wire Line
+	10300 3000 10100 3000
+Wire Wire Line
+	10300 3100 9850 3100
+Wire Wire Line
+	10300 3200 9850 3200
+Wire Wire Line
+	10300 3500 9850 3500
+Wire Wire Line
+	10300 3600 9850 3600
+Wire Wire Line
+	10300 3700 9850 3700
+Wire Wire Line
+	10300 3800 9850 3800
+Wire Wire Line
+	10400 10950 10550 10950
+Wire Wire Line
+	10550 10950 10550 11000
+Wire Wire Line
+	12500 1600 12950 1600
+Wire Wire Line
+	12500 1700 13100 1700
+Wire Wire Line
+	12500 2000 12950 2000
+Wire Wire Line
+	12500 2100 12950 2100
+Wire Wire Line
+	12500 2200 12950 2200
+Wire Wire Line
+	12500 3000 13100 3000
+Wire Wire Line
+	12500 3600 12950 3600
+Wire Wire Line
+	12500 3900 12950 3900
+Wire Wire Line
+	12550 1450 12500 1450
+Wire Wire Line
+	12550 1750 12550 1800
+Wire Wire Line
+	12550 1800 12500 1800
+Wire Wire Line
+	12600 1750 12550 1750
+Wire Wire Line
+	12850 1450 12950 1450
+Wire Wire Line
+	12950 1450 12950 1150
+Wire Wire Line
+	12950 1600 12950 1450
+Wire Wire Line
+	12950 1900 12500 1900
+Wire Wire Line
+	12950 2300 12500 2300
+Wire Wire Line
+	12950 2400 12500 2400
+Wire Wire Line
+	12950 2500 12500 2500
+Wire Wire Line
+	12950 2700 12500 2700
+Wire Wire Line
+	12950 2800 12500 2800
+Wire Wire Line
+	12950 2900 12500 2900
+Wire Wire Line
+	12950 3100 12500 3100
+Wire Wire Line
+	12950 3200 12500 3200
+Wire Wire Line
+	12950 3300 12500 3300
+Wire Wire Line
+	12950 3400 12500 3400
+Wire Wire Line
+	12950 3500 12500 3500
+Wire Wire Line
+	12950 3700 12500 3700
+Wire Wire Line
+	12950 3800 12500 3800
+Wire Wire Line
+	13100 1750 13100 1700
+Wire Wire Line
+	13100 3050 13100 3000
+Wire Wire Line
+	13250 2300 13350 2300
+Wire Wire Line
+	13250 2400 13350 2400
+Wire Wire Line
+	13350 2300 13350 2350
+Wire Wire Line
+	13350 2350 13450 2350
+Wire Wire Line
+	13350 2400 13350 2350
+Wire Wire Line
+	13900 15700 13900 15750
+Wire Wire Line
+	14050 15700 13900 15700
+Wire Wire Line
+	15250 1400 15250 1300
+Wire Wire Line
+	15350 1300 15350 1400
+Wire Wire Line
+	15350 1400 16100 1400
+Wire Wire Line
+	15900 4050 16300 4050
+Wire Wire Line
+	16000 14750 16000 14800
+Wire Wire Line
+	16050 14750 16000 14750
+Wire Wire Line
+	16100 1400 16100 1450
+Wire Wire Line
+	16100 1400 16750 1400
+Wire Wire Line
+	16100 1750 16100 2000
+Wire Wire Line
+	16100 1750 16500 1750
+Wire Wire Line
+	16150 13850 16150 14150
+Wire Wire Line
+	16150 13850 16700 13850
+Wire Wire Line
+	16150 14150 16350 14150
+Wire Wire Line
+	16250 10250 16650 10250
+Wire Wire Line
+	16250 10450 16650 10450
+Wire Wire Line
+	16300 900  16700 900 
+Wire Wire Line
+	16300 4050 16350 4050
+Wire Wire Line
+	16300 4350 16300 4450
+Wire Wire Line
+	16350 14150 16700 14150
+Wire Wire Line
+	16350 14400 16350 14150
+Wire Wire Line
+	16350 15100 16850 15100
+Wire Wire Line
+	16500 1500 16750 1500
+Wire Wire Line
+	16500 1750 16500 1500
+Wire Wire Line
+	16700 900  16750 900 
+Wire Wire Line
+	16700 1000 16700 900 
+Wire Wire Line
+	16700 14150 16750 14150
+Wire Wire Line
+	16750 800  16300 800 
+Wire Wire Line
+	16750 1000 16700 1000
+Wire Wire Line
+	16850 15000 16950 15000
+Wire Wire Line
+	16850 15100 16850 15000
+Wire Wire Line
+	16850 15400 16850 15100
+Wire Wire Line
+	16950 4050 17050 4050
+Wire Wire Line
+	16950 15400 16850 15400
+Wire Wire Line
+	17050 10650 17150 10650
+Wire Wire Line
+	17100 13700 17350 13700
+Wire Wire Line
+	17100 13750 17100 13700
+Wire Wire Line
+	17100 14150 17050 14150
+Wire Wire Line
+	17150 9950 17250 9950
+Wire Wire Line
+	17150 10050 17150 9950
+Wire Wire Line
+	17150 10650 17150 10750
+Wire Wire Line
+	17150 10650 17250 10650
+Wire Wire Line
+	17150 14150 17100 14150
+Wire Wire Line
+	17350 13700 17350 13750
+Wire Wire Line
+	17450 14150 17900 14150
+Wire Wire Line
+	17550 9950 17600 9950
+Wire Wire Line
+	17550 15000 17650 15000
+Wire Wire Line
+	17600 9950 17600 10000
+Wire Wire Line
+	17650 15000 17650 15050
+Wire Wire Line
+	17850 900  17950 900 
+Wire Wire Line
+	17850 1100 17900 1100
+Wire Wire Line
+	17850 1400 18450 1400
+Wire Wire Line
+	17900 1000 17850 1000
+Wire Wire Line
+	17900 1000 17900 1100
+Wire Wire Line
+	17900 1000 18700 1000
+Wire Wire Line
+	17950 700  18000 700 
+Wire Wire Line
+	17950 800  17850 800 
+Wire Wire Line
+	17950 800  17950 700 
+Wire Wire Line
+	17950 850  17950 800 
+Wire Wire Line
+	17950 850  18050 850 
+Wire Wire Line
+	17950 900  17950 850 
+Wire Wire Line
+	18300 700  18500 700 
+Wire Wire Line
+	18350 1500 17850 1500
+Wire Wire Line
+	18350 1500 18350 2550
+Wire Wire Line
+	18450 1400 18450 2150
+Wire Wire Line
+	18500 700  18500 750 
+Wire Wire Line
+	18700 1000 18700 1300
+Wire Wire Line
+	19100 1450 19100 1350
+Wire Wire Line
+	19200 1400 19200 1350
+Wire Wire Line
+	19200 1400 19200 1500
+Wire Wire Line
+	19200 1900 19200 2150
+Wire Wire Line
+	19200 2150 18450 2150
+Wire Wire Line
+	19200 2200 19200 2150
+Wire Wire Line
+	19200 2550 18350 2550
+Wire Wire Line
+	19200 2550 19200 2500
+Wire Wire Line
+	19200 2800 19200 2550
+Wire Wire Line
+	19200 2800 19550 2800
+Wire Wire Line
+	19250 11700 19600 11700
+Wire Wire Line
+	19250 12300 19400 12300
+Wire Wire Line
+	19400 12300 19400 12350
+Wire Wire Line
+	19400 12300 19950 12300
+Wire Wire Line
+	19550 1700 19500 1700
+Wire Wire Line
+	19550 3150 19550 3100
+Wire Wire Line
+	19600 11400 19600 11300
+Wire Wire Line
+	19600 11700 19750 11700
+Wire Wire Line
+	19650 12000 19550 12000
+Wire Wire Line
+	19700 2800 19550 2800
+Wire Wire Line
+	19750 11150 19750 11050
+Wire Wire Line
+	19750 11450 19750 11700
+Wire Wire Line
+	19750 11700 19950 11700
+Wire Wire Line
+	19900 1400 19200 1400
+Wire Wire Line
+	19900 1400 21500 1400
+Wire Wire Line
+	19900 1700 19850 1700
+Wire Wire Line
+	19900 6300 20250 6300
+Wire Wire Line
+	19950 11700 20400 11700
+Wire Wire Line
+	19950 12300 20400 12300
+Wire Wire Line
+	20000 3150 19550 3150
+Wire Wire Line
+	20000 3150 20000 3100
+Wire Wire Line
+	20050 4000 20400 4000
+Wire Wire Line
+	20050 4300 20400 4300
+Wire Wire Line
+	20050 13650 20050 13900
+Wire Wire Line
+	20050 13650 20300 13650
+Wire Wire Line
+	20200 1700 19900 1700
+Wire Wire Line
+	20300 2800 20350 2800
+Wire Wire Line
+	20300 3100 20300 3150
+Wire Wire Line
+	20300 3150 20000 3150
+Wire Wire Line
+	20300 3800 20400 3800
+Wire Wire Line
+	20300 13650 20650 13650
+Wire Wire Line
+	20350 13900 20700 13900
+Wire Wire Line
+	20400 4100 20150 4100
+Wire Wire Line
+	20400 4200 20150 4200
+Wire Wire Line
+	20400 13350 20300 13350
+Wire Wire Line
+	20450 14000 20700 14000
+Wire Wire Line
+	20550 12000 20250 12000
+Wire Wire Line
+	20650 9500 20650 9550
+Wire Wire Line
+	20650 9550 20750 9550
+Wire Wire Line
+	20650 13550 20700 13550
+Wire Wire Line
+	20650 13650 20650 13550
+Wire Wire Line
+	20650 13650 20650 13750
+Wire Wire Line
+	20650 13650 20700 13650
+Wire Wire Line
+	20650 13750 20700 13750
+Wire Wire Line
+	20700 1700 20600 1700
+Wire Wire Line
+	20700 1750 20700 1700
+Wire Wire Line
+	20700 2000 21500 2000
+Wire Wire Line
+	20900 11600 20900 11700
+Wire Wire Line
+	20950 10150 21150 10150
+Wire Wire Line
+	21050 5350 21300 5350
+Wire Wire Line
+	21050 5450 21300 5450
+Wire Wire Line
+	21050 5650 21150 5650
+Wire Wire Line
+	21050 11600 20900 11600
+Wire Wire Line
+	21050 11650 21050 11600
+Wire Wire Line
+	21100 6200 21400 6200
+Wire Wire Line
+	21100 6400 21550 6400
+Wire Wire Line
+	21150 5650 21150 5700
+Wire Wire Line
+	21150 9850 21150 10150
+Wire Wire Line
+	21150 10150 21400 10150
+Wire Wire Line
+	21200 6500 21100 6500
+Wire Wire Line
+	21200 9550 21150 9550
+Wire Wire Line
+	21250 12000 21600 12000
+Wire Wire Line
+	21400 6300 21100 6300
+Wire Wire Line
+	21450 13900 21500 13900
+Wire Wire Line
+	21450 14000 21500 14000
+Wire Wire Line
+	21500 1700 21300 1700
+Wire Wire Line
+	21500 1700 21500 2000
+Wire Wire Line
+	21550 6400 21550 6450
+Wire Wire Line
+	21700 13650 21450 13650
+Wire Wire Line
+	21700 13750 21450 13750
+Wire Notes Line
+	15800 13600 17950 13600
+Wire Notes Line
+	15800 15550 15800 13750
+Wire Notes Line
+	15800 15550 17950 15550
+Wire Notes Line
+	17950 15550 17950 13750
+Wire Notes Line
+	18450 13300 18450 14050
+Wire Notes Line
+	18450 14050 19650 14050
+Wire Notes Line
+	19650 13300 18450 13300
+Wire Notes Line
+	19650 14050 19650 13300
+Wire Notes Line
+	19950 13250 19950 14150
+Wire Notes Line
+	19950 14150 22450 14150
+Wire Notes Line
+	20250 8950 20250 10200
+Wire Notes Line
+	20250 10200 21450 10200
+Wire Notes Line
+	21450 8950 20250 8950
+Wire Notes Line
+	21450 8950 21450 10200
+Wire Notes Line
+	22450 13250 19950 13250
+Wire Notes Line
+	22450 14150 22450 13250
+Text Notes 850  9150 0    50   ~ 0
+3v3 qwiic
+Text Notes 850  10200 0    50   ~ 0
+5V qwiic
+Text Notes 1100 14800 0    50   ~ 0
+engine power
+Text Notes 1100 15450 0    50   ~ 0
+power out
+Text Notes 1150 8350 0    50   ~ 0
+EXTRA1\n\n\n
+Text Notes 1150 12600 0    50   ~ 0
+CAN\n
+Text Notes 1150 13500 0    50   ~ 0
+CAN1_DUP
+Text Notes 1200 7050 0    50   ~ 0
+EXTRA
+Text Notes 1250 3900 0    50   ~ 0
+FPV
+Text Notes 1250 4950 0    50   ~ 0
+telemetry
+Text Notes 1250 5850 0    50   ~ 0
+GPS
+Text Notes 15850 13550 0    50   ~ 0
+ARMING
+Text Notes 16850 1750 0    50   ~ 0
+sense resistor = 51.2mV / xA
+Text Notes 18500 13250 0    50   ~ 0
+Mechanical
+Text Notes 20000 13200 0    50   ~ 0
+Flash memory - 1GBit
+Text Notes 20300 8900 0    50   ~ 0
+Buzzer
+Text Label 1750 9400 2    50   ~ 0
+SCL0
+Text Label 1750 9500 2    50   ~ 0
+SDA0
+Text Label 1800 7450 2    50   ~ 0
+EXT_RX
+Text Label 1800 7550 2    50   ~ 0
+EXT_TX
+Text Label 1800 7650 2    50   ~ 0
+SCL0
+Text Label 1800 7750 2    50   ~ 0
+SDA0
+Text Label 1800 8550 2    50   ~ 0
+EXT1_RX
+Text Label 1800 8650 2    50   ~ 0
+EXT1_TX
+Text Label 1850 4300 2    50   ~ 0
+FPV_RX
+Text Label 1850 4400 2    50   ~ 0
+FPV_TX
+Text Label 1850 5350 2    50   ~ 0
+TM_RX
+Text Label 1850 5450 2    50   ~ 0
+TM_TX
+Text Label 1850 6250 2    50   ~ 0
+GPS_RX
+Text Label 1850 6350 2    50   ~ 0
+GPS_TX
+Text Label 1850 6450 2    50   ~ 0
+SCL0
+Text Label 1850 6550 2    50   ~ 0
+SDA0
+Text Label 3200 10450 2    50   ~ 0
+SCL0
+Text Label 3200 10550 2    50   ~ 0
+SDA0
+Text Label 3850 13550 2    50   ~ 0
+CAN_RX
+Text Label 3850 13650 2    50   ~ 0
+CAN_TX
+Text Label 3950 7150 2    50   ~ 0
+EXT_MOS
+Text Label 3950 12150 2    50   ~ 0
+CAN_MOS
+Text Label 4000 4000 2    50   ~ 0
+FPV_MOS
+Text Label 4000 5050 2    50   ~ 0
+TM_MOS
+Text Label 4000 5950 2    50   ~ 0
+GPS_MOS
+Text Label 4050 15200 2    50   ~ 0
+ENGINE_MOS
+Text Label 5550 1750 0    50   ~ 0
+SCK0
+Text Label 5550 1850 0    50   ~ 0
+MOSI0
+Text Label 5550 1950 0    50   ~ 0
+MISO0
+Text Label 5550 2050 0    50   ~ 0
+RF_CS
+Text Label 5550 2250 0    50   ~ 0
+RF_RESET
+Text Label 7400 2450 2    50   ~ 0
+RF_INT
+Text Label 9850 1900 0    50   ~ 0
+FPV_MOS
+Text Label 9850 2100 0    50   ~ 0
+P_IN_2
+Text Label 9850 2200 0    50   ~ 0
+P_IN_3
+Text Label 9850 2300 0    50   ~ 0
+P_IN_4
+Text Label 9850 2400 0    50   ~ 0
+TM_RX
+Text Label 9850 2500 0    50   ~ 0
+TM_TX
+Text Label 9850 2600 0    50   ~ 0
+TM_MOS
+Text Label 9850 2700 0    50   ~ 0
+FLASH_CS
+Text Label 9850 2800 0    50   ~ 0
+MOSI0
+Text Label 9850 2900 0    50   ~ 0
+MISO0
+Text Label 9850 3100 0    50   ~ 0
+SCL2
+Text Label 9850 3200 0    50   ~ 0
+SDA2
+Text Label 9850 3300 0    50   ~ 0
+MOSI1
+Text Label 9850 3400 0    50   ~ 0
+SCK1
+Text Label 9850 3500 0    50   ~ 0
+GPS_RX
+Text Label 9850 3600 0    50   ~ 0
+GPS_TX
+Text Label 9850 3700 0    50   ~ 0
+P_IN_6
+Text Label 9850 3800 0    50   ~ 0
+P_IN_5
+Text Label 9900 3900 0    50   ~ 0
+LIFTOFF
+Text Label 9900 9000 2    50   ~ 0
+P_IN_1
+Text Label 9900 9300 2    50   ~ 0
+P_EN
+Text Label 9900 10200 2    50   ~ 0
+P_IN_2
+Text Label 9900 10500 2    50   ~ 0
+P_EN
+Text Label 9900 11400 2    50   ~ 0
+P_IN_3
+Text Label 9900 11700 2    50   ~ 0
+P_EN
+Text Label 9900 12650 2    50   ~ 0
+P_IN_4
+Text Label 9900 12950 2    50   ~ 0
+P_EN
+Text Label 9900 13900 2    50   ~ 0
+P_IN_5
+Text Label 9900 14200 2    50   ~ 0
+P_EN
+Text Label 9900 15150 2    50   ~ 0
+P_IN_6
+Text Label 9900 15450 2    50   ~ 0
+P_EN
+Text Label 9950 2000 0    50   ~ 0
+CAN_MOS
+Text Label 10000 1700 0    50   ~ 0
+CAN_RX
+Text Label 10000 1800 0    50   ~ 0
+CAN_TX
+Text Label 12950 1900 2    50   ~ 0
+BUZZER
+Text Label 12950 2000 2    50   ~ 0
+P_IN_1
+Text Label 12950 2100 2    50   ~ 0
+EXT1_RX
+Text Label 12950 2200 2    50   ~ 0
+EXT1_TX
+Text Label 12950 2300 2    50   ~ 0
+SCL0
+Text Label 12950 2400 2    50   ~ 0
+SDA0
+Text Label 12950 2500 2    50   ~ 0
+RGB_TX
+Text Label 12950 2700 2    50   ~ 0
+FPV_TX
+Text Label 12950 2800 2    50   ~ 0
+FPV_RX
+Text Label 12950 2900 2    50   ~ 0
+SCK0
+Text Label 12950 3100 2    50   ~ 0
+UNSAFE_P_EN
+Text Label 12950 3200 2    50   ~ 0
+RF_CS
+Text Label 12950 3300 2    50   ~ 0
+MISO1
+Text Label 12950 3400 2    50   ~ 0
+RF_RESET
+Text Label 12950 3500 2    50   ~ 0
+GPS_MOS
+Text Label 12950 3600 2    50   ~ 0
+EXT_MOS
+Text Label 12950 3700 2    50   ~ 0
+EXT_TX
+Text Label 12950 3800 2    50   ~ 0
+EXT_RX
+Text Label 12950 3900 2    50   ~ 0
+RF_INT
+Text Label 15900 4050 0    50   ~ 0
+LIFTOFF
+Text Label 16250 10250 0    50   ~ 0
+SDA2
+Text Label 16250 10450 0    50   ~ 0
+SCL2
+Text Label 16300 800  0    50   ~ 0
+SCL0
+Text Label 16300 900  0    50   ~ 0
+SDA0
+Text Label 16700 13850 2    50   ~ 0
+UNSAFE_P_EN
+Text Label 17900 14150 2    50   ~ 0
+P_EN
+Text Label 20150 4100 0    50   ~ 0
+SCL2
+Text Label 20150 4200 0    50   ~ 0
+SDA2
+Text Label 20450 14000 0    50   ~ 0
+MISO1
+Text Label 20700 13900 2    50   ~ 0
+FLASH_CS
+Text Label 21300 5350 2    50   ~ 0
+SCL2
+Text Label 21300 5450 2    50   ~ 0
+SDA2
+Text Label 21400 6200 2    50   ~ 0
+SDA0
+Text Label 21400 6300 2    50   ~ 0
+SCL0
+Text Label 21400 10150 2    50   ~ 0
+BUZZ
+Text Label 21600 12000 2    50   ~ 0
+RGB_TX
+Text Label 21700 13650 2    50   ~ 0
+SCK1
+Text Label 21700 13750 2    50   ~ 0
+MOSI1
+Text GLabel 1500 14100 2    50   Input ~ 0
+5V
+Text GLabel 1550 8400 2    50   Input ~ 0
+5V
+Text GLabel 1550 15750 2    50   Input ~ 0
+12V
+Text GLabel 1700 10650 2    50   Input ~ 0
+5V
+Text GLabel 1750 9600 2    50   Input ~ 0
+3V3
+Text GLabel 1800 14550 1    50   Input ~ 0
+7V
+Text GLabel 2100 6850 0    50   Input ~ 0
+5V
+Text GLabel 2100 10350 0    50   Input ~ 0
+3V3
+Text GLabel 2100 10850 0    50   Input ~ 0
+5V
+Text GLabel 2100 11850 0    50   Input ~ 0
+5V
+Text GLabel 2150 3700 0    50   Input ~ 0
+5V
+Text GLabel 2150 4750 0    50   Input ~ 0
+5V
+Text GLabel 2150 5650 0    50   Input ~ 0
+5V
+Text GLabel 2950 10850 2    50   Input ~ 0
+3V3
+Text GLabel 3050 7450 3    50   Input ~ 0
+5V
+Text GLabel 3050 12450 3    50   Input ~ 0
+5V
+Text GLabel 3100 4300 3    50   Input ~ 0
+5V
+Text GLabel 3100 5350 3    50   Input ~ 0
+5V
+Text GLabel 3100 6250 3    50   Input ~ 0
+5V
+Text GLabel 3100 13950 0    50   Input ~ 0
+3V3
+Text GLabel 3650 7450 3    50   Input ~ 0
+3V3
+Text GLabel 3650 12450 3    50   Input ~ 0
+3V3
+Text GLabel 3700 4300 3    50   Input ~ 0
+3V3
+Text GLabel 3700 5350 3    50   Input ~ 0
+3V3
+Text GLabel 3700 6250 3    50   Input ~ 0
+3V3
+Text GLabel 6450 1500 2    50   Input ~ 0
+3V3
+Text GLabel 8000 8250 0    50   Input ~ 0
+12V
+Text GLabel 8200 8250 2    50   Input ~ 0
+12V_LIMIT
+Text GLabel 9150 8650 0    50   Input ~ 0
+12V_LIMIT
+Text GLabel 9150 9850 0    50   Input ~ 0
+12V_LIMIT
+Text GLabel 9150 11050 0    50   Input ~ 0
+12V_LIMIT
+Text GLabel 9150 12300 0    50   Input ~ 0
+12V_LIMIT
+Text GLabel 9150 13550 0    50   Input ~ 0
+12V_LIMIT
+Text GLabel 9150 14800 0    50   Input ~ 0
+12V_LIMIT
+Text GLabel 9350 3150 0    50   Input ~ 0
+3V3
+Text GLabel 10050 2950 0    50   Input ~ 0
+3V3
+Text GLabel 12600 1750 2    50   Input ~ 0
+3V3
+Text GLabel 12950 1150 1    50   Input ~ 0
+5V
+Text GLabel 13450 2350 2    50   Input ~ 0
+3V3
+Text GLabel 14050 15700 2    50   Input ~ 0
+GND
+Text GLabel 16100 2000 3    50   Input ~ 0
+12V
+Text GLabel 16650 14750 2    50   Input ~ 0
+3V3
+Text GLabel 17050 4050 2    50   Input ~ 0
+3V3
+Text GLabel 17150 9950 0    50   Input ~ 0
+3V3
+Text GLabel 17550 15400 2    50   Input ~ 0
+3V3
+Text GLabel 18050 850  2    50   Input ~ 0
+3V3
+Text GLabel 19200 2700 0    50   Input ~ 0
+7V
+Text GLabel 19600 11300 0    50   Input ~ 0
+GND
+Text GLabel 19750 11050 0    50   Input ~ 0
+GND
+Text GLabel 19900 6300 3    50   Input ~ 0
+3V3
+Text GLabel 20050 4300 3    50   Input ~ 0
+3V3
+Text GLabel 20050 13650 1    50   Input ~ 0
+3V3
+Text GLabel 20300 3800 0    50   Input ~ 0
+3V3
+Text GLabel 20400 11700 2    50   Input ~ 0
+5V
+Text GLabel 20400 12300 2    50   Input ~ 0
+GND
+Text GLabel 20400 13350 2    50   Input ~ 0
+GND
+Text GLabel 20450 9500 3    50   Input ~ 0
+5V
+Text GLabel 20650 2800 2    50   Input ~ 0
+5V
+Text GLabel 20900 12300 3    50   Input ~ 0
+5V
+Text GLabel 21050 5550 2    50   Input ~ 0
+3V3
+Text GLabel 21200 6500 2    50   Input ~ 0
+3V3
+Text GLabel 21200 9550 2    50   Input ~ 0
+GND
+Text GLabel 21500 13900 2    50   Input ~ 0
+GND
+Text GLabel 21500 14000 2    50   Input ~ 0
+3V3
+$Comp
+L Device:Jumper_NO_Small JP4
+U 1 1 611D3ACD
+P 8100 8250
+F 0 "JP4" H 8100 8435 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 8100 8344 50  0000 C CNN
+F 2 "custom:R_1812_4532Metric_Pad1.30x3.40mm_HandSolder_no_silk" H 8100 8250 50  0001 C CNN
+F 3 "~" H 8100 8250 50  0001 C CNN
+	1    8100 8250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0106
+U 1 1 610A375A
+P 1550 7900
+F 0 "#PWR0106" H 1550 7650 50  0001 C CNN
+F 1 "Earth" H 1550 7750 50  0001 C CNN
+F 2 "" H 1550 7900 50  0001 C CNN
+F 3 "~" H 1550 7900 50  0001 C CNN
+	1    1550 7900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0130
+U 1 1 68012FAD
+P 1550 8800
+F 0 "#PWR0130" H 1550 8550 50  0001 C CNN
+F 1 "Earth" H 1550 8650 50  0001 C CNN
+F 2 "" H 1550 8800 50  0001 C CNN
+F 3 "~" H 1550 8800 50  0001 C CNN
+	1    1550 8800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR01
+U 1 1 6130FBBF
+P 1550 15250
+F 0 "#PWR01" H 1550 15000 50  0001 C CNN
+F 1 "Earth" H 1550 15100 50  0001 C CNN
+F 2 "" H 1550 15250 50  0001 C CNN
+F 3 "~" H 1550 15250 50  0001 C CNN
+	1    1550 15250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR02
+U 1 1 6130F708
+P 1550 15900
+F 0 "#PWR02" H 1550 15650 50  0001 C CNN
+F 1 "Earth" H 1550 15750 50  0001 C CNN
+F 2 "" H 1550 15900 50  0001 C CNN
+F 3 "~" H 1550 15900 50  0001 C CNN
+	1    1550 15900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0108
+U 1 1 610AA5F2
+P 1600 4550
+F 0 "#PWR0108" H 1600 4300 50  0001 C CNN
+F 1 "Earth" H 1600 4400 50  0001 C CNN
+F 2 "" H 1600 4550 50  0001 C CNN
+F 3 "~" H 1600 4550 50  0001 C CNN
+	1    1600 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0107
+U 1 1 610A8E83
+P 1600 5600
+F 0 "#PWR0107" H 1600 5350 50  0001 C CNN
+F 1 "Earth" H 1600 5450 50  0001 C CNN
+F 2 "" H 1600 5600 50  0001 C CNN
+F 3 "~" H 1600 5600 50  0001 C CNN
+	1    1600 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0103
+U 1 1 61096E4D
+P 1600 6700
+F 0 "#PWR0103" H 1600 6450 50  0001 C CNN
+F 1 "Earth" H 1600 6550 50  0001 C CNN
+F 2 "" H 1600 6700 50  0001 C CNN
+F 3 "~" H 1600 6700 50  0001 C CNN
+	1    1600 6700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0109
+U 1 1 68908FC5
+P 1600 9750
+F 0 "#PWR0109" H 1600 9500 50  0001 C CNN
+F 1 "Earth" H 1600 9600 50  0001 C CNN
+F 2 "" H 1600 9750 50  0001 C CNN
+F 3 "~" H 1600 9750 50  0001 C CNN
+	1    1600 9750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0131
+U 1 1 68970D5A
+P 1600 10800
+F 0 "#PWR0131" H 1600 10550 50  0001 C CNN
+F 1 "Earth" H 1600 10650 50  0001 C CNN
+F 2 "" H 1600 10800 50  0001 C CNN
+F 3 "~" H 1600 10800 50  0001 C CNN
+	1    1600 10800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0111
+U 1 1 613ED04B
+P 1800 13200
+F 0 "#PWR0111" H 1800 12950 50  0001 C CNN
+F 1 "Earth" H 1800 13050 50  0001 C CNN
+F 2 "" H 1800 13200 50  0001 C CNN
+F 3 "~" H 1800 13200 50  0001 C CNN
+	1    1800 13200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0112
+U 1 1 611BE544
+P 1800 14050
+F 0 "#PWR0112" H 1800 13800 50  0001 C CNN
+F 1 "Earth" H 1800 13900 50  0001 C CNN
+F 2 "" H 1800 14050 50  0001 C CNN
+F 3 "~" H 1800 14050 50  0001 C CNN
+	1    1800 14050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0134
+U 1 1 68D5482F
+P 2100 11150
+F 0 "#PWR0134" H 2100 10900 50  0001 C CNN
+F 1 "Earth" H 2100 11000 50  0001 C CNN
+F 2 "" H 2100 11150 50  0001 C CNN
+F 3 "~" H 2100 11150 50  0001 C CNN
+	1    2100 11150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0133
+U 1 1 68D546B5
+P 2950 11150
+F 0 "#PWR0133" H 2950 10900 50  0001 C CNN
+F 1 "Earth" H 2950 11000 50  0001 C CNN
+F 2 "" H 2950 11150 50  0001 C CNN
+F 3 "~" H 2950 11150 50  0001 C CNN
+	1    2950 11150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR04
+U 1 1 6118A419
+P 3200 6800
+F 0 "#PWR04" H 3200 6550 50  0001 C CNN
+F 1 "Earth" H 3200 6650 50  0001 C CNN
+F 2 "" H 3200 6800 50  0001 C CNN
+F 3 "~" H 3200 6800 50  0001 C CNN
+	1    3200 6800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR09
+U 1 1 61427124
+P 3200 11800
+F 0 "#PWR09" H 3200 11550 50  0001 C CNN
+F 1 "Earth" H 3200 11650 50  0001 C CNN
+F 2 "" H 3200 11800 50  0001 C CNN
+F 3 "~" H 3200 11800 50  0001 C CNN
+	1    3200 11800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR06
+U 1 1 60F3C2AC
+P 3250 3650
+F 0 "#PWR06" H 3250 3400 50  0001 C CNN
+F 1 "Earth" H 3250 3500 50  0001 C CNN
+F 2 "" H 3250 3650 50  0001 C CNN
+F 3 "~" H 3250 3650 50  0001 C CNN
+	1    3250 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR07
+U 1 1 61149515
+P 3250 4700
+F 0 "#PWR07" H 3250 4450 50  0001 C CNN
+F 1 "Earth" H 3250 4550 50  0001 C CNN
+F 2 "" H 3250 4700 50  0001 C CNN
+F 3 "~" H 3250 4700 50  0001 C CNN
+	1    3250 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR08
+U 1 1 61168FA3
+P 3250 5600
+F 0 "#PWR08" H 3250 5350 50  0001 C CNN
+F 1 "Earth" H 3250 5450 50  0001 C CNN
+F 2 "" H 3250 5600 50  0001 C CNN
+F 3 "~" H 3250 5600 50  0001 C CNN
+	1    3250 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR010
+U 1 1 619DB8DF
+P 3600 14000
+F 0 "#PWR010" H 3600 13750 50  0001 C CNN
+F 1 "Earth" H 3600 13850 50  0001 C CNN
+F 2 "" H 3600 14000 50  0001 C CNN
+F 3 "~" H 3600 14000 50  0001 C CNN
+	1    3600 14000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0116
+U 1 1 631064AF
+P 3600 14950
+F 0 "#PWR0116" H 3600 14700 50  0001 C CNN
+F 1 "Earth" H 3600 14800 50  0001 C CNN
+F 2 "" H 3600 14950 50  0001 C CNN
+F 3 "~" H 3600 14950 50  0001 C CNN
+	1    3600 14950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0132
+U 1 1 68CEE7E2
+P 3650 10400
+F 0 "#PWR0132" H 3650 10150 50  0001 C CNN
+F 1 "Earth" H 3650 10250 50  0001 C CNN
+F 2 "" H 3650 10400 50  0001 C CNN
+F 3 "~" H 3650 10400 50  0001 C CNN
+	1    3650 10400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR012
+U 1 1 619B2125
+P 4000 13350
+F 0 "#PWR012" H 4000 13100 50  0001 C CNN
+F 1 "Earth" H 4000 13200 50  0001 C CNN
+F 2 "" H 4000 13350 50  0001 C CNN
+F 3 "~" H 4000 13350 50  0001 C CNN
+	1    4000 13350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0125
+U 1 1 6562B6F7
+P 6400 2750
+F 0 "#PWR0125" H 6400 2500 50  0001 C CNN
+F 1 "Earth" H 6400 2600 50  0001 C CNN
+F 2 "" H 6400 2750 50  0001 C CNN
+F 3 "~" H 6400 2750 50  0001 C CNN
+	1    6400 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0126
+U 1 1 65B41C2D
+P 7400 1550
+F 0 "#PWR0126" H 7400 1300 50  0001 C CNN
+F 1 "Earth" H 7400 1400 50  0001 C CNN
+F 2 "" H 7400 1550 50  0001 C CNN
+F 3 "~" H 7400 1550 50  0001 C CNN
+	1    7400 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR013
+U 1 1 6195D790
+P 8600 9400
+F 0 "#PWR013" H 8600 9150 50  0001 C CNN
+F 1 "Earth" H 8600 9250 50  0001 C CNN
+F 2 "" H 8600 9400 50  0001 C CNN
+F 3 "~" H 8600 9400 50  0001 C CNN
+	1    8600 9400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR014
+U 1 1 61916492
+P 8600 10600
+F 0 "#PWR014" H 8600 10350 50  0001 C CNN
+F 1 "Earth" H 8600 10450 50  0001 C CNN
+F 2 "" H 8600 10600 50  0001 C CNN
+F 3 "~" H 8600 10600 50  0001 C CNN
+	1    8600 10600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR015
+U 1 1 618D20C5
+P 8600 11800
+F 0 "#PWR015" H 8600 11550 50  0001 C CNN
+F 1 "Earth" H 8600 11650 50  0001 C CNN
+F 2 "" H 8600 11800 50  0001 C CNN
+F 3 "~" H 8600 11800 50  0001 C CNN
+	1    8600 11800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR016
+U 1 1 6188D861
+P 8600 13050
+F 0 "#PWR016" H 8600 12800 50  0001 C CNN
+F 1 "Earth" H 8600 12900 50  0001 C CNN
+F 2 "" H 8600 13050 50  0001 C CNN
+F 3 "~" H 8600 13050 50  0001 C CNN
+	1    8600 13050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR017
+U 1 1 61849189
+P 8600 14300
+F 0 "#PWR017" H 8600 14050 50  0001 C CNN
+F 1 "Earth" H 8600 14150 50  0001 C CNN
+F 2 "" H 8600 14300 50  0001 C CNN
+F 3 "~" H 8600 14300 50  0001 C CNN
+	1    8600 14300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR018
+U 1 1 61825EC2
+P 8600 15550
+F 0 "#PWR018" H 8600 15300 50  0001 C CNN
+F 1 "Earth" H 8600 15400 50  0001 C CNN
+F 2 "" H 8600 15550 50  0001 C CNN
+F 3 "~" H 8600 15550 50  0001 C CNN
+	1    8600 15550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0110
+U 1 1 625964C6
+P 9650 1650
+F 0 "#PWR0110" H 9650 1400 50  0001 C CNN
+F 1 "Earth" H 9650 1500 50  0001 C CNN
+F 2 "" H 9650 1650 50  0001 C CNN
+F 3 "~" H 9650 1650 50  0001 C CNN
+	1    9650 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR019
+U 1 1 61711789
+P 9650 8700
+F 0 "#PWR019" H 9650 8450 50  0001 C CNN
+F 1 "Earth" H 9650 8550 50  0001 C CNN
+F 2 "" H 9650 8700 50  0001 C CNN
+F 3 "~" H 9650 8700 50  0001 C CNN
+	1    9650 8700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR020
+U 1 1 616CDD48
+P 9650 9950
+F 0 "#PWR020" H 9650 9700 50  0001 C CNN
+F 1 "Earth" H 9650 9800 50  0001 C CNN
+F 2 "" H 9650 9950 50  0001 C CNN
+F 3 "~" H 9650 9950 50  0001 C CNN
+	1    9650 9950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR021
+U 1 1 616A95FA
+P 9650 11100
+F 0 "#PWR021" H 9650 10850 50  0001 C CNN
+F 1 "Earth" H 9650 10950 50  0001 C CNN
+F 2 "" H 9650 11100 50  0001 C CNN
+F 3 "~" H 9650 11100 50  0001 C CNN
+	1    9650 11100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR022
+U 1 1 61758663
+P 9650 12400
+F 0 "#PWR022" H 9650 12150 50  0001 C CNN
+F 1 "Earth" H 9650 12250 50  0001 C CNN
+F 2 "" H 9650 12400 50  0001 C CNN
+F 3 "~" H 9650 12400 50  0001 C CNN
+	1    9650 12400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR023
+U 1 1 6179C85F
+P 9650 13650
+F 0 "#PWR023" H 9650 13400 50  0001 C CNN
+F 1 "Earth" H 9650 13500 50  0001 C CNN
+F 2 "" H 9650 13650 50  0001 C CNN
+F 3 "~" H 9650 13650 50  0001 C CNN
+	1    9650 13650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR024
+U 1 1 617E13D0
+P 9650 14900
+F 0 "#PWR024" H 9650 14650 50  0001 C CNN
+F 1 "Earth" H 9650 14750 50  0001 C CNN
+F 2 "" H 9650 14900 50  0001 C CNN
+F 3 "~" H 9650 14900 50  0001 C CNN
+	1    9650 14900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR025
+U 1 1 619A70B5
+P 10550 11000
+F 0 "#PWR025" H 10550 10750 50  0001 C CNN
+F 1 "Earth" H 10550 10850 50  0001 C CNN
+F 2 "" H 10550 11000 50  0001 C CNN
+F 3 "~" H 10550 11000 50  0001 C CNN
+	1    10550 11000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0113
+U 1 1 625FFBEF
+P 11400 5050
+F 0 "#PWR0113" H 11400 4800 50  0001 C CNN
+F 1 "Earth" H 11400 4900 50  0001 C CNN
+F 2 "" H 11400 5050 50  0001 C CNN
+F 3 "~" H 11400 5050 50  0001 C CNN
+	1    11400 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0104
+U 1 1 62495541
+P 13100 1750
+F 0 "#PWR0104" H 13100 1500 50  0001 C CNN
+F 1 "Earth" H 13100 1600 50  0001 C CNN
+F 2 "" H 13100 1750 50  0001 C CNN
+F 3 "~" H 13100 1750 50  0001 C CNN
+	1    13100 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0114
+U 1 1 6260EFF4
+P 13100 3050
+F 0 "#PWR0114" H 13100 2800 50  0001 C CNN
+F 1 "Earth" H 13100 2900 50  0001 C CNN
+F 2 "" H 13100 3050 50  0001 C CNN
+F 3 "~" H 13100 3050 50  0001 C CNN
+	1    13100 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0117
+U 1 1 631705EC
+P 13900 15750
+F 0 "#PWR0117" H 13900 15500 50  0001 C CNN
+F 1 "Earth" H 13900 15600 50  0001 C CNN
+F 2 "" H 13900 15750 50  0001 C CNN
+F 3 "~" H 13900 15750 50  0001 C CNN
+	1    13900 15750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0101
+U 1 1 60FF922B
+P 15250 1400
+F 0 "#PWR0101" H 15250 1150 50  0001 C CNN
+F 1 "Earth" H 15250 1250 50  0001 C CNN
+F 2 "" H 15250 1400 50  0001 C CNN
+F 3 "~" H 15250 1400 50  0001 C CNN
+	1    15250 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR026
+U 1 1 61AE2248
+P 16000 14800
+F 0 "#PWR026" H 16000 14550 50  0001 C CNN
+F 1 "Earth" H 16000 14650 50  0001 C CNN
+F 2 "" H 16000 14800 50  0001 C CNN
+F 3 "~" H 16000 14800 50  0001 C CNN
+	1    16000 14800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0129
+U 1 1 676D0B58
+P 16300 4450
+F 0 "#PWR0129" H 16300 4200 50  0001 C CNN
+F 1 "Earth" H 16300 4300 50  0001 C CNN
+F 2 "" H 16300 4450 50  0001 C CNN
+F 3 "~" H 16300 4450 50  0001 C CNN
+	1    16300 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR027
+U 1 1 61B27EE8
+P 16700 14450
+F 0 "#PWR027" H 16700 14200 50  0001 C CNN
+F 1 "Earth" H 16700 14300 50  0001 C CNN
+F 2 "" H 16700 14450 50  0001 C CNN
+F 3 "~" H 16700 14450 50  0001 C CNN
+	1    16700 14450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0115
+U 1 1 62A782CB
+P 17150 10750
+F 0 "#PWR0115" H 17150 10500 50  0001 C CNN
+F 1 "Earth" H 17150 10600 50  0001 C CNN
+F 2 "" H 17150 10750 50  0001 C CNN
+F 3 "~" H 17150 10750 50  0001 C CNN
+	1    17150 10750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0135
+U 1 1 6A5BF54F
+P 17350 13750
+F 0 "#PWR0135" H 17350 13500 50  0001 C CNN
+F 1 "Earth" H 17350 13600 50  0001 C CNN
+F 2 "" H 17350 13750 50  0001 C CNN
+F 3 "~" H 17350 13750 50  0001 C CNN
+	1    17350 13750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0121
+U 1 1 645309A7
+P 17600 10000
+F 0 "#PWR0121" H 17600 9750 50  0001 C CNN
+F 1 "Earth" H 17600 9850 50  0001 C CNN
+F 2 "" H 17600 10000 50  0001 C CNN
+F 3 "~" H 17600 10000 50  0001 C CNN
+	1    17600 10000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR029
+U 1 1 61ABF12B
+P 17650 15050
+F 0 "#PWR029" H 17650 14800 50  0001 C CNN
+F 1 "Earth" H 17650 14900 50  0001 C CNN
+F 2 "" H 17650 15050 50  0001 C CNN
+F 3 "~" H 17650 15050 50  0001 C CNN
+	1    17650 15050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0120
+U 1 1 643DBB85
+P 18500 750
+F 0 "#PWR0120" H 18500 500 50  0001 C CNN
+F 1 "Earth" H 18500 600 50  0001 C CNN
+F 2 "" H 18500 750 50  0001 C CNN
+F 3 "~" H 18500 750 50  0001 C CNN
+	1    18500 750 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0119
+U 1 1 63CE121F
+P 18700 1300
+F 0 "#PWR0119" H 18700 1050 50  0001 C CNN
+F 1 "Earth" H 18700 1150 50  0001 C CNN
+F 2 "" H 18700 1300 50  0001 C CNN
+F 3 "~" H 18700 1300 50  0001 C CNN
+	1    18700 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0118
+U 1 1 61891275
+P 18900 3200
+F 0 "#PWR0118" H 18900 2950 50  0001 C CNN
+F 1 "Earth" H 18900 3050 50  0001 C CNN
+F 2 "" H 18900 3200 50  0001 C CNN
+F 3 "~" H 18900 3200 50  0001 C CNN
+	1    18900 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0102
+U 1 1 61009574
+P 19100 1450
+F 0 "#PWR0102" H 19100 1200 50  0001 C CNN
+F 1 "Earth" H 19100 1300 50  0001 C CNN
+F 2 "" H 19100 1450 50  0001 C CNN
+F 3 "~" H 19100 1450 50  0001 C CNN
+	1    19100 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0128
+U 1 1 65EB47BA
+P 20000 3150
+F 0 "#PWR0128" H 20000 2900 50  0001 C CNN
+F 1 "Earth" H 20000 3000 50  0001 C CNN
+F 2 "" H 20000 3150 50  0001 C CNN
+F 3 "~" H 20000 3150 50  0001 C CNN
+	1    20000 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0127
+U 1 1 65D371AC
+P 20050 4000
+F 0 "#PWR0127" H 20050 3750 50  0001 C CNN
+F 1 "Earth" H 20050 3850 50  0001 C CNN
+F 2 "" H 20050 4000 50  0001 C CNN
+F 3 "~" H 20050 4000 50  0001 C CNN
+	1    20050 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0105
+U 1 1 6654356F
+P 20700 1750
+F 0 "#PWR0105" H 20700 1500 50  0001 C CNN
+F 1 "Earth" H 20700 1600 50  0001 C CNN
+F 2 "" H 20700 1750 50  0001 C CNN
+F 3 "~" H 20700 1750 50  0001 C CNN
+	1    20700 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0124
+U 1 1 60F11BB1
+P 21050 11650
+F 0 "#PWR0124" H 21050 11400 50  0001 C CNN
+F 1 "Earth" H 21050 11500 50  0001 C CNN
+F 2 "" H 21050 11650 50  0001 C CNN
+F 3 "~" H 21050 11650 50  0001 C CNN
+	1    21050 11650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0122
+U 1 1 6A98468E
+P 21150 5700
+F 0 "#PWR0122" H 21150 5450 50  0001 C CNN
+F 1 "Earth" H 21150 5550 50  0001 C CNN
+F 2 "" H 21150 5700 50  0001 C CNN
+F 3 "~" H 21150 5700 50  0001 C CNN
+	1    21150 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0123
+U 1 1 64E4E595
+P 21550 6450
+F 0 "#PWR0123" H 21550 6200 50  0001 C CNN
+F 1 "Earth" H 21550 6300 50  0001 C CNN
+F 2 "" H 21550 6450 50  0001 C CNN
+F 3 "~" H 21550 6450 50  0001 C CNN
+	1    21550 6450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Jumper_NC_Small JP3
+U 1 1 60DE0570
+P 2250 13200
+F 0 "JP3" H 2250 13412 50  0000 C CNN
+F 1 "Jumper" H 2250 13321 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 2250 13200 50  0001 C CNN
+F 3 "~" H 2250 13200 50  0001 C CNN
+	1    2250 13200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 60C3DC0D
+P 18650 13700
+F 0 "H1" H 18750 13700 50  0000 L CNN
+F 1 "MountingHole" H 18750 13655 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO14580" H 18650 13700 50  0001 C CNN
+F 3 "~" H 18650 13700 50  0001 C CNN
+F 4 "~" H 18650 13700 50  0001 C CNN "mouser"
+	1    18650 13700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 60C3EC75
+P 18650 13900
+F 0 "H2" H 18750 13900 50  0000 L CNN
+F 1 "MountingHole" H 18750 13855 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO14580" H 18650 13900 50  0001 C CNN
+F 3 "~" H 18650 13900 50  0001 C CNN
+F 4 "~" H 18650 13900 50  0001 C CNN "mouser"
+	1    18650 13900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 60C4F58C
+P 18950 13700
+F 0 "H4" H 19050 13746 50  0000 L CNN
+F 1 "MountingHole" H 19050 13655 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO14580" H 18950 13700 50  0001 C CNN
+F 3 "~" H 18950 13700 50  0001 C CNN
+F 4 "~" H 18950 13700 50  0001 C CNN "mouser"
+	1    18950 13700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 60C40DEF
+P 18950 13900
+F 0 "H5" H 19050 13900 50  0000 L CNN
+F 1 "MountingHole" H 19050 13855 50  0001 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_ISO14580" H 18950 13900 50  0001 C CNN
+F 3 "~" H 18950 13900 50  0001 C CNN
+F 4 "~" H 18950 13900 50  0001 C CNN "mouser"
+	1    18950 13900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H6
+U 1 1 60D92CBE
+P 19050 13450
+F 0 "H6" H 19150 13496 50  0000 L CNN
+F 1 "Aesir" H 19150 13405 50  0000 L CNN
+F 2 "custom:aesir" H 19050 13450 50  0001 C CNN
+F 3 "~" H 19050 13450 50  0001 C CNN
+F 4 "~" H 19050 13450 50  0001 C CNN "mouser"
+	1    19050 13450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R25
+U 1 1 62E976AC
+P 2300 14900
+F 0 "R25" V 2093 14900 50  0000 C CNN
+F 1 "1k" V 2184 14900 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2230 14900 50  0001 C CNN
+F 3 "~" H 2300 14900 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 2300 14900 50  0001 C CNN "mouser"
+	1    2300 14900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 61222489
+P 2500 13200
+F 0 "R2" V 2293 13200 50  0000 C CNN
+F 1 "120" V 2384 13200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2430 13200 50  0001 C CNN
+F 3 "~" H 2500 13200 50  0001 C CNN
+F 4 "652-CR0805FX-1200ELF" H 2500 13200 50  0001 C CNN "mouser"
+	1    2500 13200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R26
+U 1 1 62E68B3D
+P 2500 14750
+F 0 "R26" V 2293 14750 50  0000 C CNN
+F 1 "4.7k" V 2384 14750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2430 14750 50  0001 C CNN
+F 3 "~" H 2500 14750 50  0001 C CNN
+F 4 "652-CR0805FX-4701ELF" H 2500 14750 50  0001 C CNN "mouser"
+	1    2500 14750
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 6118A413
+P 2550 7150
+F 0 "R3" V 2343 7150 50  0000 C CNN
+F 1 "1k" V 2434 7150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2480 7150 50  0001 C CNN
+F 3 "~" H 2550 7150 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 2550 7150 50  0001 C CNN "mouser"
+	1    2550 7150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R17
+U 1 1 6142711E
+P 2550 12150
+F 0 "R17" V 2343 12150 50  0000 C CNN
+F 1 "1k" V 2434 12150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2480 12150 50  0001 C CNN
+F 3 "~" H 2550 12150 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 2550 12150 50  0001 C CNN "mouser"
+	1    2550 12150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R13
+U 1 1 618E5DDC
+P 2600 4000
+F 0 "R13" V 2393 4000 50  0000 C CNN
+F 1 "1k" V 2484 4000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2530 4000 50  0001 C CNN
+F 3 "~" H 2600 4000 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 2600 4000 50  0001 C CNN "mouser"
+	1    2600 4000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R14
+U 1 1 6114950F
+P 2600 5050
+F 0 "R14" V 2393 5050 50  0000 C CNN
+F 1 "1k" V 2484 5050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2530 5050 50  0001 C CNN
+F 3 "~" H 2600 5050 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 2600 5050 50  0001 C CNN "mouser"
+	1    2600 5050
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R15
+U 1 1 61168F9D
+P 2600 5950
+F 0 "R15" V 2393 5950 50  0000 C CNN
+F 1 "1k" V 2484 5950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 2530 5950 50  0001 C CNN
+F 3 "~" H 2600 5950 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 2600 5950 50  0001 C CNN "mouser"
+	1    2600 5950
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R27
+U 1 1 63041E40
+P 3150 15200
+F 0 "R27" V 2943 15200 50  0000 C CNN
+F 1 "1k" V 3034 15200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3080 15200 50  0001 C CNN
+F 3 "~" H 3150 15200 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 3150 15200 50  0001 C CNN "mouser"
+	1    3150 15200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R28
+U 1 1 63043103
+P 3450 15050
+F 0 "R28" V 3243 15050 50  0000 C CNN
+F 1 "10k" V 3334 15050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3380 15050 50  0001 C CNN
+F 3 "~" H 3450 15050 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 3450 15050 50  0001 C CNN "mouser"
+	1    3450 15050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R19
+U 1 1 6118A423
+P 3650 7300
+F 0 "R19" H 3720 7346 50  0000 L CNN
+F 1 "10k" H 3720 7255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3580 7300 50  0001 C CNN
+F 3 "~" H 3650 7300 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 3650 7300 50  0001 C CNN "mouser"
+	1    3650 7300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R24
+U 1 1 6142712E
+P 3650 12300
+F 0 "R24" H 3720 12346 50  0000 L CNN
+F 1 "10k" H 3720 12255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3580 12300 50  0001 C CNN
+F 3 "~" H 3650 12300 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 3650 12300 50  0001 C CNN "mouser"
+	1    3650 12300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R21
+U 1 1 60FA0479
+P 3700 4150
+F 0 "R21" H 3770 4196 50  0000 L CNN
+F 1 "10k" H 3770 4105 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3630 4150 50  0001 C CNN
+F 3 "~" H 3700 4150 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 3700 4150 50  0001 C CNN "mouser"
+	1    3700 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R22
+U 1 1 6114951F
+P 3700 5200
+F 0 "R22" H 3770 5246 50  0000 L CNN
+F 1 "10k" H 3770 5155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3630 5200 50  0001 C CNN
+F 3 "~" H 3700 5200 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 3700 5200 50  0001 C CNN "mouser"
+	1    3700 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R23
+U 1 1 61168FAD
+P 3700 6100
+F 0 "R23" H 3770 6146 50  0000 L CNN
+F 1 "10k" H 3770 6055 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 3630 6100 50  0001 C CNN
+F 3 "~" H 3700 6100 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 3700 6100 50  0001 C CNN "mouser"
+	1    3700 6100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R35
+U 1 1 64ADE688
+P 9700 3100
+F 0 "R35" V 9500 3100 50  0000 C CNN
+F 1 "4.7k" V 9600 3100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 9630 3100 50  0001 C CNN
+F 3 "~" H 9700 3100 50  0001 C CNN
+F 4 "652-CR0805FX-4701ELF" H 9700 3100 50  0001 C CNN "mouser"
+	1    9700 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R36
+U 1 1 64ADE682
+P 9700 3200
+F 0 "R36" V 9493 3200 50  0000 C CNN
+F 1 "4.7k" V 9584 3200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 9630 3200 50  0001 C CNN
+F 3 "~" H 9700 3200 50  0001 C CNN
+F 4 "652-CR0805FX-4701ELF" H 9700 3200 50  0001 C CNN "mouser"
+	1    9700 3200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R8
+U 1 1 61894859
+P 10250 10950
+F 0 "R8" V 10043 10950 50  0000 C CNN
+F 1 "10k" V 10134 10950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 10180 10950 50  0001 C CNN
+F 3 "~" H 10250 10950 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 10250 10950 50  0001 C CNN "mouser"
+	1    10250 10950
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R29
+U 1 1 6411EF36
+P 13100 2300
+F 0 "R29" V 12893 2300 50  0000 C CNN
+F 1 "4.7k" V 12984 2300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 13030 2300 50  0001 C CNN
+F 3 "~" H 13100 2300 50  0001 C CNN
+F 4 "652-CR0805FX-4701ELF" H 13100 2300 50  0001 C CNN "mouser"
+	1    13100 2300
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R30
+U 1 1 6411F133
+P 13100 2400
+F 0 "R30" V 13400 2150 50  0000 C CNN
+F 1 "4.7k" V 13300 2150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 13030 2400 50  0001 C CNN
+F 3 "~" H 13100 2400 50  0001 C CNN
+F 4 "652-CR0805FX-4701ELF" H 13100 2400 50  0001 C CNN "mouser"
+	1    13100 2400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R31
+U 1 1 632C319F
+P 16100 1600
+F 0 "R31" H 16170 1646 50  0000 L CNN
+F 1 "0.0025" H 16170 1555 50  0000 L CNN
+F 2 "Resistor_SMD:R_2512_6332Metric_Pad1.40x3.35mm_HandSolder" V 16030 1600 50  0001 C CNN
+F 3 "756-ULR1-R0025FT2" H 16100 1600 50  0001 C CNN
+F 4 "756-ULR1-R0025FT2" H 16100 1600 50  0001 C CNN "mouser"
+	1    16100 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R41
+U 1 1 6772D7C4
+P 16300 4200
+F 0 "R41" H 16370 4246 50  0000 L CNN
+F 1 "2k" H 16370 4155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 16230 4200 50  0001 C CNN
+F 3 "~" H 16300 4200 50  0001 C CNN
+F 4 "71-CRCW08052K00FKEAC" H 16300 4200 50  0001 C CNN "mouser"
+	1    16300 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R10
+U 1 1 60D2E25B
+P 16700 14300
+F 0 "R10" H 16770 14346 50  0000 L CNN
+F 1 "4.7k" H 16770 14255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 16630 14300 50  0001 C CNN
+F 3 "~" H 16700 14300 50  0001 C CNN
+F 4 "652-CR0805FX-4701ELF" H 16700 14300 50  0001 C CNN "mouser"
+	1    16700 14300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R16
+U 1 1 6A428B13
+P 16900 14150
+F 0 "R16" H 16970 14196 50  0000 L CNN
+F 1 "1k" H 16970 14105 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 16830 14150 50  0001 C CNN
+F 3 "~" H 16900 14150 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 16900 14150 50  0001 C CNN "mouser"
+	1    16900 14150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R12
+U 1 1 60F93FFE
+P 17100 15400
+F 0 "R12" V 16893 15400 50  0000 C CNN
+F 1 "402" V 16984 15400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 17030 15400 50  0001 C CNN
+F 3 "~" H 17100 15400 50  0001 C CNN
+F 4 "603-RT0805FRE07402RL" H 17100 15400 50  0001 C CNN "mouser"
+	1    17100 15400
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R7
+U 1 1 60E0DAC5
+P 17300 14150
+F 0 "R7" H 17370 14196 50  0000 L CNN
+F 1 "1k" H 17370 14105 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 17230 14150 50  0001 C CNN
+F 3 "~" H 17300 14150 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 17300 14150 50  0001 C CNN "mouser"
+	1    17300 14150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R11
+U 1 1 60E1E942
+P 17400 15000
+F 0 "R11" V 17193 15000 50  0000 C CNN
+F 1 "402" V 17284 15000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 17330 15000 50  0001 C CNN
+F 3 "~" H 17400 15000 50  0001 C CNN
+F 4 "603-RT0805FRE07402RL" H 17400 15000 50  0001 C CNN "mouser"
+	1    17400 15000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R32
+U 1 1 6344AAC7
+P 19200 2350
+F 0 "R32" H 19270 2396 50  0000 L CNN
+F 1 "0.025" H 19270 2305 50  0000 L CNN
+F 2 "Resistor_SMD:R_2512_6332Metric_Pad1.40x3.35mm_HandSolder" V 19130 2350 50  0001 C CNN
+F 3 "~" H 19200 2350 50  0001 C CNN
+F 4 "WSL2512R0250FEB" H 19200 2350 50  0001 C CNN "mouser"
+	1    19200 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 6668CF68
+P 19700 1700
+F 0 "R4" V 19493 1700 50  0000 C CNN
+F 1 "1k" V 19584 1700 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 19630 1700 50  0001 C CNN
+F 3 "~" H 19700 1700 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 19700 1700 50  0001 C CNN "mouser"
+	1    19700 1700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R20
+U 1 1 6668CF62
+P 19900 1550
+F 0 "R20" V 19693 1550 50  0000 C CNN
+F 1 "10k" V 19784 1550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 19830 1550 50  0001 C CNN
+F 3 "~" H 19900 1550 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 19900 1550 50  0001 C CNN "mouser"
+	1    19900 1550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 60B09806
+P 20200 13900
+F 0 "R5" H 20270 13946 50  0000 L CNN
+F 1 "10k" H 20270 13855 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 20130 13900 50  0001 C CNN
+F 3 "~" H 20200 13900 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 20200 13900 50  0001 C CNN "mouser"
+	1    20200 13900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R39
+U 1 1 6646808C
+P 20550 2000
+F 0 "R39" V 20343 2000 50  0000 C CNN
+F 1 "1k" V 20434 2000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 20480 2000 50  0001 C CNN
+F 3 "~" H 20550 2000 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 20550 2000 50  0001 C CNN "mouser"
+	1    20550 2000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R9
+U 1 1 60D04245
+P 20950 10000
+F 0 "R9" H 21020 10046 50  0000 L CNN
+F 1 "1k" H 21020 9955 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 20880 10000 50  0001 C CNN
+F 3 "~" H 20950 10000 50  0001 C CNN
+F 4 "667-ERJ-6ENF1001V" H 20950 10000 50  0001 C CNN "mouser"
+	1    20950 10000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R6
+U 1 1 60BECE16
+P 21150 9700
+F 0 "R6" H 21080 9654 50  0000 R CNN
+F 1 "10k" H 21080 9745 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 21080 9700 50  0001 C CNN
+F 3 "~" H 21150 9700 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 21150 9700 50  0001 C CNN "mouser"
+	1    21150 9700
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R40
+U 1 1 66468092
+P 21500 1550
+F 0 "R40" V 21293 1550 50  0000 C CNN
+F 1 "10k" V 21384 1550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 21430 1550 50  0001 C CNN
+F 3 "~" H 21500 1550 50  0001 C CNN
+F 4 " 71-CRCW080510K0FKEAC" H 21500 1550 50  0001 C CNN "mouser"
+	1    21500 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_TVS D6
+U 1 1 618C77DF
+P 7750 9150
+F 0 "D6" V 7704 9230 50  0000 L CNN
+F 1 "D_TVS" V 7795 9230 50  0000 L CNN
+F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7750 9150 50  0001 C CNN
+F 3 "~" H 7750 9150 50  0001 C CNN
+F 4 "621-SD15C-7 " H 7750 9150 50  0001 C CNN "mouser"
+	1    7750 9150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_TVS D8
+U 1 1 60C9A0F2
+P 7850 10350
+F 0 "D8" V 7804 10430 50  0000 L CNN
+F 1 "D_TVS" V 7895 10430 50  0000 L CNN
+F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7850 10350 50  0001 C CNN
+F 3 "~" H 7850 10350 50  0001 C CNN
+F 4 "621-SD15C-7 " H 7850 10350 50  0001 C CNN "mouser"
+	1    7850 10350
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_TVS D10
+U 1 1 6189483D
+P 7850 11550
+F 0 "D10" V 7804 11630 50  0000 L CNN
+F 1 "D_TVS" V 7895 11630 50  0000 L CNN
+F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7850 11550 50  0001 C CNN
+F 3 "~" H 7850 11550 50  0001 C CNN
+F 4 "621-SD15C-7 " H 7850 11550 50  0001 C CNN "mouser"
+	1    7850 11550
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_TVS D12
+U 1 1 618A3F4B
+P 7850 12800
+F 0 "D12" V 7804 12880 50  0000 L CNN
+F 1 "D_TVS" V 7895 12880 50  0000 L CNN
+F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7850 12800 50  0001 C CNN
+F 3 "~" H 7850 12800 50  0001 C CNN
+F 4 "621-SD15C-7 " H 7850 12800 50  0001 C CNN "mouser"
+	1    7850 12800
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_TVS D1
+U 1 1 6102A4C5
+P 7850 14050
+F 0 "D1" V 7804 14130 50  0000 L CNN
+F 1 "D_TVS" V 7895 14130 50  0000 L CNN
+F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7850 14050 50  0001 C CNN
+F 3 "~" H 7850 14050 50  0001 C CNN
+F 4 "621-SD15C-7 " H 7850 14050 50  0001 C CNN "mouser"
+	1    7850 14050
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_TVS D4
+U 1 1 61043BA1
+P 7850 15300
+F 0 "D4" V 7804 15380 50  0000 L CNN
+F 1 "D_TVS" V 7895 15380 50  0000 L CNN
+F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 7850 15300 50  0001 C CNN
+F 3 "~" H 7850 15300 50  0001 C CNN
+F 4 "621-SD15C-7 " H 7850 15300 50  0001 C CNN "mouser"
+	1    7850 15300
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_Schottky D11
+U 1 1 6253BEF7
+P 12700 1450
+F 0 "D11" H 12700 1233 50  0000 C CNN
+F 1 "D_Schottky" H 12700 1324 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 12700 1450 50  0001 C CNN
+F 3 "~" H 12700 1450 50  0001 C CNN
+F 4 "726-BAT60AE6327XT " H 12700 1450 50  0001 C CNN "mouser"
+	1    12700 1450
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:D_Schottky D13
+U 1 1 629072B7
+P 20500 2800
+F 0 "D13" H 20500 2583 50  0000 C CNN
+F 1 "D_Schottky" H 20500 2674 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-323_HandSoldering" H 20500 2800 50  0001 C CNN
+F 3 "~" H 20500 2800 50  0001 C CNN
+F 4 "726-BAT60AE6327XT " H 20500 2800 50  0001 C CNN "mouser"
+	1    20500 2800
+	-1   0    0    1   
+$EndComp
+$Comp
+L Switch:SW_DPST_x2 SW1
+U 1 1 61298F6A
+P 17100 13950
+F 0 "SW1" H 17050 14050 50  0001 C CNN
+F 1 "SW_DPST_x2" H 17100 14094 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 17100 13950 50  0001 C CNN
+F 3 "~" H 17100 13950 50  0001 C CNN
+F 4 "~" H 17100 13950 50  0001 C CNN "mouser"
+	1    17100 13950
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:LED D5
+U 1 1 60E5C291
+P 17100 15000
+F 0 "D5" H 17250 14900 50  0000 R CNN
+F 1 "ARMED" H 17250 14800 50  0000 R CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 17100 15000 50  0001 C CNN
+F 3 "~" H 17100 15000 50  0001 C CNN
+F 4 "710-150060AS75000" H 17100 15000 50  0001 C CNN "mouser"
+	1    17100 15000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED D7
+U 1 1 60DFFEAA
+P 17400 15400
+F 0 "D7" H 17300 15500 50  0000 L CNN
+F 1 "SAFE" H 17250 15600 50  0000 L CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 17400 15400 50  0001 C CNN
+F 3 "~" H 17400 15400 50  0001 C CNN
+F 4 "710-150060YS75000" H 17400 15400 50  0001 C CNN "mouser"
+	1    17400 15400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:Heatsink_Pad HS1
+U 1 1 6188E7A3
+P 18900 3100
+F 0 "HS1" H 19041 3139 50  0000 L CNN
+F 1 "Heatsink_Pad" H 19041 3048 50  0000 L CNN
+F 2 "custom:d2pak_heatsink" H 18912 3050 50  0001 C CNN
+F 3 "~" H 18912 3050 50  0001 C CNN
+F 4 "588-DV-T263-201E-TR " H 18900 3100 50  0001 C CNN "mouser"
+	1    18900 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C20
+U 1 1 68D53EF4
+P 2100 11000
+F 0 "C20" V 1850 11000 50  0000 C CNN
+F 1 "100n" V 1950 11000 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 2138 10850 50  0001 C CNN
+F 3 "~" H 2100 11000 50  0001 C CNN
+F 4 "710-885012207072" H 2100 11000 50  0001 C CNN "mouser"
+	1    2100 11000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C21
+U 1 1 68D52958
+P 2950 11000
+F 0 "C21" V 2700 11000 50  0000 C CNN
+F 1 "100n" V 2800 11000 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 2988 10850 50  0001 C CNN
+F 3 "~" H 2950 11000 50  0001 C CNN
+F 4 "710-885012207072" H 2950 11000 50  0001 C CNN "mouser"
+	1    2950 11000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 619E7CCF
+P 3400 13950
+F 0 "C1" V 3652 13950 50  0000 C CNN
+F 1 "100n" V 3561 13950 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 3438 13800 50  0001 C CNN
+F 3 "~" H 3400 13950 50  0001 C CNN
+F 4 "710-885012207072" H 3400 13950 50  0001 C CNN "mouser"
+	1    3400 13950
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C5
+U 1 1 618C7802
+P 8500 9150
+F 0 "C5" H 8615 9196 50  0000 L CNN
+F 1 "100n" H 8615 9105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 8538 9000 50  0001 C CNN
+F 3 "~" H 8500 9150 50  0001 C CNN
+F 4 "710-885012207072" H 8500 9150 50  0001 C CNN "mouser"
+	1    8500 9150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C6
+U 1 1 61157282
+P 8500 10350
+F 0 "C6" H 8615 10396 50  0000 L CNN
+F 1 "100n" H 8615 10305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 8538 10200 50  0001 C CNN
+F 3 "~" H 8500 10350 50  0001 C CNN
+F 4 "710-885012207072" H 8500 10350 50  0001 C CNN "mouser"
+	1    8500 10350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C7
+U 1 1 61894860
+P 8500 11550
+F 0 "C7" H 8615 11596 50  0000 L CNN
+F 1 "100n" H 8615 11505 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 8538 11400 50  0001 C CNN
+F 3 "~" H 8500 11550 50  0001 C CNN
+F 4 "710-885012207072" H 8500 11550 50  0001 C CNN "mouser"
+	1    8500 11550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C8
+U 1 1 618A3F6E
+P 8500 12800
+F 0 "C8" H 8615 12846 50  0000 L CNN
+F 1 "100n" H 8615 12755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 8538 12650 50  0001 C CNN
+F 3 "~" H 8500 12800 50  0001 C CNN
+F 4 "710-885012207072" H 8500 12800 50  0001 C CNN "mouser"
+	1    8500 12800
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 6102A4CB
+P 8500 14050
+F 0 "C3" H 8615 14096 50  0000 L CNN
+F 1 "100n" H 8615 14005 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 8538 13900 50  0001 C CNN
+F 3 "~" H 8500 14050 50  0001 C CNN
+F 4 "710-885012207072" H 8500 14050 50  0001 C CNN "mouser"
+	1    8500 14050
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C4
+U 1 1 61043BA7
+P 8500 15300
+F 0 "C4" H 8615 15346 50  0000 L CNN
+F 1 "100n" H 8615 15255 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 8538 15150 50  0001 C CNN
+F 3 "~" H 8500 15300 50  0001 C CNN
+F 4 "710-885012207072" H 8500 15300 50  0001 C CNN "mouser"
+	1    8500 15300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C11
+U 1 1 610CA6CD
+P 9350 8650
+F 0 "C11" V 9098 8650 50  0000 C CNN
+F 1 "100n" V 9189 8650 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9388 8500 50  0001 C CNN
+F 3 "~" H 9350 8650 50  0001 C CNN
+F 4 "710-885012207072" H 9350 8650 50  0001 C CNN "mouser"
+	1    9350 8650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C10
+U 1 1 6118FBB7
+P 9350 9900
+F 0 "C10" V 9098 9900 50  0000 C CNN
+F 1 "100n" V 9189 9900 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9388 9750 50  0001 C CNN
+F 3 "~" H 9350 9900 50  0001 C CNN
+F 4 "710-885012207072" H 9350 9900 50  0001 C CNN "mouser"
+	1    9350 9900
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C13
+U 1 1 610E732F
+P 9350 11050
+F 0 "C13" V 9098 11050 50  0000 C CNN
+F 1 "100n" V 9189 11050 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9388 10900 50  0001 C CNN
+F 3 "~" H 9350 11050 50  0001 C CNN
+F 4 "710-885012207072" H 9350 11050 50  0001 C CNN "mouser"
+	1    9350 11050
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C12
+U 1 1 618A3F81
+P 9350 12350
+F 0 "C12" V 9098 12350 50  0000 C CNN
+F 1 "100n" V 9189 12350 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9388 12200 50  0001 C CNN
+F 3 "~" H 9350 12350 50  0001 C CNN
+F 4 "710-885012207072" H 9350 12350 50  0001 C CNN "mouser"
+	1    9350 12350
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C14
+U 1 1 6102A4D7
+P 9350 13600
+F 0 "C14" V 9098 13600 50  0000 C CNN
+F 1 "100n" V 9189 13600 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9388 13450 50  0001 C CNN
+F 3 "~" H 9350 13600 50  0001 C CNN
+F 4 "710-885012207072" H 9350 13600 50  0001 C CNN "mouser"
+	1    9350 13600
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C15
+U 1 1 61043BB3
+P 9350 14850
+F 0 "C15" V 9098 14850 50  0000 C CNN
+F 1 "100n" V 9189 14850 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9388 14700 50  0001 C CNN
+F 3 "~" H 9350 14850 50  0001 C CNN
+F 4 "710-885012207072" H 9350 14850 50  0001 C CNN "mouser"
+	1    9350 14850
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C18
+U 1 1 644F1D1F
+P 17400 9950
+F 0 "C18" V 17148 9950 50  0000 C CNN
+F 1 "100n" V 17239 9950 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 17438 9800 50  0001 C CNN
+F 3 "~" H 17400 9950 50  0001 C CNN
+F 4 "710-885012207072" H 17400 9950 50  0001 C CNN "mouser"
+	1    17400 9950
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C19
+U 1 1 6435EF3B
+P 18150 700
+F 0 "C19" V 18000 600 50  0000 C CNN
+F 1 "100n" V 18000 800 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 18188 550 50  0001 C CNN
+F 3 "~" H 18150 700 50  0001 C CNN
+F 4 "710-885012207072" H 18150 700 50  0001 C CNN "mouser"
+	1    18150 700 
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C16
+U 1 1 6103A9C1
+P 19550 2950
+F 0 "C16" H 19250 2950 50  0000 L CNN
+F 1 "330n" H 19200 2850 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 19588 2800 50  0001 C CNN
+F 3 "~" H 19550 2950 50  0001 C CNN
+F 4 "80-C0805C334K3N " H 19550 2950 50  0001 C CNN "mouser"
+	1    19550 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C9
+U 1 1 61474EC2
+P 19600 11550
+F 0 "C9" H 19800 11550 50  0000 C CNN
+F 1 "100n" H 19750 11450 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 19638 11400 50  0001 C CNN
+F 3 "~" H 19600 11550 50  0001 C CNN
+F 4 "710-885012207072" H 19600 11550 50  0001 C CNN "mouser"
+	1    19600 11550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C22
+U 1 1 617E03AF
+P 19750 11300
+F 0 "C22" H 19950 11300 50  0000 C CNN
+F 1 "100n" H 19900 11200 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 19788 11150 50  0001 C CNN
+F 3 "~" H 19750 11300 50  0001 C CNN
+F 4 "710-885012207072" H 19750 11300 50  0001 C CNN "mouser"
+	1    19750 11300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C17
+U 1 1 6103AD6E
+P 20300 2950
+F 0 "C17" H 20415 2996 50  0000 L CNN
+F 1 "100n" H 20415 2905 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 20338 2800 50  0001 C CNN
+F 3 "~" H 20300 2950 50  0001 C CNN
+F 4 "710-885012207072" H 20300 2950 50  0001 C CNN "mouser"
+	1    20300 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 5FF15A10
+P 20300 13500
+F 0 "C2" H 20450 13500 50  0000 C CNN
+F 1 "100n" H 20450 13400 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 20338 13350 50  0001 C CNN
+F 3 "https://www.mouser.se/datasheet/2/212/KEM_C1007_X8R_ULTRA_150C_SMD-1102703.pdf" H 20300 13500 50  0001 C CNN
+F 4 "710-885012207072" H 20300 13500 50  0001 C CNN "mouser"
+	1    20300 13500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:Buzzer BZ1
+U 1 1 609840B9
+P 20550 9400
+F 0 "BZ1" H 20702 9429 50  0000 L CNN
+F 1 "Buzzer" H 20702 9338 50  0000 L CNN
+F 2 "custom:CX-0905C" V 20525 9500 50  0001 C CNN
+F 3 "https://www.mouser.se/datasheet/2/670/cpt_147_85t-2306768.pdf" V 20525 9500 50  0001 C CNN
+F 4 "490-CX-0905C " H 20550 9400 50  0001 C CNN "mouser"
+	1    20550 9400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L custom:xt-30 U2
+U 1 1 61271D11
+P 1200 15150
+F 0 "U2" V 1465 15092 50  0000 C CNN
+F 1 "12v-engine" V 1374 15092 50  0000 C CNN
+F 2 "Connector_AMASS:AMASS_XT30U-F_1x02_P5.0mm_Vertical" H 1200 15200 50  0001 C CNN
+F 3 "" H 1200 15200 50  0001 C CNN
+F 4 "~" H 1200 15150 50  0001 C CNN "mouser"
+	1    1200 15150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L custom:xt-30 U3
+U 1 1 612723EE
+P 1200 15800
+F 0 "U3" V 1465 15742 50  0000 C CNN
+F 1 "12v-out" V 1374 15742 50  0000 C CNN
+F 2 "Connector_AMASS:AMASS_XT30U-F_1x02_P5.0mm_Vertical" H 1200 15850 50  0001 C CNN
+F 3 "" H 1200 15850 50  0001 C CNN
+F 4 "~" H 1200 15800 50  0001 C CNN "mouser"
+	1    1200 15800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L custom:terminal-2 U7
+U 1 1 618C77D9
+P 7550 9150
+F 0 "U7" H 7592 8885 50  0000 C CNN
+F 1 "terminal-2" H 7592 8976 50  0000 C CNN
+F 2 "custom:terminal-small" H 7650 9000 50  0001 C CNN
+F 3 "" H 7650 9000 50  0001 C CNN
+F 4 "~" H 7550 9150 50  0001 C CNN "mouser"
+	1    7550 9150
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:terminal-2 U8
+U 1 1 60C96ECC
+P 7550 10350
+F 0 "U8" H 7592 10085 50  0000 C CNN
+F 1 "terminal-2" H 7592 10176 50  0000 C CNN
+F 2 "custom:terminal-small" H 7650 10200 50  0001 C CNN
+F 3 "" H 7650 10200 50  0001 C CNN
+F 4 "~" H 7550 10350 50  0001 C CNN "mouser"
+	1    7550 10350
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:terminal-2 U9
+U 1 1 61894837
+P 7550 11550
+F 0 "U9" H 7592 11285 50  0000 C CNN
+F 1 "terminal-2" H 7592 11376 50  0000 C CNN
+F 2 "custom:terminal-small" H 7650 11400 50  0001 C CNN
+F 3 "" H 7650 11400 50  0001 C CNN
+F 4 "~" H 7550 11550 50  0001 C CNN "mouser"
+	1    7550 11550
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:terminal-2 U10
+U 1 1 618A3F45
+P 7550 12800
+F 0 "U10" H 7592 12535 50  0000 C CNN
+F 1 "terminal-2" H 7592 12626 50  0000 C CNN
+F 2 "custom:terminal-small" H 7650 12650 50  0001 C CNN
+F 3 "" H 7650 12650 50  0001 C CNN
+F 4 "~" H 7550 12800 50  0001 C CNN "mouser"
+	1    7550 12800
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:terminal-2 U23
+U 1 1 6102A4BF
+P 7550 14050
+F 0 "U23" H 7592 13785 50  0000 C CNN
+F 1 "terminal-2" H 7592 13876 50  0000 C CNN
+F 2 "custom:terminal-small" H 7650 13900 50  0001 C CNN
+F 3 "" H 7650 13900 50  0001 C CNN
+F 4 "~" H 7550 14050 50  0001 C CNN "mouser"
+	1    7550 14050
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:terminal-2 U24
+U 1 1 61043B9B
+P 7550 15300
+F 0 "U24" H 7592 15035 50  0000 C CNN
+F 1 "terminal-2" H 7592 15126 50  0000 C CNN
+F 2 "custom:terminal-small" H 7650 15150 50  0001 C CNN
+F 3 "" H 7650 15150 50  0001 C CNN
+F 4 "~" H 7550 15300 50  0001 C CNN "mouser"
+	1    7550 15300
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:xt-60 U27
+U 1 1 6128E3EC
+P 15300 1100
+F 0 "U27" H 15428 1088 50  0000 L CNN
+F 1 "12v-in" H 15428 997 50  0000 L CNN
+F 2 "Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical" H 15300 1150 50  0001 C CNN
+F 3 "" H 15300 1150 50  0001 C CNN
+F 4 "~" H 15300 1100 50  0001 C CNN "mouser"
+	1    15300 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L custom:xt-30 U28
+U 1 1 612817EB
+P 19150 1150
+F 0 "U28" H 19278 1138 50  0000 L CNN
+F 1 "7v-in" H 19278 1047 50  0000 L CNN
+F 2 "Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical" H 19150 1200 50  0001 C CNN
+F 3 "" H 19150 1200 50  0001 C CNN
+F 4 "~" H 19150 1150 50  0001 C CNN "mouser"
+	1    19150 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_Coaxial J9
+U 1 1 65AA8964
+P 7100 1450
+F 0 "J9" V 7337 1379 50  0000 C CNN
+F 1 "Conn_Coaxial" V 7246 1379 50  0000 C CNN
+F 2 "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount" H 7100 1450 50  0001 C CNN
+F 3 " ~" H 7100 1450 50  0001 C CNN
+F 4 " 712-CONSMA020.062-G " H 7100 1450 50  0001 C CNN "mouser"
+	1    7100 1450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Jumper JP2
+U 1 1 67550ACD
+P 16650 4050
+F 0 "JP2" H 16650 4314 50  0000 C CNN
+F 1 "Jumper" H 16650 4223 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 16650 4050 50  0001 C CNN
+F 3 "~" H 16650 4050 50  0001 C CNN
+	1    16650 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Jumper JP1
+U 1 1 673F4B2B
+P 21000 1700
+F 0 "JP1" H 21000 1964 50  0000 C CNN
+F 1 "Jumper" H 21000 1873 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 21000 1700 50  0001 C CNN
+F 3 "~" H 21000 1700 50  0001 C CNN
+	1    21000 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J2
+U 1 1 611B8BCA
+P 1200 13150
+F 0 "J2" H 1118 12725 50  0000 C CNN
+F 1 "JST_XH_4" H 1118 12816 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" H 1200 13150 50  0001 C CNN
+F 3 "~" H 1200 13150 50  0001 C CNN
+F 4 "~" H 1200 13150 50  0001 C CNN "mouser"
+	1    1200 13150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J3
+U 1 1 611BE536
+P 1200 14000
+F 0 "J3" H 1118 13575 50  0000 C CNN
+F 1 "JST_XH_4" H 1118 13666 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" H 1200 14000 50  0001 C CNN
+F 3 "~" H 1200 14000 50  0001 C CNN
+F 4 "~" H 1200 14000 50  0001 C CNN "mouser"
+	1    1200 14000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J5
+U 1 1 67E2ADF8
+P 1250 8650
+F 0 "J5" H 1168 8225 50  0000 C CNN
+F 1 "JST_XH_4" H 1168 8316 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" H 1250 8650 50  0001 C CNN
+F 3 "~" H 1250 8650 50  0001 C CNN
+F 4 "~" H 1250 8650 50  0001 C CNN "mouser"
+	1    1250 8650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J1
+U 1 1 6870B7BB
+P 1250 9600
+F 0 "J1" H 1168 9175 50  0000 C CNN
+F 1 "JST_SH_4" H 1168 9266 50  0000 C CNN
+F 2 "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal" H 1250 9600 50  0001 C CNN
+F 3 "~" H 1250 9600 50  0001 C CNN
+F 4 " 485-4208 " H 1250 9600 50  0001 C CNN "mouser"
+	1    1250 9600
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J10
+U 1 1 68970D50
+P 1250 10650
+F 0 "J10" H 1168 10225 50  0000 C CNN
+F 1 "JST_SH_4" H 1168 10316 50  0000 C CNN
+F 2 "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal" H 1250 10650 50  0001 C CNN
+F 3 "~" H 1250 10650 50  0001 C CNN
+F 4 " 485-4208 " H 1250 10650 50  0001 C CNN "mouser"
+	1    1250 10650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J7
+U 1 1 610AA5E4
+P 1300 4400
+F 0 "J7" H 1218 3975 50  0000 C CNN
+F 1 "JST_XH_4" H 1218 4066 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" H 1300 4400 50  0001 C CNN
+F 3 "~" H 1300 4400 50  0001 C CNN
+F 4 "~" H 1300 4400 50  0001 C CNN "mouser"
+	1    1300 4400
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J8
+U 1 1 6107D0D7
+P 1300 5450
+F 0 "J8" H 1218 5025 50  0000 C CNN
+F 1 "JST_XH_4" H 1218 5116 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" H 1300 5450 50  0001 C CNN
+F 3 "~" H 1300 5450 50  0001 C CNN
+F 4 "~" H 1300 5450 50  0001 C CNN "mouser"
+	1    1300 5450
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_BJT:MMBT3904 Q10
+U 1 1 62FF239F
+P 3000 15000
+F 0 "Q10" V 3328 15000 50  0000 C CNN
+F 1 "MMBT3904" V 3237 15000 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3200 14925 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 3000 15000 50  0001 L CNN
+F 4 "241-MMBT3904R200001" H 3000 15000 50  0001 C CNN "mouser"
+	1    3000 15000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Transistor_BJT:MMBT3904 Q11
+U 1 1 66468086
+P 20400 1800
+F 0 "Q11" V 20728 1800 50  0000 C CNN
+F 1 "MMBT3904" V 20637 1800 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 20600 1725 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 20400 1800 50  0001 L CNN
+F 4 "241-MMBT3904R200001" H 20400 1800 50  0001 C CNN "mouser"
+	1    20400 1800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Transistor_BJT:MMBT3904 Q8
+U 1 1 60DFD24D
+P 20950 9650
+F 0 "Q8" V 21278 9650 50  0000 C CNN
+F 1 "MMBT3904" V 21187 9650 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 21150 9575 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 20950 9650 50  0001 L CNN
+F 4 "241-MMBT3904R200001" H 20950 9650 50  0001 C CNN "mouser"
+	1    20950 9650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Transistor_FET:PMN48XP Q9
+U 1 1 65DBD3D5
+P 1900 14900
+F 0 "Q9" H 2105 14854 50  0000 L CNN
+F 1 "PMN48XP" H 2105 14945 50  0000 L CNN
+F 2 "Package_SO:TSOP-6_1.65x3.05mm_P0.95mm" H 2100 14800 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/PMN48XP.pdf" H 1900 14900 50  0001 C CNN
+F 4 "771-PMN48XP,125" H 1900 14900 50  0001 C CNN "mouser"
+	1    1900 14900
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:DMG2301L Q2
+U 1 1 6118A403
+P 2200 7150
+F 0 "Q2" H 2600 6950 50  0000 L CNN
+F 1 "DMG2301L" H 2400 7050 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2400 7075 50  0001 L CIN
+F 3 "https://www.diodes.com/assets/Datasheets/DMG2301L.pdf" H 2200 7150 50  0001 L CNN
+F 4 " 621-DMG2301L-7 " H 2200 7150 50  0001 C CNN "mouser"
+	1    2200 7150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:DMG2301L Q7
+U 1 1 6142710E
+P 2200 12150
+F 0 "Q7" H 2600 11950 50  0000 L CNN
+F 1 "DMG2301L" H 2400 12050 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2400 12075 50  0001 L CIN
+F 3 "https://www.diodes.com/assets/Datasheets/DMG2301L.pdf" H 2200 12150 50  0001 L CNN
+F 4 " 621-DMG2301L-7 " H 2200 12150 50  0001 C CNN "mouser"
+	1    2200 12150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:DMG2301L Q4
+U 1 1 61650319
+P 2250 4000
+F 0 "Q4" H 2650 3800 50  0000 L CNN
+F 1 "DMG2301L" H 2450 3900 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2450 3925 50  0001 L CIN
+F 3 "https://www.diodes.com/assets/Datasheets/DMG2301L.pdf" H 2250 4000 50  0001 L CNN
+F 4 " 621-DMG2301L-7 " H 2250 4000 50  0001 C CNN "mouser"
+	1    2250 4000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:DMG2301L Q5
+U 1 1 611494FF
+P 2250 5050
+F 0 "Q5" H 2650 4850 50  0000 L CNN
+F 1 "DMG2301L" H 2450 4950 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2450 4975 50  0001 L CIN
+F 3 "https://www.diodes.com/assets/Datasheets/DMG2301L.pdf" H 2250 5050 50  0001 L CNN
+F 4 " 621-DMG2301L-7 " H 2250 5050 50  0001 C CNN "mouser"
+	1    2250 5050
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:DMG2301L Q6
+U 1 1 61168F8D
+P 2250 5950
+F 0 "Q6" H 2650 5750 50  0000 L CNN
+F 1 "DMG2301L" H 2450 5850 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2450 5875 50  0001 L CIN
+F 3 "https://www.diodes.com/assets/Datasheets/DMG2301L.pdf" H 2250 5950 50  0001 L CNN
+F 4 " 621-DMG2301L-7 " H 2250 5950 50  0001 C CNN "mouser"
+	1    2250 5950
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:PMN48XP Q3
+U 1 1 6668CF76
+P 19300 1700
+F 0 "Q3" H 19505 1654 50  0000 L CNN
+F 1 "PMN48XP" H 19505 1745 50  0000 L CNN
+F 2 "Package_SO:TSOP-6_1.65x3.05mm_P0.95mm" H 19500 1600 50  0001 L CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/PMN48XP.pdf" H 19300 1700 50  0001 C CNN
+F 4 "771-PMN48XP,125" H 19300 1700 50  0001 C CNN "mouser"
+	1    19300 1700
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x06 J4
+U 1 1 6105C7B8
+P 1250 7650
+F 0 "J4" H 1168 7125 50  0000 C CNN
+F 1 "JST_GH_6" H 1168 7216 50  0000 C CNN
+F 2 "Connector_JST:JST_GH_BM06B-GHS-TBT_1x06-1MP_P1.25mm_Vertical" H 1250 7650 50  0001 C CNN
+F 3 "~" H 1250 7650 50  0001 C CNN
+F 4 "~" H 1250 7650 50  0001 C CNN "mouser"
+	1    1250 7650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x06 J6
+U 1 1 61056800
+P 1300 6450
+F 0 "J6" H 1218 5925 50  0000 C CNN
+F 1 "JST_GH_6" H 1218 6016 50  0000 C CNN
+F 2 "Connector_JST:JST_GH_BM06B-GHS-TBT_1x06-1MP_P1.25mm_Vertical" H 1300 6450 50  0001 C CNN
+F 3 "~" H 1300 6450 50  0001 C CNN
+F 4 "~" H 1300 6450 50  0001 C CNN "mouser"
+	1    1300 6450
+	-1   0    0    1   
+$EndComp
+$Comp
+L Regulator_Linear:L7805 U29
+U 1 1 60FF49D5
+P 20000 2800
+F 0 "U29" H 20000 3042 50  0000 C CNN
+F 1 "L7805" H 20000 2951 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-263-2" H 20025 2650 50  0001 L CIN
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 20000 2750 50  0001 C CNN
+F 4 "511-L7805ABD2T-TR" H 20000 2800 50  0001 C CNN "mouser"
+	1    20000 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L custom:sparkfun_H3LIS331DL U6
+U 1 1 6A8902E5
+P 20700 5400
+F 0 "U6" H 20700 5675 50  0000 C CNN
+F 1 "sparkfun_H3LIS331DL" H 20700 5584 50  0000 C CNN
+F 2 "custom:sparkfun_H3LIS331DL" H 20700 5900 50  0001 C CNN
+F 3 "" H 20700 5900 50  0001 C CNN
+F 4 "474-SEN-14480 " H 20700 5400 50  0001 C CNN "mouser"
+	1    20700 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L custom:drotek_10dof U35
+U 1 1 64827792
+P 20650 6350
+F 0 "U35" H 20675 6725 50  0000 C CNN
+F 1 "drotek_10dof" H 20675 6634 50  0000 C CNN
+F 2 "custom:drotek_10dof" H 20650 6650 50  0001 C CNN
+F 3 "" H 20650 6650 50  0001 C CNN
+F 4 "~" H 20650 6350 50  0001 C CNN "mouser"
+	1    20650 6350
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED:WS2812B D9
+U 1 1 6152A842
+P 19250 12000
+F 0 "D9" H 19200 11600 50  0000 L CNN
+F 1 "WS2812B" H 19100 11500 50  0000 L CNN
+F 2 "custom:ws2812-through-hole-5mm" H 19300 11700 50  0001 L TNN
+F 3 "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf" H 19350 11625 50  0001 L TNN
+F 4 "~" H 19250 12000 50  0001 C CNN "mouser"
+	1    19250 12000
+	-1   0    0    1   
+$EndComp
+$Comp
+L LED:WS2812B D2
+U 1 1 60BC12A4
+P 19950 12000
+F 0 "D2" H 19900 11600 50  0000 L CNN
+F 1 "WS2812B" H 19800 11500 50  0000 L CNN
+F 2 "custom:ws2812-through-hole-5mm" H 20000 11700 50  0001 L TNN
+F 3 "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf" H 20050 11625 50  0001 L TNN
+F 4 "~" H 19950 12000 50  0001 C CNN "mouser"
+	1    19950 12000
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:GY91 U33
+U 1 1 63FCD021
+P 20500 3950
+F 0 "U33" V 20649 4378 50  0000 L CNN
+F 1 "GY91" V 20740 4378 50  0000 L CNN
+F 2 "custom:GY91" H 20700 4450 50  0001 C CNN
+F 3 "" H 20700 4450 50  0001 C CNN
+F 4 "~" H 20500 3950 50  0001 C CNN "mouser"
+	1    20500 3950
+	0    1    1    0   
+$EndComp
+$Comp
+L custom:buffer U5
+U 1 1 6118A40C
+P 3150 7100
+F 0 "U5" H 3100 7450 50  0000 R CNN
+F 1 "NL17SZ17" H 3100 7550 50  0000 R CNN
+F 2 "custom:SC-74-a" H 2950 7350 50  0001 C CNN
+F 3 "" H 2950 7350 50  0001 C CNN
+F 4 "863-NL17SZ17DBVT1G" H 3150 7100 50  0001 C CNN "mouser"
+	1    3150 7100
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:buffer U21
+U 1 1 61427117
+P 3150 12100
+F 0 "U21" H 3100 12450 50  0000 R CNN
+F 1 "NL17SZ17" H 3100 12550 50  0000 R CNN
+F 2 "custom:SC-74-a" H 2950 12350 50  0001 C CNN
+F 3 "" H 2950 12350 50  0001 C CNN
+F 4 "863-NL17SZ17DBVT1G" H 3150 12100 50  0001 C CNN "mouser"
+	1    3150 12100
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:buffer U18
+U 1 1 618BD3E9
+P 3200 3950
+F 0 "U18" H 3150 4300 50  0000 R CNN
+F 1 "NL17SZ17" H 3150 4400 50  0000 R CNN
+F 2 "custom:SC-74-a" H 3000 4200 50  0001 C CNN
+F 3 "" H 3000 4200 50  0001 C CNN
+F 4 "863-NL17SZ17DBVT1G" H 3200 3950 50  0001 C CNN "mouser"
+	1    3200 3950
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:buffer U19
+U 1 1 61149508
+P 3200 5000
+F 0 "U19" H 3150 5350 50  0000 R CNN
+F 1 "NL17SZ17" H 3150 5450 50  0000 R CNN
+F 2 "custom:SC-74-a" H 3000 5250 50  0001 C CNN
+F 3 "" H 3000 5250 50  0001 C CNN
+F 4 "863-NL17SZ17DBVT1G" H 3200 5000 50  0001 C CNN "mouser"
+	1    3200 5000
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:buffer U20
+U 1 1 61168F96
+P 3200 5900
+F 0 "U20" H 3150 6250 50  0000 R CNN
+F 1 "NL17SZ17" H 3150 6350 50  0000 R CNN
+F 2 "custom:SC-74-a" H 3000 6150 50  0001 C CNN
+F 3 "" H 3000 6150 50  0001 C CNN
+F 4 "863-NL17SZ17DBVT1G" H 3200 5900 50  0001 C CNN "mouser"
+	1    3200 5900
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:buffer U15
+U 1 1 60DC1EDD
+P 16300 14650
+F 0 "U15" V 16100 14850 50  0000 L CNN
+F 1 "NL17SZ17" V 16000 14300 50  0000 L CNN
+F 2 "custom:SC-74-a" H 16100 14900 50  0001 C CNN
+F 3 "" H 16100 14900 50  0001 C CNN
+F 4 "863-NL17SZ17DBVT1G" H 16300 14650 50  0001 C CNN "mouser"
+	1    16300 14650
+	0    1    1    0   
+$EndComp
+$Comp
+L custom:buffer U22
+U 1 1 60F11BAA
+P 21000 11950
+F 0 "U22" H 20950 12300 50  0000 R CNN
+F 1 "NL17SZ17" H 20950 12400 50  0000 R CNN
+F 2 "custom:SC-74-a" H 20800 12200 50  0001 C CNN
+F 3 "" H 20800 12200 50  0001 C CNN
+F 4 "863-NL17SZ17DBVT1G" H 21000 11950 50  0001 C CNN "mouser"
+	1    21000 11950
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:w25nxx U16
+U 1 1 61030402
+P 21200 13600
+F 0 "U16" H 21075 13915 50  0000 C CNN
+F 1 "w25nxx" H 21075 13824 50  0000 C CNN
+F 2 "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm" H 21200 13900 50  0001 C CNN
+F 3 "" H 21200 13900 50  0001 C CNN
+F 4 "454-W25N01GVSFIG " H 21200 13600 50  0001 C CNN "mouser"
+	1    21200 13600
+	1    0    0    -1  
+$EndComp
+$Comp
+L custom:TXS0104E U4
+U 1 1 68DB2E62
+P 2550 10650
+F 0 "U4" H 2575 10135 50  0000 C CNN
+F 1 "TXS0104E" H 2575 10226 50  0000 C CNN
+F 2 "Package_SO:TSSOP-14_4.4x5mm_P0.65mm" H 2550 10950 50  0001 C CNN
+F 3 "" H 2550 10950 50  0001 C CNN
+F 4 "771-LSF0204PW-Q100J" H 2550 10650 50  0001 C CNN "mouser"
+	1    2550 10650
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:BTN7030-1EPA U11
+U 1 1 618C780F
+P 9250 9200
+F 0 "U11" H 9300 9600 50  0000 C CNN
+F 1 "BTN7030-1EPA" H 9300 9500 50  0000 C CNN
+F 2 "custom:Infineon_PG-TSDSO-14-22-bottom" H 9300 9500 50  0001 C CNN
+F 3 "" H 9300 9500 50  0001 C CNN
+F 4 "726-BTN70301EPAXUMA1 " H 9250 9200 50  0001 C CNN "mouser"
+	1    9250 9200
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:BTN7030-1EPA U12
+U 1 1 60CBBA72
+P 9250 10400
+F 0 "U12" H 9300 10800 50  0000 C CNN
+F 1 "BTN7030-1EPA" H 9300 10700 50  0000 C CNN
+F 2 "custom:Infineon_PG-TSDSO-14-22-bottom" H 9300 10700 50  0001 C CNN
+F 3 "" H 9300 10700 50  0001 C CNN
+F 4 "726-BTN70301EPAXUMA1 " H 9250 10400 50  0001 C CNN "mouser"
+	1    9250 10400
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:BTN7030-1EPA U13
+U 1 1 6189486D
+P 9250 11600
+F 0 "U13" H 9300 12000 50  0000 C CNN
+F 1 "BTN7030-1EPA" H 9300 11900 50  0000 C CNN
+F 2 "custom:Infineon_PG-TSDSO-14-22-bottom" H 9300 11900 50  0001 C CNN
+F 3 "" H 9300 11900 50  0001 C CNN
+F 4 "726-BTN70301EPAXUMA1 " H 9250 11600 50  0001 C CNN "mouser"
+	1    9250 11600
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:BTN7030-1EPA U14
+U 1 1 618A3F7B
+P 9250 12850
+F 0 "U14" H 9300 13250 50  0000 C CNN
+F 1 "BTN7030-1EPA" H 9300 13150 50  0000 C CNN
+F 2 "custom:Infineon_PG-TSDSO-14-22-bottom" H 9300 13150 50  0001 C CNN
+F 3 "" H 9300 13150 50  0001 C CNN
+F 4 "726-BTN70301EPAXUMA1 " H 9250 12850 50  0001 C CNN "mouser"
+	1    9250 12850
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:BTN7030-1EPA U25
+U 1 1 6102A4D1
+P 9250 14100
+F 0 "U25" H 9300 14500 50  0000 C CNN
+F 1 "BTN7030-1EPA" H 9300 14400 50  0000 C CNN
+F 2 "custom:Infineon_PG-TSDSO-14-22-bottom" H 9300 14400 50  0001 C CNN
+F 3 "" H 9300 14400 50  0001 C CNN
+F 4 "726-BTN70301EPAXUMA1 " H 9250 14100 50  0001 C CNN "mouser"
+	1    9250 14100
+	-1   0    0    1   
+$EndComp
+$Comp
+L custom:BTN7030-1EPA U26
+U 1 1 61043BAD
+P 9250 15350
+F 0 "U26" H 9300 15750 50  0000 C CNN
+F 1 "BTN7030-1EPA" H 9300 15650 50  0000 C CNN
+F 2 "custom:Infineon_PG-TSDSO-14-22-bottom" H 9300 15650 50  0001 C CNN
+F 3 "" H 9300 15650 50  0001 C CNN
+F 4 "726-BTN70301EPAXUMA1 " H 9250 15350 50  0001 C CNN "mouser"
+	1    9250 15350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Sensor_Humidity:Si7021-A20 U30
+U 1 1 62A0315D
+P 17150 10350
+F 0 "U30" H 17594 10396 50  0000 L CNN
+F 1 "Si7021-A20" H 17594 10305 50  0000 L CNN
+F 2 "Package_DFN_QFN:DFN-6-1EP_3x3mm_P1mm_EP1.5x2.4mm" H 17150 9950 50  0001 C CNN
+F 3 "https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf" H 16950 10650 50  0001 C CNN
+F 4 "634-SI7021-A20-IM" H 17150 10350 50  0001 C CNN "mouser"
+	1    17150 10350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Interface_CAN_LIN:SN65HVD230 U17
+U 1 1 611CBCA9
+P 3150 13550
+F 0 "U17" H 3150 12969 50  0000 C CNN
+F 1 "SN65HVD230" H 3150 13060 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 3150 13050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn65hvd230.pdf" H 3050 13950 50  0001 C CNN
+F 4 " 595-SN65HVD231QDRQ1 " H 3150 13550 50  0001 C CNN "mouser"
+	1    3150 13550
+	-1   0    0    1   
+$EndComp
+$Comp
+L main_v1-rescue:ltc2992-teensy U31
+U 1 1 6321BEB2
+P 17300 1200
+F 0 "U31" H 17300 535 50  0000 C CNN
+F 1 "ltc2992" H 17300 626 50  0000 C CNN
+F 2 "Package_SO:MSOP-16_3x4mm_P0.5mm" H 17300 1750 50  0001 C CNN
+F 3 "" H 17300 1750 50  0001 C CNN
+F 4 "584-LTC2992IMSPBF" H 17300 1200 50  0001 C CNN "mouser"
+	1    17300 1200
+	-1   0    0    1   
+$EndComp
+$Comp
+L RF_Module:RFM98W-433S2 U32
+U 1 1 64A191C3
+P 6400 2050
+F 0 "U32" H 5900 2700 50  0000 C CNN
+F 1 "RFM98W-433S2" H 6000 2600 50  0000 C CNN
+F 2 "RF_Module:HOPERF_RFM9XW_SMD" H 3100 3700 50  0001 C CNN
+F 3 "https://www.hoperf.com/data/upload/portal/20181127/5bfcdb5e17543.pdf" H 3100 3700 50  0001 C CNN
+F 4 ":(" H 6400 2050 50  0001 C CNN "mouser"
+	1    6400 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L main_v1-rescue:Teensy4.1-teensy U1
+U 1 1 60FE01A2
+P 11400 3750
+F 0 "U1" H 11400 6315 50  0000 C CNN
+F 1 "Teensy4.1" H 11400 6224 50  0000 C CNN
+F 2 "custom:Teensy41" H 11000 4150 50  0001 C CNN
+F 3 "" H 11000 4150 50  0001 C CNN
+F 4 "~" H 11400 3750 50  0001 C CNN "mouser"
+	1    11400 3750
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

@@ -139,7 +139,7 @@ void parse_message(uint8_t id, uint8_t *buf) {
     rx(__message);
     break;
   }
-  case 21: {
+  case 3: {
     handshake_from_ground_station_to_flight_controller __message;
     __message.parse_buf(buf);
     rx(__message);
@@ -193,43 +193,43 @@ void parse_message(uint8_t id, uint8_t *buf) {
     rx(__message);
     break;
   }
-  case 80: {
+  case 0: {
     ms_since_boot_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 81: {
+  case 1: {
     GNSS_data_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 82: {
+  case 80: {
     ms_raw_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 83: {
+  case 81: {
     bmp_raw_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 84: {
+  case 82: {
     imu_raw_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 85: {
+  case 83: {
     position_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 86: {
+  case 84: {
     differential_pressure_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
@@ -276,7 +276,7 @@ void parse_message(uint8_t id, uint8_t *buf, void *misc) {
     rx(__message, misc);
     break;
   }
-  case 21: {
+  case 3: {
     handshake_from_ground_station_to_flight_controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
@@ -330,43 +330,43 @@ void parse_message(uint8_t id, uint8_t *buf, void *misc) {
     rx(__message, misc);
     break;
   }
-  case 80: {
+  case 0: {
     ms_since_boot_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 81: {
+  case 1: {
     GNSS_data_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 82: {
+  case 80: {
     ms_raw_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 83: {
+  case 81: {
     bmp_raw_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 84: {
+  case 82: {
     imu_raw_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 85: {
+  case 83: {
     position_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 86: {
+  case 84: {
     differential_pressure_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
@@ -395,7 +395,7 @@ bool is_valid_id(uint8_t id) {
   case 20:
     return true;
     break;
-  case 21:
+  case 3:
     return true;
     break;
   case 32:
@@ -422,6 +422,12 @@ bool is_valid_id(uint8_t id) {
   case 39:
     return true;
     break;
+  case 0:
+    return true;
+    break;
+  case 1:
+    return true;
+    break;
   case 80:
     return true;
     break;
@@ -435,12 +441,6 @@ bool is_valid_id(uint8_t id) {
     return true;
     break;
   case 84:
-    return true;
-    break;
-  case 85:
-    return true;
-    break;
-  case 86:
     return true;
     break;
   default:
@@ -468,7 +468,7 @@ uint8_t id_to_len(uint8_t id) {
   case 20:
     return 1;
     break;
-  case 21:
+  case 3:
     return 0;
     break;
   case 32:
@@ -495,25 +495,25 @@ uint8_t id_to_len(uint8_t id) {
   case 39:
     return 0;
     break;
-  case 80:
+  case 0:
     return 4;
     break;
-  case 81:
+  case 1:
     return 16;
     break;
+  case 80:
+    return 8;
+    break;
+  case 81:
+    return 8;
+    break;
   case 82:
-    return 8;
-    break;
-  case 83:
-    return 8;
-    break;
-  case 84:
     return 37;
     break;
-  case 85:
+  case 83:
     return 12;
     break;
-  case 86:
+  case 84:
     return 4;
     break;
   default:
@@ -541,7 +541,7 @@ enum nodes id_to_sender(uint8_t id) {
   case 20:
     return nodes::ground_station;
     break;
-  case 21:
+  case 3:
     return nodes::ground_station;
     break;
   case 32:
@@ -568,6 +568,12 @@ enum nodes id_to_sender(uint8_t id) {
   case 39:
     return nodes::flight_controller;
     break;
+  case 0:
+    return nodes::flight_controller;
+    break;
+  case 1:
+    return nodes::flight_controller;
+    break;
   case 80:
     return nodes::flight_controller;
     break;
@@ -581,12 +587,6 @@ enum nodes id_to_sender(uint8_t id) {
     return nodes::flight_controller;
     break;
   case 84:
-    return nodes::flight_controller;
-    break;
-  case 85:
-    return nodes::flight_controller;
-    break;
-  case 86:
     return nodes::flight_controller;
     break;
   }
@@ -612,7 +612,7 @@ enum nodes id_to_receiver(uint8_t id) {
   case 20:
     return nodes::flight_controller;
     break;
-  case 21:
+  case 3:
     return nodes::flight_controller;
     break;
   case 32:
@@ -639,6 +639,12 @@ enum nodes id_to_receiver(uint8_t id) {
   case 39:
     return nodes::ground_station;
     break;
+  case 0:
+    return nodes::ground_station;
+    break;
+  case 1:
+    return nodes::ground_station;
+    break;
   case 80:
     return nodes::ground_station;
     break;
@@ -652,12 +658,6 @@ enum nodes id_to_receiver(uint8_t id) {
     return nodes::ground_station;
     break;
   case 84:
-    return nodes::ground_station;
-    break;
-  case 85:
-    return nodes::ground_station;
-    break;
-  case 86:
     return nodes::ground_station;
     break;
   }
@@ -683,7 +683,7 @@ enum categories id_to_category(uint8_t id) {
   case 20:
     return categories::none;
     break;
-  case 21:
+  case 3:
     return categories::none;
     break;
   case 32:
@@ -710,6 +710,12 @@ enum categories id_to_category(uint8_t id) {
   case 39:
     return categories::none;
     break;
+  case 0:
+    return categories::none;
+    break;
+  case 1:
+    return categories::none;
+    break;
   case 80:
     return categories::none;
     break;
@@ -723,12 +729,6 @@ enum categories id_to_category(uint8_t id) {
     return categories::none;
     break;
   case 84:
-    return categories::none;
-    break;
-  case 85:
-    return categories::none;
-    break;
-  case 86:
     return categories::none;
     break;
   }
