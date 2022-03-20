@@ -37,24 +37,24 @@ void sendMessage(fc::MessageBase* msg, enum where target) {
     case where::telemetry:
       message_count[id] = (message_count[id] + 1) % send_frequency[id].val;
       if (message_count[id] == 0) {
-        telemetry_queue.enqueue(buf, index);
+        telemetry_queue.append(buf, index);
       }
       flash_queue.enqueue(buf, index);
       break;
     
     case where::important:
-      telemetry_queue.enqueue(buf, index, true);
+      telemetry_queue.append(buf, index, true);
       lora_queue.enqueue(buf, index);
       flash_queue.enqueue(buf, index, true);
       break;
     
     case where::always:
-      telemetry_queue.enqueue(buf, index, true);
+      telemetry_queue.append(buf, index, true);
       flash_queue.enqueue(buf, index, true);
       break;
     
     case where::real_telemetry:
-      telemetry_queue.enqueue(buf, index, true);
+      telemetry_queue.append(buf, index, true);
       break;
   }
 }
@@ -107,7 +107,7 @@ void handleDataStreams() {
     if (data_logging_enabled) {
       flash_queue.enqueue(buf, len);
     }
-    telemetry_queue.enqueue(buf, len);
+    telemetry_queue.append(buf, len);
   }
 }
 

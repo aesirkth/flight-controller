@@ -13,6 +13,7 @@
 #include "FlexCAN_T4.h"
 #include "Sampler.h"
 #include "RandomBuffer.h"
+#include "Spool.h"
 
 #define DUMPED_FILE_NAME "DATA"
 
@@ -28,7 +29,7 @@ void showError();
 void showOk();
 void showNeutral();
 
-extern RandomBuffer telemetry_queue;
+extern Spool telemetry_queue;
 extern RandomBuffer flash_queue;
 extern RandomBuffer lora_queue;
 

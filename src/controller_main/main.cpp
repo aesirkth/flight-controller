@@ -42,10 +42,11 @@ static_assert(FLASH_WRITE_FREQUENCY * FLASH_WRITE_AMOUNT <= FLASH_BANDWIDTH, "in
 //static_assert(FLASH_WRITE_FREQUENCY * FLASH_WRITE_AMOUNT <= FLASH_BANDWIDTH, "invalid flash configuration");
 
 
-uint8_t telemetry_buf[2048];
+// uint8_t telemetry_buf[2048];
 uint8_t flash_buf[4096];
 uint8_t lora_buf[256];
-RandomBuffer telemetry_queue {telemetry_buf,  sizeof(telemetry_buf)};
+// RandomBuffer telemetry_queue {telemetry_buf,  sizeof(telemetry_buf)};
+Spool telemetry_queue;
 RandomBuffer flash_queue {flash_buf, sizeof(flash_buf)};
 RandomBuffer lora_queue {lora_buf, sizeof(lora_buf)};
 
@@ -154,7 +155,7 @@ void sampleGps(void*) {
   uint8_t buf[HEADER_SIZE + msg.get_size()];
   uint8_t len;
   DataProtocol::build_buf(&msg, buf, &len);
-  telemetry_queue.enqueue(buf, len);
+  telemetry_queue.append(buf, len);
 }
 
 void initRGB() {
@@ -211,16 +212,23 @@ void sendTelemetry(void*) {
   fc::ms_since_boot_from_flight_controller_to_ground_station time_msg;
   time_msg.set_ms_since_boot(millis());
   sendMessage(&time_msg, where::real_telemetry);
-  uint16_t should_send = 0;
-  if (telemetry_queue.get_used_size() > can_send) {
-    should_send = can_send;
-    can_send = 0;
-  } else {
-    should_send = telemetry_queue.get_used_size();
-    can_send -= should_send;
-  }
-  uint8_t content_buf[should_send];
-  telemetry_queue.dequeue(content_buf, should_send);
+  
+  // uint16_t should_send = 0;
+  // if (telemetry_queue.get_used_size() > can_send) {
+  //   should_send = can_send;
+  //   can_send = 0;
+  // } else {
+  //   should_send = telemetry_queue.get_used_size();
+  //   can_send -= should_send;
+  // }
+  // uint8_t content_buf[should_send];
+  // telemetry_queue.dequeue(content_buf, should_send);
+
+  uint8_t content_buf[can_send];
+  uint16_t should_send;
+  should_send = telemetry_queue.pop(can_send, content_buf);
+  can_send -= should_send;
+
   TM_SERIAL.write(content_buf, should_send);  
   #ifdef SERIAL_TELEMETRY
   Serial.write(content_buf, should_send);
