@@ -43,18 +43,18 @@ void sendMessage(fc::MessageBase* msg, enum where target) {
       break;
     
     case where::important:
-      telemetry_queue.append(buf, index, true);
+      telemetry_queue.append(buf, index);
       lora_queue.enqueue(buf, index);
       flash_queue.enqueue(buf, index, true);
       break;
     
     case where::always:
-      telemetry_queue.append(buf, index, true);
+      telemetry_queue.append(buf, index);
       flash_queue.enqueue(buf, index, true);
       break;
     
     case where::real_telemetry:
-      telemetry_queue.append(buf, index, true);
+      telemetry_queue.append(buf, index);
       break;
   }
 }
