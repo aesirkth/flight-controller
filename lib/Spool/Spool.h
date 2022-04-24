@@ -76,7 +76,8 @@ public:
 		this->nb_messages -= nb_messages;
 		for (int i = 1; i < should_send; ++i)
 		{
-			checksum = (checksum + out_buf[i]) % 16;
+			checksum += (out_buf[i] & 0xf0) >> 4;
+			checksum = (checksum + (out_buf[i] & 0x0f)) % 16;
 		}
 		out_buf[0] = (checksum << 4) | nb_messages; // Packet header
 		return should_send;
