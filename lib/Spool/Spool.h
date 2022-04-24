@@ -52,7 +52,9 @@ public:
 	uint16_t pop(uint16_t can_send, uint8_t* out_buf) {
 		// Pop the n first messages
 		uint16_t len;
-		uint16_t should_send = 0;
+		uint16_t should_send = 1;
+		uint16_t nb_messages = 0;
+		uint16_t checksum = 0;
 
 		len = (uint16_t)this->buf[this->start_index];
 		while (should_send + len <= can_send and this->start_index != this->end_index)
@@ -67,9 +69,16 @@ public:
 			}
 			this->start_index = (this->start_index + len) % BUF_LEN;
 			this->nb_messages -= 1;
+			nb_messages += 1;
 			should_send += len;
 			len = (uint16_t)this->buf[this->start_index];
 		}
+		this->nb_messages -= nb_messages;
+		for (int i = 1; i < should_send; ++i)
+		{
+			checksum = (checksum + out_buf[i]) % 16;
+		}
+		out_buf[0] = (checksum << 4) | nb_messages; // Packet header
 		return should_send;
 	}
 
