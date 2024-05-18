@@ -86,6 +86,10 @@ void fc::rx(fc::handshake_from_ground_station_to_flight_controller msg) {
     delay(500);
 }
 
+void canIrq(const CAN_message_t &can_msg) {
+    send_protocol.parse_CAN_message(can_msg);
+}
+
 void setup() {
     Serial.begin(BAUD);
     Serial3.begin(TELEMETRY_BAUD);
@@ -93,6 +97,22 @@ void setup() {
     can.begin();
     can.setBaudRate(1000000);
     rgb.begin();
+
+    const uint8_t txBoxes = 8;
+    const uint8_t rxBoxes = 56;
+    can.setMaxMB(txBoxes + rxBoxes);
+    for (int i = 0; i < rxBoxes; i++) {
+        can.setMB((FLEXCAN_MAILBOX)i, RX, STD);
+    }
+    for (int i = rxBoxes; i < (txBoxes + rxBoxes); i++) {
+        can.setMB((FLEXCAN_MAILBOX)i, TX, STD);
+    }
+    for (int i = 0; i < rxBoxes; i++) {
+        can.setMBManualFilter((FLEXCAN_MAILBOX)i, 0x00, 0xF00); // Filter with (id & 0xF00) == 0x00
+    }
+    can.onReceive(canIrq);
+    can.enableMBInterrupts();
+
     if (!error) {
         rgb.setPixel(0, WHITE);
         rgb.show();
@@ -100,13 +120,39 @@ void setup() {
         rgb.setPixel(0, ORANGE);
         rgb.show();
     }
+    DMAMEM static uint8_t tm_tx_buf[4086];
+    DMAMEM static uint8_t tm_rx_buf[4086];
+    Serial3.addMemoryForWrite(tm_tx_buf, sizeof(tm_tx_buf));
+    Serial3.addMemoryForRead(tm_rx_buf, sizeof(tm_rx_buf));
 }
 
 void loop() {
+    // while (Serial.available()) {
+    //     Serial3.write(Serial.read());
+    // }
+    // while (Serial3.available()) {
+    //     Serial.write(Serial3.read());
+    // }
+    // return;
+
+    // static uint64_t last_spam = 0;
+    // if (micros() - last_spam > 1000000 / 1500) {
+    //     fc::ms_since_boot_from_flight_controller_to_ground_station msg;
+    //     msg.set_ms_since_boot(millis());
+    //     CAN_message_t spam_can;
+    //     DataProtocol::build_CAN_message(&msg, &spam_can);
+    //     can.write(spam_can);
+    //     // Serial.println("spam");
+    //     last_spam = micros();
+    // }
+    // return;
+
     static CAN_message_t can_msg;
     while (Serial.available() > 0) {
+        noInterrupts();
         uint8_t byte = Serial.read();
         send_protocol.parse_byte(byte);
+        interrupts();
     }
     if (can.read(can_msg)) {
         send_protocol.parse_CAN_message(can_msg);

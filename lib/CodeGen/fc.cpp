@@ -6,231 +6,34 @@ GENERATED FILE DO NOT EDIT
 #include <stdint.h>
 
 namespace fc {
-__attribute__((weak)) void rx(local_timestamp_from_local_to_local msg) {}
-__attribute__((weak)) void rx(local_timestamp_from_local_to_local msg,
-                              void *misc) {}
-__attribute__((weak)) void
-rx(time_sync_from_ground_station_to_flight_controller msg) {}
-__attribute__((weak)) void
-rx(time_sync_from_ground_station_to_flight_controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(set_state_from_ground_station_to_flight_controller msg) {}
-__attribute__((weak)) void
-rx(set_state_from_ground_station_to_flight_controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(set_parachute_output_from_ground_station_to_flight_controller msg) {}
-__attribute__((weak)) void
-rx(set_parachute_output_from_ground_station_to_flight_controller msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(set_data_logging_from_ground_station_to_flight_controller msg) {}
-__attribute__((weak)) void
-rx(set_data_logging_from_ground_station_to_flight_controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(dump_flash_from_ground_station_to_flight_controller msg) {}
-__attribute__((weak)) void
-rx(dump_flash_from_ground_station_to_flight_controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(handshake_from_ground_station_to_flight_controller msg) {}
-__attribute__((weak)) void
-rx(handshake_from_ground_station_to_flight_controller msg, void *misc) {}
-__attribute__((weak)) void
-rx(return_time_sync_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(return_time_sync_from_flight_controller_to_ground_station msg, void *misc) {}
-__attribute__((weak)) void
-rx(return_power_mode_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(return_power_mode_from_flight_controller_to_ground_station msg, void *misc) {
-}
-__attribute__((weak)) void
-rx(return_radio_equipment_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(return_radio_equipment_from_flight_controller_to_ground_station msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(return_parachute_output_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(return_parachute_output_from_flight_controller_to_ground_station msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(onboard_battery_voltage_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(onboard_battery_voltage_from_flight_controller_to_ground_station msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(return_data_logging_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(return_data_logging_from_flight_controller_to_ground_station msg,
-   void *misc) {}
-__attribute__((weak)) void
-rx(return_dump_flash_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(return_dump_flash_from_flight_controller_to_ground_station msg, void *misc) {
-}
-__attribute__((weak)) void
-rx(return_handshake_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(return_handshake_from_flight_controller_to_ground_station msg, void *misc) {}
 __attribute__((weak)) void
 rx(ms_since_boot_from_flight_controller_to_ground_station msg) {}
 __attribute__((weak)) void
 rx(ms_since_boot_from_flight_controller_to_ground_station msg, void *misc) {}
 __attribute__((weak)) void
-rx(GNSS_data_from_flight_controller_to_ground_station msg) {}
+rx(handshake_from_ground_station_to_flight_controller msg) {}
 __attribute__((weak)) void
-rx(GNSS_data_from_flight_controller_to_ground_station msg, void *misc) {}
+rx(handshake_from_ground_station_to_flight_controller msg, void *misc) {}
 __attribute__((weak)) void
-rx(ms_raw_from_flight_controller_to_ground_station msg) {}
+rx(return_handshake_from_flight_controller_to_ground_station msg) {}
 __attribute__((weak)) void
-rx(ms_raw_from_flight_controller_to_ground_station msg, void *misc) {}
-__attribute__((weak)) void
-rx(bmp_raw_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(bmp_raw_from_flight_controller_to_ground_station msg, void *misc) {}
-__attribute__((weak)) void
-rx(imu_raw_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(imu_raw_from_flight_controller_to_ground_station msg, void *misc) {}
-__attribute__((weak)) void
-rx(position_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(position_from_flight_controller_to_ground_station msg, void *misc) {}
-__attribute__((weak)) void
-rx(differential_pressure_from_flight_controller_to_ground_station msg) {}
-__attribute__((weak)) void
-rx(differential_pressure_from_flight_controller_to_ground_station msg,
-   void *misc) {}
+rx(return_handshake_from_flight_controller_to_ground_station msg, void *misc) {}
 void parse_message(uint8_t id, uint8_t *buf) {
   switch (id) {
-  case 255: {
-    local_timestamp_from_local_to_local __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 16: {
-    time_sync_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 17: {
-    set_state_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 18: {
-    set_parachute_output_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 19: {
-    set_data_logging_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 20: {
-    dump_flash_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 3: {
-    handshake_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 32: {
-    return_time_sync_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 33: {
-    return_power_mode_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 34: {
-    return_radio_equipment_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 35: {
-    return_parachute_output_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 36: {
-    onboard_battery_voltage_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 37: {
-    return_data_logging_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 38: {
-    return_dump_flash_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 39: {
-    return_handshake_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 0: {
+  case 253: {
     ms_since_boot_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 1: {
-    GNSS_data_from_flight_controller_to_ground_station __message;
+  case 254: {
+    handshake_from_ground_station_to_flight_controller __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
   }
-  case 80: {
-    ms_raw_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 81: {
-    bmp_raw_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 82: {
-    imu_raw_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 83: {
-    position_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message);
-    break;
-  }
-  case 84: {
-    differential_pressure_from_flight_controller_to_ground_station __message;
+  case 255: {
+    return_handshake_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message);
     break;
@@ -240,134 +43,20 @@ void parse_message(uint8_t id, uint8_t *buf) {
 
 void parse_message(uint8_t id, uint8_t *buf, void *misc) {
   switch (id) {
-  case 255: {
-    local_timestamp_from_local_to_local __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 16: {
-    time_sync_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 17: {
-    set_state_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 18: {
-    set_parachute_output_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 19: {
-    set_data_logging_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 20: {
-    dump_flash_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 3: {
-    handshake_from_ground_station_to_flight_controller __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 32: {
-    return_time_sync_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 33: {
-    return_power_mode_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 34: {
-    return_radio_equipment_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 35: {
-    return_parachute_output_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 36: {
-    onboard_battery_voltage_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 37: {
-    return_data_logging_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 38: {
-    return_dump_flash_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 39: {
-    return_handshake_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 0: {
+  case 253: {
     ms_since_boot_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 1: {
-    GNSS_data_from_flight_controller_to_ground_station __message;
+  case 254: {
+    handshake_from_ground_station_to_flight_controller __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
   }
-  case 80: {
-    ms_raw_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 81: {
-    bmp_raw_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 82: {
-    imu_raw_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 83: {
-    position_from_flight_controller_to_ground_station __message;
-    __message.parse_buf(buf);
-    rx(__message, misc);
-    break;
-  }
-  case 84: {
-    differential_pressure_from_flight_controller_to_ground_station __message;
+  case 255: {
+    return_handshake_from_flight_controller_to_ground_station __message;
     __message.parse_buf(buf);
     rx(__message, misc);
     break;
@@ -377,70 +66,13 @@ void parse_message(uint8_t id, uint8_t *buf, void *misc) {
 
 bool is_valid_id(uint8_t id) {
   switch (id) {
+  case 253:
+    return true;
+    break;
+  case 254:
+    return true;
+    break;
   case 255:
-    return true;
-    break;
-  case 16:
-    return true;
-    break;
-  case 17:
-    return true;
-    break;
-  case 18:
-    return true;
-    break;
-  case 19:
-    return true;
-    break;
-  case 20:
-    return true;
-    break;
-  case 3:
-    return true;
-    break;
-  case 32:
-    return true;
-    break;
-  case 33:
-    return true;
-    break;
-  case 34:
-    return true;
-    break;
-  case 35:
-    return true;
-    break;
-  case 36:
-    return true;
-    break;
-  case 37:
-    return true;
-    break;
-  case 38:
-    return true;
-    break;
-  case 39:
-    return true;
-    break;
-  case 0:
-    return true;
-    break;
-  case 1:
-    return true;
-    break;
-  case 80:
-    return true;
-    break;
-  case 81:
-    return true;
-    break;
-  case 82:
-    return true;
-    break;
-  case 83:
-    return true;
-    break;
-  case 84:
     return true;
     break;
   default:
@@ -450,71 +82,14 @@ bool is_valid_id(uint8_t id) {
 
 uint8_t id_to_len(uint8_t id) {
   switch (id) {
+  case 253:
+    return 4;
+    break;
+  case 254:
+    return 0;
+    break;
   case 255:
-    return 4;
-    break;
-  case 16:
-    return 4;
-    break;
-  case 17:
-    return 1;
-    break;
-  case 18:
-    return 1;
-    break;
-  case 19:
-    return 1;
-    break;
-  case 20:
-    return 1;
-    break;
-  case 3:
     return 0;
-    break;
-  case 32:
-    return 0;
-    break;
-  case 33:
-    return 0;
-    break;
-  case 34:
-    return 1;
-    break;
-  case 35:
-    return 1;
-    break;
-  case 36:
-    return 4;
-    break;
-  case 37:
-    return 1;
-    break;
-  case 38:
-    return 1;
-    break;
-  case 39:
-    return 0;
-    break;
-  case 0:
-    return 4;
-    break;
-  case 1:
-    return 16;
-    break;
-  case 80:
-    return 8;
-    break;
-  case 81:
-    return 8;
-    break;
-  case 82:
-    return 37;
-    break;
-  case 83:
-    return 12;
-    break;
-  case 84:
-    return 4;
     break;
   default:
     return 0;
@@ -523,70 +98,13 @@ uint8_t id_to_len(uint8_t id) {
 
 enum nodes id_to_sender(uint8_t id) {
   switch (id) {
+  case 253:
+    return nodes::flight_controller;
+    break;
+  case 254:
+    return nodes::ground_station;
+    break;
   case 255:
-    return nodes::local;
-    break;
-  case 16:
-    return nodes::ground_station;
-    break;
-  case 17:
-    return nodes::ground_station;
-    break;
-  case 18:
-    return nodes::ground_station;
-    break;
-  case 19:
-    return nodes::ground_station;
-    break;
-  case 20:
-    return nodes::ground_station;
-    break;
-  case 3:
-    return nodes::ground_station;
-    break;
-  case 32:
-    return nodes::flight_controller;
-    break;
-  case 33:
-    return nodes::flight_controller;
-    break;
-  case 34:
-    return nodes::flight_controller;
-    break;
-  case 35:
-    return nodes::flight_controller;
-    break;
-  case 36:
-    return nodes::flight_controller;
-    break;
-  case 37:
-    return nodes::flight_controller;
-    break;
-  case 38:
-    return nodes::flight_controller;
-    break;
-  case 39:
-    return nodes::flight_controller;
-    break;
-  case 0:
-    return nodes::flight_controller;
-    break;
-  case 1:
-    return nodes::flight_controller;
-    break;
-  case 80:
-    return nodes::flight_controller;
-    break;
-  case 81:
-    return nodes::flight_controller;
-    break;
-  case 82:
-    return nodes::flight_controller;
-    break;
-  case 83:
-    return nodes::flight_controller;
-    break;
-  case 84:
     return nodes::flight_controller;
     break;
   }
@@ -594,70 +112,13 @@ enum nodes id_to_sender(uint8_t id) {
 
 enum nodes id_to_receiver(uint8_t id) {
   switch (id) {
+  case 253:
+    return nodes::ground_station;
+    break;
+  case 254:
+    return nodes::flight_controller;
+    break;
   case 255:
-    return nodes::local;
-    break;
-  case 16:
-    return nodes::flight_controller;
-    break;
-  case 17:
-    return nodes::flight_controller;
-    break;
-  case 18:
-    return nodes::flight_controller;
-    break;
-  case 19:
-    return nodes::flight_controller;
-    break;
-  case 20:
-    return nodes::flight_controller;
-    break;
-  case 3:
-    return nodes::flight_controller;
-    break;
-  case 32:
-    return nodes::ground_station;
-    break;
-  case 33:
-    return nodes::ground_station;
-    break;
-  case 34:
-    return nodes::ground_station;
-    break;
-  case 35:
-    return nodes::ground_station;
-    break;
-  case 36:
-    return nodes::ground_station;
-    break;
-  case 37:
-    return nodes::ground_station;
-    break;
-  case 38:
-    return nodes::ground_station;
-    break;
-  case 39:
-    return nodes::ground_station;
-    break;
-  case 0:
-    return nodes::ground_station;
-    break;
-  case 1:
-    return nodes::ground_station;
-    break;
-  case 80:
-    return nodes::ground_station;
-    break;
-  case 81:
-    return nodes::ground_station;
-    break;
-  case 82:
-    return nodes::ground_station;
-    break;
-  case 83:
-    return nodes::ground_station;
-    break;
-  case 84:
     return nodes::ground_station;
     break;
   }
@@ -665,70 +126,13 @@ enum nodes id_to_receiver(uint8_t id) {
 
 enum categories id_to_category(uint8_t id) {
   switch (id) {
+  case 253:
+    return categories::none;
+    break;
+  case 254:
+    return categories::none;
+    break;
   case 255:
-    return categories::none;
-    break;
-  case 16:
-    return categories::none;
-    break;
-  case 17:
-    return categories::none;
-    break;
-  case 18:
-    return categories::none;
-    break;
-  case 19:
-    return categories::none;
-    break;
-  case 20:
-    return categories::none;
-    break;
-  case 3:
-    return categories::none;
-    break;
-  case 32:
-    return categories::none;
-    break;
-  case 33:
-    return categories::none;
-    break;
-  case 34:
-    return categories::none;
-    break;
-  case 35:
-    return categories::none;
-    break;
-  case 36:
-    return categories::none;
-    break;
-  case 37:
-    return categories::none;
-    break;
-  case 38:
-    return categories::none;
-    break;
-  case 39:
-    return categories::none;
-    break;
-  case 0:
-    return categories::none;
-    break;
-  case 1:
-    return categories::none;
-    break;
-  case 80:
-    return categories::none;
-    break;
-  case 81:
-    return categories::none;
-    break;
-  case 82:
-    return categories::none;
-    break;
-  case 83:
-    return categories::none;
-    break;
-  case 84:
     return categories::none;
     break;
   }

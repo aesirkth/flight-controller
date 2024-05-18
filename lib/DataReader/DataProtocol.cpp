@@ -17,7 +17,7 @@ void DataProtocol::parse_byte(uint8_t byte) {
         state = START1;
         break;
       }
-      payload_length = fc::is_valid_id(byte) ? fc::id_to_len(byte) : EDDA::id_to_len(byte);
+      payload_length = EDDA::is_valid_id(byte) ? EDDA::id_to_len(byte) : fc::id_to_len(byte);
       payload_id = byte;
       state = CHECKSUM;
       payload_index = 0;
@@ -50,7 +50,7 @@ void DataProtocol::parse_bytes(uint8_t* buf, uint8_t len) {
 }
 
 void DataProtocol::parse_CAN_message(CAN_message_t msg) {
-  uint8_t len = fc::is_valid_id(msg.id) ? fc::id_to_len(msg.id) : EDDA::id_to_len(msg.id);
+  uint8_t len = EDDA::is_valid_id(msg.id) ? EDDA::id_to_len(msg.id) : fc::id_to_len(msg.id);
   if (not (fc::is_valid_id(msg.id) || EDDA::is_valid_id(msg.id))) {
     return;
   }

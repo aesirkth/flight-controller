@@ -22,4 +22,5 @@ enum struct where {
 
 void DataProtocolCallback(uint8_t id, uint8_t* buf, uint8_t len);
 void handleDataStreams();
+void canIrq(const CAN_message_t &msg);
 void sendMessage(fc::MessageBase* , enum where);

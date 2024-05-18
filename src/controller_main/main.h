@@ -28,9 +28,9 @@ void showError();
 void showOk();
 void showNeutral();
 
-extern RandomBuffer telemetry_queue;
-extern RandomBuffer flash_queue;
-extern RandomBuffer lora_queue;
+volatile extern RandomBuffer telemetry_queue;
+volatile extern RandomBuffer flash_queue;
+volatile extern RandomBuffer lora_queue;
 
 extern Sampler sampler;
 extern GPS gps1; // for gps on Serial1
@@ -38,7 +38,7 @@ extern GPS gps2; // for gps on Serial3
 extern Flash flash; // flash chip
 extern IntervalTimer para1_timer; // timer for parachute 1
 extern IntervalTimer para2_timer; // timer for parachute 1
-extern FlexCAN_T4<CAN2, RX_SIZE_16, TX_SIZE_16> can;  // 1Mbs, CAN0, pins 29&30 for TX&RX
+extern FlexCAN_T4<CAN2, RX_SIZE_1024, TX_SIZE_128> can; // 1Mbs, CAN0, pins 29&30 for TX&RX
 extern GPS* best_gps; // stores the best gps
 extern RH_RF95 rfm; // LoRa modem
 extern WS2812Serial strip;

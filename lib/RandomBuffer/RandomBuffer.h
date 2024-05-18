@@ -3,15 +3,15 @@
 #include <string.h>
 
 class RandomBuffer {
-public:
+private:
     uint8_t* buf_;
-    uint16_t len_;
+    uint32_t len_;
     uint16_t insert_index_ = 0;
     uint16_t output_index_ = 0;
     uint16_t used_bytes_ = 0;
 
-//public:
-    RandomBuffer(uint8_t* buf, uint16_t len) {
+public:
+    RandomBuffer(uint8_t* buf, uint32_t len) {
         buf_ = buf;
         len_ = len;
     }
